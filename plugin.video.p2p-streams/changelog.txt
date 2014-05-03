@@ -1,4 +1,7 @@
-[B]v0.2.6 (a definir):[/B]
+[B]v0.2.7 (3-05-2014):[/B]
+-Fixed issue with configuration of sopcast on windows
+
+[B]v0.2.6 (29-04-2014):[/B]
 -Added support for Mac i386 (thanks crackerj0e)
 -Fixed issues with srvany download
 -Wiki updated
