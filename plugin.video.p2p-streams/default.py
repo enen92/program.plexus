@@ -1317,7 +1317,7 @@ def sopstreams(name,iconimage,sop):
             proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
             config = True  
             for line in proc.stdout:
-                    if "1060" in line.rstrip():
+                    if " 1060:" in line.rstrip():
                         config = False
                         print "Configuration is not DONE!"
             if config == False: mensagemok(traducao(40000),traducao(40180),traducao(40181), traducao(40182))
