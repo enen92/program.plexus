@@ -89,7 +89,7 @@ def russiandictionary(string):
       
       
 def advanced_menu():
-	addLink('[COLOR orange]Advancedsettings.xml:[/COLOR]','','')
+	addLink('[COLOR orange]XBMC Advancedsettings.xml:[/COLOR]','','')
 	lock_file = xbmc.translatePath('special://temp/'+ 'ts.lock')
 	if xbmcvfs.exists(lock_file):
 		addDir(traducao(40068),MainURL,20,'',2,False)
@@ -111,6 +111,54 @@ def advanced_menu():
 			if match[0] != '252420': valuebuff = '[COLOR red]' + match[0] + '[/COLOR]'
 			else : valuebuff =  '[COLOR green]' + match[0] + '[/COLOR]'
 			addLink(traducao(40067) +valuebuff+']','','')
+	addLink('[COLOR orange]Acestream engine settings:[/COLOR]','','')
+	try:
+		porta = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","port.txt"))
+	except: porta = "N/A"
+	addDir("Port [COLOR orange][ " + str(int(porta))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","port.txt"),51,'',2,False)
+	try:
+		vodbuffer = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","vodbuffer.txt"))
+	except: vodbuffer = "N/A"
+	addDir("VOD buffer (s) [COLOR orange][ " + str(int(vodbuffer))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","vodbuffer.txt"),51,'',2,False)
+	try:
+		livebuffer = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","livebuffer.txt"))
+	except: livebuffer = "N/A"
+	addDir("Live buffer (s) [COLOR orange][ " + str(int(livebuffer))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","livebuffer.txt"),51,'',2,False)
+	try:
+		downloadlimit = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","downloadlimit.txt"))
+	except: downloadlimit = "N/A"
+	addDir("Download Limit (Kb/s) (0=No limit) [COLOR orange][ " + str(int(downloadlimit))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","downloadlimit.txt"),51,'',2,False)
+	try:
+		uploadlimit = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","uploadlimit.txt"))
+	except: uploadlimit = "N/A"
+	addDir("Upload Limit (Kb/s) (0=No limit) [COLOR orange][ " + str(int(uploadlimit))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","uploadlimit.txt"),51,'',2,False)
+	try:
+		maxconnections = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnections.txt"))
+	except: maxconnections = "N/A"
+	addDir("Max number of connections (0=No limit) [COLOR orange][ " + str(int(maxconnections))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnections.txt"),51,'',2,False)
+	try:
+		maxconnectionsstream = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnectionsstream.txt"))
+	except: maxconnectionsstream = "N/A"
+	addDir("Max number of connections per stream (0=No limit) [COLOR orange][ " + str(int(maxconnectionsstream))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnectionsstream.txt"),51,'',2,False)
+
+def set_engine_setting(file):
+	value = readfile(file)
+	keyb = xbmc.Keyboard(str(int(value)), traducao(40033))
+	keyb.doModal()
+	if (keyb.isConfirmed()):
+		search = keyb.getText()
+		try:
+			int(search)
+			integer = True
+		except: integer = False
+		if integer == True:
+			savefile(file, search)
+			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), "Setting changed sucessfully", 1,addonpath+"/icon.png"))
+			xbmc.executebuiltin("Container.Refresh")
+		else:
+			mensagemok(traducao(40000),"Not a valid value. A integer is needed!")
+			sys.exit(0)
+	
 
 
 def delete_playercorexml():
@@ -1771,5 +1819,6 @@ elif mode==47: addon_favourites()
 elif mode==48: remove_addon_favourites(url)
 elif mode==49: remove_list(name)
 elif mode==50: livefootballaol_menu()
+elif mode==51: set_engine_setting(url)
     
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
