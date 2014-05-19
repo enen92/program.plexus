@@ -96,7 +96,6 @@ def advanced_menu():
 	userdatapath = xbmc.translatePath(os.path.join('special://home/userdata'.decode('utf-8'),''.decode('utf-8')))
 	advancedsettings_var = os.path.join(userdatapath,'advancedsettings.xml')
 	advancedsettingsbackup_var = os.path.join(userdatapath,'advancedsettingsbackup.xml')
-	print "menu"
 	addDir(traducao(40058),MainURL,16,'',2,False)
 	if xbmcvfs.exists(advancedsettings_var):
 		addDir(traducao(40063),MainURL,18,'',2,False)
@@ -112,34 +111,47 @@ def advanced_menu():
 			else : valuebuff =  '[COLOR green]' + match[0] + '[/COLOR]'
 			addLink(traducao(40067) +valuebuff+']','','')
 	addLink('[COLOR orange]Acestream engine settings:[/COLOR]','','')
-	try:
-		porta = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","port.txt"))
-	except: porta = "N/A"
-	addDir("Port [COLOR orange][ " + str(int(porta))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","port.txt"),51,'',2,False)
-	try:
-		vodbuffer = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","vodbuffer.txt"))
-	except: vodbuffer = "N/A"
-	addDir("VOD buffer (s) [COLOR orange][ " + str(int(vodbuffer))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","vodbuffer.txt"),51,'',2,False)
-	try:
-		livebuffer = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","livebuffer.txt"))
-	except: livebuffer = "N/A"
-	addDir("Live buffer (s) [COLOR orange][ " + str(int(livebuffer))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","livebuffer.txt"),51,'',2,False)
-	try:
-		downloadlimit = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","downloadlimit.txt"))
-	except: downloadlimit = "N/A"
-	addDir("Download Limit (Kb/s) (0=No limit) [COLOR orange][ " + str(int(downloadlimit))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","downloadlimit.txt"),51,'',2,False)
-	try:
-		uploadlimit = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","uploadlimit.txt"))
-	except: uploadlimit = "N/A"
-	addDir("Upload Limit (Kb/s) (0=No limit) [COLOR orange][ " + str(int(uploadlimit))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","uploadlimit.txt"),51,'',2,False)
-	try:
-		maxconnections = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnections.txt"))
-	except: maxconnections = "N/A"
-	addDir("Max number of connections (0=No limit) [COLOR orange][ " + str(int(maxconnections))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnections.txt"),51,'',2,False)
-	try:
-		maxconnectionsstream = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnectionsstream.txt"))
-	except: maxconnectionsstream = "N/A"
-	addDir("Max number of connections per stream (0=No limit) [COLOR orange][ " + str(int(maxconnectionsstream))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnectionsstream.txt"),51,'',2,False)
+
+	#Change engine settings from xbmc menus
+	eligible = True
+	if xbmc.getCondVisibility('system.platform.linux'):
+		if os.uname()[4] == "armv6l" or os.uname()[4] == "armv7l":
+			eligible = True
+	elif xbmc.getCondVisibility('system.platform.OSX'): eligible = True
+	else: eligible = False
+	if eligible and xbmcvfs.exists(os.path.join(pastaperfil,'acestream','ace','ACEStream','values')):
+		try:
+			porta = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","port.txt"))
+		except: porta = "N/A"
+		addDir("Port [COLOR orange][ " + str(int(porta))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","port.txt"),51,'',2,False)
+		try:
+			vodbuffer = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","vodbuffer.txt"))
+		except: vodbuffer = "N/A"
+		addDir("VOD buffer (s) [COLOR orange][ " + str(int(vodbuffer))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","vodbuffer.txt"),51,'',2,False)
+		try:
+			livebuffer = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","livebuffer.txt"))
+		except: livebuffer = "N/A"
+		addDir("Live buffer (s) [COLOR orange][ " + str(int(livebuffer))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","livebuffer.txt"),51,'',2,False)
+		try:
+			downloadlimit = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","downloadlimit.txt"))
+		except: downloadlimit = "N/A"
+		addDir("Download Limit (Kb/s) (0=No limit) [COLOR orange][ " + str(int(downloadlimit))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","downloadlimit.txt"),51,'',2,False)
+		try:
+			uploadlimit = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","uploadlimit.txt"))
+		except: uploadlimit = "N/A"
+		addDir("Upload Limit (Kb/s) (0=No limit) [COLOR orange][ " + str(int(uploadlimit))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","uploadlimit.txt"),51,'',2,False)
+		try:
+			maxconnections = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnections.txt"))
+		except: maxconnections = "N/A"
+		addDir("Max number of connections (0=No limit) [COLOR orange][ " + str(int(maxconnections))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnections.txt"),51,'',2,False)
+		try:
+			maxconnectionsstream = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnectionsstream.txt"))
+		except: maxconnectionsstream = "N/A"
+		addDir("Max number of connections per stream (0=No limit) [COLOR orange][ " + str(int(maxconnectionsstream))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnectionsstream.txt"),51,'',2,False)
+	elif eligible and not xbmcvfs.exists(os.path.join(pastaperfil,'acestream','ace','ACEStream','values')):
+		addLink('[COLOR red][B]Engine is outdated. Please re-do addon configuration.[/COLOR][/B]','','')
+	else:
+		pass
 
 def set_engine_setting(file):
 	value = readfile(file)
