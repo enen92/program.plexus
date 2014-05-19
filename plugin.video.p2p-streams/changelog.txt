@@ -1,3 +1,13 @@
+[B]v0.2.8 (20-05-2014):[/B]
+-Added xbian armv7 package (thanks to xbian devs)
+-Added openelec armv7 package
+-Acestream settings are now separated from the engine (txt files), openssl was also updated. This applies to the raspberry pi, mac osx and linux armv7. If you run the addon in one of those platforms, please re-do the configuration.
+-It's now possible to change the engine settings from the advanced functions menu for the platforms listed above (re-do the configuration to get the new engine)
+-Fixed wiziwig parser
+-Fixed error in linux armv7 config
+-Fixed configuration on android (apk download refused by google code)
+-Fixed xbian detection (thanks xbian devs)
+
 [B]v0.2.7 (3-05-2014):[/B]
 -Fixed issue with configuration of sopcast on windows
 
