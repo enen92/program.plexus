@@ -789,8 +789,9 @@ def wiziwig_servers(url):
 		return
 	ender=[]
 	titulo=[]
-	station_name=re.findall('stationname">(.+?)</td>(.*?)<td></td></tr><tr class="broadcast', conteudo, re.DOTALL)
+	station_name=re.findall('stationname">(.+?)</td>(.*?)<td></td></tr><(?:tr class="broadcast|/tbody>)', conteudo, re.DOTALL)
 	for station,html_trunk in station_name:
+		print station
 		streams=re.compile('.*?<tr class="streamrow[^"]*">\s*<td>\s*([^\s]+)\s*</td>\s*<td>\s*<a class="broadcast go" href="((?!adserver|http://torrent-tv.ru|forum|www\.bet365|BWIN)[^"]+)" target="_blank">Play now!</a>\s*<a[^>]*>[^>]*</a>\s*</td>\s*<td>([^<]+)</td>').findall(html_trunk)
 		for nome,chid,quality in streams:
 			if re.search('Sopcast',nome,re.IGNORECASE) or re.search('Acestream',nome,re.IGNORECASE) or re.search('TorrentStream',nome,re.IGNORECASE):
@@ -860,6 +861,8 @@ def autoconf():
                 	if choose > -1:
                 		OS_Choose= OS_list[choose]
                 		if OS_Choose == "MXLinux":
+					acestream_installed = False
+					sopcast_installed = False
                 			print "MXLinux"
                 			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
                 			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,traducao(40025),traducao(40000))
@@ -868,6 +871,7 @@ def autoconf():
 						download_tools().extract(SPSC_KIT,path_libraries)
 						xbmc.sleep(500)
 						download_tools().remove(SPSC_KIT)
+						sopcast_installed = True
 					acestream_mxlinux = "http://p2p-strm.googlecode.com/svn/trunk/aceengine-armv7l-mxlinux.tar.gz"
 					SPSC_KIT = os.path.join(addonpath,acestream_mxlinux.split("/")[-1])
 					download_tools().Downloader(acestream_mxlinux,SPSC_KIT,traducao(40026),traducao(40000))
@@ -876,7 +880,9 @@ def autoconf():
 						download_tools().extract(SPSC_KIT,path_libraries)
 						xbmc.sleep(500)
 						download_tools().remove(SPSC_KIT)
-					settings.setSetting('autoconfig',value='false')				
+						acestream_installed = True
+					if acestream_installed and sopcast_installed:
+						settings.setSetting('autoconfig',value='false')				
 		elif os.uname()[4] == "x86_64" and os.uname()[1] == "OpenELEC" or settings.getSetting('openelecx86_64') == "true":
 			settings.setSetting('openelecx86_64',value='true')
 			print "Detected OpenELEC x86_64"
