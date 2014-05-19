@@ -3,7 +3,10 @@
 """ p2p-streams
     2014 enen92 fightnight"""
 
-import xbmc,xbmcaddon,xbmcgui,xbmcplugin,urllib,urllib2,os,re,sys,datetime,time,subprocess,xbmcvfs,livestreams,socket,pytz
+import xbmc,xbmcaddon,xbmcgui,xbmcplugin,urllib,urllib2,os,re,sys,datetime,time,subprocess,xbmcvfs,livestreams,socket
+try:
+	import pytz
+except: pass
 
 ####################################################### CONSTANTES #####################################################
 
@@ -23,7 +26,6 @@ iconpequeno=addonpath + art + 'iconpq.jpg'
 traducaoma= settings.getLocalizedString
 mensagemok = xbmcgui.Dialog().ok
 mensagemprogresso = xbmcgui.DialogProgress()
-#downloadPath = settings.getSetting('download-folder').decode('utf-8')
 pastaperfil = xbmc.translatePath(settings.getAddonInfo('profile')).decode('utf-8')
 startpath=os.path.join(pastaperfil,'acestream','ace','start.py')
 
@@ -110,6 +112,7 @@ def advanced_menu():
 			if match[0] != '252420': valuebuff = '[COLOR red]' + match[0] + '[/COLOR]'
 			else : valuebuff =  '[COLOR green]' + match[0] + '[/COLOR]'
 			addLink(traducao(40067) +valuebuff+']','','')
+			addLink('','','')
 	addLink('[COLOR orange]Acestream engine settings:[/COLOR]','','')
 
 	#Change engine settings from xbmc menus
@@ -123,33 +126,33 @@ def advanced_menu():
 		try:
 			porta = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","port.txt"))
 		except: porta = "N/A"
-		addDir("Port [COLOR orange][ " + str(int(porta))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","port.txt"),51,'',2,False)
+		addDir(traducao(600015) +"[COLOR orange][ " + str(int(porta))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","port.txt"),51,'',2,False)
 		try:
 			vodbuffer = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","vodbuffer.txt"))
 		except: vodbuffer = "N/A"
-		addDir("VOD buffer (s) [COLOR orange][ " + str(int(vodbuffer))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","vodbuffer.txt"),51,'',2,False)
+		addDir(traducao(600016) + "[COLOR orange][ " + str(int(vodbuffer))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","vodbuffer.txt"),51,'',2,False)
 		try:
 			livebuffer = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","livebuffer.txt"))
 		except: livebuffer = "N/A"
-		addDir("Live buffer (s) [COLOR orange][ " + str(int(livebuffer))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","livebuffer.txt"),51,'',2,False)
+		addDir(traducao(600017)+"[COLOR orange][ " + str(int(livebuffer))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","livebuffer.txt"),51,'',2,False)
 		try:
 			downloadlimit = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","downloadlimit.txt"))
 		except: downloadlimit = "N/A"
-		addDir("Download Limit (Kb/s) (0=No limit) [COLOR orange][ " + str(int(downloadlimit))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","downloadlimit.txt"),51,'',2,False)
+		addDir(traducao(600018) +"[COLOR orange][ " + str(int(downloadlimit))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","downloadlimit.txt"),51,'',2,False)
 		try:
 			uploadlimit = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","uploadlimit.txt"))
 		except: uploadlimit = "N/A"
-		addDir("Upload Limit (Kb/s) (0=No limit) [COLOR orange][ " + str(int(uploadlimit))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","uploadlimit.txt"),51,'',2,False)
+		addDir(traducao(600019)+"[COLOR orange][ " + str(int(uploadlimit))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","uploadlimit.txt"),51,'',2,False)
 		try:
 			maxconnections = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnections.txt"))
 		except: maxconnections = "N/A"
-		addDir("Max number of connections (0=No limit) [COLOR orange][ " + str(int(maxconnections))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnections.txt"),51,'',2,False)
+		addDir(traducao(600020)+"[COLOR orange][ " + str(int(maxconnections))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnections.txt"),51,'',2,False)
 		try:
 			maxconnectionsstream = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnectionsstream.txt"))
 		except: maxconnectionsstream = "N/A"
-		addDir("Max number of connections per stream (0=No limit) [COLOR orange][ " + str(int(maxconnectionsstream))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnectionsstream.txt"),51,'',2,False)
+		addDir(traducao(600021)+"[COLOR orange][ " + str(int(maxconnectionsstream))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnectionsstream.txt"),51,'',2,False)
 	elif eligible and not xbmcvfs.exists(os.path.join(pastaperfil,'acestream','ace','ACEStream','values')):
-		addLink('[COLOR red][B]Engine is outdated. Please re-do addon configuration.[/COLOR][/B]','','')
+		addLink("[COLOR red][B]"+traducao()+"[/COLOR][/B]","","")
 	else:
 		pass
 
