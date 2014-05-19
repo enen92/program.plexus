@@ -304,10 +304,14 @@
 	<string id="600013">Please select your timezone</string>
 	
 	<string id="600014">Not available for your Mac architecture!</string>
-	
 
-
-
-
+	<string id="600015">Port</string>
+	<string id="600016">VOD buffer (s) </string>
+	<string id="600017">Live buffer (s) </string>
+	<string id="600018">Download Limit (Kb/s) (0=No limit) </string>
+	<string id="600019">Upload Limit (Kb/s) (0=No limit) </string>
+	<string id="600020">Max number of connections (0=No limit) </string>
+	<string id="600021">Max number of connections per stream (0=No limit) </string>
+	<string id="600022">AcestreamEngine is outdated. Please re-do the addon configuration.</string>
 
 </strings>
