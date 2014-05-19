@@ -304,6 +304,15 @@
 	<string id="600013">Seleccione a sua timezone</string>
 	
 	<string id="600014">Não está disponível para a arquitectura do seu Mac</string>
+
+	<string id="600015">Porta</string>
+	<string id="600016">VOD buffer (streams on-demand) (s) </string>
+	<string id="600017">Live buffer (streams em directo) (s) </string>
+	<string id="600018">Limite de Download (Kb/s) (0=ilimitado) </string>
+	<string id="600019">Limite de Upload (Kb/s) (0=ilimitado) </string>
+	<string id="600020">Número máximo de connecções (0=ilimitado) </string>
+	<string id="600021">Número máximo de connecções por stream (0=ilimitado) </string>
+	<string id="600022">AcestreamEngine necessita actualização. Por favor repita a configuração.</string>
 	
 																					
 </strings>
