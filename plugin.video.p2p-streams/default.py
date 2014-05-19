@@ -7,7 +7,7 @@ import xbmc,xbmcaddon,xbmcgui,xbmcplugin,urllib,urllib2,os,re,sys,datetime,time,
 
 ####################################################### CONSTANTES #####################################################
 
-versao = '0.2.1'
+versao = '0.2.8'
 addon_id = 'plugin.video.p2p-streams'
 MainURL = 'http://google.com'
 WiziwigURL = 'http://www.wiziwig.tv'
@@ -791,7 +791,6 @@ def wiziwig_servers(url):
 	titulo=[]
 	station_name=re.findall('stationname">(.+?)</td>(.*?)<td></td></tr><(?:tr class="broadcast|/tbody>)', conteudo, re.DOTALL)
 	for station,html_trunk in station_name:
-		print station
 		streams=re.compile('.*?<tr class="streamrow[^"]*">\s*<td>\s*([^\s]+)\s*</td>\s*<td>\s*<a class="broadcast go" href="((?!adserver|http://torrent-tv.ru|forum|www\.bet365|BWIN)[^"]+)" target="_blank">Play now!</a>\s*<a[^>]*>[^>]*</a>\s*</td>\s*<td>([^<]+)</td>').findall(html_trunk)
 		for nome,chid,quality in streams:
 			if re.search('Sopcast',nome,re.IGNORECASE) or re.search('Acestream',nome,re.IGNORECASE) or re.search('TorrentStream',nome,re.IGNORECASE):
@@ -811,21 +810,21 @@ def wiziwig_servers(url):
          
 def autoconf():
 	import tarfile
-	sopcast_raspberry = "http://p2p-strm.googlecode.com/svn/trunk/sopcast-raspberry.tar.gz"
-	sopcast_linux_generico =  "http://p2p-strm.googlecode.com/svn/trunk/sp-aut.tar.gz"
-	acestream_windows = "http://p2p-strm.googlecode.com/svn/trunk/Windows-Files/windows-aceengine2-3.tar.gz"
+	sopcast_raspberry = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/sopcast-raspberry.tar.gz"
+	sopcast_linux_generico =  "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/sp-aut.tar.gz"
+	acestream_windows = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/windows-aceengine2-3.tar.gz"
     
 	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":
 		print "Detected OS: Linux"
 		if os.uname()[4] == "armv6l":
 			try:
-				if re.search(os.uname()[1],"openelec",re.IGNORECASE): acestream_rpi = "http://p2p-strm.googlecode.com/svn/trunk/openelec-for-userdata.tar.gz"
-				elif re.search(os.uname()[1],"raspbmc",re.IGNORECASE): acestream_rpi = "http://p2p-strm.googlecode.com/svn/trunk/raspbmc-for-userdata.tar.gz"
-				elif re.search(os.uname()[1],"xbian",re.IGNORECASE): acestream_rpi = "http://p2p-strm.googlecode.com/svn/trunk/xbian-userdata.tar.gz"
+				if re.search(os.uname()[1],"openelec",re.IGNORECASE): acestream_rpi = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/openelec-acestream.tar.gz"
+				elif re.search(os.uname()[1],"raspbmc",re.IGNORECASE): acestream_rpi = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/raspbmc-acestream.tar.gz"
+				elif os.path.isfile("/etc/xbian_version"): acestream_rpi = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/xbian-acestream.tar.gz"
 				else:
 					mensagemok(traducao(40000),"Sorry could not detect your OS.","Select it from the next list")
 					OS_list = ["OpenELEC","Raspbmc","Xbian","Pipplware"]
-					url_packagerpi_list = ["http://p2p-strm.googlecode.com/svn/trunk/openelec-for-userdata.tar.gz","http://p2p-strm.googlecode.com/svn/trunk/raspbmc-for-userdata.tar.gz","http://p2p-strm.googlecode.com/svn/trunk/xbian-userdata.tar.gz","http://p2p-strm.googlecode.com/svn/trunk/raspbmc-for-userdata.tar.gz"]
+					url_packagerpi_list = ["http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/openelec-acestream.tar.gz","http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/raspbmc-acestream.tar.gz","http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/xbian-acestream.tar.gz","http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/raspbmc-acestream.tar.gz"]
 					OS_Rpi_choose = xbmcgui.Dialog().select
 					choose=OS_Rpi_choose('Select your OS',OS_list)
 					if choose > -1:
@@ -854,39 +853,106 @@ def autoconf():
 				download_tools().remove(SPSC_KIT)
 
 			settings.setSetting('autoconfig',value='false')
+
+
                 elif os.uname()[4] == "armv7l":
-                	mensagemok(traducao(40000),traducao(40109),traducao(40110))
-                	OS_list = ["MXLinux"]
-                	choose=xbmcgui.Dialog().select('Select your OS',OS_list)
-                	if choose > -1:
-                		OS_Choose= OS_list[choose]
-                		if OS_Choose == "MXLinux":
-					acestream_installed = False
-					sopcast_installed = False
-                			print "MXLinux"
-                			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
-                			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,traducao(40025),traducao(40000))
-					if tarfile.is_tarfile(SPSC_KIT):
-						path_libraries = os.path.join(pastaperfil,"sopcast")
-						download_tools().extract(SPSC_KIT,path_libraries)
-						xbmc.sleep(500)
-						download_tools().remove(SPSC_KIT)
-						sopcast_installed = True
-					acestream_mxlinux = "http://p2p-strm.googlecode.com/svn/trunk/aceengine-armv7l-mxlinux.tar.gz"
-					SPSC_KIT = os.path.join(addonpath,acestream_mxlinux.split("/")[-1])
-					download_tools().Downloader(acestream_mxlinux,SPSC_KIT,traducao(40026),traducao(40000))
-        				if tarfile.is_tarfile(SPSC_KIT):
-						path_libraries = os.path.join(pastaperfil,"acestream")
-						download_tools().extract(SPSC_KIT,path_libraries)
-						xbmc.sleep(500)
-						download_tools().remove(SPSC_KIT)
-						acestream_installed = True
-					if acestream_installed and sopcast_installed:
-						settings.setSetting('autoconfig',value='false')				
+			if re.search(os.uname()[1],"openelec",re.IGNORECASE):
+				OS_Choose = "OpenELEC"
+			elif os.path.isfile("/etc/xbian_version"):
+				OS_Choose = "Xbian"
+			else:
+                		mensagemok(traducao(40000),traducao(40109),traducao(40110))
+                		OS_list = ["MXLinux","OpenELEC","Xbian"]
+                		choose=xbmcgui.Dialog().select('Select your OS',OS_list)
+                		if choose > -1:
+                			OS_Choose= OS_list[choose]
+
+			#Linux armv7 configuration according to platform
+
+			#MXLINUX
+
+                	if OS_Choose == "MXLinux":
+				acestream_installed = False
+				sopcast_installed = False
+               			print "MXLinux"
+               			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
+               			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,traducao(40025),traducao(40000))
+				if tarfile.is_tarfile(SPSC_KIT):
+					path_libraries = os.path.join(pastaperfil,"sopcast")
+					download_tools().extract(SPSC_KIT,path_libraries)
+					xbmc.sleep(500)
+					download_tools().remove(SPSC_KIT)
+					sopcast_installed = True
+
+				acestream_mxlinux = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Armv7/mxlinux/mxlinux_armv7_acestream.tar.gz"
+				SPSC_KIT = os.path.join(addonpath,acestream_mxlinux.split("/")[-1])
+				download_tools().Downloader(acestream_mxlinux,SPSC_KIT,traducao(40026),traducao(40000))
+        			if tarfile.is_tarfile(SPSC_KIT):
+					path_libraries = os.path.join(pastaperfil,"acestream")
+					download_tools().extract(SPSC_KIT,path_libraries)
+					xbmc.sleep(500)
+					download_tools().remove(SPSC_KIT)
+					acestream_installed = True
+				if acestream_installed and sopcast_installed:
+					settings.setSetting('autoconfig',value='false')	
+
+			#OPENELEC
+
+                	if OS_Choose == "OpenELEC":
+				acestream_installed = False
+				sopcast_installed = False
+                		print "Openelec armv7 platform detected"
+                		SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
+                		download_tools().Downloader(sopcast_raspberry,SPSC_KIT,traducao(40025),traducao(40000))
+				if tarfile.is_tarfile(SPSC_KIT):
+					path_libraries = os.path.join(pastaperfil,"sopcast")
+					download_tools().extract(SPSC_KIT,path_libraries)
+					xbmc.sleep(500)
+					download_tools().remove(SPSC_KIT)
+					sopcast_installed = True
+				acestream_armv7 = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Armv7/openelec/openelec-acestream.tar.gz"
+				SPSC_KIT = os.path.join(addonpath,acestream_armv7.split("/")[-1])
+				download_tools().Downloader(acestream_armv7,SPSC_KIT,traducao(40026),traducao(40000))
+        			if tarfile.is_tarfile(SPSC_KIT):
+					path_libraries = os.path.join(pastaperfil,"acestream")
+					download_tools().extract(SPSC_KIT,path_libraries)
+					xbmc.sleep(500)
+					download_tools().remove(SPSC_KIT)
+					acestream_installed = True
+				if acestream_installed and sopcast_installed:
+					settings.setSetting('autoconfig',value='false')	
+
+			#XBIAN
+               		if OS_Choose == "Xbian":
+				acestream_installed = False
+				sopcast_installed = False
+               			print "Xbian armv7 platform detected"
+               			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
+               			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,traducao(40025),traducao(40000))
+				if tarfile.is_tarfile(SPSC_KIT):
+					path_libraries = os.path.join(pastaperfil,"sopcast")
+					download_tools().extract(SPSC_KIT,path_libraries)
+					xbmc.sleep(500)
+					download_tools().remove(SPSC_KIT)
+					sopcast_installed = True
+				acestream_armv7 = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Armv7/xbian/xbian_acestream.tar.gz"
+				SPSC_KIT = os.path.join(addonpath,acestream_armv7.split("/")[-1])
+				download_tools().Downloader(acestream_armv7,SPSC_KIT,traducao(40026),traducao(40000))
+       				if tarfile.is_tarfile(SPSC_KIT):
+					path_libraries = os.path.join(pastaperfil,"acestream")
+					download_tools().extract(SPSC_KIT,path_libraries)
+					xbmc.sleep(500)
+					download_tools().remove(SPSC_KIT)
+					acestream_installed = True
+				if acestream_installed and sopcast_installed:
+					settings.setSetting('autoconfig',value='false')	
+
+
+			
 		elif os.uname()[4] == "x86_64" and os.uname()[1] == "OpenELEC" or settings.getSetting('openelecx86_64') == "true":
 			settings.setSetting('openelecx86_64',value='true')
 			print "Detected OpenELEC x86_64"
-			openelecx86_64_package = "http://p2p-strm.googlecode.com/svn/trunk/openelec_x86_64_userdata.tar.gz"
+			openelecx86_64_package = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/Openelec/openelec_x86_64_userdata.tar.gz"
 			SPSC_KIT = os.path.join(addonpath,openelecx86_64_package.split("/")[-1])
 			download_tools().Downloader(openelecx86_64_package,SPSC_KIT,traducao(40112),traducao(40000))
 			import tarfile
@@ -1001,7 +1067,7 @@ def autoconf():
                             xbmc.sleep(1000)
                             print "System Users", users
 			    srvanytargz = os.path.join(sopcast_executable.replace("SopCast.exe",""),"srvany.tar.gz")                               
-                            download_tools().Downloader("http://p2p-strm.googlecode.com/svn/trunk/Windows-Files/srvany.tar.gz",srvanytargz,traducao(40167),traducao(40000)) 
+                            download_tools().Downloader("http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/srvany.tar.gz",srvanytargz,traducao(40167),traducao(40000)) 
                             xbmc.sleep(1000)
                             import tarfile
                             if tarfile.is_tarfile(srvanytargz):
@@ -1079,7 +1145,7 @@ def autoconf():
                                             xbmc.sleep(1000)
                                             mensagemprogresso.update(70,traducao(40176), "   ")
                                             print "Trying to set sopcastp2p service regedit permissions..."
-                                            download_tools().Downloader("http://p2p-strm.googlecode.com/svn/trunk/Windows-Files/sopcastp2p-permissions.txt",os.path.join(pastaperfil,"sopcastp2p-permissions.txt"),traducao(40177),traducao(40000))
+                                            download_tools().Downloader("http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/sopcastp2p-permissions.txt",os.path.join(pastaperfil,"sopcastp2p-permissions.txt"),traducao(40177),traducao(40000))
                                             xbmc.sleep(500)
                                             ret = mensagemprogresso.create(traducao(40000),traducao(40000))
                                             xbmc.sleep(500)
@@ -1107,10 +1173,10 @@ def autoconf():
 		print "Detected OS: Mac OSX"
 		available = False
 		if os.uname()[-1] == "x86_64":
-			mac_package = "http://p2p-strm.googlecode.com/svn/trunk/Mac64bits-Files/mac64bit_with_modules.tar.gz"
+			mac_package = "https://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/MacOSX_x86_64_ace_and_sop.tar.gz"
 			available = True
 		elif os.uname()[-1] == "i386":
-			mac_package = "http://p2p-strm.googlecode.com/svn/trunk/Mac64bits-Files/maci386package_withmodules.tar.gz"
+			mac_package = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/MacOSX_i386_ace_and_sop.tar.gz"
 			available = True
 		else:
 			available = False
@@ -1184,7 +1250,7 @@ def autoconf():
 					sopcast_installed = True
 					mensagemok(traducao(40000),traducao(50014))
 				else:
-					sopcast_apk = "http://p2p-strm.googlecode.com/svn/trunk/SopCast.apk"
+					sopcast_apk = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/SopCast.apk.tar.gz"
 					mensagemok(traducao(40000),traducao(50013))
 					if xbmcvfs.exists(os.path.join("sdcard","Download")):
 						pasta = os.path.join("sdcard","Download")
@@ -1194,6 +1260,9 @@ def autoconf():
 						pasta = dialog.browse(int(0), traducao(40190), 'myprograms')
 						sopfile = os.path.join(pasta,sopcast_apk.split("/")[-1])
 					download_tools().Downloader(sopcast_apk,sopfile,traducao(40073),traducao(40000))
+					if tarfile.is_tarfile(sopfile):
+						download_tools().extract(sopfile,pasta)
+						download_tools().remove(sopfile)
 					mensagemok(traducao(40000),traducao(50015),pasta,traducao(50016))
 					sopcast_installed = True
 					settings.setSetting('external_sopcast',value='0')
@@ -1205,7 +1274,7 @@ def autoconf():
 		#acestream config for android
 
 		if sopcast_installed == True:
-			acestreamengine_apk = "http://p2p-strm.googlecode.com/svn/trunk/acestream-2.1.11.apk"
+			acestreamengine_apk = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/acestream-2.1.11.apk.tar.gz"
 			mensagemok(traducao(40000),traducao(50018),traducao(50019),traducao(50020))
 			if xbmcvfs.exists(os.path.join("sdcard","Download")):
 				pasta = os.path.join("sdcard","Download")
@@ -1215,6 +1284,9 @@ def autoconf():
 				pasta = dialog.browse(int(0), traducao(40190), 'myprograms')
 				acefile = os.path.join(pasta,acestreamengine_apk.split("/")[-1])
 			download_tools().Downloader(acestreamengine_apk,acefile,traducao(40072),traducao(40000))
+			if tarfile.is_tarfile(acefile):
+				download_tools().extract(acefile,pasta)
+				download_tools().remove(acefile)
 			xbmc.sleep(2000)
 			mensagemok(traducao(40000),traducao(50021),pasta,traducao(50016))
 			mensagemok(traducao(40000),traducao(50022))
