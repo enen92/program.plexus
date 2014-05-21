@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.p2p-streams"
        name="p2p-streams"
-       version="0.2.8"
+       version="0.2.9"
        provider-name="enen92 - fightnight">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -17,10 +17,10 @@
   <extension point="xbmc.addon.metadata">
     <summary>P2P-Streams addon</summary>
     <description lang="en">P2P-Streams addon makes it easy for you to watch peer-to-peer streams in XBMC without the need for external players. Currently supporting Acestream and Sopcast streams it comprises an auto-configuration tool that will download the engines specifically for your platform. 
-Supported platforms: Linux (Ubuntu/Debian/CentOS), Raspberry Pi (Openelec,Raspbmc,Xbian), Windows, Mac, Android, Openelec x86_64, Linux armv7 (MXLinux).
+Supported platforms: Linux (i386/x86_64/Raspberry Pi/armv7(mxlinux,xbian,openelec)/Openelec), Windows, Mac, Android.
 Credits: Cristi - Atlanta (xsopcast plugin); NouisMons (acestream engine plugin); Tarasian666 (Mac/Rpi/armv7 ace engines); Divingmule (livestreams plugin); Marquerite (addor art).</description>
     <description lang="pt">O addon p2p-Streams torna possível assistir de forma simples a streams peer-to-peer directamente no XBMC sem a necessidade de players externos. De momento suporta streams Ace (Acestreams) e Sopcast e inclui uma ferramenta de autoconfiguração que irá fazer o download das engines correspondentes ao seu sistema operativo. 
-Plataformas suportadas: Linux (Ubuntu/Debian/CentOS), Raspberry Pi (Openelec,Raspbmc,Xbian), Windows, Mac, Android, Openelec x86_64, Linux armv7 (MXLinux).
+Plataformas suportadas:Linux (i386/x86_64/Raspberry Pi/armv7(mxlinux,xbian,openelec)/Openelec), Windows, Mac, Android.
 Créditos: Cristi - Atlanta (xsopcast plugin); NouisMons (acestream engine plugin); Tarasian666 (Mac/Rpi/armv7 ace engines); Divingmule (livestreams plugin); Marquerite (addor art).</description>
     <platform>all</platform>
   </extension>

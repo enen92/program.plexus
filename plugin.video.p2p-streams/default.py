@@ -113,16 +113,18 @@ def advanced_menu():
 			else : valuebuff =  '[COLOR green]' + match[0] + '[/COLOR]'
 			addLink(traducao(40067) +valuebuff+']','','')
 			addLink('','','')
-	addLink('[COLOR orange]Acestream engine settings:[/COLOR]','','')
 
 	#Change engine settings from xbmc menus
-	eligible = True
+
+	eligible = False
 	if xbmc.getCondVisibility('system.platform.linux'):
 		if os.uname()[4] == "armv6l" or os.uname()[4] == "armv7l":
 			eligible = True
 	elif xbmc.getCondVisibility('system.platform.OSX'): eligible = True
+	elif settings.getSetting('openeleci386') == "true": eligible = True
 	else: eligible = False
 	if eligible and xbmcvfs.exists(os.path.join(pastaperfil,'acestream','ace','ACEStream','values')):
+		addLink('[COLOR orange]Acestream engine settings:[/COLOR]','','')
 		try:
 			porta = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","port.txt"))
 		except: porta = "N/A"
@@ -910,7 +912,7 @@ def autoconf():
 
 
 			
-		elif os.uname()[4] == "x86_64" and os.uname()[1] == "OpenELEC" or settings.getSetting('openelecx86_64') == "true":
+		elif (os.uname()[4] == "x86_64" and re.search(os.uname()[1],"openelec",re.IGNORECASE)) or settings.getSetting('openelecx86_64') == "true":
 			settings.setSetting('openelecx86_64',value='true')
 			print "Detected OpenELEC x86_64"
 			openelecx86_64_package = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/Openelec/openelec_x86_64_userdata.tar.gz"
@@ -923,7 +925,7 @@ def autoconf():
 				download_tools().remove(SPSC_KIT)
 			settings.setSetting('autoconfig',value='false')
 
-		elif os.uname()[4] == "i386" and os.uname()[1] == "OpenELEC" or settings.getSetting('openeleci386') == "true":
+		elif (os.uname()[4] == "i386" and re.search(os.uname()[1],"openelec",re.IGNORECASE)) or (os.uname()[4] == "i686" and re.search(os.uname()[1],"openelec",re.IGNORECASE)) or settings.getSetting('openeleci386') == "true":
 			settings.setSetting('openeleci386',value='true')
 			print "Detected OpenELEC i386"
 			openeleci386_package = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/openelec/openeleci386-acestream-sopcast.tar.gz"
@@ -942,7 +944,7 @@ def autoconf():
 				if opcao: 
 					settings.setSetting('openelecx86_64',value='true')
 					autoconf()
-			elif os.uname()[4] == "i386":
+			elif os.uname()[4] == "i386" or os.uname()[4] == "i686":
 				opcao= xbmcgui.Dialog().yesno(traducao(40000), traducao(600023))
 				if opcao: 
 					settings.setSetting('openeleci386',value='true')
@@ -1545,8 +1547,14 @@ def sopstreams_builtin(name,iconimage,sop):
         ret = mensagemprogresso.create(traducao(40000),"SopCast",traducao(40039))
         mensagemprogresso.update(0)
         while counter > 0 and spsc.pid:
+	    if mensagemprogresso.iscanceled():
+	    	mensagemprogress.close()
+           	try: os.kill(self.spsc_pid,9)
+            	except: pass
+                break
             xbmc.sleep(400)
             counter -= 1
+	    mensagemprogresso.update(int((1-(counter/50.0))*100))
             try:
                 urllib2.urlopen(url)
                 counter=0
@@ -1555,6 +1563,7 @@ def sopstreams_builtin(name,iconimage,sop):
             except:pass
                     
         if res:
+	    mensagemprogresso.update(100)
 	    xbmcplugin.setResolvedUrl(int(sys.argv[1]),True,listitem)
             player = streamplayer(xbmc.PLAYER_CORE_AUTO , spsc_pid=spsc.pid , listitem=listitem)
             if int(sys.argv[1]) < 0:
@@ -1625,18 +1634,7 @@ class SopWindowsPlayer(xbmc.Player):
             self.onPlayBackStopped()
             print 'Chegou ao fim. Playback terminou.'
 
-#class PlaybackFailed(Exception):
-#    '''XBMC falhou a carregar o stream'''
-#    print "falhou a carregar o stream"
-#    import subprocess
-#    cmd = ['sc','stop','sopcastp2p']
-#    proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
-#    for line in proc.stdout:
-#        print line.rstrip()
 
-def sopserver():
-    opcao= xbmcgui.Dialog().yesno(traducao(40000), traducao(40041), linkwiki, traducao(40042))
-    if opcao: comecarvideo(name,'')
 
 class streamplayer(xbmc.Player):
     def __init__( self , *args, **kwargs):
@@ -1658,10 +1656,7 @@ class streamplayer(xbmc.Player):
             if not xbmc.Player(xbmc.PLAYER_CORE_AUTO).isPlaying():
                 player = streamplayer(xbmc.PLAYER_CORE_AUTO , spsc_pid=self.spsc_pid , listitem=self.listitem)
                 player.play(url, self.listitem)     
-        #else: 
-            #try:
-            
-            #except: pass
+
 
     def onPlayBackStopped(self):
         self._playbackLock = False

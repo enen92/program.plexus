@@ -1,3 +1,8 @@
+[B]v0.2.9 (21-05-2014):[/B]
+-Added openelec i386/i686 package
+-Small fixes
+-Different dialogprogress for sopcast
+
 [B]v0.2.8 (20-05-2014):[/B]
 -Added xbian armv7 package (thanks to xbian devs)
 -Added openelec armv7 package
