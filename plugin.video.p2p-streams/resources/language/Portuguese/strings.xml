@@ -163,7 +163,7 @@
 	<string id="40110">Escolha o OS da seguinte lista.</string>
 	<string id="40111">Plataforma openelec x86_64</string>
 	<string id="40112">A transferir módulos SopCast e Acestream.</string>
-	<string id="40113">Está a usar OpenELEC x86_x64?</string>
+	<string id="40113">Está a usar o OpenELEC x86_x64?</string>
 	<string id="40114">-Website-parsers do addon</string>
 	<string id="40115">-Listas xml do addon</string>
 	<string id="40116">[B][COLOR orange]Lista sopcast.org[/COLOR][/B] (http://sopcast.org/chlist.xml)</string>
@@ -313,6 +313,8 @@
 	<string id="600020">Número máximo de connecções (0=ilimitado) </string>
 	<string id="600021">Número máximo de connecções por stream (0=ilimitado) </string>
 	<string id="600022">AcestreamEngine necessita actualização. Por favor repita a configuração.</string>
+
+	<string id="600023">Está a usar o OpenELEC i386?</string>
 	
 																					
 </strings>
