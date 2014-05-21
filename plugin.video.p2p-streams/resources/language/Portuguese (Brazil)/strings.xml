@@ -313,6 +313,8 @@
 	<string id="600020">Número máximo de connecções (0=ilimitado) </string>
 	<string id="600021">Número máximo de connecções por stream (0=ilimitado) </string>
 	<string id="600022">AcestreamEngine necessita actualização. Por favor repita a configuração.</string>
+
+	<string id="600023">Está a usar o OpenELEC i386?</string>
 	
 																					
 </strings>
