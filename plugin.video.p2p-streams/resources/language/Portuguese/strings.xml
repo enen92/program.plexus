@@ -315,6 +315,9 @@
 	<string id="600022">AcestreamEngine necessita actualização. Por favor repita a configuração.</string>
 
 	<string id="600023">Está a usar o OpenELEC i386?</string>
+	<string id="600024">Introduza um valor inteiro</string>
+	<string id="600025">Valor inválido. Apenas valores inteiros!</string>
+	<string id="600026">Definição alterada com sucesso</string>
 	
 																					
 </strings>

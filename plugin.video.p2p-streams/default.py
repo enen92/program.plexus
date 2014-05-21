@@ -158,7 +158,7 @@ def advanced_menu():
 
 def set_engine_setting(file):
 	value = readfile(file)
-	keyb = xbmc.Keyboard(str(int(value)), traducao(40033))
+	keyb = xbmc.Keyboard(str(int(value)), traducao(600024))
 	keyb.doModal()
 	if (keyb.isConfirmed()):
 		search = keyb.getText()
@@ -168,31 +168,12 @@ def set_engine_setting(file):
 		except: integer = False
 		if integer == True:
 			savefile(file, search)
-			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), "Setting changed sucessfully", 1,addonpath+"/icon.png"))
+			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), traducao(600026), 1,addonpath+"/icon.png"))
 			xbmc.executebuiltin("Container.Refresh")
 		else:
-			mensagemok(traducao(40000),"Not a valid value. A integer is needed!")
+			mensagemok(traducao(40000),traducao(600025))
 			sys.exit(0)
 	
-
-
-def delete_playercorexml():
-	userdatapath = xbmc.translatePath(os.path.join('special://home/userdata'.decode('utf-8'),''.decode('utf-8')))
-	playercore_var = os.path.join(userdatapath,'playercorefactory.xml')
-	playercorebackup_var = os.path.join(userdatapath,'playercorefactorybackup.xml')
-	xbmcvfs.delete(playercore_var)
-	mensagemok(traducao(40000),traducao(40066))
-	xbmc.executebuiltin("Container.Refresh")		
-		
-def backup_playercorexml():
-	userdatapath = xbmc.translatePath(os.path.join('special://home/userdata'.decode('utf-8'),''.decode('utf-8')))
-	playercore_var = os.path.join(userdatapath,'playercorefactory.xml')
-	playercorebackup_var = os.path.join(userdatapath,'playercorebackup.xml')
-	if xbmcvfs.exists(playercorebackup_var):
-		xbmcvfs.delete(playercorebackup_var)
-	xbmcvfs.copy(playercore_var,playercorebackup_var)
-	mensagemok(traducao(40000),traducao(40064))
-	xbmc.executebuiltin("Container.Refresh")
 		
 def remove_lock():
 	lock_file = xbmc.translatePath('special://temp/'+ 'ts.lock')
@@ -200,29 +181,6 @@ def remove_lock():
 	mensagemok(traducao(40000),traducao(40069))
 	xbmc.executebuiltin("Container.Refresh")
 	
-def import_playerxml():
-	userdatapath = xbmc.translatePath(os.path.join('special://home/userdata'.decode('utf-8'),''.decode('utf-8')))
-	playercore_var = os.path.join(userdatapath,'playercorefactory.xml')
-	playercorebackup_var = os.path.join(userdatapath,'playercorefactorybackup.xml')
-	if xbmcvfs.exists(playercore_var):
-		print "A playercorefactory.xml already exists"
-		if xbmcvfs.exists(playercorebackup_var):
-			print "An pcorefactory.xml backup already exists"
-			xbmcvfs.delete(playercorebackup_var)
-			xbmcvfs.rename(playercore_var,playercorebackup_var)
-			download_tools().Downloader("http://p2p-strm.googlecode.com/svn/trunk/playercorefactory.xml",playercore_var,traducao(40103),traducao(40000))
-			mensagemok(traducao(40000),traducao(40060))
-		else:	
-			xbmcvfs.rename(playercore_var,playercorebackup_var)
-			download_tools().Downloader("http://p2p-strm.googlecode.com/svn/trunk/playercorefactory.xml",playercore_var,traducao(40103),traducao(40000))
-			mensagemok(traducao(40000),traducao(40060))
-	else:
-		print "No pcorefactory.xml in the system yet"
-		download_tools().Downloader("http://p2p-strm.googlecode.com/svn/trunk/playercorefactory.xml",playercore_var,traducao(40103),traducao(40000))
-		mensagemok(traducao(40000),traducao(40060))
-	settings.setSetting('external_sopcast',value='true')
-	xbmc.executebuiltin("Container.Refresh")	
-
 
 def delete_advancedxml():
 	userdatapath = xbmc.translatePath(os.path.join('special://home/userdata'.decode('utf-8'),''.decode('utf-8')))

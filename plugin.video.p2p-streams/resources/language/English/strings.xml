@@ -315,5 +315,10 @@
 	<string id="600022">AcestreamEngine is outdated. Please re-do the addon configuration.</string>
 
 	<string id="600023">Are you running OpenELEC i386?</string>
+	<string id="600024">Insert an integer value</string>
+	<string id="600025">Not a valid value. A integer is needed!</string>
+	<string id="600026">Setting changed sucessfully.</string>
+
+
 
 </strings>
