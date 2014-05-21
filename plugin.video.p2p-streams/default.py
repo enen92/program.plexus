@@ -963,14 +963,42 @@ def autoconf():
 				download_tools().extract(SPSC_KIT,pastaperfil)
 				xbmc.sleep(500)
 				download_tools().remove(SPSC_KIT)
+			settings.setSetting('autoconfig',value='false')
+
+		elif os.uname()[4] == "i386" and os.uname()[1] == "OpenELEC" or settings.getSetting('openeleci386') == "true":
+			settings.setSetting('openeleci386',value='true')
+			print "Detected OpenELEC i386"
+			openeleci386_package = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/openelec/openeleci386-acestream-sopcast.tar.gz"
+			SPSC_KIT = os.path.join(addonpath,openeleci386_package.split("/")[-1])
+			download_tools().Downloader(openeleci386_package,SPSC_KIT,traducao(40112),traducao(40000))
+			import tarfile
+			if tarfile.is_tarfile(SPSC_KIT):
+				download_tools().extract(SPSC_KIT,pastaperfil)
+				xbmc.sleep(500)
+				download_tools().remove(SPSC_KIT)
 			settings.setSetting('autoconfig',value='false')		
+	
 		else:
-			opcao= xbmcgui.Dialog().yesno(traducao(40000), traducao(40113))
-			if opcao: 
-				settings.setSetting('openelecx86_64',value='true')
-				autoconf()
-			else:
+			if os.uname()[4] == "x86_64":
+				opcao= xbmcgui.Dialog().yesno(traducao(40000), traducao(40113))
+				if opcao: 
+					settings.setSetting('openelecx86_64',value='true')
+					autoconf()
+			elif os.uname()[4] == "i386":
+				opcao= xbmcgui.Dialog().yesno(traducao(40000), traducao(600023))
+				if opcao: 
+					settings.setSetting('openeleci386',value='true')
+					autoconf()
+
+			else: mensagemok(traducao(40000),traducao(40056))
+			
+
+			#Linux but not openelec i386 nor openelec x86_64 - General Linux platforms configuration
+			
+			if settings.getSetting('openeleci386') == "false" and settings.getSetting('openelecx86_64') == "false":
+
 				print "Detected Other Linux Plataform"
+
             		#Sop
 				if os.path.isfile("/usr/lib/libstdc++.so.5") and os.path.isfile("/usr/lib/libstdc++.so.5.0.1"):
 					print "Sopcast configuration: Linux has sop libs already"
@@ -1517,11 +1545,19 @@ def sopstreams_builtin(name,iconimage,sop):
         os.system("killall -9 "+SPSC_BINARY)
         global spsc
         if xbmc.getCondVisibility('System.Platform.Linux') and settings.getSetting('force_android') == "false":
+
         	if os.uname()[4] == "armv6l" or os.uname()[4] == "armv7l" or settings.getSetting('openelecx86_64') == "true":
         		if settings.getSetting('sop_debug_mode') == "false":
         			cmd = [os.path.join(pastaperfil,'sopcast','qemu-i386'),os.path.join(pastaperfil,'sopcast','lib/ld-linux.so.2'),"--library-path",os.path.join(pastaperfil,'sopcast',"lib"),os.path.join(pastaperfil,'sopcast','sp-sc-auth'),sop,str(LOCAL_PORT),str(VIDEO_PORT)]
 			else: 
 				cmd = [os.path.join(pastaperfil,'sopcast','qemu-i386'),os.path.join(pastaperfil,'sopcast','lib/ld-linux.so.2'),"--library-path",os.path.join(pastaperfil,'sopcast',"lib"),os.path.join(pastaperfil,'sopcast','sp-sc-auth'),sop,str(LOCAL_PORT),str(VIDEO_PORT),">",SPSC_LOG]
+
+		elif settings.getSetting('openeleci386') == "true":
+        		if settings.getSetting('sop_debug_mode') == "false":
+        			cmd = [os.path.join(pastaperfil,'sopcast','lib/ld-linux.so.2'),"--library-path",os.path.join(pastaperfil,'sopcast',"lib"),os.path.join(pastaperfil,'sopcast','sp-sc-auth'),sop,str(LOCAL_PORT),str(VIDEO_PORT)]
+			else: 
+				cmd = [os.path.join(pastaperfil,'sopcast','lib/ld-linux.so.2'),"--library-path",os.path.join(pastaperfil,'sopcast',"lib"),os.path.join(pastaperfil,'sopcast','sp-sc-auth'),sop,str(LOCAL_PORT),str(VIDEO_PORT),">",SPSC_LOG]
+
 		else: 
 			if settings.getSetting('sop_debug_mode') == "false":
 				cmd = [SPSC, sop, str(LOCAL_PORT), str(VIDEO_PORT)]
@@ -1548,7 +1584,7 @@ def sopstreams_builtin(name,iconimage,sop):
         xbmc.sleep(int(settings.getSetting('wait_time')))
         res=False
         counter=50
-        ret = mensagemprogresso.create(traducao(40000),traducao(40039))
+        ret = mensagemprogresso.create(traducao(40000),"SopCast",traducao(40039))
         mensagemprogresso.update(0)
         while counter > 0 and spsc.pid:
             xbmc.sleep(400)
