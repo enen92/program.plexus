@@ -314,4 +314,6 @@
 	<string id="600021">Max number of connections per stream (0=No limit) </string>
 	<string id="600022">AcestreamEngine is outdated. Please re-do the addon configuration.</string>
 
+	<string id="600023">Are you running OpenELEC i386?</string>
+
 </strings>
