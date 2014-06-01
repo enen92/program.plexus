@@ -1,3 +1,6 @@
+[B]v0.3.0 (1-06-2014):[/B]
+-Fix issue with strings missing on devices not eligible to change acestreamengine settings from addon gui.
+
 [B]v0.2.9 (21-05-2014):[/B]
 -Added openelec i386/i686 package
 -Small fixes

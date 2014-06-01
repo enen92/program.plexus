@@ -122,6 +122,7 @@ def advanced_menu():
 			eligible = True
 	elif xbmc.getCondVisibility('system.platform.OSX'): eligible = True
 	elif settings.getSetting('openeleci386') == "true": eligible = True
+	elif settings.getSetting('force_android') == "true": eligible = False
 	else: eligible = False
 	if eligible and xbmcvfs.exists(os.path.join(pastaperfil,'acestream','ace','ACEStream','values')):
 		addLink('[COLOR orange]Acestream engine settings:[/COLOR]','','')
@@ -154,7 +155,7 @@ def advanced_menu():
 		except: maxconnectionsstream = "N/A"
 		addDir(traducao(600021)+"[COLOR orange][ " + str(int(maxconnectionsstream))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnectionsstream.txt"),51,'',2,False)
 	elif eligible and not xbmcvfs.exists(os.path.join(pastaperfil,'acestream','ace','ACEStream','values')):
-		addLink("[COLOR red][B]"+traducao()+"[/COLOR][/B]","","")
+		addLink("[COLOR red][B]"+traducao(600027)+"[/COLOR][/B]","","")
 	else:
 		pass
 

@@ -319,6 +319,8 @@
 	<string id="600025">Not a valid value. A integer is needed!</string>
 	<string id="600026">Setting changed sucessfully.</string>
 
+	<string id="600027">Please re-do the configuration to obtain the new modules.</string>
+
 
 
 </strings>

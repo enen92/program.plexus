@@ -318,6 +318,8 @@
 	<string id="600024">Introduza um valor inteiro</string>
 	<string id="600025">Valor inválido. Apenas valores inteiros!</string>
 	<string id="600026">Definição alterada com sucesso</string>
+
+	<string id="600027">Por favor repita a configuração para obter os novos módulos</string>
 	
 																					
 </strings>
