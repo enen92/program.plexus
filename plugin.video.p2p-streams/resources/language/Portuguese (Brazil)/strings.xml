@@ -54,7 +54,7 @@
 	<string id="40001">Torrent-TV.ru (todas as categorias)</string>
 	<string id="40002">WiZiWiG.tv</string>
 	<string id="40003">Sopcast.ucoz</string>
-	<string id="40004">Ir para ID Acestream</string>
+	<string id="40004">Ir para hash Acestream / Torrent URL</string>
 	<string id="40005">Ir para ID Sopcast</string>
 	<string id="40006">Ir para URL Sopcast</string>
 	<string id="40007">Ir para Stream Sopcast</string>
@@ -320,6 +320,8 @@
 	<string id="600026">Definição alterada com sucesso</string>
 
 	<string id="600027">Por favor repita a configuração para obter os novos módulos</string>
+	<string id="600028">Seleccione o ficheiro torrent local.</string>
+	<string id="600029">Carregar ficheiro .torrent local</string>
 	
 																					
 </strings>

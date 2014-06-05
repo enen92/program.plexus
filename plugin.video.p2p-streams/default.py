@@ -10,7 +10,7 @@ except: pass
 
 ####################################################### CONSTANTES #####################################################
 
-versao = '0.2.8'
+versao = '0.3.1'
 addon_id = 'plugin.video.p2p-streams'
 MainURL = 'http://google.com'
 WiziwigURL = 'http://www.wiziwig.tv'
@@ -567,12 +567,13 @@ def menu_principal():
 
       if xbmc.getCondVisibility('system.platform.windows') or xbmc.getCondVisibility('system.platform.linux') or xbmc.getCondVisibility('System.Platform.OSX') or xbmc.getCondVisibility('System.Platform.Android'):
           #addDir('[COLOR red]Testar Acestream[/COLOR] ','11f2eb93cfe49106b5336b9d36ce05de493c5692',1,'',2,False)
-          addDir(traducao(40004),MainURL,4,'',1,False)
+          addDir('[COLOR orange]AceStream: [/COLOR]' + traducao(40004),MainURL,4,'',1,False)
+          addDir('[COLOR orange]AceStream: [/COLOR]' + traducao(600029),MainURL,52,'',1,False)
 
       if xbmc.getCondVisibility('system.platform.windows') or xbmc.getCondVisibility('system.platform.linux') or xbmc.getCondVisibility('System.Platform.OSX') or xbmc.getCondVisibility('System.Platform.Android'):
           #addDir('[COLOR red]Test Sopcast stream[/COLOR]',"sop://124.232.150.188:3912/11265",2,'',2,False)
-          addDir(traducao(40005),MainURL,3,'',1,False)
-          addDir(traducao(40006),MainURL,5,'',1,False)
+          addDir('[COLOR orange]SopCast: [/COLOR]' + traducao(40005),MainURL,3,'',1,False)
+          addDir('[COLOR orange]SopCast: [/COLOR]' + traducao(40006),MainURL,5,'',1,False)
 
       elif xbmc.getCondVisibility('system.platform.windows'):
           addDir(traducao(40007),MainURL,7,'',1,False)
@@ -581,8 +582,13 @@ def menu_principal():
           addLink(traducao(40056),'','')
           
       addLink('','','')
-      addDir(traducao(40057),MainURL,15,'',2,True)       
+      addDir('[B]' + traducao(40057) + '[/B]',MainURL,15,'',2,True)       
       xbmc.executebuiltin("Container.SetViewMode(50)")
+      
+def load_local_torrent():
+	torrent_file = xbmcgui.Dialog().browse(int(1), traducao(600028), 'myprograms','.torrent')
+	if torrent_file: acestreams("Local .torrent","",'file://' + torrent_file)
+	else: pass
 
 
 def sopcast_ucoz():
@@ -1404,8 +1410,10 @@ def acestreams_builtin(name,iconimage,chid):
         print "Starting Player Ace hash: " + chid
         TSPlayer = tsengine()
         out = None
-        if chid.find('http://') == -1:
+        if chid.find('http://') == -1 and chid.find('.torrent') == -1:
             out = TSPlayer.load_torrent(chid,'PID',port=aceport)
+        elif chid.find('http://') == -1 and chid.find('.torrent') != -1:
+            out = TSPlayer.load_torrent(chid,'TORRENT',port=aceport)
         else:
             out = TSPlayer.load_torrent(chid,'TORRENT',port=aceport)
         if out == 'Ok':
@@ -1903,5 +1911,6 @@ elif mode==48: remove_addon_favourites(url)
 elif mode==49: remove_list(name)
 elif mode==50: livefootballaol_menu()
 elif mode==51: set_engine_setting(url)
+elif mode==52: load_local_torrent()
     
 xbmcplugin.endOfDirectory(int(sys.argv[1]))

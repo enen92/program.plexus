@@ -1,3 +1,6 @@
+[B]v0.3.1 (5-06-2014):[/B]
+-Added support for local .torrent files (+menu entry)
+
 [B]v0.3.0 (1-06-2014):[/B]
 -Fix issue with strings missing on devices not eligible to change acestreamengine settings from addon gui.
 
