@@ -587,7 +587,11 @@ def menu_principal():
       
 def load_local_torrent():
 	torrent_file = xbmcgui.Dialog().browse(int(1), traducao(600028), 'myprograms','.torrent')
-	if torrent_file: acestreams("Local .torrent","",'file://' + torrent_file)
+	if torrent_file:
+		if xbmc.getCondVisibility('system.platform.windows'):
+			acestreams("Local .torrent","",'file:\\' + torrent_file)
+		else:
+			acestreams("Local .torrent","",'file://' + torrent_file)
 	else: pass
 
 
