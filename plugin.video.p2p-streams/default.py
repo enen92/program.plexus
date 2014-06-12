@@ -10,7 +10,7 @@ except: pass
 
 ####################################################### CONSTANTES #####################################################
 
-versao = '0.3.1'
+versao = '0.3.4'
 addon_id = 'plugin.video.p2p-streams'
 MainURL = 'http://google.com'
 WiziwigURL = 'http://www.wiziwig.tv'
@@ -349,21 +349,21 @@ def arenavision_schedule(url):
 		source = abrir_url(url)
 	except: source="";mensagemok(traducao(40000),traducao(40128))
 	if source:
-		match = re.compile('<span style="font-size: x-small;">(.+?)</span>').findall(source)
+		match = re.compile('<br />(.+?)<').findall(source)
 		for event in match:
-			print event
-			eventmatch = re.compile('(.+?)/(.+?)/(.+?) (.+?):(.+?) CET (.*)').findall(event)
+			eventmatch = re.compile('(.+?)/(.+?)/(.+?) (.+?):(.+?) CET (.*)').findall(event.replace('<br />',''))
 			print eventmatch
-			try:
-				from datetime import datetime
-				from dateutil import tz
-				d = datetime(year=2000 + int(eventmatch[0][2]),month=int(eventmatch[0][1]),day=int(eventmatch[0][0]),hour=int(eventmatch[0][3]),minute=int(eventmatch[0][4]),tzinfo=tz.gettz('Europe/Madrid'))
-				fmt = "%d-%m-%y %H:%M"
-				timezona= settings.getSetting('timezone')
-				time = str(d.astimezone(tz.gettz(pytz.all_timezones[int(timezona)])).strftime(fmt))
-				addLink('[B][COLOR orange]' + time + '[/B][/COLOR] ' + eventmatch[0][5],'',"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png")
-			except:
-				addLink(event.replace("&nbsp;",""),'',"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png")
+			for dia,mes,year,hour,minute,evento in eventmatch:
+				try:
+					from datetime import datetime
+					from dateutil import tz
+					d = datetime(year=2000 + int(eventmatch[0][2]),month=int(eventmatch[0][1]),day=int(eventmatch[0][0]),hour=int(eventmatch[0][3]),minute=int(eventmatch[0][4]),tzinfo=tz.gettz('Europe/Madrid'))
+					fmt = "%d-%m-%y %H:%M"
+					timezona= settings.getSetting('timezone')
+					time = str(d.astimezone(tz.gettz(pytz.all_timezones[int(timezona)])).strftime(fmt))
+					addLink('[B][COLOR orange]' + time + '[/B][/COLOR] ' + eventmatch[0][5],'',"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png")
+				except:
+					addLink(event.replace("&nbsp;",""),'',"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png")
 	xbmc.executebuiltin("Container.SetViewMode(51)")
 
 def livefootballws_events():
@@ -465,6 +465,7 @@ def rojadirecta_events():
 	if source:
 		match = re.findall('<span class="(\d+)">.*?<div class="menutitle".*?<span class="t">([^<]+)</span>(.*?)</div>',source,re.DOTALL)
 		for id,time,eventtmp in match:
+			print 'teste',eventtmp
 			try:
 				from datetime import datetime
 				from dateutil import tz
@@ -474,18 +475,23 @@ def rojadirecta_events():
 				time = str(d.astimezone(tz.gettz(pytz.all_timezones[int(timezona)])).strftime(fmt))
 			except:pass
     			eventnospanish = re.compile('<span class="es">(.+?)</span>').findall(eventtmp)
+    			print eventnospanish
     			if eventnospanish:
         			for spanishtitle in eventnospanish:
             				eventtmp = eventtmp.replace('<span class="es">' + spanishtitle + '</span>','')
     			eventclean=eventtmp.replace('<span class="en">','').replace('</span>','').replace(' ()','')
+    			print eventclean
 			matchdois = re.compile('(.*)<b>\s*(.*?)\s*</b>').findall(eventclean)	
     			for sport,event in matchdois:
+    				print sport,event
         			express = '<span class="' + id+ '">.*?</span>\s*</span>'
         			streams = re.findall(express,source,re.DOTALL)
         			for streamdata in streams:
-            				p2pstream = re.compile('<td>P2P</td>\n.+?<td>(.+?)</td>\n.+?<td(.+?)/td>\n.+?<td(.+?)/td>\n.+?<td(.+?)/td>\n.+?<td>.+?href="(.+?)"').findall(streamdata)
+            				p2pstream = re.compile('<td>P2P</td><td>(.+?)</td><td>(.+?)</td><td>(.+?)</td><td>(.+?)</td><td><b><.+?href="(.+?)"').findall(streamdata)
             				already = False
+            				print "p2pstream e tal",p2pstream
             				for canal,language,tipo,qualidade,urltmp in p2pstream:
+            					print tipo
                					if "Sopcast" in tipo or "Acestream" in tipo:
                     					if already == False:
                         					addLink("[B][COLOR orange]"+time+ " - " + sport + " - " + event + "[/B][/COLOR]",'',"http://www.ligafutbol.net/wp-content/2010/02/Roja_Directa_logo.jpg")
@@ -694,6 +700,7 @@ def torrenttv_play(name,url):
 
 def wiziwig_cats():
     addDir(traducao(40009),WiziwigURL + '/index.php?part=sports',9,'',1,True)
+    addDir("World Cup 2014 ",WiziwigURL + '/competition.php?part=sports&discipline=worldcup&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/worldcup.gif',1,True)
     addDir(traducao(40010),WiziwigURL + '/competition.php?part=sports&discipline=americanfootball&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/americanfootball.gif',1,True)
     addDir(traducao(40011),WiziwigURL + '/competition.php?part=sports&discipline=football&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/football.gif',1,True)
     addDir(traducao(40012),WiziwigURL + '/competition.php?part=sports&discipline=basketball&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/basketball.gif',1,True)
@@ -706,7 +713,7 @@ def wiziwig_cats():
     addDir(traducao(40019),WiziwigURL + '/competition.php?part=sports&discipline=cricket&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/cricket.gif',1,True)
     addDir(traducao(40020),WiziwigURL + '/competition.php?part=sports&discipline=cycling&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/cycling.gif',1,True)
     addDir(traducao(40021),WiziwigURL + '/competition.php?part=sports&discipline=other&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/other.gif',1,True)
-    xbmc.executebuiltin("Container.SetViewMode(50)")
+    xbmc.executebuiltin("Container.SetViewMode(51)")
 
 def translate_months(month):
 	if month == "January": return 1
