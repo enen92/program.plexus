@@ -393,7 +393,7 @@ def livefootballws_events():
 						addDir("[B][COLOR orange]("+traducao(600012)+time+")[/COLOR][/B] "+teams[0],url[0],39,"http://www.userlogos.org/files/logos/clubber/football_ws___.PNG",number_of_items,True)
 					except:
 						if '<span style="color: #000000;">' not in data_item:
-							addDir("[B][COLOR orange]("+data_item+")[/COLOR][/B] "+teams[0],url[0],39,"http://www.userlogos.org/files/logos/clubber/football_ws___.PNG",number_of_items,True)
+							addDir("[B][COLOR green]("+data_item+")[/COLOR][/B] "+teams[0],url[0],39,"http://www.userlogos.org/files/logos/clubber/football_ws___.PNG",number_of_items,True)
 						else: pass
 			except: pass
 
@@ -465,7 +465,6 @@ def rojadirecta_events():
 	if source:
 		match = re.findall('<span class="(\d+)">.*?<div class="menutitle".*?<span class="t">([^<]+)</span>(.*?)</div>',source,re.DOTALL)
 		for id,time,eventtmp in match:
-			print 'teste',eventtmp
 			try:
 				from datetime import datetime
 				from dateutil import tz
@@ -480,18 +479,14 @@ def rojadirecta_events():
         			for spanishtitle in eventnospanish:
             				eventtmp = eventtmp.replace('<span class="es">' + spanishtitle + '</span>','')
     			eventclean=eventtmp.replace('<span class="en">','').replace('</span>','').replace(' ()','')
-    			print eventclean
 			matchdois = re.compile('(.*)<b>\s*(.*?)\s*</b>').findall(eventclean)	
     			for sport,event in matchdois:
-    				print sport,event
         			express = '<span class="' + id+ '">.*?</span>\s*</span>'
         			streams = re.findall(express,source,re.DOTALL)
         			for streamdata in streams:
-            				p2pstream = re.compile('<td>P2P</td><td>(.+?)</td><td>(.+?)</td><td>(.+?)</td><td>(.+?)</td><td><b><.+?href="(.+?)"').findall(streamdata)
+            				p2pstream = re.compile('<td>P2P</td><td>([^<]*)</td><td>([^<]*)</td><td>([^<]*)</td><td>([^<]*)</td><td><b><.+?href="(.+?)"').findall(streamdata)
             				already = False
-            				print "p2pstream e tal",p2pstream
             				for canal,language,tipo,qualidade,urltmp in p2pstream:
-            					print tipo
                					if "Sopcast" in tipo or "Acestream" in tipo:
                     					if already == False:
                         					addLink("[B][COLOR orange]"+time+ " - " + sport + " - " + event + "[/B][/COLOR]",'',"http://www.ligafutbol.net/wp-content/2010/02/Roja_Directa_logo.jpg")
@@ -499,20 +494,32 @@ def rojadirecta_events():
 							if "ArenaVision" in canal: thumbnail = "http://s30.postimg.org/n6m6le88h/arenavisionlogo.png"
 							else: thumbnail = "http://www.ligafutbol.net/wp-content/2010/02/Roja_Directa_logo.jpg"
                    					addDir("[B]["+tipo.replace("<","").replace(">","")+"][/B]-"+canal.replace("<","").replace(">","")+" - ("+language.replace("<","").replace(">","")+") - ("+qualidade.replace("<","").replace(">","")+" Kbs)",urltmp.replace("goto/",""),43,thumbnail,43,False)
+                   			p2pdirect = re.compile('<td>P2P</td><td></td><td></td><td>(.+?)</td><td></td><td>.+?href="(.+?)"').findall(streamdata)
+                   			for tipo,link in p2pdirect:
+                   				if tipo == "SopCast" and "sop://" in link:
+                   					addDir("[B][SopCast][/B]- (no info)",link,43,"http://www.ligafutbol.net/wp-content/2010/02/Roja_Directa_logo.jpg",43,False)
+
 	xbmc.executebuiltin("Container.SetViewMode(51)")
 
 def rojadirecta_resolver(name,url):
-	if "sop://" not in url and "acestream://" not in url: 
-		url="http://"+url
+	print name,url
+	if "sop://" not in url and "acestream://" not in url:
+		if "http://" not in url: 
+			url="http://"+url
 		try:
 			source = abrir_url(url)
 		except: source = "";mensagemok(traducao(40000),traducao(40128))
+		matchredirect = re.compile('<frame src="(.+?)"').findall(source)
 		matchsop = re.compile('sop://(.+?)"').findall(source)
 		if matchsop: sopstreams(name,"http://www.ligafutbol.net/wp-content/2010/02/Roja_Directa_logo.jpg","sop://" + matchsop[0])
 		else:
 			match = re.compile('this.loadPlayer\("(.+?)"').findall(source)
 			if match: acestreams(name,"http://www.ligafutbol.net/wp-content/2010/02/Roja_Directa_logo.jpg",match[0])
-			else: mensagemok(traducao(40000),traducao(40022))
+			else: 
+				if matchredirect:
+					rojadirecta_resolver(name,matchredirect[0])
+				else:
+					mensagemok(traducao(40000),traducao(40022))
 	elif "sop://" in url: sopstreams(name,"http://www.ligafutbol.net/wp-content/2010/02/Roja_Directa_logo.jpg",url)
 	elif "acestream://" in url: acestreams(name,"http://www.ligafutbol.net/wp-content/2010/02/Roja_Directa_logo.jpg",url)
 	else: mensagemok(traducao(40000),traducao(40022))		
@@ -535,13 +542,59 @@ def site_parsers_menu():
       addDir(traducao(40140),MainURL,44,os.path.join(addonpath,'resources','art','torrenttvru.png'),2,True)
       addDir(traducao(40106),MainURL,24,'http://1torrent.tv/images/header_logo.png',2,True)
       addDir(traducao(40003),MainURL,13,'http://s1.postimg.org/snkagb15b/sopblog.png',1,True)
+      addDir("ArenaVision World Cup 2014",MainURL,53,'http://s30.postimg.org/n6m6le88h/arenavisionlogo.png',1,True,"http://www.happyholidays2014.com/wp-content/uploads/2014/05/Fifa-World-cup-2014-brail.jpg")
       addDir(traducao(40131),MainURL,35,'http://s30.postimg.org/n6m6le88h/arenavisionlogo.png',1,True)
       addDir(traducao(40002),MainURL,8,'http://www.brudvik.org/wp-content/uploads/2011/08/wiziwig-logo.png',2,True)
       addDir(traducao(40132),MainURL,38,'http://www.userlogos.org/files/logos/clubber/football_ws___.PNG',1,True)
       addDir(traducao(40133),MainURL,40,'http://www.ligafutbol.net/wp-content/2010/02/Roja_Directa_logo.jpg',1,True)
       addDir(traducao(40139),MainURL,41,'http://livefootballvideo.com/images/xlivefootballvideologo.png.pagespeed.ic.3kxaAupa3O.png',1,True)
       addDir(traducao(40157),MainURL,50,'http://s30.postimg.org/3oznvmo5d/livefootball.png',1,True)
-      xbmc.executebuiltin("Container.SetViewMode(51)")        
+      xbmc.executebuiltin("Container.SetViewMode(51)")
+
+def arenavision_mundial():
+	try:
+		source = abrir_url("http://mundial.arenavision.in/")
+	except: source="";mensagemok(traducao(40000),traducao(40128))
+	if source:
+		match = re.compile("<li><a href='(.+?)'>(.+?)</a></li>").findall(source)
+		for link,name in match:
+			if "Agenda/Schedule" in name:
+				addDir(name,link,54,"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png",1,True,"http://www.happyholidays2014.com/wp-content/uploads/2014/05/Fifa-World-cup-2014-brail.jpg")
+			if "ArenaMundial" in name:
+				addDir(name,link,36,"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png",1,False,"http://www.happyholidays2014.com/wp-content/uploads/2014/05/Fifa-World-cup-2014-brail.jpg")
+			else: pass
+
+def arenavision_mundial_agenda(url):
+	try:
+		source = abrir_url(url)
+	except: source="";mensagemok(traducao(40000),traducao(40128))
+	if source:
+		html_trunk = re.findall("<u>(.+?)</u></b><br /><br />(.*?)(?:<b>|script)", source, re.DOTALL)
+		for dia,eventos in html_trunk:
+			try:
+				monthvector = dia.split(" ")
+				if len(monthvector) == 4:
+					if monthvector[3] == 'junio':
+						month = 6
+					elif monthvector[3] == 'julio':
+						month = 7
+					addLink('[B][COLOR orange]' + str(monthvector[1])+ '/' + str(month) + '/2014' + '[/B][/COLOR]',MainURL,"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png","http://www.happyholidays2014.com/wp-content/uploads/2014/05/Fifa-World-cup-2014-brail.jpg")
+					match = re.compile("/>(.+?)<").findall('/>' + eventos)
+					for evento in match:
+						event_dict = evento.split('/')
+						hour_minute = re.compile('(.+?):(.+?) CET').findall(event_dict[0])
+						from datetime import datetime
+						from dateutil import tz
+						d = datetime(year=2014,month=6,day=15,hour=int(hour_minute[0][0]),minute=int(hour_minute[0][1]),tzinfo=tz.gettz('Europe/Madrid'))
+						fmt = "%H:%M"
+						timezona= settings.getSetting('timezone')
+						time = str(d.astimezone(tz.gettz(pytz.all_timezones[int(timezona)])).strftime(fmt))
+						addLink(str(time) + ' - ' + event_dict[2],MainURL,"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png","http://www.happyholidays2014.com/wp-content/uploads/2014/05/Fifa-World-cup-2014-brail.jpg")
+
+			except:
+				pass
+	xbmc.executebuiltin("Container.SetViewMode(51)")
+
 
 def xml_lists_menu():
       if settings.getSetting('sopcast-oficial') == "true":
@@ -601,22 +654,27 @@ def load_local_torrent():
 	else: pass
 
 
+
 def sopcast_ucoz():
     conteudo=clean(abrir_url('http://sopcast.ucoz.com'))
-    listagem=re.compile('<div class="eTitle" style="text-align:left;"><a href="(.+?)">(.+?)</a></div>').findall(conteudo)
+    listagem=re.compile('<div class="eTitle" style="text-align:left;"><a href="(.+?)">(.+?)</a>').findall(conteudo)
     for urllist,titulo in listagem:
-	try:
-		match = re.compile('\((.*?)\.(.*?)\.(.*?)\. (.*?):(.*?) UTC\) (.*)').findall(titulo)
-		for dia,mes,ano,hora,minuto,evento in match:
-			from datetime import datetime
-			from dateutil import tz
-			d = datetime(year=int(ano),month=int(mes),day=int(dia),hour=int(hora),minute=int(minuto),tzinfo=tz.gettz('Europe/London'))
-			fmt = "%y-%m-%d %H:%M"
-			timezona= settings.getSetting('timezone')
-			time = str(d.astimezone(tz.gettz(pytz.all_timezones[int(timezona)])).strftime(fmt))
-        		addDir('[B][COLOR orange]' + time + '[/B][/COLOR]-' + evento,urllist,14,'',len(listagem),False)
-	except:
-		addDir(titulo,urllist,14,'',len(listagem),False)
+    	print titulo
+    	try:
+    		match = re.compile('\((.*?)\.(.*?)\.(.*?)\. (.*?):(.*?) UTC\) (.*)').findall(titulo)
+    		if match:
+    			for dia,mes,ano,hora,minuto,evento in match:
+    				from datetime import datetime
+    				from dateutil import tz
+    				d = datetime(year=int(ano),month=int(mes),day=int(dia),hour=int(hora),minute=int(minuto),tzinfo=tz.gettz('Europe/London'))
+    				fmt = "%y-%m-%d %H:%M"
+    				timezona= settings.getSetting('timezone')
+    				time = str(d.astimezone(tz.gettz(pytz.all_timezones[int(timezona)])).strftime(fmt))
+    				addDir('[B][COLOR orange]' + time + '[/B][/COLOR]-' + evento,urllist,14,'',len(listagem),False)
+    		else:
+    			addDir(titulo,urllist,14,'',len(listagem),False)
+    	except:
+    			addDir(titulo,urllist,14,'',len(listagem),False)
 
 def sopcast_ucoz_play(name,url):
     conteudo=clean(abrir_url(url))
@@ -1709,18 +1767,18 @@ def comecarvideo(titulo,thumb):
 
 ################################################## PASTAS ################################################################
 
-def addLink(name,url,iconimage):
+def addLink(name,url,iconimage,fan_art="%s/fanart.jpg"%settings.getAddonInfo("path")):
       liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
       liz.setInfo( type="Video", infoLabels={ "Title": name } )
-      liz.setProperty('fanart_image', "%s/fanart.jpg"%settings.getAddonInfo("path"))
+      liz.setProperty('fanart_image', fan_art)
       return xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz)
 
-def addDir(name,url,mode,iconimage,total,pasta):
+def addDir(name,url,mode,iconimage,total,pasta,fan_art="%s/fanart.jpg"%settings.getAddonInfo("path")):
       u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)+"&iconimage="+urllib.quote_plus(iconimage)
       contextmen = []
       liz=xbmcgui.ListItem(name,iconImage="DefaultFolder.png", thumbnailImage=iconimage)
       liz.setInfo( type="Video", infoLabels={ "Title": name} )
-      liz.setProperty('fanart_image', "%s/fanart.jpg"%settings.getAddonInfo("path"))
+      liz.setProperty('fanart_image', fan_art)
       if mode == 1 or mode == 2:
 	    try:
 		 dirs, files = xbmcvfs.listdir(os.path.join(pastaperfil,"Favourites"))
@@ -1923,5 +1981,9 @@ elif mode==49: remove_list(name)
 elif mode==50: livefootballaol_menu()
 elif mode==51: set_engine_setting(url)
 elif mode==52: load_local_torrent()
+elif mode==53: arenavision_mundial()
+elif mode==54: arenavision_mundial_agenda("http://mundial.arenavision.in/p/agenda-tvschedule-tv.html")
+
+
     
 xbmcplugin.endOfDirectory(int(sys.argv[1]))

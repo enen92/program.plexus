@@ -1,7 +1,13 @@
+[B]v0.3.4 (13-06-2014):[/B]
+-Added Arenavision mundial parser (temporary till the end of the competition)
+-Added p2p links with no info to rojadirect parser
+-Fixed urls like futbolsinlimites (iframe hidden sop://) in rojadirecta
+-Fixed a minor issue in sopcast ucoz
+
 [B]v0.3.3 (12-06-2014):[/B]
--Fix arenavision / arenavision schedule
+-Fix arenavision/ arenavision schedule
 -Fix Rojadirecta parser
--Added world cup 2014 category to wiziwig parser
+-Added world cup 2014 section to wiziwig parser
 
 [B]v0.3.2 (6-06-2014):[/B]
 -Fix load_local_torrents for windows (tks azirus)
