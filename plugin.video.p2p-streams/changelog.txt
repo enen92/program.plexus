@@ -1,3 +1,6 @@
+[B]v0.3.4 (15-06-2014):[/B]
+-Fix empty listings for rojadirecta,AV and Arenamundial.
+
 [B]v0.3.4 (13-06-2014):[/B]
 -Added Arenavision mundial parser (temporary till the end of the competition)
 -Added p2p links with no info to rojadirect parser
