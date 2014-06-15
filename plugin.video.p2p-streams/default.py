@@ -10,7 +10,7 @@ except: pass
 
 ####################################################### CONSTANTES #####################################################
 
-versao = '0.3.4'
+versao = '0.3.5'
 addon_id = 'plugin.video.p2p-streams'
 MainURL = 'http://google.com'
 WiziwigURL = 'http://www.wiziwig.tv'
@@ -320,13 +320,13 @@ def livefootballaol_menu():
 
 def arenavision_menu():
 	try:
-		source = abrir_url("http://www.arenavision.in/")
+		source = abrir_url("http://go.arenavision.in/")
 	except: source="";mensagemok(traducao(40000),traducao(40128))
 	if source:
 		match = re.compile("<li><a href='(.+?)'>(.+?)</a></li>").findall(source)
 		for link,name in match:
-			if "Agenda/Schedule" in name:
-				addDir(name,link,37,"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png",1,True)
+			if "Agenda" in name:
+				addDir("[B][COLOR orange]Agenda/Schedule[/COLOR][/B]",link,37,"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png",1,True)
 			if "AV" in name:
 				addDir(name,link,36,"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png",1,False)
 			else: pass
@@ -345,23 +345,23 @@ def arenavision_streams(name,url):
 			else: mensagemok(traducao(40000),traducao(40022))
 
 def arenavision_schedule(url):
+	print url
 	try:
 		source = abrir_url(url)
 	except: source="";mensagemok(traducao(40000),traducao(40128))
 	if source:
-		match = re.compile('<br />(.+?)<').findall(source)
+		match = re.findall("<br />(.*?)<div class='post-footer'>", source, re.DOTALL)
 		for event in match:
-			eventmatch = re.compile('(.+?)/(.+?)/(.+?) (.+?):(.+?) CET (.*)').findall(event.replace('<br />',''))
-			print eventmatch
+			eventmatch = re.compile('(.+?)/(.+?)/(.+?) (.+?):(.+?) CET (.+?)<').findall(event)
 			for dia,mes,year,hour,minute,evento in eventmatch:
 				try:
 					from datetime import datetime
 					from dateutil import tz
-					d = datetime(year=2000 + int(eventmatch[0][2]),month=int(eventmatch[0][1]),day=int(eventmatch[0][0]),hour=int(eventmatch[0][3]),minute=int(eventmatch[0][4]),tzinfo=tz.gettz('Europe/Madrid'))
+					d = datetime(year=2000 + int(year),month=int(mes),day=int(dia),hour=int(hour),minute=int(minute),tzinfo=tz.gettz('Europe/Madrid'))
 					fmt = "%d-%m-%y %H:%M"
 					timezona= settings.getSetting('timezone')
 					time = str(d.astimezone(tz.gettz(pytz.all_timezones[int(timezona)])).strftime(fmt))
-					addLink('[B][COLOR orange]' + time + '[/B][/COLOR] ' + eventmatch[0][5],'',"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png")
+					addLink('[B][COLOR orange]' + time + '[/B][/COLOR] ' + evento,'',"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png")
 				except:
 					addLink(event.replace("&nbsp;",""),'',"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png")
 	xbmc.executebuiltin("Container.SetViewMode(51)")
@@ -460,7 +460,7 @@ def livefootballvideo_sources(url):
 
 def rojadirecta_events():
 	try:
-		source = abrir_url("http://www.rojadirecta.me/")
+		source = abrir_url("http://en.rojadirecta.eu/")
 	except: source = "";mensagemok(traducao(40000),traducao(40128))
 	if source:
 		match = re.findall('<span class="(\d+)">.*?<div class="menutitle".*?<span class="t">([^<]+)</span>(.*?)</div>',source,re.DOTALL)
@@ -483,8 +483,8 @@ def rojadirecta_events():
     			for sport,event in matchdois:
         			express = '<span class="' + id+ '">.*?</span>\s*</span>'
         			streams = re.findall(express,source,re.DOTALL)
-        			for streamdata in streams:
-            				p2pstream = re.compile('<td>P2P</td><td>([^<]*)</td><td>([^<]*)</td><td>([^<]*)</td><td>([^<]*)</td><td><b><.+?href="(.+?)"').findall(streamdata)
+        			for streamdata in streams:        			
+            				p2pstream = re.compile('<td>P2P</td>\n.+?<td>([^<]*)</td>\n.+?<td>([^<]*)</td>\n.+?<td>([^<]*)</td>\n.+?<td>([^<]*)</td>\n.+?<td><b><a.+?href="(.+?)"').findall(streamdata)
             				already = False
             				for canal,language,tipo,qualidade,urltmp in p2pstream:
                					if "Sopcast" in tipo or "Acestream" in tipo:
@@ -559,7 +559,7 @@ def arenavision_mundial():
 		match = re.compile("<li><a href='(.+?)'>(.+?)</a></li>").findall(source)
 		for link,name in match:
 			if "Agenda/Schedule" in name:
-				addDir(name,link,54,"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png",1,True,"http://www.happyholidays2014.com/wp-content/uploads/2014/05/Fifa-World-cup-2014-brail.jpg")
+				addDir('[B][COLOR orange]Agenda/Schedule[/B][/COLOR]',link,54,"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png",1,True,"http://www.happyholidays2014.com/wp-content/uploads/2014/05/Fifa-World-cup-2014-brail.jpg")
 			if "ArenaMundial" in name:
 				addDir(name,link,36,"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png",1,False,"http://www.happyholidays2014.com/wp-content/uploads/2014/05/Fifa-World-cup-2014-brail.jpg")
 			else: pass
@@ -569,30 +569,27 @@ def arenavision_mundial_agenda(url):
 		source = abrir_url(url)
 	except: source="";mensagemok(traducao(40000),traducao(40128))
 	if source:
-		html_trunk = re.findall("<u>(.+?)</u></b><br /><br />(.*?)(?:<b>|script)", source, re.DOTALL)
-		for dia,eventos in html_trunk:
-			try:
-				monthvector = dia.split(" ")
-				if len(monthvector) == 4:
-					if monthvector[3] == 'junio':
-						month = 6
-					elif monthvector[3] == 'julio':
-						month = 7
-					addLink('[B][COLOR orange]' + str(monthvector[1])+ '/' + str(month) + '/2014' + '[/B][/COLOR]',MainURL,"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png","http://www.happyholidays2014.com/wp-content/uploads/2014/05/Fifa-World-cup-2014-brail.jpg")
-					match = re.compile("/>(.+?)<").findall('/>' + eventos)
-					for evento in match:
-						event_dict = evento.split('/')
-						hour_minute = re.compile('(.+?):(.+?) CET').findall(event_dict[0])
-						from datetime import datetime
-						from dateutil import tz
-						d = datetime(year=2014,month=6,day=15,hour=int(hour_minute[0][0]),minute=int(hour_minute[0][1]),tzinfo=tz.gettz('Europe/Madrid'))
-						fmt = "%H:%M"
-						timezona= settings.getSetting('timezone')
-						time = str(d.astimezone(tz.gettz(pytz.all_timezones[int(timezona)])).strftime(fmt))
-						addLink(str(time) + ' - ' + event_dict[2],MainURL,"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png","http://www.happyholidays2014.com/wp-content/uploads/2014/05/Fifa-World-cup-2014-brail.jpg")
-
-			except:
-				pass
+		html_trunk = re.findall("u>(.*?)(?:<br />\n<b><|script)", source, re.DOTALL)
+		for trunk in html_trunk:
+			data = re.compile('(.*?)</b>').findall(trunk)
+			for dias in data:
+				dia = re.compile('.* (.+?) de (.+?)<').findall(dias)
+				for day,mes in dia:
+					if mes == 'junio': month = 6
+					elif mes == 'julio': month = 7
+					addLink('[B][COLOR orange]' + day + '/' + str(month) + '/2014' + '[/B][/COLOR]',MainURL,"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png","http://www.happyholidays2014.com/wp-content/uploads/2014/05/Fifa-World-cup-2014-brail.jpg")
+			eventos = re.compile('(.+?):(.+?) CET(.+?)(?:<|\n<)').findall(trunk)
+			for evento in eventos:
+				try:
+					event_dict = evento[2].split('/')
+					from datetime import datetime
+					from dateutil import tz
+					d = datetime(year=2014,month=6,day=15,hour=int(evento[0]),minute=int(evento[1]),tzinfo=tz.gettz('Europe/Madrid'))
+					fmt = "%H:%M"
+					timezona= settings.getSetting('timezone')
+					time = str(d.astimezone(tz.gettz(pytz.all_timezones[int(timezona)])).strftime(fmt))
+					addLink(str(time) + ' - ' + event_dict[2],MainURL,"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png","http://www.happyholidays2014.com/wp-content/uploads/2014/05/Fifa-World-cup-2014-brail.jpg")
+				except:pass
 	xbmc.executebuiltin("Container.SetViewMode(51)")
 
 
