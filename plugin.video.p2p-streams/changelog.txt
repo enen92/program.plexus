@@ -1,5 +1,5 @@
 [B]v0.3.6 (16-06-2014):[/B]
--New icon pack for wiziwig (tks azirus)
+-New icon pack for wiziwig (tks axlt2002)
 -A proper livefootballvideo.com parser
 -Fixed livefootballaol list.
 
