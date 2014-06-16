@@ -10,7 +10,7 @@ except: pass
 
 ####################################################### CONSTANTES #####################################################
 
-versao = '0.3.5'
+versao = '0.3.6'
 addon_id = 'plugin.video.p2p-streams'
 MainURL = 'http://google.com'
 WiziwigURL = 'http://www.wiziwig.tv'
@@ -314,9 +314,9 @@ def livefootballaol_menu():
 		source = abrir_url("http://www.livefootballol.com/sopcast-channel-list.html")
 	except: source="";mensagemok(traducao(40000),traducao(40128))
 	if source:
-		match = re.compile("<strong>(.+?)</strong></a></td>.+?\n.+?<td>(.+?)</td>.+?\n.+?<td>(.+?)</td>").findall(source)
+		match = re.compile('">(.+?)</s.+?td>\n<td>(.+?)</td>\n<td>(.+?)</td>').findall(source)
 		for titulo,sopaddress,language in match:
-			addDir("[B][COLOR orange][SopCast] [/COLOR]"+titulo+"[/B] ("+language+ ')',sopaddress,2,"http://s30.postimg.org/3oznvmo5d/livefootball.png",len(match),False)
+			addDir("[B][COLOR orange][SopCast] [/COLOR]"+titulo.replace('<strong>','').replace('</a>','')+"[/B] ("+language.replace('<strong>','').replace('</strong>','')+ ')',sopaddress,2,"http://s30.postimg.org/3oznvmo5d/livefootball.png",len(match),False)
 
 def arenavision_menu():
 	try:
@@ -438,25 +438,44 @@ def livefootballvideo_events():
 		source = abrir_url("http://livefootballvideo.com/streaming")
 	except: source ="";mensagemok(traducao(40000),traducao(40128))
 	if source:
-		match = re.compile('href="http://livefootballvideo.com/streaming/(.+?)"').findall(source)
-		for url in match:
-			if url.split("/")[-1] != "":
-				addDir(url.split("/")[-1],"http://livefootballvideo.com/streaming/" + url,42,"http://livefootballvideo.com/images/xlivefootballvideologo.png.pagespeed.ic.3kxaAupa3O.png",42,True)
-		xbmc.executebuiltin("Container.SetViewMode(51)")
+		match = re.compile('"([^"]+)" alt="[^"]*"/>.*?.*?>([^<]+)</a>\s*</div>\s*<div class="date_time column"><span class="starttime time" rel="[^"]*">([^<]+)</span>.*?<span class="startdate date" rel="[^"]*">([^"]+).*?<span>([^<]+)</span></div>.*?team away column"><span>([^&<]+).*?href="([^"]+)">([^<]+)<').findall(source)
+		for icon,comp,timetmp,datetmp,home,away,url,live in match:
+			print live
+			mes_dia = re.compile(', (.+?) (.+?)<').findall(datetmp)
+			for mes,dia in mes_dia:
+				dia = re.findall('\d+', dia)
+				month = translate_months(mes)
+				hora_minuto = re.compile('(\d+):(\d+)').findall(timetmp)
+				print hora_minuto
+				try:
+					from datetime import datetime
+					from dateutil import tz
+					d = datetime(year=2014,month=int(month),day=int(dia[0]),hour=int(hora_minuto[0][0]),minute=int(hora_minuto[0][1]),tzinfo=tz.gettz('Atlantic/Azores'))
+					fmt = "%d/%m %H:%M"
+					timezona= settings.getSetting('timezone')
+					time = str(d.astimezone(tz.gettz(pytz.all_timezones[int(timezona)])).strftime(fmt))
+					if "Online" in live: time = '[B][COLOR green](Online)[/B][/COLOR]'
+					else: time = '[B][COLOR orange]' + time + '[/B][/COLOR]'
+					addDir(time + ' - [B]('+comp+')[/B] ' + home + ' vs ' + away,url,42,os.path.join(addonpath,'resources','art','football.png'),len(match),True)
+				except: addDir('[B][COLOR orange]' + timetmp + ' ' + datetmp + '[/B][/COLOR] - [B]('+comp+')[/B] ' + home + ' vs ' + away,url,42,os.path.join(addonpath,'resources','art','football.png'),len(match),True)
+
 
 def livefootballvideo_sources(url):
 	try:
 		source = abrir_url(url)
 	except: source = ""; mensagemok(traducao(40000),traducao(40128))
 	if source:
-		match = re.compile("href='sop://(.+?)'").findall(source)
-		for sopaddress in match:
-			addDir("[B][COLOR orange][SopCast] [/COLOR][/B]","sop://"+sopaddress,2,"http://livefootballvideo.com/images/xlivefootballvideologo.png.pagespeed.ic.3kxaAupa3O.png",len(match),False)
-		matchdois = re.compile("href='acestream://(.+?)'").findall(source)
-		for address in match:
-			addDir("[B][COLOR orange][Acestream] [/COLOR][/B]",address,1,"http://livefootballvideo.com/images/xlivefootballvideologo.png.pagespeed.ic.3kxaAupa3O.png",len(match),False)
-		if not match and not matchdois: mensagemok(traducao(40000),traducao(40022));sys.exit(0)
-	xbmc.executebuiltin("Container.SetViewMode(51)")
+		match = re.compile("title='sopcast'>\n<img src='(.+?)' alt='sopcast'/></a></td><td align='left'>(.+?)</td>\n<td>(.+?)</td><td>(.+?)</td><td><a href='(.+?)'").findall(source)
+		for logo,name,language,quality,link in match:
+			addDir("[B][COLOR orange][SopCast] [/COLOR][/B]" + name + ' (' + language + ') ('+quality+')',link,2,logo,len(match),False)
+		match2 = re.compile("title='acestream'>\n<img src='(.+?)' alt='acestream'/></a></td><td align='left'>(.+?)</td>\n<td>(.+?)</td><td>(.+?)</td><td><a href='(.+?)'").findall(source)
+		for logo,name,language,quality,link in match2:
+			if "acestream://" in link:
+				addDir("[B][COLOR orange][Acestream] [/COLOR][/B]" + name + ' (' + language + ') ('+quality+')',link,1,logo,len(match),False)
+		if len(match) != 0 or len(match2) !=0:
+			xbmc.executebuiltin("Container.SetViewMode(51)")
+		else:
+			sys.exit(0)
 
 def rojadirecta_events():
 	try:
@@ -544,7 +563,7 @@ def site_parsers_menu():
       addDir(traducao(40003),MainURL,13,'http://s1.postimg.org/snkagb15b/sopblog.png',1,True)
       addDir("ArenaVision World Cup 2014",MainURL,53,'http://s30.postimg.org/n6m6le88h/arenavisionlogo.png',1,True,"http://www.happyholidays2014.com/wp-content/uploads/2014/05/Fifa-World-cup-2014-brail.jpg")
       addDir(traducao(40131),MainURL,35,'http://s30.postimg.org/n6m6le88h/arenavisionlogo.png',1,True)
-      addDir(traducao(40002),MainURL,8,'http://www.brudvik.org/wp-content/uploads/2011/08/wiziwig-logo.png',2,True)
+      addDir(traducao(40002),MainURL,8,os.path.join(addonpath,'resources','art','wiziwiglogo.png'),2,True)
       addDir(traducao(40132),MainURL,38,'http://www.userlogos.org/files/logos/clubber/football_ws___.PNG',1,True)
       addDir(traducao(40133),MainURL,40,'http://www.ligafutbol.net/wp-content/2010/02/Roja_Directa_logo.jpg',1,True)
       addDir(traducao(40139),MainURL,41,'http://livefootballvideo.com/images/xlivefootballvideologo.png.pagespeed.ic.3kxaAupa3O.png',1,True)
@@ -754,20 +773,20 @@ def torrenttv_play(name,url):
 		except:pass
 
 def wiziwig_cats():
-    addDir(traducao(40009),WiziwigURL + '/index.php?part=sports',9,'',1,True)
-    addDir("World Cup 2014 ",WiziwigURL + '/competition.php?part=sports&discipline=worldcup&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/worldcup.gif',1,True)
-    addDir(traducao(40010),WiziwigURL + '/competition.php?part=sports&discipline=americanfootball&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/americanfootball.gif',1,True)
-    addDir(traducao(40011),WiziwigURL + '/competition.php?part=sports&discipline=football&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/football.gif',1,True)
-    addDir(traducao(40012),WiziwigURL + '/competition.php?part=sports&discipline=basketball&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/basketball.gif',1,True)
-    addDir(traducao(40013),WiziwigURL + '/competition.php?part=sports&discipline=icehockey&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/icehockey.gif',1,True)
-    addDir(traducao(40014),WiziwigURL + '/competition.php?part=sports&discipline=baseball&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/baseball.gif',1,True)
-    addDir(traducao(40015),WiziwigURL + '/competition.php?part=sports&discipline=tennis&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/tennis.gif',1,True)
-    addDir(traducao(40016),WiziwigURL + '/competition.php?part=sports&discipline=motorsports&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/motorsports.gif',1,True)
-    addDir(traducao(40017),WiziwigURL + '/competition.php?part=sports&discipline=rugby&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/rugby.gif',1,True)
-    addDir(traducao(40018),WiziwigURL + '/competition.php?part=sports&discipline=golf&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/golf.gif',1,True)
-    addDir(traducao(40019),WiziwigURL + '/competition.php?part=sports&discipline=cricket&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/cricket.gif',1,True)
-    addDir(traducao(40020),WiziwigURL + '/competition.php?part=sports&discipline=cycling&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/cycling.gif',1,True)
-    addDir(traducao(40021),WiziwigURL + '/competition.php?part=sports&discipline=other&archive=no&allowedDays=1,2,3,4,5,6,7',9,WiziwigURL + '/gfx/disciplines/other.gif',1,True)
+    addDir(traducao(40009),WiziwigURL + '/index.php?part=sports',9,os.path.join(addonpath,'resources','art','wiziwiglogo.png'),1,True)
+    addDir("World Cup 2014 ",WiziwigURL + '/competition.php?part=sports&discipline=worldcup&archive=no&allowedDays=1,2,3,4,5,6,7',9,os.path.join(addonpath,'resources','art','worldcup.png'),1,True)
+    addDir(traducao(40010),WiziwigURL + '/competition.php?part=sports&discipline=americanfootball&archive=no&allowedDays=1,2,3,4,5,6,7',9,os.path.join(addonpath,'resources','art','americanfootball.png'),1,True)
+    addDir(traducao(40011),WiziwigURL + '/competition.php?part=sports&discipline=football&archive=no&allowedDays=1,2,3,4,5,6,7',9,os.path.join(addonpath,'resources','art','football.png'),1,True)
+    addDir(traducao(40012),WiziwigURL + '/competition.php?part=sports&discipline=basketball&archive=no&allowedDays=1,2,3,4,5,6,7',9,os.path.join(addonpath,'resources','art','Basketball.png'),1,True)
+    addDir(traducao(40013),WiziwigURL + '/competition.php?part=sports&discipline=icehockey&archive=no&allowedDays=1,2,3,4,5,6,7',9,os.path.join(addonpath,'resources','art','IceHockey.png'),1,True)
+    addDir(traducao(40014),WiziwigURL + '/competition.php?part=sports&discipline=baseball&archive=no&allowedDays=1,2,3,4,5,6,7',9,os.path.join(addonpath,'resources','art','Baseball.png'),1,True)
+    addDir(traducao(40015),WiziwigURL + '/competition.php?part=sports&discipline=tennis&archive=no&allowedDays=1,2,3,4,5,6,7',9,os.path.join(addonpath,'resources','art','Tennis.png'),1,True)
+    addDir(traducao(40016),WiziwigURL + '/competition.php?part=sports&discipline=motorsports&archive=no&allowedDays=1,2,3,4,5,6,7',9,os.path.join(addonpath,'resources','art','Racing.png'),1,True)
+    addDir(traducao(40017),WiziwigURL + '/competition.php?part=sports&discipline=rugby&archive=no&allowedDays=1,2,3,4,5,6,7',9,os.path.join(addonpath,'resources','art','Rugby.png'),1,True)
+    addDir(traducao(40018),WiziwigURL + '/competition.php?part=sports&discipline=golf&archive=no&allowedDays=1,2,3,4,5,6,7',9,os.path.join(addonpath,'resources','art','Golf.png'),1,True)
+    addDir(traducao(40019),WiziwigURL + '/competition.php?part=sports&discipline=cricket&archive=no&allowedDays=1,2,3,4,5,6,7',9,os.path.join(addonpath,'resources','art','Cricket.png'),1,True)
+    addDir(traducao(40020),WiziwigURL + '/competition.php?part=sports&discipline=cycling&archive=no&allowedDays=1,2,3,4,5,6,7',9,os.path.join(addonpath,'resources','art','Cycling.png'),1,True)
+    addDir(traducao(40021),WiziwigURL + '/competition.php?part=sports&discipline=other&archive=no&allowedDays=1,2,3,4,5,6,7',9,os.path.join(addonpath,'resources','art','Other_white.png'),1,True)
     xbmc.executebuiltin("Container.SetViewMode(51)")
 
 def translate_months(month):
