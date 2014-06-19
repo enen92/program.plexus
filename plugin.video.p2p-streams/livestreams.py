@@ -8,9 +8,11 @@ from BeautifulSoup import BeautifulStoneSoup, BeautifulSoup, BeautifulSOAP
 
 addon_id = 'plugin.video.p2p-streams'
 settings = xbmcaddon.Addon(id=addon_id)
+addonpath = settings.getAddonInfo('path').decode('utf-8')
 pastaperfil = xbmc.translatePath(settings.getAddonInfo('profile')).decode('utf-8')
 mensagemok = xbmcgui.Dialog().ok
 traducaoma= settings.getLocalizedString
+art = '/resources/art/'
 
 def traducao(texto):
       return traducaoma(texto).encode('utf-8')
@@ -46,7 +48,7 @@ def get_groups(url):
             if (group.find('.//channel')==None): continue
             group_name=group.attrib[LANGUAGE]
             try:
-	        addDir(group_name,url,29,"",True)
+	        addDir(group_name,url,29,addonpath + art + 'xml_list_sopcast.png',True)
             except: pass
         xbmc.executebuiltin("Container.SetViewMode(51)")
     except:
@@ -75,6 +77,7 @@ def get_channels(name,url):
 						thumbnail = channel.find('.//thumbnail').text
 					except: pass
 					if sop_address:
+						if thumbnail == "": thumbnail = addonpath + art + 'sopcast_link.png'
 						try: addDir('[B][COLOR orange]' + title + ' [/B][/COLOR](' + tipo +')',sop_address,2,thumbnail,False)
 						except:pass
 					else: pass

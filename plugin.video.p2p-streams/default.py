@@ -91,28 +91,28 @@ def russiandictionary(string):
       
       
 def advanced_menu():
-	addLink('[COLOR orange]XBMC Advancedsettings.xml:[/COLOR]','','')
+	addLink('[COLOR orange]XBMC Advancedsettings.xml:[/COLOR]','',addonpath + art + 'settings_menu.png')
 	lock_file = xbmc.translatePath('special://temp/'+ 'ts.lock')
 	if xbmcvfs.exists(lock_file):
 		addDir(traducao(40068),MainURL,20,'',2,False)
 	userdatapath = xbmc.translatePath(os.path.join('special://home/userdata'.decode('utf-8'),''.decode('utf-8')))
 	advancedsettings_var = os.path.join(userdatapath,'advancedsettings.xml')
 	advancedsettingsbackup_var = os.path.join(userdatapath,'advancedsettingsbackup.xml')
-	addDir(traducao(40058),MainURL,16,'',2,False)
+	addDir(traducao(40058),MainURL,16,'p2p',2,False)
 	if xbmcvfs.exists(advancedsettings_var):
-		addDir(traducao(40063),MainURL,18,'',2,False)
-		addDir(traducao(40065),MainURL,19,'',2,False)
+		addDir(traducao(40063),MainURL,18,'p2p',2,False)
+		addDir(traducao(40065),MainURL,19,'p2p',2,False)
 	if xbmcvfs.exists(advancedsettingsbackup_var):
-		addDir(traducao(40061),MainURL,17,'',2,False)
-	addLink('','','')
+		addDir(traducao(40061),MainURL,17,'p2p',2,False)
+	addLink('','','p2p')
 	if xbmcvfs.exists(advancedsettings_var):
 		content = readfile(advancedsettings_var)
 		match = re.compile('<cachemembuffersize>(.+?)</cachemembuffersize>').findall(content)
 		if match:
 			if match[0] != '252420': valuebuff = '[COLOR red]' + match[0] + '[/COLOR]'
 			else : valuebuff =  '[COLOR green]' + match[0] + '[/COLOR]'
-			addLink(traducao(40067) +valuebuff+']','','')
-			addLink('','','')
+			addLink(traducao(40067) +valuebuff+']','','p2p')
+			addLink('','','p2p')
 
 	#Change engine settings from xbmc menus
 
@@ -125,37 +125,37 @@ def advanced_menu():
 	elif settings.getSetting('force_android') == "true": eligible = False
 	else: eligible = False
 	if eligible and xbmcvfs.exists(os.path.join(pastaperfil,'acestream','ace','ACEStream','values')):
-		addLink('[COLOR orange]Acestream engine settings:[/COLOR]','','')
+		addLink('[COLOR orange]Acestream engine settings:[/COLOR]','',addonpath + art + 'settings_menu.png')
 		try:
 			porta = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","port.txt"))
 		except: porta = "N/A"
-		addDir(traducao(600015) +"[COLOR orange][ " + str(int(porta))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","port.txt"),51,'',2,False)
+		addDir(traducao(600015) +"[COLOR orange][ " + str(int(porta))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","port.txt"),51,'p2p',2,False)
 		try:
 			vodbuffer = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","vodbuffer.txt"))
 		except: vodbuffer = "N/A"
-		addDir(traducao(600016) + "[COLOR orange][ " + str(int(vodbuffer))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","vodbuffer.txt"),51,'',2,False)
+		addDir(traducao(600016) + "[COLOR orange][ " + str(int(vodbuffer))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","vodbuffer.txt"),51,'p2p',2,False)
 		try:
 			livebuffer = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","livebuffer.txt"))
 		except: livebuffer = "N/A"
-		addDir(traducao(600017)+"[COLOR orange][ " + str(int(livebuffer))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","livebuffer.txt"),51,'',2,False)
+		addDir(traducao(600017)+"[COLOR orange][ " + str(int(livebuffer))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","livebuffer.txt"),51,'p2p',2,False)
 		try:
 			downloadlimit = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","downloadlimit.txt"))
 		except: downloadlimit = "N/A"
-		addDir(traducao(600018) +"[COLOR orange][ " + str(int(downloadlimit))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","downloadlimit.txt"),51,'',2,False)
+		addDir(traducao(600018) +"[COLOR orange][ " + str(int(downloadlimit))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","downloadlimit.txt"),51,'p2p',2,False)
 		try:
 			uploadlimit = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","uploadlimit.txt"))
 		except: uploadlimit = "N/A"
-		addDir(traducao(600019)+"[COLOR orange][ " + str(int(uploadlimit))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","uploadlimit.txt"),51,'',2,False)
+		addDir(traducao(600019)+"[COLOR orange][ " + str(int(uploadlimit))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","uploadlimit.txt"),51,'p2p',2,False)
 		try:
 			maxconnections = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnections.txt"))
 		except: maxconnections = "N/A"
-		addDir(traducao(600020)+"[COLOR orange][ " + str(int(maxconnections))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnections.txt"),51,'',2,False)
+		addDir(traducao(600020)+"[COLOR orange][ " + str(int(maxconnections))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnections.txt"),51,'p2p',2,False)
 		try:
 			maxconnectionsstream = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnectionsstream.txt"))
 		except: maxconnectionsstream = "N/A"
 		addDir(traducao(600021)+"[COLOR orange][ " + str(int(maxconnectionsstream))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnectionsstream.txt"),51,'',2,False)
 	elif eligible and not xbmcvfs.exists(os.path.join(pastaperfil,'acestream','ace','ACEStream','values')):
-		addLink("[COLOR red][B]"+traducao(600027)+"[/COLOR][/B]","","")
+		addLink("[COLOR red][B]"+traducao(600027)+"[/COLOR][/B]","",addonpath + art + 'processwarning.png')
 	else:
 		pass
 
@@ -614,50 +614,50 @@ def arenavision_mundial_agenda(url):
 
 def xml_lists_menu():
       if settings.getSetting('sopcast-oficial') == "true":
-      	    addDir(traducao(40116),"http://sopcast.org/chlist.xml",28,'',2,True)
+      	    addDir(traducao(40116),"http://sopcast.org/chlist.xml",28,addonpath + art + 'xml_list_sopcast.png',2,True)
       if settings.getSetting('sopcast-romanian') == "true":
-            addDir(traducao(40117),"http://streams.magazinmixt.ro/xsopcast.xml",28,'',2,True)
+            addDir(traducao(40117),"http://streams.magazinmixt.ro/xsopcast.xml",28,addonpath + art + 'xml_list_sopcast.png',2,True)
       if settings.getSetting('livestreams-spanish') == "true":
-            addDir(traducao(40118),"http://dl.dropbox.com/u/4735170/streams.xml",28,'',2,True)
+            addDir(traducao(40118),"http://dl.dropbox.com/u/4735170/streams.xml",28,addonpath + art + 'xml_lists.png',2,True)
       if settings.getSetting('livestreams-pt-sports') == "true":
-            addDir(traducao(40119),"http://dl.dropboxusercontent.com/u/266138381/Desporto.xml",28,'',2,True)
+            addDir(traducao(40119),"http://dl.dropboxusercontent.com/u/266138381/Desporto.xml",28,addonpath + art + 'xml_lists.png',2,True)
       if settings.getSetting('livestreams-pt-events') == "true":
-            addDir(traducao(40120),"http://dl.dropboxusercontent.com/u/266138381/Eventos.xml",28,'',2,True)
+            addDir(traducao(40120),"http://dl.dropboxusercontent.com/u/266138381/Eventos.xml",28,addonpath + art + 'xml_lists.png',2,True)
       try:
             if xbmcvfs.exists(os.path.join(pastaperfil,"Lists")):
 		   dirs, files = xbmcvfs.listdir(os.path.join(pastaperfil,"Lists"))
                    for file in files:
 			f = open(os.path.join(pastaperfil,"Lists",file), "r")
 	                string = f.read()
-                        addDir("[B][COLOR orange]" + file.replace(".txt","") + "[/B][/COLOR]",string,28,'',2,True)
+                        addDir("[B][COLOR orange]" + file.replace(".txt","") + "[/B][/COLOR]",string,28,addonpath + art + 'xml_lists.png',2,True)
       except: pass
-      addDir(traducao(40121),MainURL,34,'',2,False)
+      addDir(traducao(40121),MainURL,34,addonpath + art + 'plus-menu.png',2,False)
       xbmc.executebuiltin("Container.SetViewMode(51)")
 			
 def menu_principal():
-      addDir(traducao(40114),MainURL,26,'',2,True)
-      addDir(traducao(40115),MainURL,27,'',2,True)
-      addDir(traducao(40144),MainURL,47,'',2,True)
-      addLink('','','')
+      addDir(traducao(40114),MainURL,26,addonpath + art + 'web-parsers-menu.png',2,True)
+      addDir(traducao(40115),MainURL,27,addonpath + art + 'xml_lists.png',2,True)
+      addDir(traducao(40144),MainURL,47,addonpath + art + 'Favorites-menu.png',2,True)
+      addLink('','','p2p')
 
       if xbmc.getCondVisibility('system.platform.windows') or xbmc.getCondVisibility('system.platform.linux') or xbmc.getCondVisibility('System.Platform.OSX') or xbmc.getCondVisibility('System.Platform.Android'):
           #addDir('[COLOR red]Testar Acestream[/COLOR] ','11f2eb93cfe49106b5336b9d36ce05de493c5692',1,'',2,False)
-          addDir('[COLOR orange]AceStream: [/COLOR]' + traducao(40004),MainURL,4,'',1,False)
-          addDir('[COLOR orange]AceStream: [/COLOR]' + traducao(600029),MainURL,52,'',1,False)
+          addDir('[COLOR orange]AceStream: [/COLOR]' + traducao(40004),MainURL,4,addonpath + art + 'acestream-menu-item.png',1,False)
+          addDir('[COLOR orange]AceStream: [/COLOR]' + traducao(600029),MainURL,52,addonpath + art + 'acestream-menu-item.png',1,False)
 
       if xbmc.getCondVisibility('system.platform.windows') or xbmc.getCondVisibility('system.platform.linux') or xbmc.getCondVisibility('System.Platform.OSX') or xbmc.getCondVisibility('System.Platform.Android'):
           #addDir('[COLOR red]Test Sopcast stream[/COLOR]',"sop://124.232.150.188:3912/11265",2,'',2,False)
-          addDir('[COLOR orange]SopCast: [/COLOR]' + traducao(40005),MainURL,3,'',1,False)
-          addDir('[COLOR orange]SopCast: [/COLOR]' + traducao(40006),MainURL,5,'',1,False)
+          addDir('[COLOR orange]SopCast: [/COLOR]' + traducao(40005),MainURL,3,addonpath + art + 'sopcast-menu-item.png',1,False)
+          addDir('[COLOR orange]SopCast: [/COLOR]' + traducao(40006),MainURL,5,addonpath + art + 'sopcast-menu-item.png',1,False)
 
       elif xbmc.getCondVisibility('system.platform.windows'):
           addDir(traducao(40007),MainURL,7,'',1,False)
 
       if xbmc.getCondVisibility('System.Platform.IOS') or xbmc.getCondVisibility('System.Platform.ATV2'):
-          addLink(traducao(40056),'','')
+          addLink(traducao(40056),'',addonpath + art + 'processwarning.png')
           
-      addLink('','','')
-      addDir('[B]' + traducao(40057) + '[/B]',MainURL,15,'',2,True)       
+      addLink('','','p2p')
+      addDir('[B]' + traducao(40057) + '[/B]',MainURL,15,addonpath + art + 'settings_menu.png',2,True)       
       xbmc.executebuiltin("Container.SetViewMode(50)")
       
 def load_local_torrent():
