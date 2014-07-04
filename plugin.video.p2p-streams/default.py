@@ -32,7 +32,7 @@ startpath=os.path.join(pastaperfil,'acestream','ace','start.py')
 ### SOPCAST ###
 LISTA_SOP='http://www.sopcast.com/chlist.xml'
 SPSC_BINARY = "sp-sc-auth"
-SPSC = os.path.join(pastaperfil,'sopcast',SPSC_BINARY)
+#SPSC = os.path.join(pastaperfil,'sopcast',SPSC_BINARY)
 SPSC_LOG = os.path.join(pastaperfil,'sopcast','sopcast.log')
 LOCAL_PORT = settings.getSetting('local_port')
 VIDEO_PORT = settings.getSetting('video_port')
@@ -117,7 +117,7 @@ def advanced_menu():
 	#Change engine settings from xbmc menus
 
 	eligible = False
-	if xbmc.getCondVisibility('system.platform.linux'):
+	if xbmc.getCondVisibility('system.platform.linux') and settings.getSetting('force_android') != "true":
 		if os.uname()[4] == "armv6l" or os.uname()[4] == "armv7l":
 			eligible = True
 	elif xbmc.getCondVisibility('system.platform.OSX'): eligible = True
@@ -479,7 +479,7 @@ def livefootballvideo_sources(url):
 
 def rojadirecta_events():
 	try:
-		source = abrir_url("http://en.rojadirecta.eu/")
+		source = abrir_url("http://www.rojadirecta.me/")
 	except: source = "";mensagemok(traducao(40000),traducao(40128))
 	if source:
 		match = re.findall('<span class="(\d+)">.*?<div class="menutitle".*?<span class="t">([^<]+)</span>(.*?)</div>',source,re.DOTALL)
@@ -641,12 +641,10 @@ def menu_principal():
       addLink('','','p2p')
 
       if xbmc.getCondVisibility('system.platform.windows') or xbmc.getCondVisibility('system.platform.linux') or xbmc.getCondVisibility('System.Platform.OSX') or xbmc.getCondVisibility('System.Platform.Android'):
-          #addDir('[COLOR red]Testar Acestream[/COLOR] ','11f2eb93cfe49106b5336b9d36ce05de493c5692',1,'',2,False)
           addDir('[COLOR orange]AceStream: [/COLOR]' + traducao(40004),MainURL,4,addonpath + art + 'acestream-menu-item.png',1,False)
           addDir('[COLOR orange]AceStream: [/COLOR]' + traducao(600029),MainURL,52,addonpath + art + 'acestream-menu-item.png',1,False)
 
       if xbmc.getCondVisibility('system.platform.windows') or xbmc.getCondVisibility('system.platform.linux') or xbmc.getCondVisibility('System.Platform.OSX') or xbmc.getCondVisibility('System.Platform.Android'):
-          #addDir('[COLOR red]Test Sopcast stream[/COLOR]',"sop://124.232.150.188:3912/11265",2,'',2,False)
           addDir('[COLOR orange]SopCast: [/COLOR]' + traducao(40005),MainURL,3,addonpath + art + 'sopcast-menu-item.png',1,False)
           addDir('[COLOR orange]SopCast: [/COLOR]' + traducao(40006),MainURL,5,addonpath + art + 'sopcast-menu-item.png',1,False)
 
@@ -659,6 +657,18 @@ def menu_principal():
       addLink('','','p2p')
       addDir('[B]' + traducao(40057) + '[/B]',MainURL,15,addonpath + art + 'settings_menu.png',2,True)       
       xbmc.executebuiltin("Container.SetViewMode(50)")
+      
+      #dirty hack to break sopcast.exe player codec - renaming the file again in case xbmc crashed
+      if xbmc.getCondVisibility('system.platform.windows'):
+      	import _winreg
+      	aReg = _winreg.ConnectRegistry(None,_winreg.HKEY_LOCAL_MACHINE)
+      	try:
+      		aKey = _winreg.OpenKey(aReg, r'SOFTWARE\SopCast\Player\InstallPath',0, _winreg.KEY_READ)
+      		name, value, type = _winreg.EnumValue(aKey, 0)
+      		codec_file = os.path.join(os.path.join(value.replace("SopCast.exe","")),'codec','sop.ocx.old')
+      		_winreg.CloseKey(aKey)
+      		if xbmcvfs.exists(codec_file): xbmcvfs.rename(codec_file,os.path.join(os.path.join(value.replace("SopCast.exe","")),'codec','sop.ocx'))
+      	except:pass
       
 def load_local_torrent():
 	torrent_file = xbmcgui.Dialog().browse(int(1), traducao(600028), 'myprograms','.torrent')
@@ -866,7 +876,7 @@ def wiziwig_servers(url):
 def autoconf():
 	import tarfile
 	sopcast_raspberry = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/sopcast-raspberry.tar.gz"
-	sopcast_linux_generico =  "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/sp-aut.tar.gz"
+	sopcast_linux_generico =  "https://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Sopcastx86_64i386/sopcast_linux.tar.gz"
 	acestream_windows = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/windows-aceengine2-3.tar.gz"
     
 	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":
@@ -1052,13 +1062,7 @@ def autoconf():
 				print "Detected Other Linux Plataform"
 
             		#Sop
-				if os.path.isfile("/usr/lib/libstdc++.so.5") and os.path.isfile("/usr/lib/libstdc++.so.5.0.1"):
-					print "Sopcast configuration: Linux has sop libs already"
-				elif os.path.isfile("/usr/lib/libstdc++.so.5") and os.path.isfile("/usr/lib/libstdc++.so.5.0.7"):
-					print "Sopcast configuration: Linux has sop libs already installed - 5.0.7 exception case"
-				else: 
-					mensagemok(traducao(40000),traducao(40027),traducao(40028) + linkwiki,traducao(40029))
-					sys.exit(0)
+            		#Download and extract sopcast-bundle
 				SPSC_KIT = os.path.join(addonpath,sopcast_linux_generico.split("/")[-1])
 				download_tools().Downloader(sopcast_linux_generico,SPSC_KIT,traducao(40025),traducao(40000))
 				import tarfile
@@ -1067,7 +1071,24 @@ def autoconf():
 					download_tools().extract(SPSC_KIT,path_libraries)
 					xbmc.sleep(500)
 					download_tools().remove(SPSC_KIT)
+				#set every single file from the bundle as executable
+				path_libraries = os.path.join(pastaperfil,"sopcast")
+				dirs, files = xbmcvfs.listdir(path_libraries)
+				for ficheiro in files:
+					binary_path = os.path.join(path_libraries,ficheiro)
+					st = os.stat(binary_path)
+					import stat
+					os.chmod(binary_path, st.st_mode | stat.S_IEXEC)
+				path_libraries = os.path.join(path_libraries,"lib")
+				dirs, files = xbmcvfs.listdir(path_libraries)
+				for ficheiro in files:
+					binary_path = os.path.join(path_libraries,ficheiro)
+					st = os.stat(binary_path)
+					import stat
+					os.chmod(binary_path, st.st_mode | stat.S_IEXEC)
+	   		 
 	   		 #Ace
+	   		 
 				import subprocess
 				proc_response = []
 				proc = subprocess.Popen(['whereis','acestreamengine'],stdout=subprocess.PIPE)
@@ -1547,6 +1568,15 @@ def sopstreams(name,iconimage,sop):
             else:
                 import _winreg
                 aReg = _winreg.ConnectRegistry(None,_winreg.HKEY_LOCAL_MACHINE)
+                #Dirty hack to break sopcast h264 codec so double sound can be avoided
+                try:
+                	aKey = _winreg.OpenKey(aReg, r'SOFTWARE\SopCast\Player\InstallPath',0, _winreg.KEY_READ)
+                	name, value, type = _winreg.EnumValue(aKey, 0)
+                	codec_file = os.path.join(os.path.join(value.replace("SopCast.exe","")),'codec','sop.ocx')
+                	_winreg.CloseKey(aKey)
+                	if xbmcvfs.exists(codec_file): xbmcvfs.rename(codec_file,os.path.join(os.path.join(value.replace("SopCast.exe","")),'codec','sop.ocx.old'))
+                except:pass
+                aReg = _winreg.ConnectRegistry(None,_winreg.HKEY_LOCAL_MACHINE)
                 aKey = _winreg.OpenKey(aReg, r'SYSTEM\CurrentControlSet\Services\sopcastp2p\Parameters', 3, _winreg.KEY_WRITE)
                 _winreg.SetValueEx(aKey,"AppParameters",0, _winreg.REG_SZ, sop)  
                 _winreg.CloseKey(aKey)
@@ -1572,6 +1602,7 @@ def sopstreams(name,iconimage,sop):
                                 playlist = xbmc.PlayList(1)
                                 playlist.clear()
                                 listitem = xbmcgui.ListItem(name, iconImage=iconimage, thumbnailImage=iconimage)
+                                listitem.setLabel(name)
                                 listitem.setInfo("Video", {"Title":name})
                                 listitem.setProperty('mimetype', 'video/x-msvideo')
                                 listitem.setProperty('IsPlayable', 'true')
@@ -1592,6 +1623,16 @@ def sopstreams(name,iconimage,sop):
                 servicecreator = False
                 for line in proc.stdout:
                         print "linha " + line.rstrip()
+			 #dirty hack to break sopcast.exe player codec - renaming the file again
+                import _winreg
+                aReg = _winreg.ConnectRegistry(None,_winreg.HKEY_LOCAL_MACHINE)
+                try:
+                	aKey = _winreg.OpenKey(aReg, r'SOFTWARE\SopCast\Player\InstallPath',0, _winreg.KEY_READ)
+                	name, value, type = _winreg.EnumValue(aKey, 0)
+                	codec_file = os.path.join(os.path.join(value.replace("SopCast.exe","")),'codec','sop.ocx.old')
+                	_winreg.CloseKey(aKey)
+                	if xbmcvfs.exists(codec_file): xbmcvfs.rename(codec_file,os.path.join(os.path.join(value.replace("SopCast.exe","")),'codec','sop.ocx'))
+                except:pass
 
 
 def sopstreams_builtin(name,iconimage,sop):
@@ -1614,9 +1655,9 @@ def sopstreams_builtin(name,iconimage,sop):
 
 		else: 
 			if settings.getSetting('sop_debug_mode') == "false":
-				cmd = [SPSC, sop, str(LOCAL_PORT), str(VIDEO_PORT)]
+				cmd = [os.path.join(pastaperfil,'sopcast','ld-linux.so.2'),'--library-path',os.path.join(pastaperfil,'sopcast','lib'),os.path.join(pastaperfil,'sopcast',SPSC_BINARY), sop, str(LOCAL_PORT), str(VIDEO_PORT)]
 			else:
-				cmd = [SPSC, sop, str(LOCAL_PORT), str(VIDEO_PORT),">",SPSC_LOG]
+				cmd = [os.path.join(pastaperfil,'sopcast','ld-linux.so.2'),'--library-path',os.path.join(pastaperfil,'sopcast','lib'),os.path.join(pastaperfil,'sopcast',SPSC_BINARY), sop, str(LOCAL_PORT), str(VIDEO_PORT),">",SPSC_LOG]
         elif xbmc.getCondVisibility('System.Platform.OSX'):
         	if settings.getSetting('sop_debug_mode') == "false":
 			cmd = [os.path.join(pastaperfil,'sopcast','sp-sc-auth'), str(sop), str(LOCAL_PORT), str(VIDEO_PORT)]
@@ -1764,22 +1805,6 @@ class streamplayer(xbmc.Player):
             try: os.kill(self.spsc_pid,9)
             except: pass
 
-########################################################### PLAYER ################################################
-
-def comecarvideo(titulo,thumb):
-      playlist = xbmc.PlayList(1)
-      playlist.clear()
-      listitem = xbmcgui.ListItem(titulo, iconImage="DefaultVideo.png", thumbnailImage=thumb)            
-      listitem.setInfo("Video", {"Title":titulo})
-      listitem.setProperty('mimetype', 'video/x-msvideo')
-      listitem.setProperty('IsPlayable', 'true')
-      dialogWait = xbmcgui.DialogProgress()
-      dialogWait.create(traducao(40000), traducao(40043))
-      playlist.add('http://127.0.0.1:8902/tv.asf', listitem)
-      dialogWait.close()
-      del dialogWait
-      xbmcPlayer = xbmc.Player(xbmc.PLAYER_CORE_AUTO)
-      xbmcPlayer.play(playlist)
 
 ################################################## PASTAS ################################################################
 

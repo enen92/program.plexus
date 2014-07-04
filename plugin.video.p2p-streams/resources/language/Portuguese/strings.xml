@@ -77,7 +77,7 @@
 	<string id="40024">Não encontrado.</string>
 	<string id="40025">A transferir modulos Sopcast.</string>
 	<string id="40026">A transferir módulos Acestream.</string>
-	<string id="40027">p2p-streams para Linux requerem instalação manual no sistema.</string>
+	<string id="40027">(Linux) Tem de instalar a acestream-engine manualmente.</string>
 	<string id="40028">Tutorial: </string>
 	<string id="40029">Siga o tutorial e tente de novo.</string>
 	<string id="40030">A transferir motor Acestream.</string>

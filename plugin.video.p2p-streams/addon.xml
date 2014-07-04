@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.p2p-streams"
        name="p2p-streams"
-       version="0.3.7"
+       version="0.3.8"
        provider-name="enen92 - fightnight">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -16,12 +16,13 @@
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary>P2P-Streams addon</summary>
-    <description lang="en">P2P-Streams addon makes it easy for you to watch peer-to-peer streams in XBMC without the need for external players. Currently supporting Acestream and Sopcast streams it comprises an auto-configuration tool that will download the engines specifically for your platform. 
-Supported platforms: Linux (i386/x86_64/Raspberry Pi/armv7(mxlinux,xbian,openelec)/Openelec), Windows, Mac, Android.
-Credits: Cristi - Atlanta (xsopcast plugin); NouisMons (acestream engine plugin); Tarasian666 (Mac/Rpi/armv7 ace engines); Divingmule (livestreams plugin); Marquerite (addor art).</description>
-    <description lang="pt">O addon p2p-Streams torna possível assistir de forma simples a streams peer-to-peer directamente no XBMC sem a necessidade de players externos. De momento suporta streams Ace (Acestreams) e Sopcast e inclui uma ferramenta de autoconfiguração que irá fazer o download das engines correspondentes ao seu sistema operativo. 
-Plataformas suportadas:Linux (i386/x86_64/Raspberry Pi/armv7(mxlinux,xbian,openelec)/Openelec), Windows, Mac, Android.
-Créditos: Cristi - Atlanta (xsopcast plugin); NouisMons (acestream engine plugin); Tarasian666 (Mac/Rpi/armv7 ace engines); Divingmule (livestreams plugin); Marquerite (addor art).</description>
+    <description lang="en">AceStream and Sopcast in your favourite media center! Watch peer-to-peer streams in XBMC without the need for external players. Project page: https://code.google.com/p/p2p-strm/</description>
+    <description lang="pt">AceStream e Sopcast no seu Media-Center de eleição! Assista a streams peer-to-peer no XBMC sem a necessidade de players externos. Página do projecto: https://code.google.com/p/p2p-strm/</description>
+    <disclaimer lang="en">The authors does not host nor distribute any of the content displayed by this addon. The authors have no affiliation with any of the content providers. This addon does not track its users.</disclaimer>
+    <disclaimer lang="pt">Os autores não alojam nem distribuem nenhum do conteúdo acessível a partir deste addon. Os autores não têm qualquer afiliação com nenhum dos sites utilizados por este addon. O addon não contem nenhuma ferramenta de tracking.</disclaimer>
+    <forum>http://www.xbmchub.com/forums/threads/18099-RELEASE-p2p-streams-Acestream-and-Sopcast-*BETA*</forum>
+    <source>https://github.com/enen92/P2P-Streams-XBMC | https://github.com/enen92/P2P-Streams-XBMC--Modules-</source>
+    <website>https://code.google.com/p/p2p-strm/</website>
     <platform>all</platform>
   </extension>
 </addon>

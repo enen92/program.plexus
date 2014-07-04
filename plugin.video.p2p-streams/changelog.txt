@@ -1,3 +1,11 @@
+[B]v0.3.8 (4-07-2014):[/B]
+-Simplified linux instalation (no more libs required). If you run the addon on linux (i386/x86_64) re-do the configuration again or the addon will not work.
+-Dirty hack to avoid double sound on windows
+-New settings layout
+-Fixed rojadirecta url
+-Proper addon.xml
+-Other small fixes
+
 [B]v0.3.7 (19-06-2014):[/B]
 -New icon pack for general menus
 

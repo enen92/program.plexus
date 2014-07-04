@@ -77,7 +77,7 @@
 	<string id="40024">Not found.</string>
 	<string id="40025">Downloading SopCast Modules</string>
 	<string id="40026">Downloading Acestream Modules</string>
-	<string id="40027">p2p-streams for Linux requires manual install on your system</string>
+	<string id="40027">(Linux) You need to install the acestream-engine manually.</string>
 	<string id="40028">Tutorial: </string>
 	<string id="40029">Follow the tutorial steps and try again.</string>
 	<string id="40030">Downloading Acestream engine.</string>
