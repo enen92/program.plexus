@@ -7,7 +7,6 @@
     <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.beautifulsoup" version="3.0.8"/>
     <import addon="script.module.simplejson" />
-    <import addon="script.module.pytz" />
     <import addon="script.module.mechanize" version="0.2.6"/>
   </requires>
   <extension point="xbmc.python.pluginsource"
