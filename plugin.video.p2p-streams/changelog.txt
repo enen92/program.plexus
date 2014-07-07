@@ -1,3 +1,8 @@
+[B]v0.3.9 (7/7/2014)[/B]
+-Fix timezones
+-Removed pytz
+(fixes by j0anita)
+
 [B]v0.3.8 (4-07-2014):[/B]
 -Simplified linux instalation (no more libs required). If you run the addon on linux (i386/x86_64) re-do the configuration again or the addon will not work.
 -Dirty hack to avoid double sound on windows
