@@ -4,9 +4,6 @@
     2014 enen92 fightnight"""
 
 import xbmc,xbmcaddon,xbmcgui,xbmcplugin,urllib,urllib2,os,re,sys,datetime,time,subprocess,xbmcvfs,livestreams,socket
-try:
-	import pytz
-except: pass
 
 ####################################################### CONSTANTES #####################################################
 
@@ -355,15 +352,17 @@ def arenavision_schedule(url):
 			eventmatch = re.compile('(.+?)/(.+?)/(.+?) (.+?):(.+?) CET (.+?)<').findall(event)
 			for dia,mes,year,hour,minute,evento in eventmatch:
 				try:
-					from datetime import datetime
-					from dateutil import tz
-					d = datetime(year=2000 + int(year),month=int(mes),day=int(dia),hour=int(hour),minute=int(minute),tzinfo=tz.gettz('Europe/Madrid'))
-					fmt = "%d-%m-%y %H:%M"
-					timezona= settings.getSetting('timezone')
-					time = str(d.astimezone(tz.gettz(pytz.all_timezones[int(timezona)])).strftime(fmt))
+					import datetime
+					import pytzimp
+					d = pytzimp.timezone(str(pytzimp.timezone('Europe/Madrid'))).localize(datetime.datetime(2000 + int(year), int(mes), int(dia), hour=int(hour), minute=int(minute)))
+					timezona= settings.getSetting('timezone_new')
+                                        lisboa=pytzimp.timezone(pytzimp.all_timezones[int(timezona)])
+                                        convertido=d.astimezone(lisboa)
+                                        fmt = "%d-%m-%y %H:%M"
+                                        time=convertido.strftime(fmt)
 					addLink('[B][COLOR orange]' + time + '[/B][/COLOR] ' + evento,'',"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png")
 				except:
-					addLink(event.replace("&nbsp;",""),'',"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png")
+					addLink(evento.replace("&nbsp;",""),'',"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png")
 	xbmc.executebuiltin("Container.SetViewMode(51)")
 
 def livefootballws_events():
@@ -383,14 +382,17 @@ def livefootballws_events():
 					url = re.compile('<a href="(.+?)">').findall(item)
 					teams = re.compile('/.+?-(.+?).html').findall(url[0])
 					try:
-						match = re.compile('(.+?) (.+?) (.+?):(.*)').findall(data_item)
-						from datetime import datetime
-						from dateutil import tz
-						d = datetime(year=2014,month=6,day=int(match[0][0]),hour=int(match[0][2]),minute=int(match[0][3]),tzinfo=tz.gettz('Europe/Moscow'))
-						fmt = "%d %H:%M"
-						timezona= settings.getSetting('timezone')
-						time = str(d.astimezone(tz.gettz(pytz.all_timezones[int(timezona)])).strftime(fmt))
-						addDir("[B][COLOR orange]("+traducao(600012)+time+")[/COLOR][/B] "+teams[0],url[0],39,"http://www.userlogos.org/files/logos/clubber/football_ws___.PNG",number_of_items,True)
+                                                match = re.compile('(.+?) (.+?) (.+?):(.*)').findall(data_item)
+                                                import datetime
+                                                import pytzimp
+                                                timezona= settings.getSetting('timezone_new')
+                                                d = pytzimp.timezone(str(pytzimp.timezone('Europe/Moscow'))).localize(datetime.datetime(2014, 6, int(match[0][0]), hour=int(match[0][2]), minute=int(match[0][3])))
+                                                lisboa=pytzimp.timezone(pytzimp.all_timezones[int(timezona)])
+                                                convertido=d.astimezone(lisboa)
+                                                fmt = "%d %H:%M"
+                                                time=convertido.strftime(fmt)
+
+                                                addDir("[B][COLOR orange]("+traducao(600012)+time+")[/COLOR][/B] "+teams[0],url[0],39,"http://www.userlogos.org/files/logos/clubber/football_ws___.PNG",number_of_items,True)
 					except:
 						if '<span style="color: #000000;">' not in data_item:
 							addDir("[B][COLOR green]("+data_item+")[/COLOR][/B] "+teams[0],url[0],39,"http://www.userlogos.org/files/logos/clubber/football_ws___.PNG",number_of_items,True)
@@ -440,20 +442,21 @@ def livefootballvideo_events():
 	if source:
 		match = re.compile('"([^"]+)" alt="[^"]*"/>.*?.*?>([^<]+)</a>\s*</div>\s*<div class="date_time column"><span class="starttime time" rel="[^"]*">([^<]+)</span>.*?<span class="startdate date" rel="[^"]*">([^"]+).*?<span>([^<]+)</span></div>.*?team away column"><span>([^&<]+).*?href="([^"]+)">([^<]+)<').findall(source)
 		for icon,comp,timetmp,datetmp,home,away,url,live in match:
-			print live
 			mes_dia = re.compile(', (.+?) (.+?)<').findall(datetmp)
 			for mes,dia in mes_dia:
 				dia = re.findall('\d+', dia)
 				month = translate_months(mes)
 				hora_minuto = re.compile('(\d+):(\d+)').findall(timetmp)
-				print hora_minuto
 				try:
-					from datetime import datetime
-					from dateutil import tz
-					d = datetime(year=2014,month=int(month),day=int(dia[0]),hour=int(hora_minuto[0][0]),minute=int(hora_minuto[0][1]),tzinfo=tz.gettz('Atlantic/Azores'))
-					fmt = "%d/%m %H:%M"
-					timezona= settings.getSetting('timezone')
-					time = str(d.astimezone(tz.gettz(pytz.all_timezones[int(timezona)])).strftime(fmt))
+                                        import datetime
+					import pytzimp
+					d = pytzimp.timezone(str(pytzimp.timezone('Atlantic/Azores'))).localize(datetime.datetime(2014, int(month), int(dia[0]), hour=int(hora_minuto[0][0]), minute=int(hora_minuto[0][1])))
+					timezona= settings.getSetting('timezone_new')
+                                        lisboa=pytzimp.timezone(pytzimp.all_timezones[int(timezona)])
+                                        convertido=d.astimezone(lisboa)
+                                        fmt = "%d/%m %H:%M"
+                                        time=convertido.strftime(fmt)
+					
 					if "Online" in live: time = '[B][COLOR green](Online)[/B][/COLOR]'
 					else: time = '[B][COLOR orange]' + time + '[/B][/COLOR]'
 					addDir(time + ' - [B]('+comp+')[/B] ' + home + ' vs ' + away,url,42,os.path.join(addonpath,'resources','art','football.png'),len(match),True)
@@ -485,12 +488,15 @@ def rojadirecta_events():
 		match = re.findall('<span class="(\d+)">.*?<div class="menutitle".*?<span class="t">([^<]+)</span>(.*?)</div>',source,re.DOTALL)
 		for id,time,eventtmp in match:
 			try:
-				from datetime import datetime
-				from dateutil import tz
-				d = datetime(year=2014,month=6,day=7,hour=int(time.split(':')[0]),minute=int(time.split(':')[-1]),tzinfo=tz.gettz('Europe/Madrid'))
-				fmt = "%H:%M"
-				timezona= settings.getSetting('timezone')
-				time = str(d.astimezone(tz.gettz(pytz.all_timezones[int(timezona)])).strftime(fmt))
+                                import datetime
+                                import pytzimp
+                                d = pytzimp.timezone(str(pytzimp.timezone('Europe/Madrid'))).localize(datetime.datetime(2014, 6, 7, hour=int(time.split(':')[0]), minute=int(time.split(':')[-1])))
+                                timezona= settings.getSetting('timezone_new')
+                                lisboa=pytzimp.timezone(pytzimp.all_timezones[int(timezona)])
+                                convertido=d.astimezone(lisboa)
+                                fmt = "%H:%M"
+                                time=convertido.strftime(fmt)
+				
 			except:pass
     			eventnospanish = re.compile('<span class="es">(.+?)</span>').findall(eventtmp)
     			print eventnospanish
@@ -601,12 +607,14 @@ def arenavision_mundial_agenda(url):
 			for evento in eventos:
 				try:
 					event_dict = evento[2].split('/')
-					from datetime import datetime
-					from dateutil import tz
-					d = datetime(year=2014,month=6,day=15,hour=int(evento[0]),minute=int(evento[1]),tzinfo=tz.gettz('Europe/Madrid'))
-					fmt = "%H:%M"
-					timezona= settings.getSetting('timezone')
-					time = str(d.astimezone(tz.gettz(pytz.all_timezones[int(timezona)])).strftime(fmt))
+					import datetime
+					import pytzimp
+					d = pytzimp.timezone(str(pytzimp.timezone('Europe/Madrid'))).localize(datetime.datetime(2014, 6, 15, hour=int(evento[0]), minute=int(evento[1])))
+					timezona= settings.getSetting('timezone_new')
+                                        lisboa=pytzimp.timezone(pytzimp.all_timezones[int(timezona)])
+                                        convertido=d.astimezone(lisboa)
+                                        fmt = "%H:%M"
+                                        time=convertido.strftime(fmt)
 					addLink(str(time) + ' - ' + event_dict[2],MainURL,"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png","http://www.happyholidays2014.com/wp-content/uploads/2014/05/Fifa-World-cup-2014-brail.jpg")
 				except:pass
 	xbmc.executebuiltin("Container.SetViewMode(51)")
@@ -690,12 +698,15 @@ def sopcast_ucoz():
     		match = re.compile('\((.*?)\.(.*?)\.(.*?)\. (.*?):(.*?) UTC\) (.*)').findall(titulo)
     		if match:
     			for dia,mes,ano,hora,minuto,evento in match:
-    				from datetime import datetime
-    				from dateutil import tz
-    				d = datetime(year=int(ano),month=int(mes),day=int(dia),hour=int(hora),minute=int(minuto),tzinfo=tz.gettz('Europe/London'))
-    				fmt = "%y-%m-%d %H:%M"
-    				timezona= settings.getSetting('timezone')
-    				time = str(d.astimezone(tz.gettz(pytz.all_timezones[int(timezona)])).strftime(fmt))
+                                import datetime
+                                import pytzimp
+                                d = pytzimp.timezone(str(pytzimp.timezone('Europe/London'))).localize(datetime.datetime(int(ano), int(mes), int(dia), hour=int(hora), minute=int(minuto)))
+                                timezona= settings.getSetting('timezone_new')
+                                lisboa=pytzimp.timezone(pytzimp.all_timezones[int(timezona)])
+                                convertido=d.astimezone(lisboa)
+                                fmt = "%y-%m-%d %H:%M"
+                                time=convertido.strftime(fmt)
+    				
     				addDir('[B][COLOR orange]' + time + '[/B][/COLOR]-' + evento,urllist,14,'',len(listagem),False)
     		else:
     			addDir(titulo,urllist,14,'',len(listagem),False)
@@ -830,14 +841,15 @@ def wiziwig_events(url):
 		dayname = int(month_day[0][1])
 		hourname = int(time1.split(':')[0])
 		minutesname = int(time1.split(':')[1])
-		from datetime import datetime
-		from dateutil import tz
-		d = datetime(year=2014,month=monthname,day=dayname,hour=hourname,minute=minutesname,tzinfo=tz.gettz('Europe/Madrid'))
-		fmt = "%m-%d %H:%M"
-		madrid = tz.gettz('Europe/Madrid')
-		timezona= settings.getSetting('timezone')
-		time = str(d.astimezone(tz.gettz(pytz.all_timezones[int(timezona)])).strftime(fmt))
-		#print monthname, dayname
+
+		import datetime
+                import pytzimp
+                d = pytzimp.timezone(str(pytzimp.timezone('Europe/Madrid'))).localize(datetime.datetime(2014, monthname, dayname, hour=hourname, minute=minutesname))
+                timezona= settings.getSetting('timezone_new')
+                lisboa=pytzimp.timezone(pytzimp.all_timezones[int(timezona)])
+                convertido=d.astimezone(lisboa)
+                fmt = "%m-%d %H:%M"
+                time=convertido.strftime(fmt)
 		addDir('[B](' + str(time) + ')[/B] ' + team1 + team2,WiziwigURL + url,10,WiziwigURL + icon,len(eventos),True)
 	except: addDir('[B](' + datefinal[1] + ' ' + time1 + ')[/B] ' + team1 + team2,WiziwigURL + url,10,WiziwigURL + icon,len(eventos),True)
     xbmc.executebuiltin("Container.SetViewMode(51)")
