@@ -1,3 +1,6 @@
+[B]v0.4.0 (19/7/2014)[/B]
+-Removed world cup categories
+
 [B]v0.3.9 (7/7/2014)[/B]
 -Fix timezones
 -Removed pytz

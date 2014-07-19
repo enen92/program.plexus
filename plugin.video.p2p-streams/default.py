@@ -567,7 +567,6 @@ def site_parsers_menu():
       addDir(traducao(40140),MainURL,44,os.path.join(addonpath,'resources','art','torrenttvru.png'),2,True)
       addDir(traducao(40106),MainURL,24,'http://1torrent.tv/images/header_logo.png',2,True)
       addDir(traducao(40003),MainURL,13,'http://s1.postimg.org/snkagb15b/sopblog.png',1,True)
-      addDir("ArenaVision World Cup 2014",MainURL,53,'http://s30.postimg.org/n6m6le88h/arenavisionlogo.png',1,True,"http://www.happyholidays2014.com/wp-content/uploads/2014/05/Fifa-World-cup-2014-brail.jpg")
       addDir(traducao(40131),MainURL,35,'http://s30.postimg.org/n6m6le88h/arenavisionlogo.png',1,True)
       addDir(traducao(40002),MainURL,8,os.path.join(addonpath,'resources','art','wiziwiglogo.png'),2,True)
       addDir(traducao(40132),MainURL,38,'http://www.userlogos.org/files/logos/clubber/football_ws___.PNG',1,True)
@@ -575,50 +574,6 @@ def site_parsers_menu():
       addDir(traducao(40139),MainURL,41,'http://livefootballvideo.com/images/xlivefootballvideologo.png.pagespeed.ic.3kxaAupa3O.png',1,True)
       addDir(traducao(40157),MainURL,50,'http://s30.postimg.org/3oznvmo5d/livefootball.png',1,True)
       xbmc.executebuiltin("Container.SetViewMode(51)")
-
-def arenavision_mundial():
-	try:
-		source = abrir_url("http://mundial.arenavision.in/")
-	except: source="";mensagemok(traducao(40000),traducao(40128))
-	if source:
-		match = re.compile("<li><a href='(.+?)'>(.+?)</a></li>").findall(source)
-		for link,name in match:
-			if "Agenda/Schedule" in name:
-				addDir('[B][COLOR orange]Agenda/Schedule[/B][/COLOR]',link,54,"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png",1,True,"http://www.happyholidays2014.com/wp-content/uploads/2014/05/Fifa-World-cup-2014-brail.jpg")
-			if "ArenaMundial" in name:
-				addDir(name,link,36,"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png",1,False,"http://www.happyholidays2014.com/wp-content/uploads/2014/05/Fifa-World-cup-2014-brail.jpg")
-			else: pass
-
-def arenavision_mundial_agenda(url):
-	try:
-		source = abrir_url(url)
-	except: source="";mensagemok(traducao(40000),traducao(40128))
-	if source:
-		html_trunk = re.findall("u>(.*?)(?:<br />\n<b><|script)", source, re.DOTALL)
-		for trunk in html_trunk:
-			data = re.compile('(.*?)</b>').findall(trunk)
-			for dias in data:
-				dia = re.compile('.* (.+?) de (.+?)<').findall(dias)
-				for day,mes in dia:
-					if mes == 'junio': month = 6
-					elif mes == 'julio': month = 7
-					addLink('[B][COLOR orange]' + day + '/' + str(month) + '/2014' + '[/B][/COLOR]',MainURL,"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png","http://www.happyholidays2014.com/wp-content/uploads/2014/05/Fifa-World-cup-2014-brail.jpg")
-			eventos = re.compile('(.+?):(.+?) CET(.+?)(?:<|\n<)').findall(trunk)
-			for evento in eventos:
-				try:
-					event_dict = evento[2].split('/')
-					import datetime
-					import pytzimp
-					d = pytzimp.timezone(str(pytzimp.timezone('Europe/Madrid'))).localize(datetime.datetime(2014, 6, 15, hour=int(evento[0]), minute=int(evento[1])))
-					timezona= settings.getSetting('timezone_new')
-                                        lisboa=pytzimp.timezone(pytzimp.all_timezones[int(timezona)])
-                                        convertido=d.astimezone(lisboa)
-                                        fmt = "%H:%M"
-                                        time=convertido.strftime(fmt)
-					addLink(str(time) + ' - ' + event_dict[2],MainURL,"http://s30.postimg.org/n6m6le88h/arenavisionlogo.png","http://www.happyholidays2014.com/wp-content/uploads/2014/05/Fifa-World-cup-2014-brail.jpg")
-				except:pass
-	xbmc.executebuiltin("Container.SetViewMode(51)")
-
 
 def xml_lists_menu():
       if settings.getSetting('sopcast-oficial') == "true":
@@ -795,7 +750,6 @@ def torrenttv_play(name,url):
 
 def wiziwig_cats():
     addDir(traducao(40009),WiziwigURL + '/index.php?part=sports',9,os.path.join(addonpath,'resources','art','wiziwiglogo.png'),1,True)
-    addDir("World Cup 2014 ",WiziwigURL + '/competition.php?part=sports&discipline=worldcup&archive=no&allowedDays=1,2,3,4,5,6,7',9,os.path.join(addonpath,'resources','art','worldcup.png'),1,True)
     addDir(traducao(40010),WiziwigURL + '/competition.php?part=sports&discipline=americanfootball&archive=no&allowedDays=1,2,3,4,5,6,7',9,os.path.join(addonpath,'resources','art','americanfootball.png'),1,True)
     addDir(traducao(40011),WiziwigURL + '/competition.php?part=sports&discipline=football&archive=no&allowedDays=1,2,3,4,5,6,7',9,os.path.join(addonpath,'resources','art','football.png'),1,True)
     addDir(traducao(40012),WiziwigURL + '/competition.php?part=sports&discipline=basketball&archive=no&allowedDays=1,2,3,4,5,6,7',9,os.path.join(addonpath,'resources','art','Basketball.png'),1,True)
@@ -2034,8 +1988,6 @@ elif mode==49: remove_list(name)
 elif mode==50: livefootballaol_menu()
 elif mode==51: set_engine_setting(url)
 elif mode==52: load_local_torrent()
-elif mode==53: arenavision_mundial()
-elif mode==54: arenavision_mundial_agenda("http://mundial.arenavision.in/p/agenda-tvschedule-tv.html")
 
 
     
