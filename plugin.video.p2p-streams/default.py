@@ -468,13 +468,13 @@ def livefootballvideo_sources(url):
 		source = abrir_url(url)
 	except: source = ""; mensagemok(traducao(40000),traducao(40128))
 	if source:
-		match = re.compile("title='sopcast'>\n<img src='(.+?)' alt='sopcast'/></a></td><td align='left'>(.+?)</td>\n<td>(.+?)</td><td>(.+?)</td><td><a href='(.+?)'").findall(source)
-		for logo,name,language,quality,link in match:
-			addDir("[B][COLOR orange][SopCast] [/COLOR][/B]" + name + ' (' + language + ') ('+quality+')',link,2,logo,len(match),False)
-		match2 = re.compile("title='acestream'>\n<img src='(.+?)' alt='acestream'/></a></td><td align='left'>(.+?)</td>\n<td>(.+?)</td><td>(.+?)</td><td><a href='(.+?)'").findall(source)
-		for logo,name,language,quality,link in match2:
+		match = re.compile("alt='sopcast'/></a></td><td align='left'>(.+?)</td><td>(.+?)</td><td>(.+?)</td><td><a href='(.+?)'").findall(source)
+		for name,language,quality,link in match:
+			addDir("[B][COLOR orange][SopCast] [/COLOR][/B]" + name + ' (' + language + ') ('+quality+')',link,2,os.path.join(addonpath,'resources','art','sopcast_logo.jpg'),len(match),False)
+		match2 = re.compile("alt='acestream.+?'/></a></td><td align='left'>(.+?)</td><td>(.+?)</td><td>(.+?)</td><td><a href='(.+?)'").findall(source)
+		for name,language,quality,link in match2:
 			if "acestream://" in link:
-				addDir("[B][COLOR orange][Acestream] [/COLOR][/B]" + name + ' (' + language + ') ('+quality+')',link,1,logo,len(match),False)
+				addDir("[B][COLOR orange][Acestream] [/COLOR][/B]" + name + ' (' + language + ') ('+quality+')',link,1,os.path.join(addonpath,'resources','art','acelogofull.jpg'),len(match),False)
 		if len(match) != 0 or len(match2) !=0:
 			xbmc.executebuiltin("Container.SetViewMode(51)")
 		else:
