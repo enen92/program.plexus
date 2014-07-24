@@ -9,6 +9,7 @@
 			
 	    	<setting id="openelecx86_64" type="bool" label="40111" visible="false" default="false"/>
 	    	<setting id="openeleci386" type="bool" label="40111" visible="false" default="false"/>
+	    	<setting id="python_cmd" type="text" label="" default="python" visible="false" />
 		<setting id="hide_porn" type="bool" label="40100" default="false"/>
 		<setting id="russian_translation" type="bool" label="1106" default="true"/>
 	</category>

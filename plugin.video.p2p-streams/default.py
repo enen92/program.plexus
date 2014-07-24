@@ -852,14 +852,18 @@ def autoconf():
 				if re.search(os.uname()[1],"openelec",re.IGNORECASE): acestream_rpi = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/openelec-acestream.tar.gz"
 				elif re.search(os.uname()[1],"raspbmc",re.IGNORECASE): acestream_rpi = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/raspbmc-acestream.tar.gz"
 				elif os.path.isfile("/etc/xbian_version"): acestream_rpi = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/xbian-acestream.tar.gz"
+				elif "ARCH" in os.uname()[2]:
+					acestream_rpi = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/archarm-acestream.tar.gz"
+					settings.setSetting('python_cmd',value='python2')
 				else:
 					mensagemok(traducao(40000),"Sorry could not detect your OS.","Select it from the next list")
-					OS_list = ["OpenELEC","Raspbmc","Xbian","Pipplware"]
-					url_packagerpi_list = ["http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/openelec-acestream.tar.gz","http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/raspbmc-acestream.tar.gz","http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/xbian-acestream.tar.gz","http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/raspbmc-acestream.tar.gz"]
+					OS_list = ["OpenELEC","Raspbmc","Xbian","Pipplware","Arch Linux Arm"]
+					url_packagerpi_list = ["http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/openelec-acestream.tar.gz","http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/raspbmc-acestream.tar.gz","http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/xbian-acestream.tar.gz","http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/raspbmc-acestream.tar.gz","http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/archarm-acestream.tar.gz"]
 					OS_Rpi_choose = xbmcgui.Dialog().select
 					choose=OS_Rpi_choose('Select your OS',OS_list)
 					if choose > -1:
 						acestream_rpi= url_packagerpi_list[choose]
+						if OS_list[choose] == "Arch Linux Arm": settings.setSetting('python_cmd',value='python2')
 			except: acestream_rpi = "" #da erro de script no windows, workaround porque diferente rpi
 			print "Detected Platform Raspberry PI"
 			#Sop
