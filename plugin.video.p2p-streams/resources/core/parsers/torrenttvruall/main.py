@@ -45,7 +45,7 @@ def torrenttv():
             					dict_torrent[categorie].append((channel_name[0],acehash))
             				except: pass
 	for categories in dict_torrent.keys():
-		addDir(categories,str(dict_torrent),54,os.path.join(current_dir,"icon.png"),2,True,parser="torrenttvruall",parserfunction="channels")
+		addDir(categories,str(dict_torrent),401,os.path.join(current_dir,"icon.png"),2,True,parser="torrenttvruall",parserfunction="channels")
 		
 def torrenttv_play(name,url):
 	dict_torrent=eval(url)

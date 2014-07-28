@@ -42,9 +42,9 @@ def sopcast_ucoz():
     				
     				addDir('[B][COLOR orange]' + time + '[/B][/COLOR]-' + evento,urllist,54,'',len(listagem),False,parser="sopcastucoz",parserfunction="play")
     		else:
-    			addDir(titulo,urllist,54,'',len(listagem),False,parser="sopcastucoz",parserfunction="play")
+    			addDir(titulo,urllist,401,'',len(listagem),False,parser="sopcastucoz",parserfunction="play")
     	except:
-    			addDir(titulo,urllist,54,'',len(listagem),False,parser="sopcastucoz",parserfunction="play")
+    			addDir(titulo,urllist,401,'',len(listagem),False,parser="sopcastucoz",parserfunction="play")
 
 def sopcast_ucoz_play(name,url):
     conteudo=clean(abrir_url(url))

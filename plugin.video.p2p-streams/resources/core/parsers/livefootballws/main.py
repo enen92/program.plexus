@@ -55,7 +55,7 @@ def livefootballws_events():
                                                 i += 1
 					except:
 						if '<span style="color: #000000;">' not in data_item:
-							addDir("[B][COLOR green]("+data_item+")[/COLOR][/B] "+teams[0],url[0],54,os.path.join(current_dir,'icon.png'),number_of_items,True,parser="livefootballws",parserfunction="streams")
+							addDir("[B][COLOR green]("+data_item+")[/COLOR][/B] "+teams[0],url[0],401,os.path.join(current_dir,'icon.png'),number_of_items,True,parser="livefootballws",parserfunction="streams")
 							i += 1
 						else: pass
 			except: pass
@@ -77,7 +77,7 @@ def livefootballws_events_simple():
 			print event
 			for value in event:
 				evento += value.replace('.html','') + ' '
-			addDir(status + ' ' + evento,url,54,os.path.join(current_dir,'icon.png'),number_of_items,True,parser="livefootballws",parserfunction="streams")
+			addDir(status + ' ' + evento,url,401,os.path.join(current_dir,'icon.png'),number_of_items,True,parser="livefootballws",parserfunction="streams")
 
 def livefootballws_streams(url):
 	try:

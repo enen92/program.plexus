@@ -31,9 +31,9 @@ def arenavision_menu():
 		match = re.compile("<li><a href='(.+?)'>(.+?)</a></li>").findall(source)
 		for link,name in match:
 			if "Agenda" in name:
-				addDir("[B][COLOR orange]Agenda/Schedule[/COLOR][/B]",link,54,os.path.join(current_dir,"icon.png"),1,True,parser="arenavision",parserfunction="arenavision_schedule")
+				addDir("[B][COLOR orange]Agenda/Schedule[/COLOR][/B]",link,401,os.path.join(current_dir,"icon.png"),1,True,parser="arenavision",parserfunction="arenavision_schedule")
 			if "AV" in name:
-				addDir(name,link,54,os.path.join(current_dir,"icon.png"),1,False,parser="arenavision",parserfunction="arenavision_streams")
+				addDir(name,link,401,os.path.join(current_dir,"icon.png"),1,False,parser="arenavision",parserfunction="arenavision_streams")
 			else: pass
 
 

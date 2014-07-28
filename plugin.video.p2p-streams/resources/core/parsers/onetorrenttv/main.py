@@ -31,7 +31,7 @@ def onetorrent_main():
         for lista in canais:
             individual=re.compile('<img src="(.+?)">.+?<a href="(.+?)">(.+?)</a>').findall(lista)
             for img,link,nomech in individual:
-                addDir(nomech,base_url+link,54,base_url + img,2,False,parser="1torrent.tv",parserfunction='play_torrent')
+                addDir(nomech,base_url+link,401,base_url + img,2,False,parser="1torrent.tv",parserfunction='play_torrent')
                 pass
         addLink('','','')
 

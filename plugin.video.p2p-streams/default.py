@@ -92,7 +92,7 @@ print "Parserfunction: "+str(parserfunction)
 
 #from 1-99 functions related to the addon menu functions 
 if mode==None or url==None or len(url)<1:
-      print "Versao Instalada: v" + versao
+      print "Installed version: v" + versao
       if settings.getSetting('autoconfig') == "true": autoconf()
       main_menu()
 elif mode==1: ace.acestreams(name,iconimage,url)
@@ -127,7 +127,8 @@ elif mode==306: remove_lock()
 elif mode==400: parsers.addon_parsers_menu()
 elif mode==401:
 	package = 'resources.core.parsers.' + parser
-	parser_module = getattr(__import__(package, fromlist=[name]), "main")
+	name = "main"
+	parser_module = getattr(__import__(package, fromlist=[name]), name)
 	parser_module.module_tree(name,url,iconimage,mode,parser,parserfunction)
     
 xbmcplugin.endOfDirectory(int(sys.argv[1]))

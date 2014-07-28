@@ -23,19 +23,19 @@ def module_tree(name,url,iconimage,mode,parser,parserfunction):
 	elif parserfunction == 'servers': wiziwig_servers(url)
 
 def wiziwig_cats():
-    addDir(traducao(40009),WiziwigURL + '/index.php?part=sports',54,os.path.join(addonpath,'resources','art','wiziwiglogo.png'),1,True)
-    addDir(traducao(40010),WiziwigURL + '/competition.php?part=sports&discipline=americanfootball&archive=no&allowedDays=1,2,3,4,5,6,7',54,os.path.join(addonpath,'resources','art','americanfootball.png'),1,True,parser='wiziwig',parserfunction='events')
-    addDir(traducao(40011),WiziwigURL + '/competition.php?part=sports&discipline=football&archive=no&allowedDays=1,2,3,4,5,6,7',54,os.path.join(addonpath,'resources','art','football.png'),1,True,parser='wiziwig',parserfunction='events')
-    addDir(traducao(40012),WiziwigURL + '/competition.php?part=sports&discipline=basketball&archive=no&allowedDays=1,2,3,4,5,6,7',54,os.path.join(addonpath,'resources','art','Basketball.png'),1,True,parser='wiziwig',parserfunction='events')
-    addDir(traducao(40013),WiziwigURL + '/competition.php?part=sports&discipline=icehockey&archive=no&allowedDays=1,2,3,4,5,6,7',54,os.path.join(addonpath,'resources','art','IceHockey.png'),1,True,parser='wiziwig',parserfunction='events')
-    addDir(traducao(40014),WiziwigURL + '/competition.php?part=sports&discipline=baseball&archive=no&allowedDays=1,2,3,4,5,6,7',54,os.path.join(addonpath,'resources','art','Baseball.png'),1,True,parser='wiziwig',parserfunction='events')
-    addDir(traducao(40015),WiziwigURL + '/competition.php?part=sports&discipline=tennis&archive=no&allowedDays=1,2,3,4,5,6,7',54,os.path.join(addonpath,'resources','art','Tennis.png'),1,True,parser='wiziwig',parserfunction='events')
-    addDir(traducao(40016),WiziwigURL + '/competition.php?part=sports&discipline=motorsports&archive=no&allowedDays=1,2,3,4,5,6,7',54,os.path.join(addonpath,'resources','art','Racing.png'),1,True,parser='wiziwig',parserfunction='events')
-    addDir(traducao(40017),WiziwigURL + '/competition.php?part=sports&discipline=rugby&archive=no&allowedDays=1,2,3,4,5,6,7',54,os.path.join(addonpath,'resources','art','Rugby.png'),1,True,parser='wiziwig',parserfunction='events')
-    addDir(traducao(40018),WiziwigURL + '/competition.php?part=sports&discipline=golf&archive=no&allowedDays=1,2,3,4,5,6,7',54,os.path.join(addonpath,'resources','art','Golf.png'),1,True,parser='wiziwig',parserfunction='events')
-    addDir(traducao(40019),WiziwigURL + '/competition.php?part=sports&discipline=cricket&archive=no&allowedDays=1,2,3,4,5,6,7',54,os.path.join(addonpath,'resources','art','Cricket.png'),1,True,parser='wiziwig',parserfunction='events')
-    addDir(traducao(40020),WiziwigURL + '/competition.php?part=sports&discipline=cycling&archive=no&allowedDays=1,2,3,4,5,6,7',54,os.path.join(addonpath,'resources','art','Cycling.png'),1,True,parser='wiziwig',parserfunction='events')
-    addDir(traducao(40021),WiziwigURL + '/competition.php?part=sports&discipline=other&archive=no&allowedDays=1,2,3,4,5,6,7',54,os.path.join(addonpath,'resources','art','Other_white.png'),1,True,parser='wiziwig',parserfunction='events')
+    addDir(traducao(40009),WiziwigURL + '/index.php?part=sports',401,os.path.join(addonpath,'resources','art','wiziwiglogo.png'),1,True,parser='wiziwig',parserfunction='events')
+    addDir(traducao(40010),WiziwigURL + '/competition.php?part=sports&discipline=americanfootball&archive=no&allowedDays=1,2,3,4,5,6,7',401,os.path.join(addonpath,'resources','art','americanfootball.png'),1,True,parser='wiziwig',parserfunction='events')
+    addDir(traducao(40011),WiziwigURL + '/competition.php?part=sports&discipline=football&archive=no&allowedDays=1,2,3,4,5,6,7',401,os.path.join(addonpath,'resources','art','football.png'),1,True,parser='wiziwig',parserfunction='events')
+    addDir(traducao(40012),WiziwigURL + '/competition.php?part=sports&discipline=basketball&archive=no&allowedDays=1,2,3,4,5,6,7',401,os.path.join(addonpath,'resources','art','Basketball.png'),1,True,parser='wiziwig',parserfunction='events')
+    addDir(traducao(40013),WiziwigURL + '/competition.php?part=sports&discipline=icehockey&archive=no&allowedDays=1,2,3,4,5,6,7',401,os.path.join(addonpath,'resources','art','IceHockey.png'),1,True,parser='wiziwig',parserfunction='events')
+    addDir(traducao(40014),WiziwigURL + '/competition.php?part=sports&discipline=baseball&archive=no&allowedDays=1,2,3,4,5,6,7',401,os.path.join(addonpath,'resources','art','Baseball.png'),1,True,parser='wiziwig',parserfunction='events')
+    addDir(traducao(40015),WiziwigURL + '/competition.php?part=sports&discipline=tennis&archive=no&allowedDays=1,2,3,4,5,6,7',401,os.path.join(addonpath,'resources','art','Tennis.png'),1,True,parser='wiziwig',parserfunction='events')
+    addDir(traducao(40016),WiziwigURL + '/competition.php?part=sports&discipline=motorsports&archive=no&allowedDays=1,2,3,4,5,6,7',401,os.path.join(addonpath,'resources','art','Racing.png'),1,True,parser='wiziwig',parserfunction='events')
+    addDir(traducao(40017),WiziwigURL + '/competition.php?part=sports&discipline=rugby&archive=no&allowedDays=1,2,3,4,5,6,7',401,os.path.join(addonpath,'resources','art','Rugby.png'),1,True,parser='wiziwig',parserfunction='events')
+    addDir(traducao(40018),WiziwigURL + '/competition.php?part=sports&discipline=golf&archive=no&allowedDays=1,2,3,4,5,6,7',401,os.path.join(addonpath,'resources','art','Golf.png'),1,True,parser='wiziwig',parserfunction='events')
+    addDir(traducao(40019),WiziwigURL + '/competition.php?part=sports&discipline=cricket&archive=no&allowedDays=1,2,3,4,5,6,7',401,os.path.join(addonpath,'resources','art','Cricket.png'),1,True,parser='wiziwig',parserfunction='events')
+    addDir(traducao(40020),WiziwigURL + '/competition.php?part=sports&discipline=cycling&archive=no&allowedDays=1,2,3,4,5,6,7',401,os.path.join(addonpath,'resources','art','Cycling.png'),1,True,parser='wiziwig',parserfunction='events')
+    addDir(traducao(40021),WiziwigURL + '/competition.php?part=sports&discipline=other&archive=no&allowedDays=1,2,3,4,5,6,7',401,os.path.join(addonpath,'resources','art','Other_white.png'),1,True,parser='wiziwig',parserfunction='events')
     xbmc.executebuiltin("Container.SetViewMode(51)")
     
 def wiziwig_events(url):
@@ -63,8 +63,8 @@ def wiziwig_events(url):
                 convertido=d.astimezone(lisboa)
                 fmt = "%m-%d %H:%M"
                 time=convertido.strftime(fmt)
-		addDir('[B](' + str(time) + ')[/B] ' + team1 + team2,WiziwigURL + url,54,WiziwigURL + icon,len(eventos),True,parser='wiziwig',parserfunction='servers')
-	except: addDir('[B](' + datefinal[1] + ' ' + time1 + ')[/B] ' + team1 + team2,WiziwigURL + url,54,WiziwigURL + icon,len(eventos),True,parser='wiziwig',parserfunction='servers')
+		addDir('[B](' + str(time) + ')[/B] ' + team1 + team2,WiziwigURL + url,401,WiziwigURL + icon,len(eventos),True,parser='wiziwig',parserfunction='servers')
+	except: addDir('[B](' + datefinal[1] + ' ' + time1 + ')[/B] ' + team1 + team2,WiziwigURL + url,401,WiziwigURL + icon,len(eventos),True,parser='wiziwig',parserfunction='servers')
     xbmc.executebuiltin("Container.SetViewMode(51)")
     
     

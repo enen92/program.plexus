@@ -61,11 +61,11 @@ def rojadirecta_events():
                        						already = True
 							if "ArenaVision" in canal: thumbnail = os.path.join(current_dir,'media','arenavisionlogo.png')
 							else: thumbnail = os.path.join(current_dir,'icon.png')
-                   					addDir("[B]["+tipo.replace("<","").replace(">","")+"][/B]-"+canal.replace("<","").replace(">","")+" - ("+language.replace("<","").replace(">","")+") - ("+qualidade.replace("<","").replace(">","")+" Kbs)",urltmp.replace("goto/",""),54,thumbnail,43,False,parser='rojadirecta',parserfunction='resolve_and_play')
+                   					addDir("[B]["+tipo.replace("<","").replace(">","")+"][/B]-"+canal.replace("<","").replace(">","")+" - ("+language.replace("<","").replace(">","")+") - ("+qualidade.replace("<","").replace(">","")+" Kbs)",urltmp.replace("goto/",""),401,thumbnail,43,False,parser='rojadirecta',parserfunction='resolve_and_play')
                    			p2pdirect = re.compile('<td>P2P</td><td></td><td></td><td>(.+?)</td><td></td><td>.+?href="(.+?)"').findall(streamdata)
                    			for tipo,link in p2pdirect:
                    				if tipo == "SopCast" and "sop://" in link:
-                   					addDir("[B][SopCast][/B]- (no info)",link,54,os.path.join(current_dir,'icon.png'),43,False,parser='rojadirecta',parserfunction='resolve_and_play')
+                   					addDir("[B][SopCast][/B]- (no info)",link,401,os.path.join(current_dir,'icon.png'),43,False,parser='rojadirecta',parserfunction='resolve_and_play')
 
 	xbmc.executebuiltin("Container.SetViewMode(51)")
 

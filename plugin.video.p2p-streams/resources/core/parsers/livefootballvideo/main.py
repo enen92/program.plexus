@@ -45,8 +45,8 @@ def livefootballvideo_events():
 					
 					if "Online" in live: time = '[B][COLOR green](Online)[/B][/COLOR]'
 					else: time = '[B][COLOR orange]' + time + '[/B][/COLOR]'
-					addDir(time + ' - [B]('+comp+')[/B] ' + home + ' vs ' + away,url,54,os.path.join(addonpath,'resources','art','football.png'),len(match),True,parser='livefootballvideo',parserfunction='sources')
-				except: addDir('[B][COLOR orange]' + timetmp + ' ' + datetmp + '[/B][/COLOR] - [B]('+comp+')[/B] ' + home + ' vs ' + away,url,54,os.path.join(addonpath,'resources','art','football.png'),len(match),True,parser='livefootballvideo',parserfunction='sources')
+					addDir(time + ' - [B]('+comp+')[/B] ' + home + ' vs ' + away,url,401,os.path.join(addonpath,'resources','art','football.png'),len(match),True,parser='livefootballvideo',parserfunction='sources')
+				except: addDir('[B][COLOR orange]' + timetmp + ' ' + datetmp + '[/B][/COLOR] - [B]('+comp+')[/B] ' + home + ' vs ' + away,url,401,os.path.join(addonpath,'resources','art','football.png'),len(match),True,parser='livefootballvideo',parserfunction='sources')
 
 
 def livefootballvideo_sources(url):
