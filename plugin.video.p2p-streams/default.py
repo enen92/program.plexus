@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 
 """ p2p-streams
-    2014 enen92 fightnight"""
+2014 enen92 fightnight
+   
+   This file contains the main menu and the addon directory tree
+    
+"""
 
 import xbmc,xbmcaddon,xbmcgui,xbmcplugin,urllib,urllib2,os,re,sys,datetime,time,subprocess,xbmcvfs,socket
 from resources.core.utils.pluginxbmc import *
@@ -15,25 +19,28 @@ from resources.core.livestreams import *
 from resources.core.parsers import parsers
 from resources.core.resolver import go_to_id
                                                                                                                                                                                                                                                                   
-def menu_principal():
-      addDir(traducao(40114),MainURL,53,addonpath + art + 'web-parsers-menu.png',2,True)
-      addDir(traducao(40115),MainURL,27,addonpath + art + 'xml_lists.png',2,True)
-      addDir(traducao(40144),MainURL,47,addonpath + art + 'Favorites-menu.png',2,True)
+def main_menu():
+      addDir(traducao(40114),MainURL,400,addonpath + art + 'web-parsers-menu.png',2,True)
+      addDir(traducao(40115),MainURL,100,addonpath + art + 'xml_lists.png',2,True)
+      addDir(traducao(40144),MainURL,200,addonpath + art + 'Favorites-menu.png',2,True)
       addLink('','','p2p')
       if xbmc.getCondVisibility('system.platform.windows') or xbmc.getCondVisibility('system.platform.linux') or xbmc.getCondVisibility('System.Platform.OSX') or xbmc.getCondVisibility('System.Platform.Android'):
           addDir('[COLOR orange]AceStream: [/COLOR]' + traducao(40004),MainURL,4,addonpath + art + 'acestream-menu-item.png',1,False)
-          addDir('[COLOR orange]AceStream: [/COLOR]' + traducao(600029),MainURL,52,addonpath + art + 'acestream-menu-item.png',1,False)
+          addDir('[COLOR orange]AceStream: [/COLOR]' + traducao(600029),MainURL,6,addonpath + art + 'acestream-menu-item.png',1,False)
       if xbmc.getCondVisibility('system.platform.windows') or xbmc.getCondVisibility('system.platform.linux') or xbmc.getCondVisibility('System.Platform.OSX') or xbmc.getCondVisibility('System.Platform.Android'):
           addDir('[COLOR orange]SopCast: [/COLOR]' + traducao(40005),MainURL,3,addonpath + art + 'sopcast-menu-item.png',1,False)
           addDir('[COLOR orange]SopCast: [/COLOR]' + traducao(40006),MainURL,5,addonpath + art + 'sopcast-menu-item.png',1,False)
-      elif xbmc.getCondVisibility('system.platform.windows'):
-          addDir(traducao(40007),MainURL,7,'',1,False)
       if xbmc.getCondVisibility('System.Platform.IOS') or xbmc.getCondVisibility('System.Platform.ATV2'):
           addLink(traducao(40056),'',addonpath + art + 'processwarning.png')
       addLink('','','p2p')
-      addDir('[B]' + traducao(40057) + '[/B]',MainURL,15,addonpath + art + 'settings_menu.png',2,True)       
+      addDir('[B]' + traducao(40057) + '[/B]',MainURL,300,addonpath + art + 'settings_menu.png',2,True)       
       xbmc.executebuiltin("Container.SetViewMode(50)")
       sop.break_sopcast()
+      
+      
+""" 
+Addon tree is below  
+"""
 
 def get_params():
       param=[]
@@ -83,58 +90,44 @@ print "Iconimage: "+str(iconimage)
 print "Parser: "+str(parser)
 print "Parserfunction: "+str(parserfunction)
 
+#from 1-99 functions related to the addon menu functions 
 if mode==None or url==None or len(url)<1:
       print "Versao Instalada: v" + versao
       if settings.getSetting('autoconfig') == "true": autoconf()
-      menu_principal()
-
-elif mode==1:
-	ace.acestreams(name,iconimage,url)
-elif mode==2: 
-	sop.sopstreams(name,iconimage,url)
-elif mode==3:
-	go_to_id('sop_id')
-elif mode==4:
-	go_to_id('ace')
-elif mode==5:
-	go_to_id('sop_url')
-#
-elif mode==6: lista_sop()
-elif mode==7: sopserver()
-elif mode==15: advanced_menu()
-elif mode==16: import_advancedxml()
-elif mode==17: recoverbackup_advancedxml()
-elif mode==18: backup_advancedxml()
-elif mode==19: delete_advancedxml()
-elif mode==20: remove_lock()
-elif mode==21: import_playerxml()
-elif mode==22: backup_playercorexml()
-elif mode==23: delete_playercorexml()
-elif mode==27: xml_lists_menu()
-elif mode==28: get_groups(url)
-elif mode==29: get_channels(name,url)
-elif mode==30: getChannelItems(name,url,"fanart")
-elif mode==31: getRegexParsed(regexs, url)
-elif mode==32: item = xbmcgui.ListItem(path=url); xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, item)
-elif mode==33: xbmc.executebuiltin(url.replace(';',''))
-elif mode==34: addlista()
-elif mode==46: add_to_addon_favourites(name,url)
-elif mode==47: addon_favourites()
-elif mode==48: remove_addon_favourites(url)
-elif mode==49: remove_list(name)
-elif mode==51: set_engine_setting(url)
-elif mode==52: ace.load_local_torrent()
-#parser stuff
-elif mode==53: parsers.addon_parsers_menu()
-elif mode==54:
-	if not parser: print "não é um parser"
-	else: 
-		print "é o parser",parser
-		#from resources.core.parsers.livefootballws import main as pa
-		#pa.module_tree(name,url,iconimage,mode,parser,parserfunction)
-		package = 'resources.core.parsers.' + parser
-		name = "main"
-		parser_module = getattr(__import__(package, fromlist=[name]), name)
-		parser_module.module_tree(name,url,iconimage,mode,parser,parserfunction)
+      main_menu()
+elif mode==1: ace.acestreams(name,iconimage,url)
+elif mode==2: sop.sopstreams(name,iconimage,url)
+elif mode==3: go_to_id('sop_id')
+elif mode==4: go_to_id('ace')
+elif mode==5: go_to_id('sop_url')
+elif mode==6: ace.load_local_torrent()
+#from 100-199 functions related to xml lists
+elif mode==100: xml_lists_menu()
+elif mode==101: get_groups(url)
+elif mode==102: get_channels(name,url)
+elif mode==103: getChannelItems(name,url,"fanart")
+elif mode==104: getRegexParsed(regexs, url)
+elif mode==105: item = xbmcgui.ListItem(path=url); xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, item)
+elif mode==106: xbmc.executebuiltin(url.replace(';',''))
+elif mode==107: addlista()
+elif mode==108: remove_list(name)
+#from 200-299 Favourites
+elif mode==200: addon_favourites()
+elif mode==201: add_to_addon_favourites(name,url)
+elif mode==202: remove_addon_favourites(url)
+#from 300-399 Advanced functions
+elif mode==300: advanced_menu()
+elif mode==301: import_advancedxml()
+elif mode==302: recoverbackup_advancedxml()
+elif mode==303: backup_advancedxml()
+elif mode==304: delete_advancedxml()
+elif mode==305: set_engine_setting(url)
+elif mode==306: remove_lock()
+#from 400-499 Advanced functions
+elif mode==400: parsers.addon_parsers_menu()
+elif mode==401:
+	package = 'resources.core.parsers.' + parser
+	parser_module = getattr(__import__(package, fromlist=[name]), "main")
+	parser_module.module_tree(name,url,iconimage,mode,parser,parserfunction)
     
 xbmcplugin.endOfDirectory(int(sys.argv[1]))

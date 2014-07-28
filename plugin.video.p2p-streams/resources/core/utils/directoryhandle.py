@@ -31,14 +31,14 @@ def addDir(name,url,mode,iconimage,total,pasta,fan_art="%s/fanart.jpg"%settings.
       if mode == 1 or mode == 2:
 	    try:
 		 dirs, files = xbmcvfs.listdir(os.path.join(pastaperfil,"Favourites"))
-		 if url.replace(":","").replace("/","") + ".txt" in files: contextmen.append((traducao(40146), 'XBMC.RunPlugin(%s?mode=48&url=%s&name=%s&iconimage=%s)' % (sys.argv[0], urllib.quote_plus(url),name,iconimage)))
-		 else: contextmen.append((traducao(40143), 'XBMC.RunPlugin(%s?mode=46&url=%s&name=%s&iconimage=%s)' % (sysargv, urllib.quote_plus(url),name,iconimage)))
+		 if url.replace(":","").replace("/","") + ".txt" in files: contextmen.append((traducao(40146), 'XBMC.RunPlugin(%s?mode=202&url=%s&name=%s&iconimage=%s)' % (sys.argv[0], urllib.quote_plus(url),name,iconimage)))
+		 else: contextmen.append((traducao(40143), 'XBMC.RunPlugin(%s?mode=201&url=%s&name=%s&iconimage=%s)' % (sysargv, urllib.quote_plus(url),name,iconimage)))
             except: pass
-      elif mode == 28:
+      elif mode == 101:
 	    try:
 		ficheiro = os.path.join(pastaperfil,"Lists",name.replace("[B][COLOR orange]","").replace("[/B][/COLOR]","") + ".txt")
 		if xbmcvfs.exists(ficheiro):
-			contextmen.append((traducao(40149), 'XBMC.RunPlugin(%s?mode=49&url=%s&name=%s&iconimage=%s)' % (sysargv, urllib.quote_plus(url),ficheiro,iconimage)))
+			contextmen.append((traducao(40149), 'XBMC.RunPlugin(%s?mode=108&url=%s&name=%s&iconimage=%s)' % (sysargv, urllib.quote_plus(url),ficheiro,iconimage)))
 	    except: pass
       liz.addContextMenuItems(contextmen,replaceItems=False)
       return xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=pasta,totalItems=total)
@@ -62,8 +62,8 @@ def addDir_livestreams_common(name,url,mode,iconimage,folder,fannart=None):
 	if mode == 1 or mode == 2:
 		try:
 			dirs, files = xbmcvfs.listdir(os.path.join(pastaperfil,"Favourites"))
-			if url.replace(":","").replace("/","") + ".txt" in files: contextmen.append((traducao(40146), 'XBMC.RunPlugin(%s?mode=48&url=%s&name=%s&iconimage=%s)' % (sys.argv[0], urllib.quote_plus(url),name,iconimage)))
-			else: contextmen.append((traducao(40143), 'XBMC.RunPlugin(%s?mode=46&url=%s&name=%s&iconimage=%s)' % (sys.argv[0], urllib.quote_plus(url),name,iconimage)))
+			if url.replace(":","").replace("/","") + ".txt" in files: contextmen.append((traducao(40146), 'XBMC.RunPlugin(%s?mode=202&url=%s&name=%s&iconimage=%s)' % (sys.argv[0], urllib.quote_plus(url),name,iconimage)))
+			else: contextmen.append((traducao(40143), 'XBMC.RunPlugin(%s?mode=201&url=%s&name=%s&iconimage=%s)' % (sys.argv[0], urllib.quote_plus(url),name,iconimage)))
 		except: pass
 	liz.addContextMenuItems(contextmen,replaceItems=False)
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=folder)
@@ -83,13 +83,13 @@ def addDir_livestreams(name,url,mode,iconimage,fanart,description,genre,date,cre
         if "RunPlugin" in url: pasta = False
         else: pasta = True
         liz=xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage=iconimage)
-	if mode == 33:
+	if mode == 106:
 		try:
 			dirs, files = xbmcvfs.listdir(os.path.join(pastaperfil,"Favourites"))
 			match = re.compile("url=(.+?)&mode").findall(url.replace(";",""))
 			if match:
-				if match[0].replace(":","").replace("/","").replace(";","") + ".txt" in files: contextmen.append((traducao(40146), 'XBMC.RunPlugin(%s?mode=48&url=%s&name=%s&iconimage=%s)' % (sys.argv[0], urllib.quote_plus(url),name,iconimage)))
-				else: contextmen.append((traducao(40143), 'XBMC.RunPlugin(%s?mode=46&url=%s&name=%s&iconimage=%s)' % (sys.argv[0], urllib.quote_plus(url),name,iconimage)))
+				if match[0].replace(":","").replace("/","").replace(";","") + ".txt" in files: contextmen.append((traducao(40146), 'XBMC.RunPlugin(%s?mode=202&url=%s&name=%s&iconimage=%s)' % (sys.argv[0], urllib.quote_plus(url),name,iconimage)))
+				else: contextmen.append((traducao(40143), 'XBMC.RunPlugin(%s?mode=201&url=%s&name=%s&iconimage=%s)' % (sys.argv[0], urllib.quote_plus(url),name,iconimage)))
 		except: pass
 	liz.addContextMenuItems(contextmen,replaceItems=False)		
 	if fanart:
@@ -106,8 +106,8 @@ def addLink_livestreams(url,name,iconimage,fanart,description,genre,date,showcon
         except: pass
 	contextmen = []
         ok = True
-        if regexs: mode = '31'
-        else: mode = '32'
+        if regexs: mode = '104'
+        else: mode = '105'
         u=sys.argv[0]+"?"
         u += "url="+urllib.quote_plus(url)+"&mode="+mode
         if regexs:

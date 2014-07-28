@@ -18,24 +18,24 @@ Main Menu
 
 def xml_lists_menu():
       if settings.getSetting('sopcast-oficial') == "true":
-      	    addDir(traducao(40116),"http://sopcast.org/chlist.xml",28,addonpath + art + 'xml_list_sopcast.png',2,True)
+      	    addDir(traducao(40116),"http://sopcast.org/chlist.xml",101,addonpath + art + 'xml_list_sopcast.png',2,True)
       if settings.getSetting('sopcast-romanian') == "true":
-            addDir(traducao(40117),"http://streams.magazinmixt.ro/xsopcast.xml",28,addonpath + art + 'xml_list_sopcast.png',2,True)
+            addDir(traducao(40117),"http://streams.magazinmixt.ro/xsopcast.xml",101,addonpath + art + 'xml_list_sopcast.png',2,True)
       if settings.getSetting('livestreams-spanish') == "true":
-            addDir(traducao(40118),"http://dl.dropbox.com/u/4735170/streams.xml",28,addonpath + art + 'xml_lists.png',2,True)
+            addDir(traducao(40118),"http://dl.dropbox.com/u/4735170/streams.xml",101,addonpath + art + 'xml_lists.png',2,True)
       if settings.getSetting('livestreams-pt-sports') == "true":
-            addDir(traducao(40119),"http://dl.dropboxusercontent.com/u/266138381/Desporto.xml",28,addonpath + art + 'xml_lists.png',2,True)
+            addDir(traducao(40119),"http://dl.dropboxusercontent.com/u/266138381/Desporto.xml",101,addonpath + art + 'xml_lists.png',2,True)
       if settings.getSetting('livestreams-pt-events') == "true":
-            addDir(traducao(40120),"http://dl.dropboxusercontent.com/u/266138381/Eventos.xml",28,addonpath + art + 'xml_lists.png',2,True)
+            addDir(traducao(40120),"http://dl.dropboxusercontent.com/u/266138381/Eventos.xml",101,addonpath + art + 'xml_lists.png',2,True)
       try:
             if xbmcvfs.exists(os.path.join(pastaperfil,"Lists")):
 		   dirs, files = xbmcvfs.listdir(os.path.join(pastaperfil,"Lists"))
                    for file in files:
 			f = open(os.path.join(pastaperfil,"Lists",file), "r")
 	                string = f.read()
-                        addDir("[B][COLOR orange]" + file.replace(".txt","") + "[/B][/COLOR]",string,28,addonpath + art + 'xml_lists.png',2,True)
+                        addDir("[B][COLOR orange]" + file.replace(".txt","") + "[/B][/COLOR]",string,101,addonpath + art + 'xml_lists.png',2,True)
       except: pass
-      addDir(traducao(40121),MainURL,34,addonpath + art + 'plus-menu.png',2,False)
+      addDir(traducao(40121),MainURL,107,addonpath + art + 'plus-menu.png',2,False)
       xbmc.executebuiltin("Container.SetViewMode(51)")
       
 """ 
@@ -69,7 +69,7 @@ def addlista():
 			search = keyb.getText()
 			if search=='': sys.exit(0)
 			encode=urllib.quote(search)
-			if encode.split(".")[-1] != "xml": print "diferente de xml";mensagemok(traducao(40000),traducao(40128)); sys.exit(0)
+			if encode.split(".")[-1] != "xml": mensagemok(traducao(40000),traducao(40128)); sys.exit(0)
 			else:
 				try:
 					print encode
@@ -138,7 +138,7 @@ def get_groups(url):
             if (group.find('.//channel')==None): continue
             group_name=group.attrib[LANGUAGE]
             try:
-	        addDir_livestreams_common(group_name,url,29,addonpath + art + 'xml_list_sopcast.png',True)
+	        addDir_livestreams_common(group_name,url,102,addonpath + art + 'xml_list_sopcast.png',True)
             except: pass
         xbmc.executebuiltin("Container.SetViewMode(51)")
     except:
@@ -227,7 +227,7 @@ def getData(url,fanart):
                     credits = ''
 
                 try:
-                    addDir_livestreams(name.encode('utf-8', 'ignore'),url.encode('utf-8'),30,thumbnail,fanArt,desc,genre,date,credits,True)
+                    addDir_livestreams(name.encode('utf-8', 'ignore'),url.encode('utf-8'),103,thumbnail,fanArt,desc,genre,date,credits,True)
                 except:
                     addon_log('There was a problem adding directory from getData(): '+name.encode('utf-8', 'ignore'))
         else:
@@ -398,15 +398,15 @@ def getItems(items,fanart):
 		    if "RunPlugin" in url[0]:
 			try:
 				print name,url
-				addDir_livestreams(name.encode('utf-8', 'ignore'),url[0],33,thumbnail,fanArt,desc,genre,"credits",date)
+				addDir_livestreams(name.encode('utf-8', 'ignore'),url[0],106,thumbnail,fanArt,desc,genre,"credits",date)
 			except:
 				match = re.compile("&name=(.+?)\)").findall(url[0].replace(";",""))
 				if match:
 					try:
-						addDir_livestreams(name.encode('utf-8', 'ignore'),removeNonAscii(url[0]),33,thumbnail,fanArt,desc,genre,credits,date)
+						addDir_livestreams(name.encode('utf-8', 'ignore'),removeNonAscii(url[0]),106,thumbnail,fanArt,desc,genre,credits,date)
 					except:
 						try:
-							addDir_livestreams(removeNonAscii(name.encode('utf-8', 'ignore')),removeNonAscii(url[0].replace(";","")),33,thumbnail,fanArt,desc,genre,credits,date)
+							addDir_livestreams(removeNonAscii(name.encode('utf-8', 'ignore')),removeNonAscii(url[0].replace(";","")),106,thumbnail,fanArt,desc,genre,credits,date)
 						except: 
 							addon_log('There was a problem adding item - '+name.encode('utf-8', 'ignore'))
 				else:
