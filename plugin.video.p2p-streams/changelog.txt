@@ -1,3 +1,9 @@
+[B]v0.4.2 (28/7/2014)[/B]
+-Added support for m3u lists
+-Added support for archlinuxarm
+-Clean up code
+-Addon turned into modules (including parsers)
+
 [B]v0.4.1 (22/7/2014)[/B]
 -Fix livefootballvideo.com
 
