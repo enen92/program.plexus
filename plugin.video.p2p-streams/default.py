@@ -13,6 +13,7 @@ from resources.core.favourites import *
 from resources.core.advancedfunctions import *
 from resources.core.livestreams import *
 from resources.core.parsers import parsers
+from resources.core.resolver import go_to_id
                                                                                                                                                                                                                                                                   
 def menu_principal():
       addDir(traducao(40114),MainURL,53,addonpath + art + 'web-parsers-menu.png',2,True)
@@ -33,32 +34,6 @@ def menu_principal():
       addDir('[B]' + traducao(40057) + '[/B]',MainURL,15,addonpath + art + 'settings_menu.png',2,True)       
       xbmc.executebuiltin("Container.SetViewMode(50)")
       sop.break_sopcast()
-
-      
-#Esta é para ficar aqui!		
-def go_to_id(p2p_type):
-	if p2p_type=='ace':
-		keyb = xbmc.Keyboard('', traducao(40033))
-		keyb.doModal()
-		if (keyb.isConfirmed()):
-			search = keyb.getText()
-			if search=='': sys.exit(0)
-			else:
-				channel_id = search
-				ace.acestreams(traducao(40035),'',str(channel_id))
-	elif p2p_type=='sop_id':
-		channel_id = xbmcgui.Dialog().numeric(0, traducao(40033))
-		sop.sopstreams(traducao(40035),'',str(channel_id))
-	elif p2p_type=='sop_url':
-		keyb = xbmc.Keyboard('sop://', traducao(40034) + ' sop://')
-		keyb.doModal()
-		if (keyb.isConfirmed()):
-			search = keyb.getText()
-			if search=='': sys.exit(0)
-			else:
-				channel_id = search
-				sop.sopstreams(traducao(40036),'',str(channel_id))
-
 
 def get_params():
       param=[]
