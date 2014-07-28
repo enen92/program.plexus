@@ -1,0 +1,172 @@
+[B]v0.4.1 (22/7/2014)[/B]
+-Fix livefootballvideo.com
+
+[B]v0.4.0 (19/7/2014)[/B]
+-Removed world cup categories
+
+[B]v0.3.9 (7/7/2014)[/B]
+-Fix timezones
+-Removed pytz
+(fixes by j0anita)
+
+[B]v0.3.8 (4-07-2014):[/B]
+-Simplified linux instalation (no more libs required). If you run the addon on linux (i386/x86_64) re-do the configuration again or the addon will not work.
+-Dirty hack to avoid double sound on windows
+-New settings layout
+-Fixed rojadirecta url
+-Proper addon.xml
+-Other small fixes
+
+[B]v0.3.7 (19-06-2014):[/B]
+-New icon pack for general menus
+
+[B]v0.3.6 (16-06-2014):[/B]
+-New icon pack for wiziwig (tks axlt2002)
+-A proper livefootballvideo.com parser
+-Fixed livefootballaol list.
+
+[B]v0.3.5 (15-06-2014):[/B]
+-Fix empty listings for rojadirecta,AV and Arenamundial.
+
+[B]v0.3.4 (13-06-2014):[/B]
+-Added Arenavision mundial parser (temporary till the end of the competition)
+-Added p2p links with no info to rojadirect parser
+-Fixed urls like futbolsinlimites (iframe hidden sop://) in rojadirecta
+-Fixed a minor issue in sopcast ucoz
+
+[B]v0.3.3 (12-06-2014):[/B]
+-Fix arenavision/ arenavision schedule
+-Fix Rojadirecta parser
+-Added world cup 2014 section to wiziwig parser
+
+[B]v0.3.2 (6-06-2014):[/B]
+-Fix load_local_torrents for windows (tks azirus)
+
+[B]v0.3.1 (5-06-2014):[/B]
+-Added support for local .torrent files (+menu entry)
+
+[B]v0.3.0 (1-06-2014):[/B]
+-Fix issue with strings missing on devices not eligible to change acestreamengine settings from addon gui.
+
+[B]v0.2.9 (21-05-2014):[/B]
+-Added openelec i386/i686 package
+-Small fixes
+-Different dialogprogress for sopcast
+
+[B]v0.2.8 (20-05-2014):[/B]
+-Added xbian armv7 package (thanks to xbian devs)
+-Added openelec armv7 package
+-Acestream settings are now separated from the engine (txt files), openssl was also updated. This applies to the raspberry pi, mac osx and linux armv7. If you run the addon in one of those platforms, please re-do the configuration.
+-It's now possible to change the engine settings from the advanced functions menu for the platforms listed above (re-do the configuration to get the new engine)
+-Fixed wiziwig parser
+-Fixed error in linux armv7 config
+-Fixed configuration on android (apk download refused by google code)
+-Fixed xbian detection (thanks xbian devs)
+
+[B]v0.2.7 (3-05-2014):[/B]
+-Fixed issue with configuration of sopcast on windows
+
+[B]v0.2.6 (29-04-2014):[/B]
+-Added support for Mac i386 (thanks crackerj0e)
+-Fixed issues with srvany download
+-Wiki updated
+
+[B]v0.2.5 (25-04-2014):[/B]
+-Added pipplware portuguese rpi distribution to config list
+-Small fix for users in windows
+-New icon torrent-tv
+-Simplified process for mac osx x86_64
+
+[B]v0.2.4 (22-04-2014):[/B]
+-Fix autoconfiguration android
+
+[B]v0.2.3 (22-04-2014):[/B]
+-Sopcast now works for android (using xbmc player without root)
+-Fix livefootball.ws (ddos protection)
+-Fix sopcast ucoz parser
+-Fix livestreams code
+-Added timezones (defined to london by default)
+-New icon for aces (thanks marquerite)
+
+[B]v0.2.2 (9-04-2014):[/B]
+-Acestream engine status window on videoosd
+-New art for playback
+-Debug mode for acestream outgoing and received commands
+-Fix livefootball.ws parser
+-Possible to define logos on the player when calling from other addons (add iconimage variable)
+-windows engine upgraded to 2.2.3-next
+
+[B]v0.2.1 (24-03-2014):[/B]
+-Upgraded acestream engine to 2.2-next in windows
+-Fixed calls from outside of the addon as regular playmedia items/strm files (setResolvedUrl)
+
+[B]v0.2.0 (27-02-2014):[/B]
+-Small fix arenavision
+-Fixed xml lists (some items not showing)
+-New settings
+-Small fixes for windows
+-Re-code and fix configuration for android
+-Added support for non-rooted android devices (gotham is required). This is the default option on android.
+
+[B]v0.1.9 (25-02-2014):[/B]
+-Fixed bugs for android
+-Fixed issue in windows config
+
+[B]v0.1.8 (25-02-2014):[/B]
+-Added livefootballaol parser
+-Added sopcast for windows
+-fixed rojadirecta/arenavision parsers
+-Fixed porn
+-Fixed minor issues
+-Added more options to advancedsettingsxml (advanced function)
+
+[B]v0.1.7 (18-02-2014):[/B]
+-Rework from version 1.0.5
+-Fixed openelec 64 bit kill engine command
+-Added support for valdikSS proxy
+-Added new more parsers (rojadirecta, arenavision, livefootball.ws, livefootballvideo.com)
+-Added robust xml parser (it parses either sopcast based lists or regular livestreams lists)
+-Builtin livestreams addon as a python module
+-Added addon favourites
+-Fixed xbmc favourites (tks gb)
+-Small fixes
+
+[B]v0.1.6 (9-02-2014):[/B]
+-Added support for openelec 64bit
+-Option for servers
+
+[B]v0.1.5 (04-02-2014):[/B]
+-Merged nouismons new build
+-Extended support for linux armv7 (mx linux)
+-Fixed wiziwig catcher
+-Added force android option
+-Fixed calls from other addons
+
+[B]v0.1.4 (22-01-2014):[/B]
+-Added full support for android
+-Proper wiziwig parser
+-Translate torrent-tv.ru/hide porno
+-Concluded sopcast blog
+-Added possibility to call external players (android only atm)
+-Added 1torrent.tv parser
+
+[B]v0.1.3 (22-01-2014):[/B]
+- Full torrent-tv.ru api support.
+
+[B]v0.1.2 (20-01-2014):[/B]
+-Fixed system name bug on raspberry pi
+-Fixed lib sopcast bug in linux for latest version
+-Fixed issue with tslock
+-Fixed strings bug
+-Added prebuffer, seed and speed status on starting
+-Added full support for MacOsX (sopcast and acestream)
+-Added avancedsettings menu to easy the process of importing advancedsettings.xml (with status display)
+
+
+
+[B]v0.1.1 (13-01-2014):[/B]
+-Fix.
+
+[B]v0.1.0 (13-01-2014):[/B]
+-First beta release of the addon
+
