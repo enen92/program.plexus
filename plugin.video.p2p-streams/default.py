@@ -105,7 +105,7 @@ elif mode==5: go_to_id('sop_url')
 elif mode==6: ace.load_local_torrent()
 #from 100-199 functions related to xml lists
 elif mode==100: xml_lists_menu()
-elif mode==101: get_groups(url)
+elif mode==101: list_type(url)
 elif mode==102: get_channels(name,url)
 elif mode==103: getChannelItems(name,url,"fanart")
 elif mode==104: getRegexParsed(regexs, url)
@@ -113,6 +113,7 @@ elif mode==105: item = xbmcgui.ListItem(path=url); xbmcplugin.setResolvedUrl(int
 elif mode==106: xbmc.executebuiltin(url.replace(';',''))
 elif mode==107: addlista()
 elif mode==108: remove_list(name)
+elif mode==109: get_groups(url)
 #from 200-299 Favourites
 elif mode==200: addon_favourites()
 elif mode==201: add_to_addon_favourites(name,url,iconimage)

@@ -11,7 +11,7 @@
 
 """
      
-import xbmc,xbmcgui,xbmcplugin
+import xbmc,xbmcgui,xbmcplugin,xbmcvfs
 import tarfile,os,re,sys,subprocess
 from utils.pluginxbmc import *
 from utils.webutils import download_tools

@@ -68,7 +68,7 @@ def addlista():
 	opcao= xbmcgui.Dialog().yesno(traducao(40000), traducao(40123),"","",traducao(40124),traducao(40125))
 	if opcao:
 		dialog = xbmcgui.Dialog()
-		lista_xml = dialog.browse(int(1), traducao(40186), 'myprograms','.xml')
+		lista_xml = dialog.browse(int(1), traducao(40186), 'myprograms','.xml|.m3u')
 		keybdois = xbmc.Keyboard("", traducao(40130))
 		keybdois.doModal()
 		if (keybdois.isConfirmed()):
@@ -88,7 +88,7 @@ def addlista():
 			search = keyb.getText()
 			if search=='': sys.exit(0)
 			encode=urllib.quote(search)
-			if encode.split(".")[-1] != "xml": mensagemok(traducao(40000),traducao(40128)); sys.exit(0)
+			if encode.split(".")[-1] != "xml" and encode.split(".")[-1] != "m3u": mensagemok(traducao(40000),traducao(40128)); sys.exit(0)
 			else:
 				try:
 					code = abrir_url(search)
@@ -124,6 +124,22 @@ def remove_list(name):
 Parsing functions
 
 """	
+def list_type(url):
+	ltype = url.split('.')[-1]
+	if ltype == 'xml': get_groups(url)
+	elif ltype == 'm3u': parse_m3u(url)
+	else: pass
+	
+def parse_m3u(url):
+	if "http" in url: content = abrir_url(url)
+	else: content = readfile(url)
+	match = re.compile('#EXTINF:0,(.*?)\n(.*)').findall(content)
+	for channel_name,stream_url in match:
+		if 'plugin://' in stream_url: 
+			stream_url = 'XBMC.RunPlugin('+stream_url+')'
+			addDir(channel_name,stream_url,106,'',1,False)
+		else: addLink(channel_name,stream_url,'')
+
 
 def get_groups(url):
     from xml.etree import ElementTree
