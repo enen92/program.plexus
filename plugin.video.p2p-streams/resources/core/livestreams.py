@@ -10,8 +10,8 @@
     addlista() -> add a new list. It'll ask for local or remote and processes the given input
     remove_list(name) -> Remove a list
     
-    get_groups(url) -> First regex function to parse a given list. Used to list categories on lists.
-    get_channels(name,url) -> Second regex function to parse a given list. Used to list channels.
+    get_groups(url) -> First regex function to parse a given list. Sopcast type list
+    get_channels(name,url) -> Second regex function to parse a given list. Used to general livestreams xml type lists
     getData(url,fanart) -> Get the item data such as iconimage, fanart, etc
     getChannelItems(name,url,fanart) -> Function to grab the channel items
     getItems(items,fanart) -> Function to grab the items from the xml
@@ -19,6 +19,9 @@
     getSoup(url) -> uses beautifulsoup to parse a remote xml
     addon_log(string) -> Simple log/print function
     getRegexParsed(regexs, url) -> parse the regex expression
+    list_type(url) -> Checks if the list is xml or m3u
+    parse_m3u(url) -> Parses a m3u type list
+    
     
 
 """
