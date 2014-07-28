@@ -18,7 +18,7 @@ from utils.timeutils import translate_months
 base_url = "http://www.livefootball.ws"
 
 def module_tree(name,url,iconimage,mode,parser,parserfunction):
-	if not parserfunction: livefootballws_events_simple()
+	if not parserfunction: livefootballws_events()
 	elif parserfunction == 'streams': livefootballws_streams(url)
 
 def livefootballws_events():
@@ -27,12 +27,9 @@ def livefootballws_events():
 	except: source = ""; mensagemok(traducao(40000),traducao(40128))
 	if source:
 		items = re.findall('<div class="base custom" align="center"(.*?)</center></div><br></div>', source, re.DOTALL)
-		#print items
 		number_of_items= len(items)
-		i=0	
 		for item in reversed(items):
 			data = re.compile('<div style="text-align: center;">(.+?)</div>').findall(item)
-			print data
 			try:
 				check = re.compile(" (.+?):(.+?)").findall(data[-1].replace("color:",""))
 				if not check and "Online" not in data[-1]:pass
@@ -52,33 +49,12 @@ def livefootballws_events():
                                                 time=convertido.strftime(fmt)
 
                                                 addDir("[B][COLOR orange]("+traducao(600012)+time+")[/COLOR][/B] "+teams[0],url[0],39,os.path.join(current_dir,'icon.png'),number_of_items,True,parser="livefootballws",parserfunction="streams")
-                                                i += 1
 					except:
 						if '<span style="color: #000000;">' not in data_item:
 							addDir("[B][COLOR green]("+data_item+")[/COLOR][/B] "+teams[0],url[0],401,os.path.join(current_dir,'icon.png'),number_of_items,True,parser="livefootballws",parserfunction="streams")
-							i += 1
 						else: pass
 			except: pass
-			if i == 0: livefootballws_events_simple() 
 			
-def livefootballws_events_simple():
-	try:
-		source = mechanize_browser(base_url)
-	except: source = ""; mensagemok(traducao(40000),traducao(40128))
-	if source:
-		items = re.compile('<div align="center" style="margin-bottom: 1px;"><span class="argr_custom more"><a href="(.+?)">(.+?)</a>').findall(source)
-		number_of_items = len(items)
-		for url,date in reversed(items):
-			if 'Online' in date: status = '[COLOR green]Online[/COLOR]'
-			else: status = '[COLOR orange]Soon...[/COLOR]'
-			eventlist = url.split('/')[-1].split('-')
-			event = eventlist[1:]
-			evento = ''
-			print event
-			for value in event:
-				evento += value.replace('.html','') + ' '
-			addDir(status + ' ' + evento,url,401,os.path.join(current_dir,'icon.png'),number_of_items,True,parser="livefootballws",parserfunction="streams")
-
 def livefootballws_streams(url):
 	try:
 		source = mechanize_browser(url)

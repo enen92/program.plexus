@@ -1,3 +1,6 @@
+[B]v0.4.3 (29/7/2014)[/B]
+-Fixes from 0.4.2
+
 [B]v0.4.2 (28/7/2014)[/B]
 -Added support for m3u lists
 -Added support for archlinuxarm

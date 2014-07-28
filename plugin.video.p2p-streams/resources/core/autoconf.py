@@ -71,7 +71,7 @@ def autoconf():
 
 			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
 			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,traducao(40025),traducao(40000))
-            
+			import tarfile            
 			if tarfile.is_tarfile(SPSC_KIT):
 				path_libraries = os.path.join(pastaperfil,"sopcast")
 				download_tools().extract(SPSC_KIT,path_libraries)
@@ -106,7 +106,7 @@ def autoconf():
 			#Linux armv7 configuration according to platform
 
 			#MXLINUX
-
+				import tarfile
                 	if OS_Choose == "MXLinux":
 				acestream_installed = False
 				sopcast_installed = False
