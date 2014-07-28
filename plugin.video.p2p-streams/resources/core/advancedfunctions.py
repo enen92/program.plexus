@@ -183,7 +183,7 @@ def set_engine_setting(file):
 			integer = True
 		except: integer = False
 		if integer == True:
-			savefile(file, search)
+			save(file, search)
 			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), traducao(600026), 1,addonpath+"/icon.png"))
 			xbmc.executebuiltin("Container.Refresh")
 		else:
