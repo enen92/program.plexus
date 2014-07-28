@@ -1,5 +1,18 @@
 # -*- coding: utf-8 -*-
-""" p2p-streams (c)  2014 enen92 fightnight"""
+
+""" p2p-streams  (c)  2014 enen92 fightnight
+
+    This file contains the functions for xbmc addon directory handle
+    
+    Functions:
+    
+    addLink(name,url,iconimage,fan_art="%s/fanart.jpg"%settings.getAddonInfo("path")) -> Addlink function used in the 'whole' addon
+    addDir(name,url,mode,iconimage,total,pasta,fan_art="%s/fanart.jpg"%settings.getAddonInfo("path"),parser=None,parserfunction=None) -> AddDir function used in the whole addon
+    addDir_livestreams_common(name,url,mode,iconimage,folder,fannart=None) -> AddDir function used only by the livestreams module of the addon
+    addLink_livestreams(url,name,iconimage,fanart,description,genre,date,showcontext,playlist,regexs,total) -> AddLink function used only by the livestreams module of the addon
+   	
+
+"""
 
 import xbmc,xbmcgui,xbmcvfs,xbmcplugin,os,urllib,sys
 from pluginxbmc import *

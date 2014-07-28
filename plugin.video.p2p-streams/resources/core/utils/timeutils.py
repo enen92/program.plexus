@@ -1,7 +1,14 @@
 # -*- coding: utf-8 -*-
 
-""" p2p-streams
-    2014 enen92 fightnight"""
+""" p2p-streams  (c)  2014 enen92 fightnight
+
+    This file contains functions related to time manipulation
+    
+    Functions:
+    
+    translate_months(month) -> Receives the month name in english and returns an integer corresponding to the month number. Used in parsers.
+   	
+"""
 
 def translate_months(month):
 	if month == "January": return 1

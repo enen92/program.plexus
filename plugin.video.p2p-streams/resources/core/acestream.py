@@ -1,7 +1,17 @@
 # -*- coding: utf-8 -*-
 
-""" p2p-streams
-    2014 enen92 fightnight"""
+""" p2p-streams  (c)  2014 enen92 fightnight
+
+    This file contains the function that brigdes the addon to the acecore.py file
+    
+    Functions:
+    
+    load_local_torrent() -> Load a local .torrent file
+    acestreams(name,iconimage,chid) -> Function that interprets the received url (acestream://,*.acelive,ts://) and sends it to acestreams_builtin
+    acestreams_builtin(name,iconimage,chid -> Bridge to acecore.py file
+   	
+
+"""
     
 import xbmc,xbmcgui,xbmcplugin,urllib,xbmcvfs,os
 from utils.pluginxbmc import *
@@ -29,7 +39,7 @@ def acestreams(name,iconimage,chid):
 		pDialog.close()
 		ip_adress = settings.getSetting('ip_addr')
 		proxy_port = settings.getSetting('aceporta')
-		chid=chid.replace('acestream://','').replace('ts://','').replace('st://','')
+		chid=chid.replace('acestream://','').replace('ts://','')
 		strm = "http://" + ip_adress + ":" + proxy_port + "/pid/" + chid + "/stream.mp4"
 		listitem = xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
 		listitem.setLabel(name + " (" + chid + ")")

@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
-""" p2p-streams
-2014 enen92 fightnight
+""" p2p-streams (c) 2014 enen92 fightnight
    
-   This file contains the main menu and the addon directory tree
+   This file contains the main menu and the addon directory tree.
+   All the necessary modules are present in ~/resources/core directory
+   Parsers are in ~resources/core/parsers
     
 """
 
@@ -35,6 +36,7 @@ def main_menu():
       addLink('','','p2p')
       addDir('[B]' + traducao(40057) + '[/B]',MainURL,300,addonpath + art + 'settings_menu.png',2,True)       
       xbmc.executebuiltin("Container.SetViewMode(50)")
+      #break_sopcast is a function used in windows to intentionally break the sopcast.exe setup by renaming one of its codec files. It's ran here to rename the file again in case it failed when played before
       sop.break_sopcast()
       
       
@@ -113,7 +115,7 @@ elif mode==107: addlista()
 elif mode==108: remove_list(name)
 #from 200-299 Favourites
 elif mode==200: addon_favourites()
-elif mode==201: add_to_addon_favourites(name,url)
+elif mode==201: add_to_addon_favourites(name,url,iconimage)
 elif mode==202: remove_addon_favourites(url)
 #from 300-399 Advanced functions
 elif mode==300: advanced_menu()

@@ -1,5 +1,13 @@
-""" p2p-streams
-    2014 enen92 fightnight"""
+""" p2p-streams (c) 2014 enen92 fightnight
+
+This file handles all the website parsers addon engine
+
+Functions:
+
+	addon_parsers_menu() -> Lists all installed parsers
+
+
+"""
 
 
 import os,sys,xbmc,xbmcgui,xbmcvfs,re

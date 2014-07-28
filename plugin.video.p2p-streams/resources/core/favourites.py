@@ -1,36 +1,51 @@
 # -*- coding: utf-8 -*-
 
-""" p2p-streams
-    2014 enen92 fightnight"""
+""" p2p-streams  (c)  2014 enen92 fightnight
+
+    This file contains the the code for favourites used in the addon
+    
+    Functions:
+    
+	addon_favourites() -> Main menu. It parses the userdata/Favourites folder for items and lists them
+	add_to_addon_favourites(name,url,iconimage) -> Add an item to the addon favourites. Receives the name of the channel, the url and the iconimage
+	remove_addon_favourites(url) -> Remove from addon favourites
+    
+
+"""
     
 import xbmc,xbmcgui,xbmcplugin,xbmcvfs,sys,os
 from utils.pluginxbmc import *
 from utils.iofile import *
+from utils.directoryhandle import addDir
 
 def addon_favourites():
 	if xbmcvfs.exists(os.path.join(pastaperfil,"Favourites")):
 		dirs, files = xbmcvfs.listdir(os.path.join(pastaperfil,"Favourites"))
 		if files:
 			for file in files:
-				f = open(os.path.join(pastaperfil,"Favourites",file), "r")
-				string = f.read()
+				string = readfile(os.path.join(pastaperfil,"Favourites",file))
 				match = string.split("|")
-				addDir("[B][COLOR orange]" + match[0] + "[/B][/COLOR]",match[2],int(match[1]),'',1,False)
+				try: iconimage = match[3]
+				except:
+					if 'acestream' in file: iconimage = addonpath + art + 'acelogofull.png'
+					elif 'sop' in file: iconimage = addonpath + art + 'sopcast_logo.jpg'
+					else: iconimage = ''
+				addDir("[B][COLOR orange]" + match[0] + "[/B][/COLOR]",match[2],int(match[1]),iconimage,1,False)
 			xbmc.executebuiltin("Container.SetViewMode(51)")
 		else:
 			mensagemok(traducao(40000),traducao(40145));sys.exit(0)
 			
-def add_to_addon_favourites(name,url):
-	name = name.replace("[b]","").replace("[/b]","").replace("[color orange]","").replace("[/color]","")
+def add_to_addon_favourites(name,url,iconimage):
+	name = name.replace("[b]","").replace("[/b]","").replace("[color orange]","").replace("[/color]","").replace("[B]","").replace("[/B]","")
 	if "runplugin" in url:
 		print "Existe Runplugin"
 		match = re.compile("url=(.+?)&mode=(.+?)&").findall(url.replace(";",""))
 		for url,mode in match:
-			favourite_text = name + " (" + url + ")|" + str(mode) + "|" + url
+			favourite_text = name + " (" + url + ")|" + str(mode) + "|" + url + '|' + iconimage
 			favouritetxt = os.path.join(pastaperfil,"Favourites",url.replace(":","").replace("/","") + ".txt")
 			if not xbmcvfs.exists(os.path.join(pastaperfil,"Favourites")): xbmcvfs.mkdir(os.path.join(pastaperfil,"Favourites"))
 			print favouritetxt
-			savefile(favouritetxt, favourite_text)
+			save(favouritetxt, favourite_text)
 			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), traducao(40148), 1,addonpath+"/icon.png"))
 	else:
 		if "sop://" in url:
@@ -41,12 +56,12 @@ def add_to_addon_favourites(name,url):
 			if len(url) < 30: tipo = "sopcast"
 			else: tipo = "acestream"
 		if tipo == "sopcast":
-			favourite_text = name + " (" + url + ")|" + str(2) + "|" + url  
+			favourite_text = name + " (" + url + ")|" + str(2) + "|" + url + '|' + iconimage
 		elif tipo == "acestream":
-			favourite_text = name + " (" + url + ")|" + str(1) + "|" + url  
+			favourite_text = name + " (" + url + ")|" + str(1) + "|" + url + '|' + iconimage 
 		favouritetxt = os.path.join(pastaperfil,"Favourites",url.replace(":","").replace("/","") + ".txt")
 		if not xbmcvfs.exists(os.path.join(pastaperfil,"Favourites")): xbmcvfs.mkdir(os.path.join(pastaperfil,"Favourites"))
-		savefile(favouritetxt, favourite_text)
+		save(favouritetxt, favourite_text)
 		xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), traducao(40148), 1,addonpath+"/icon.png"))
 		xbmc.executebuiltin("Container.Refresh")
 			

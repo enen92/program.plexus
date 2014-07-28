@@ -1,7 +1,27 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#NOTE: This part of the addon is mostly the livestreams addon code made by Divingmule!
+""" p2p-streams  (c)  2014 enen92 fightnight
+
+    This file contains the livestream addon engine. It is mostly based on divingmule work on livestreams addon!
+    
+    Functions:
+    
+    xml_lists_menu() -> main menu for the xml list category
+    addlista() -> add a new list. It'll ask for local or remote and processes the given input
+    remove_list(name) -> Remove a list
+    
+    get_groups(url) -> First regex function to parse a given list. Used to list categories on lists.
+    get_channels(name,url) -> Second regex function to parse a given list. Used to list channels.
+    getData(url,fanart) -> Get the item data such as iconimage, fanart, etc
+    getChannelItems(name,url,fanart) -> Function to grab the channel items
+    getItems(items,fanart) -> Function to grab the items from the xml
+    removeNonAscii(s) -> Function to remove non-ascii characters from the list
+    getSoup(url) -> uses beautifulsoup to parse a remote xml
+    addon_log(string) -> Simple log/print function
+    getRegexParsed(regexs, url) -> parse the regex expression
+    
+
+"""
 
 import urllib,urllib2,re,xbmcplugin,xbmcgui,xbmc,xbmcaddon,HTMLParser,time,datetime,os,xbmcvfs,sys
 from BeautifulSoup import BeautifulStoneSoup, BeautifulSoup, BeautifulSOAP
@@ -47,7 +67,6 @@ Add a new list function
 def addlista():
 	opcao= xbmcgui.Dialog().yesno(traducao(40000), traducao(40123),"","",traducao(40124),traducao(40125))
 	if opcao:
-		print "Carreguei"
 		dialog = xbmcgui.Dialog()
 		lista_xml = dialog.browse(int(1), traducao(40186), 'myprograms','.xml')
 		keybdois = xbmc.Keyboard("", traducao(40130))
@@ -72,7 +91,6 @@ def addlista():
 			if encode.split(".")[-1] != "xml": mensagemok(traducao(40000),traducao(40128)); sys.exit(0)
 			else:
 				try:
-					print encode
 					code = abrir_url(search)
 				except:
 					mensagemok(traducao(40000),traducao(40128))
@@ -397,7 +415,6 @@ def getItems(items,fanart):
             try:
 		    if "RunPlugin" in url[0]:
 			try:
-				print name,url
 				addDir_livestreams(name.encode('utf-8', 'ignore'),url[0],106,thumbnail,fanArt,desc,genre,"credits",date)
 			except:
 				match = re.compile("&name=(.+?)\)").findall(url[0].replace(";",""))

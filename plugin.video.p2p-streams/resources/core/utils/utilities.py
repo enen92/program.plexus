@@ -1,7 +1,15 @@
 # -*- coding: utf-8 -*-
 
-""" p2p-streams
-    2014 enen92 fightnight"""
+""" p2p-streams  (c)  2014 enen92 fightnight
+
+    This file contains common utilites
+    
+    Functions:
+    
+    handle_wait(time_to_wait,title,text,segunda='') -> Timer with dialog progress capabilities
+    clean_text(text) -> Function to remove specific characters from a string
+   	
+"""
     
 import xbmc,xbmcplugin,xbmcgui,xbmcaddon,re
 from pluginxbmc import *

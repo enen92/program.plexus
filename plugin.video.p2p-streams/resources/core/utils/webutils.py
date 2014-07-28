@@ -1,7 +1,21 @@
 # -*- coding: utf-8 -*-
 
-""" p2p-streams
-    2014 enen92 fightnight"""
+""" p2p-streams  (c)  2014 enen92 fightnight
+
+    This file contains web utilities
+    
+    Classes:
+    
+    download_tools() -> Contains a downloader, a extraction function and a remove function
+    
+    Functions:
+    
+    abrir_url -> Get a webpage source code through urllib2
+    mechanize_browser(url) -> Get a webpage source code through mechanize module. To avoid DDOS protections.
+    makeRequest(url, headers=None) -> check if a page is up and retrieve its source code
+    clean(text) -> Remove specific characters from the page source
+   	
+"""
     
 import xbmc,xbmcplugin,xbmcgui,xbmcaddon,urllib,urllib2,tarfile,os,sys,re
 from pluginxbmc import *

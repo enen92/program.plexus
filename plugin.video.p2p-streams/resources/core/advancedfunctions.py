@@ -1,7 +1,25 @@
 # -*- coding: utf-8 -*-
 
-""" p2p-streams
-    2014 enen92 fightnight"""
+""" p2p-streams  (c)  2014 enen92 fightnight
+
+    This file contains all the function the addon uses in the section "Advanced tools".
+    
+    Functions:
+    
+    Advancedsettings.xml related functions are below. Advancedsettings.xml are not automatically imported since they are advanced configurations the user should have control of.
+    
+   	advanced_menu() -> Main menu
+   	import_advancedxml() -> Import recommended advancedsettings.xml
+   	backup_advancedxml() -> When importing an advancedsettings.xml file, if a previous file exists on the same directory the addon will automatically make a backup of the file renaming it to advancedsettingsbackup.xml. This is what this function does
+   	recoverbackup_advancedxml() -> Recover an advancedsettings.xml file resulting from a previous backup
+   	delete_advancedxml() -> Delete the advancedsettings.xml file
+   	
+   Acestream related functions:
+   	set_engine_setting(file) -> Set an acestreamengine setting to a given value. This is used in macosx and linux arm since the acestreamengine is not officially provided by acestream.org and the user doesn't have any other way to change them.
+   	remove_lock() -> function to remove .lock files created during the acestream loop.
+   	
+
+"""
     
 import xbmc,xbmcgui,xbmcplugin,xbmcvfs,sys,os,re
 from utils.pluginxbmc import *

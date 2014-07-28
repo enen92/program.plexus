@@ -1,7 +1,14 @@
 # -*- coding: utf-8 -*-
 
-""" p2p-streams
-    2014 enen92 fightnight"""
+""" p2p-streams  (c)  2014 enen92 fightnight
+
+    This file contains the common variables used by the addon
+    
+    Functions:
+    
+    traducao(texto) -> Translate a string
+   	
+"""
     
 import xbmc,xbmcplugin,xbmcgui,xbmcaddon
 

@@ -2,7 +2,12 @@
 
 """ p2p-streams  (c)  2014 enen92 fightnight
 
-    Sopcast and Acestream modules setup - Addon first boot
+    This file contains a single function. It's a function that will run on the addon first boot to download and configure the system for acestream/sopcast. The platform will be automatically detected and the necessary files downloaded and extracted to the userdata. 
+    This function will run if and only the setting "Download modules" on boot is enabled.
+    
+    Functions:
+    
+   	autoconf() -> Autoconfiguration tool
 
 """
      
