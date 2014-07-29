@@ -42,14 +42,6 @@ Main Menu
 def xml_lists_menu():
       if settings.getSetting('sopcast-oficial') == "true":
       	    addDir(traducao(40116),"http://sopcast.org/chlist.xml",101,addonpath + art + 'xml_list_sopcast.png',2,True)
-      if settings.getSetting('sopcast-romanian') == "true":
-            addDir(traducao(40117),"http://streams.magazinmixt.ro/xsopcast.xml",101,addonpath + art + 'xml_list_sopcast.png',2,True)
-      if settings.getSetting('livestreams-spanish') == "true":
-            addDir(traducao(40118),"http://dl.dropbox.com/u/4735170/streams.xml",101,addonpath + art + 'xml_lists.png',2,True)
-      if settings.getSetting('livestreams-pt-sports') == "true":
-            addDir(traducao(40119),"http://dl.dropboxusercontent.com/u/266138381/Desporto.xml",101,addonpath + art + 'xml_lists.png',2,True)
-      if settings.getSetting('livestreams-pt-events') == "true":
-            addDir(traducao(40120),"http://dl.dropboxusercontent.com/u/266138381/Eventos.xml",101,addonpath + art + 'xml_lists.png',2,True)
       try:
             if xbmcvfs.exists(os.path.join(pastaperfil,"Lists")):
 		   dirs, files = xbmcvfs.listdir(os.path.join(pastaperfil,"Lists"))

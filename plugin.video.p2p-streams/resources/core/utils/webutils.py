@@ -14,6 +14,7 @@
     mechanize_browser(url) -> Get a webpage source code through mechanize module. To avoid DDOS protections.
     makeRequest(url, headers=None) -> check if a page is up and retrieve its source code
     clean(text) -> Remove specific characters from the page source
+    url_isup(url, headers=None) -> Check if url is up. Returns True or False.
    	
 """
     
@@ -88,6 +89,17 @@ def makeRequest(url, headers=None):
 	except:
 		mensagemok(traducao(40000),traducao(40122))
 		sys.exit(0)
+		
+def url_isup(url, headers=None):
+	try:
+		if not headers:
+			headers = {'User-agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0'}
+		req = urllib2.Request(url,None,headers)
+		response = urllib2.urlopen(req)
+		data = response.read()
+		response.close()
+		return True
+	except: return False
 		
 def clean(text):
       command={'\r':'','\n':'','\t':'','&nbsp;':' ','&quot;':'"','&#039;':'','&#39;':"'",'&#227;':'ã','&170;':'ª','&#233;':'é','&#231;':'ç','&#243;':'ó','&#226;':'â','&ntilde;':'ñ','&#225;':'á','&#237;':'í','&#245;':'õ','&#201;':'É','&#250;':'ú','&amp;':'&','&#193;':'Á','&#195;':'Ã','&#202;':'Ê','&#199;':'Ç','&#211;':'Ó','&#213;':'Õ','&#212;':'Ó','&#218;':'Ú'}

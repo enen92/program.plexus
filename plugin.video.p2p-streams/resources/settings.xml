@@ -43,12 +43,10 @@
 		<setting id="engine-status" type="bool" label="49999" default="true"/>
 		<setting id="ace-debug" type="bool" label="49998" default="false"/>
 	</category>
-	<category label="Lists">
+	<category label="Lists/Parsers">
 		<setting id="sopcast-oficial" type="bool" label="40134" default="true" />
-		<setting id="sopcast-romanian" type="bool" label="40135" default="true" />
-		<setting id="livestreams-spanish" type="bool" label="40136" default="false" />
-		<setting id="livestreams-pt-sports" type="bool" label="40137" default="false" />
-		<setting id="livestreams-pt-events" type="bool" label="40138" default="false" />
+		<setting type="action" label="Executar python script" action="XBMC.RunPlugin(plugin://plugin.video.p2p-streams/?mode=404&name=p2p&url=p2p)" />
+
 	</category>
 
 </settings>

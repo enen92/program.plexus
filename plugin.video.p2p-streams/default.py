@@ -133,5 +133,9 @@ elif mode==401:
 	name = "main"
 	parser_module = getattr(__import__(package, fromlist=[name]), name)
 	parser_module.module_tree(name,url,iconimage,mode,parser,parserfunction)
+elif mode==402: parsers.add_new_parser(url='')
+elif mode==403: parsers.remove_parser(iconimage)
+elif mode==404: parsers.runscript()
+elif mode==405: parsers.add_new_parser(url)
     
 xbmcplugin.endOfDirectory(int(sys.argv[1]))

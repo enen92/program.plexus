@@ -53,6 +53,8 @@ def addDir(name,url,mode,iconimage,total,pasta,fan_art="%s/fanart.jpg"%settings.
 		if xbmcvfs.exists(ficheiro):
 			contextmen.append((traducao(40149), 'XBMC.RunPlugin(%s?mode=108&url=%s&name=%s&iconimage=%s)' % (sysargv, urllib.quote_plus(url),ficheiro,iconimage)))
 	    except: pass
+      elif mode == 401 and parser and not parserfunction:
+			contextmen.append(("Remover parser", 'XBMC.RunPlugin(%s?mode=403&url=%s&name=%s&iconimage=%s)' % (sysargv, urllib.quote_plus(url),name,iconimage)))
       liz.addContextMenuItems(contextmen,replaceItems=False)
       return xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=pasta,totalItems=total)
       
