@@ -106,13 +106,13 @@ def autoconf():
 			#Linux armv7 configuration according to platform
 
 			#MXLINUX
-				import tarfile
                 	if OS_Choose == "MXLinux":
 				acestream_installed = False
 				sopcast_installed = False
                			print "MXLinux"
                			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
                			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,traducao(40025),traducao(40000))
+               			import tarfile
 				if tarfile.is_tarfile(SPSC_KIT):
 					path_libraries = os.path.join(pastaperfil,"sopcast")
 					download_tools().extract(SPSC_KIT,path_libraries)
@@ -134,6 +134,7 @@ def autoconf():
 			#OPENELEC
 
                 	if OS_Choose == "OpenELEC":
+                		import tarfile
 				acestream_installed = False
 				sopcast_installed = False
                 		print "Openelec armv7 platform detected"
@@ -158,6 +159,7 @@ def autoconf():
 
 			#XBIAN
                		if OS_Choose == "Xbian":
+               			import tarfile
 				acestream_installed = False
 				sopcast_installed = False
                			print "Xbian armv7 platform detected"
@@ -528,6 +530,7 @@ def autoconf():
 						pasta = dialog.browse(int(0), traducao(40190), 'myprograms')
 						sopfile = os.path.join(pasta,sopcast_apk.split("/")[-1])
 					download_tools().Downloader(sopcast_apk,sopfile,traducao(40073),traducao(40000))
+					import tarfile
 					if tarfile.is_tarfile(sopfile):
 						download_tools().extract(sopfile,pasta)
 						download_tools().remove(sopfile)
@@ -551,6 +554,7 @@ def autoconf():
 				pasta = dialog.browse(int(0), traducao(40190), 'myprograms')
 				acefile = os.path.join(pasta,acestreamengine_apk.split("/")[-1])
 			download_tools().Downloader(acestreamengine_apk,acefile,traducao(40072),traducao(40000))
+			import tarfile
 			if tarfile.is_tarfile(acefile):
 				download_tools().extract(acefile,pasta)
 				download_tools().remove(acefile)
