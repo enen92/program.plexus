@@ -72,7 +72,7 @@ def add_new_parser(url):
 			parser_tball = dialog.browse(int(1), "Escolha a tarball", 'myprograms','.tar.gz')
 			if '.tar.gz' in parser_tball:
 				parser_name = parser_tball.split('/')
-				if not parser_name: parser_name = parser_tball.split('"\"')
+				if not parser_name: parser_name = parser_tball.split('\\')
 				parser_name=parser_name[-1].replace('.tar.gz','')	
 				print "a lista e ",parser_tball,parser_name
 				future_parser_tball = os.path.join(parser_folder,parser_name+'.tar.gz')
@@ -147,7 +147,8 @@ def add_new_parser(url):
 	
 def remove_parser(iconimage):
 	parser_plugin = iconimage.split('/')
-	if not parser_plugin: parser_plugin=parser_plugin.split('"\"')
+	if len(parser_plugin) == 1: 
+		parser_plugin=iconimage.split("\\")
 	parser_plugin = parser_plugin[-2]
 	xbmcvfs.delete(os.path.join(parser_folder,parser_plugin +'.txt'))
 	module_folder = os.path.join(parser_core_folder,parser_plugin)
