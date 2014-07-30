@@ -55,6 +55,7 @@ def addDir(name,url,mode,iconimage,total,pasta,fan_art="%s/fanart.jpg"%settings.
 	    except: pass
       elif mode == 401 and parser and not parserfunction:
 			contextmen.append(("Remover parser", 'XBMC.RunPlugin(%s?mode=403&url=%s&name=%s&iconimage=%s)' % (sysargv, urllib.quote_plus(url),name,iconimage)))
+			contextmen.append(("Sincronizar parser", 'XBMC.RunPlugin(%s?mode=407&url=%s&name=%s&iconimage=%s&parser=%s)' % (sysargv, urllib.quote_plus(url),name,iconimage,parser)))
       liz.addContextMenuItems(contextmen,replaceItems=False)
       return xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=pasta,totalItems=total)
       

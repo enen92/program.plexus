@@ -14,7 +14,7 @@ Functions:
 """
 
 
-import os,sys,xbmc,xbmcgui,xbmcvfs,re
+import os,sys,xbmc,xbmcgui,xbmcvfs,re,datetime
 base_dir =  os.path.dirname(os.path.realpath(__file__))
 core_dir =  os.path.dirname(os.path.realpath(__file__)).replace('parsers','')
 sys.path.append(core_dir)
@@ -47,6 +47,16 @@ def addon_parsers_menu():
 			if module_name:
 				parser_dict[module_name] = [module,thumbnail,fanart]
 	total_parsers = len(parser_dict.keys())
+	if settings.getSetting('parser_sync') == "true":
+		t1 = datetime.datetime.strptime(settings.getSetting("parsers_last_sync"), "%Y-%m-%d %H:%M:%S.%f")
+		t2 = datetime.datetime.now()
+		hoursList = [10, 15, 20, 24]
+		interval = int(settings.getSetting("parser_sync_cron"))
+		update = abs(t2 - t1) > datetime.timedelta(hours=hoursList[interval])
+		if update:
+			sync_parser()
+			settings.setSetting('parsers_last_sync',value=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f"))
+		
 	for key in sorted(parser_dict.keys()):
 		print parser_dict[key][1]
 		addDir(key,MainURL,401,parser_dict[key][1],total_parsers,True,parser=parser_dict[key][0])
@@ -125,18 +135,12 @@ def add_new_parser(url):
 			module_tar_location = os.path.join(parser_core_folder,modulename+'.tar.gz')
 			print module_tar_location
 			save(module_file,str(text))
-			print 1
 			download_tools().Downloader(url,module_tar_location,"A transferir parser",traducao(40000))
-			print 2
 			import tarfile 
-			print 3           
 			if tarfile.is_tarfile(module_tar_location):
-				print 4
 				download_tools().extract(module_tar_location,parser_core_folder)
-				print 5
 				xbmc.sleep(500)
 				download_tools().remove(module_tar_location)
-				print 6
 				print modulename," : Module installed sucessfully"
 				return
 	
@@ -149,12 +153,61 @@ def remove_parser(iconimage):
 	dirs, files = xbmcvfs.listdir(module_folder)
 	for file in files:
 			xbmcvfs.delete(os.path.join(module_folder,file))
-	xbmcvfs.rmdir(module_folder)
+	try:
+		xbmcvfs.rmdir(module_folder)
+	except:
+		import shutil
+		shutil.rmtree(module_folder)
 	xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), "Parser removido com sucesso",1,addonpath+"/icon.png"))
 	xbmc.executebuiltin("Container.Refresh")
 	
 def sync_parser():
-	pass
+	dirs, files = xbmcvfs.listdir(parser_folder)
+	if files: 
+		mensagemprogresso.create(traducao(40000),"Syncing parsers...","")
+		mensagemprogresso.update(0,"Syncing parsers...","")
+		xbmc.sleep(1000)
+		number_of_files = len(files)
+		i = 0
+	for file in files:
+		i += 1
+		error = False
+		mensagemprogresso.update(int(float(i)/number_of_files*100),"Syncing parsers...",file.replace('.txt',''),"Checking")
+		module_file = os.path.join(parser_folder,file)
+		text = eval(readfile(module_file))
+		if not text: pass
+		else:
+			if 'url' and 'md5' in text.keys():
+				installed_md5 = text['md5']
+				module_url = text['url']
+				module_md5 = text['url'].replace('.tar.gz','.md5')
+				try: current_md5 = abrir_url(module_md5)
+				except: current_md5 = installed_md5; error = True
+				if current_md5 != installed_md5:
+					print('Module requires update ' + str(file.replace('.txt','')) + ' ' + str(installed_md5) + ' != ' + str(current_md5))
+					mensagemprogresso.update(int(float(i)/number_of_files*100),"Syncing parsers...",file.replace('.txt',''),"Updating...")
+					add_new_parser(module_url)
+					mensagemprogresso.create(traducao(40000),"Syncing parsers...",file.replace('.txt',''),"Updated!")
+				else:
+					print('Module is up to date: ' + str(file.replace('.txt','')))
+					if error == False: message = "Already up to date..."
+					else: message = "Error: invalid url for parser repository"
+					mensagemprogresso.update(int(float(i)/number_of_files*100),"Syncing parsers...",file.replace('.txt',''),message)
+		xbmc.sleep(1000)
+	try:
+		mensagemprogresso.update(100,"","")
+		mensagemprogresso.close()
+	except: pass
+	settings.setSetting('parsers_last_sync',value=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f"))
+	return
+	
+def sync_single_parser(parser):
+	parser_file = os.path.join(parser_folder,parser+'.txt')
+	if xbmcvfs.exists(parser_file):
+		string = eval(readfile(parser_file))
+		if string:
+			add_new_parser(string['url'])
+			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), "Parser module was updated!",1,addonpath+"/icon.png"))	
 	
 def runscript():
 	keyb = xbmc.Keyboard("", "Introduza o url do plugin")

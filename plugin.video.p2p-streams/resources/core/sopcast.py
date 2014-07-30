@@ -39,6 +39,8 @@ Sopcast Utils:
 sop_sleep(time , spsc_pid) -> sopcast_binary pid sleep function. For all supported OS's except Windows.
 handle_wait_socket(time_to_wait,title,text,segunda='') -> Timer to check if sopcast local server has started (attempt to connect on sopcast local server port). This function is Windows only.
 break_sopcast() -> intentionally break the sopcast player in windows to avoid double sound created by the running sopcastp2p service
+
+
 """
 
 

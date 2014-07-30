@@ -44,8 +44,15 @@
 		<setting id="ace-debug" type="bool" label="49998" default="false"/>
 	</category>
 	<category label="Lists/Parsers">
+	 	<setting label="Listas" type="lsep" />
 		<setting id="sopcast-oficial" type="bool" label="40134" default="true" />
+		<setting label="Parsers" type="lsep" />
 		<setting type="action" label="Executar python script" action="XBMC.RunPlugin(plugin://plugin.video.p2p-streams/?mode=404&name=p2p&url=p2p)" />
+		<setting type="action" label="Sincronizar parsers" action="XBMC.RunPlugin(plugin://plugin.video.p2p-streams/?mode=406&name=p2p&url=p2p)" />
+		<setting id="parser_sync" type="bool" label="Allow parser sync" default="true"/>
+		<setting id="parser_sync_cron" type="enum" label="Intervalo de pesquisa de novos" values="10h|15h|20h|24h" default="3" enable="!eq(-1,false)"/>
+		<setting id="parsers_last_sync" type="text" default="1970-01-01 23:59:00.000000" visible="false"/>
+
 
 	</category>
 
