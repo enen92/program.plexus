@@ -14,7 +14,7 @@ Functions:
 """
 
 
-import os,sys,xbmc,xbmcgui,xbmcvfs,re,datetime
+import os,sys,xbmc,xbmcgui,xbmcvfs,re,datetime,time
 base_dir =  os.path.dirname(os.path.realpath(__file__))
 core_dir =  os.path.dirname(os.path.realpath(__file__)).replace('parsers','')
 sys.path.append(core_dir)
@@ -48,7 +48,8 @@ def addon_parsers_menu():
 				parser_dict[module_name] = [module,thumbnail,fanart]
 	total_parsers = len(parser_dict.keys())
 	if settings.getSetting('parser_sync') == "true":
-		t1 = datetime.datetime.strptime(settings.getSetting("parsers_last_sync"), "%Y-%m-%d %H:%M:%S.%f")
+		try:t1 = datetime.datetime.strptime(settings.getSetting("parsers_last_sync"), "%Y-%m-%d %H:%M:%S.%f")
+		except:t1 = datetime.datetime.fromtimestamp(time.mktime(time.strptime(settings.getSetting("parsers_last_sync"), "%Y-%m-%d %H:%M:%S.%f")))
 		t2 = datetime.datetime.now()
 		hoursList = [10, 15, 20, 24]
 		interval = int(settings.getSetting("parser_sync_cron"))
