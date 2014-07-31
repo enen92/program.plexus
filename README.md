@@ -1,21 +1,19 @@
-P2P-Streams-XBMC
+P2P-Streams XBMC Addon
 ================
 
-Colaborative development repository for the P2P-Streams XBMC addon. Acestreams and Sopcast for XBMC.
-P2P-Streams addon makes it easy for you to watch peer-to-peer streams in XBMC without the need for external players. Currently supporting Acestream and Sopcast streams it comprises an auto-configuration tool that will download the engines specifically for your platform.
+About the addon
+----------
+p2p-streams is an XBMC addon for watching peer-to-peer streams in XBMC without the need for external players. Peer-to-peer (P2P) computing or networking is a distributed application architecture that partitions tasks or workloads between peers. Peers are equally privileged, equipotent participants in the application. They are said to form a peer-to-peer network of nodes.
 
-Supported platforms: 
--Linux (Ubuntu/Debian/CentOS)
--Raspberry Pi (Openelec,Raspbmc,Xbian)
--Windows
--Mac OSX (i386/x86_64)
--Android
--Openelec x86_64
--Some Linux armv7 distros (MXLinux)
+The addon currently supports SopCast and AceStream and several platforms:
+* Windows
+* OSX
+* Android
+* Linux
+  * Armv6 (Raspberry PI including OpenELEC)
+  * Armv7 (OpenELEC,Xbian,MXLinux)
+  * i386 (including OpenELEC)
+  * x86_64 (including OpenELEC)
+  
 
-Credits:
--Cristi - Atlanta (xsopcast)
--NouisMons (script.module.acestreamengine)
--Tarasian666 (Mac/Rpi/armv7 ace engines)
--Divingmule (livestreams plugin)
--Marquerite (addon art).
+ 	
