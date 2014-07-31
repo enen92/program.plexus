@@ -96,10 +96,31 @@ Either the sopcast executable failed to login, the channel is offline or has bee
 There are several aditional configurations you might have to do to improve acestream behaviour.  Try to limit the cache by importing one of the recommended advancedsettings.xml (advanced tools menu). However most of the reasons fall out of the bounds of this addon.
 Port forward port 8621 and change the main engine settings. This site has some usefull information: [acestream buffer guide](http://acestreamguide.com/buffering/) . If that doesn't solve your problem your ISP is probably throttling your traffic.
 
-####Some acestreams play fine in windows but not on Android, Raspberry Pi and Linux. Why?
+####Some acestreams play fine in windows but not on Android, Raspberry Pi and Linux (Torrent unavailable). Why?
 The AcestreamEngine for windows is several versions above and seems to receive much more support and development. Streams created in the windows 2.2 version of acestream engine (and above) are not supported in older versions (which are used in all the other platforms).
 
 ####Can I stream normal torrents with this plugin? 
 The AcestreamEngine can stream regular torrent files. So, the addon can do this as well.
 However in our opinion there are better alternatives to do this in XBMC. Check XBMCtorrent or Pulsar.
+
+Authors
+----------
+enen92 and fightnight
+
+Credits
+----------
+This addon would not be possible without the help and first work of some developers:
+
+* **Nouismons** – First version of tsengine plugin
+* **Cristi-Atlanta** – Xsopcast plugin
+* **Divingmule** – Livestreams addon
+* **Marquerite** – Addon art
+* **Tarasian666** – Alternative version of the acestreamengine written in python (which was tweaked to work on linux arm and mac osx)
+
+Contribute
+----------
+[**Source code**](https://github.com/enen92/P2P-Streams-XBMC/tree/master/plugin.video.p2p-streams)
+[**External modules**](https://github.com/enen92/P2P-Streams-XBMC--Modules-)
+[**Translations**](https://github.com/enen92/P2P-Streams-XBMC/blob/master/plugin.video.p2p-streams/resources/language/English/strings.xml)
+[**Issues or feature requests**](https://github.com/enen92/P2P-Streams-XBMC/issues)
 
