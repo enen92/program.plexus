@@ -27,7 +27,7 @@ def savefile(filename, contents):
 		fh.close()
 		return
 	except:
-		print "Could not write to: %s" % filename
+		print("Could not write to: %s" % filename)
 		return
     
 def save(filename,contents):

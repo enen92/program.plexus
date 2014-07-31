@@ -46,7 +46,7 @@ srvany_permissions = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/s
 def autoconf():
 	#Configuration for LINUX 
 	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":
-		print "Detected OS: Linux"
+		print("Detected OS: Linux")
 		#Linux Armv6
 		if os.uname()[4] == "armv6l":
 			try:
@@ -57,7 +57,7 @@ def autoconf():
 					acestream_rpi = acestream_generic_raspberry
 					settings.setSetting('python_cmd',value='python2')
 				else:
-					mensagemok(traducao(40000),"Sorry could not detect your OS.","Select it from the next list")
+					mensagemok(traducao(40000),traducao(400007),traducao(400008))
 					OS_list = ["OpenELEC","Raspbmc","Xbian","Pipplware","Arch Linux Arm"]
 					url_packagerpi_list = [acestream_openelec_raspberry, acestream_generic_raspberry, acestream_generic_raspberry,acestream_generic_raspberry, acestream_generic_raspberry]
 					OS_Rpi_choose = xbmcgui.Dialog().select
@@ -65,8 +65,8 @@ def autoconf():
 					if choose > -1:
 						acestream_rpi= url_packagerpi_list[choose]
 						if OS_list[choose] == "Arch Linux Arm": settings.setSetting('python_cmd',value='python2')
-			except: acestream_rpi = "" #da erro de script no windows, workaround porque diferente rpi
-			print "Detected Platform Raspberry PI"
+			except: acestream_rpi = ""
+			print("Detected linux armv6 - possible Raspberry PI")
 			#Sop
 
 			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
@@ -109,7 +109,7 @@ def autoconf():
                 	if OS_Choose == "MXLinux":
 				acestream_installed = False
 				sopcast_installed = False
-               			print "MXLinux"
+               			print("Detected MXLinux armv7")
                			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
                			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,traducao(40025),traducao(40000))
                			import tarfile
@@ -137,7 +137,7 @@ def autoconf():
                 		import tarfile
 				acestream_installed = False
 				sopcast_installed = False
-                		print "Openelec armv7 platform detected"
+                		print("Openelec armv7 platform detected")
                 		SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
                 		download_tools().Downloader(sopcast_raspberry,SPSC_KIT,traducao(40025),traducao(40000))
 				if tarfile.is_tarfile(SPSC_KIT):
@@ -162,7 +162,7 @@ def autoconf():
                			import tarfile
 				acestream_installed = False
 				sopcast_installed = False
-               			print "Xbian armv7 platform detected"
+               			print("Xbian armv7 platform detected")
                			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
                			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,traducao(40025),traducao(40000))
 				if tarfile.is_tarfile(SPSC_KIT):
@@ -186,7 +186,7 @@ def autoconf():
 			
 		elif (os.uname()[4] == "x86_64" and re.search(os.uname()[1],"openelec",re.IGNORECASE)) or settings.getSetting('openelecx86_64') == "true":
 			settings.setSetting('openelecx86_64',value='true')
-			print "Detected OpenELEC x86_64"
+			print("Detected OpenELEC x86_64")
 			SPSC_KIT = os.path.join(addonpath,openelecx86_64_package.split("/")[-1])
 			download_tools().Downloader(openelecx86_64_package,SPSC_KIT,traducao(40112),traducao(40000))
 			import tarfile
@@ -198,7 +198,7 @@ def autoconf():
 
 		elif (os.uname()[4] == "i386" and re.search(os.uname()[1],"openelec",re.IGNORECASE)) or (os.uname()[4] == "i686" and re.search(os.uname()[1],"openelec",re.IGNORECASE)) or settings.getSetting('openeleci386') == "true":
 			settings.setSetting('openeleci386',value='true')
-			print "Detected OpenELEC i386"
+			print("Detected OpenELEC i386")
 			SPSC_KIT = os.path.join(addonpath,openeleci386_package.split("/")[-1])
 			download_tools().Downloader(openeleci386_package,SPSC_KIT,traducao(40112),traducao(40000))
 			import tarfile
@@ -227,7 +227,7 @@ def autoconf():
 			
 			if settings.getSetting('openeleci386') == "false" and settings.getSetting('openelecx86_64') == "false":
 
-				print "Detected Other Linux Plataform"
+				print("Detected Other Linux i386 Plataform")
 
             		#Sop
             		#Download and extract sopcast-bundle
@@ -261,22 +261,22 @@ def autoconf():
 				proc_response = []
 				proc = subprocess.Popen(['whereis','acestreamengine'],stdout=subprocess.PIPE)
 				for line in proc.stdout:
-					print "Output of acestream subprocess check",line.rstrip()
+					print("Output of acestream subprocess check",line.rstrip())
 					proc_response.append(line.rstrip())
 					if "acestreamengine: /" in str(proc_response):
-						print "Acestream engine is already installed"
+						print("Acestream engine is already installed")
 						try:
 							proc.kill()
 							proc.wait()
 						except:pass
 					else:
-						mensagemok(traducao(40031),traducao(40027),traducao(40028) + linkwiki,traducao(40029))
+						mensagemok(AceStream,traducao(40027),traducao(40028) + linkwiki,traducao(40029))
 						sys.exit(0)
 				settings.setSetting('autoconfig',value='false')
 
 
 	elif xbmc.getCondVisibility('system.platform.windows'):
-		print "Detected OS: Windows"
+		print("Detected OS: Windows")
 		if not xbmcvfs.exists(pastaperfil): xbmcvfs.mkdir(pastaperfil)
         	#Sop
 		import ctypes
@@ -288,7 +288,7 @@ def autoconf():
                     cmd = ['sc','delete','sopcastp2p']
                     proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
                     for line in proc.stdout:
-                        print "linha " + line.rstrip()
+                        print("cmd out: " + line.rstrip())
                     xbmc.sleep(1000)
                     ret = mensagemprogresso.create(traducao(40000),traducao(40000))
                     mensagemprogresso.update(0,traducao(40160),"  ")
@@ -299,7 +299,7 @@ def autoconf():
                         aKey = _winreg.OpenKey(aReg, r'SOFTWARE\SopCast\Player\InstallPath',0, _winreg.KEY_READ)
                         name, value, type = _winreg.EnumValue(aKey, 0)
                         sopcast_executable = value
-                        print "Installation executable of sopcast was found: " + sopcast_executable
+                        print("Installation executable of sopcast was found: " + sopcast_executable)
                         _winreg.CloseKey(aKey)
                         mensagemprogresso.update(10,traducao(40160),traducao(40161))
                     except:
@@ -310,20 +310,20 @@ def autoconf():
                         xbmc.sleep(1000)
                         mensagemprogresso.update(20,traducao(40164),"  ")
                         xbmc.sleep(1000)
-                        print "Getting windows users IDS"
+                        print ("Getting windows users IDS")
                         aReg = _winreg.ConnectRegistry(None,_winreg.HKEY_LOCAL_MACHINE)
                         aKey = _winreg.OpenKey(aReg, r'SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList')
                         users = []
                         for i in range(1024):
                             try:
                                 asubkey=_winreg.EnumKey(aKey,i)
-                                print asubkey
+                                print(asubkey)
                                 aKeydois = _winreg.OpenKey(aReg, os.path.join('SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList',asubkey))
                                 val=_winreg.QueryValueEx(aKeydois, "ProfileImagePath")
                                 try:
-                                    print val[0]
+                                    print(val[0])
                                 except:
-                                    print "Notice: User with strange characters, print cmd ignored."
+                                    print("Notice: User with strange characters, print cmd ignored.")
                                 if "Windows" in val[0] or "%systemroot%" in val[0]:
                                     pass
                                 else:
@@ -337,7 +337,7 @@ def autoconf():
                             xbmc.sleep(200)
                             mensagemprogresso.update(30,traducao(40166),"   ")
                             xbmc.sleep(1000)
-                            print "System Users", users
+                            print("System Users", users)
 			    srvanytargz = os.path.join(sopcast_executable.replace("SopCast.exe",""),"srvany.tar.gz")                               
                             download_tools().Downloader(srvany_executable,srvanytargz,traducao(40167),traducao(40000)) 
                             xbmc.sleep(1000)
@@ -356,7 +356,7 @@ def autoconf():
                             proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
                             servicecreator = False
                             for line in proc.stdout:
-                                print "linha " + line.rstrip()
+                                print ("cmd out: " + line.rstrip())
                                 servicecreator = True
                             if servicecreator == False:
                                 mensagemok(traducao(40000),traducao(40169))
@@ -365,7 +365,7 @@ def autoconf():
                                 xbmc.sleep(1000)
                                 mensagemprogresso.update(45,traducao(40170),"  ")
                                 xbmc.sleep(1000)
-                                print "Trying to modify regedit...."
+                                print("Trying to modify regedit....")
                                 try:
                                     aReg = _winreg.ConnectRegistry(None,_winreg.HKEY_LOCAL_MACHINE)
                                     key = _winreg.CreateKey(aReg, r'SYSTEM\CurrentControlSet\Services\sopcastp2p\Parameters')
@@ -385,11 +385,9 @@ def autoconf():
                                     proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
                                     lines = []
                                     for line in proc.stdout:
-					print line.rstrip()
+					print(line.rstrip())
                                         if line.rstrip() != "" and "(" in line.rstrip(): lines.append(line.rstrip())
                                         else: pass
-				    print lines
-				    print len(lines)
                                     if len(lines) != 1: mensagemok(traducao(40000),traducao(40173))
                                     else:
                                         linha_arr = []
@@ -398,9 +396,9 @@ def autoconf():
                                         linha_add = ''
                                         for linha in linha_arr:
                                             linha_add += linha
-                                        print "line peace to add: " + linha_add
+                                        print("line peace to add: " + linha_add)
                                         linha_final = lines[0].replace("S:(",linha_add + "S:(")
-                                        print "Final line: " + linha_final
+                                        print("Final line: " + linha_final)
                                         permissions = False
                                         xbmc.sleep(500)
                                         mensagemprogresso.update(60,traducao(40172), traducao(40161))
@@ -409,14 +407,14 @@ def autoconf():
                                         cmd = ['sc','sdset','sopcastp2p',linha_final]
                                         proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
                                         for line in proc.stdout:
-                                            print line.rstrip()
+                                            print(line.rstrip())
                                             permissions = True
                                         if permissions == False: mensagemok(traducao(40000),traducao(40175))
                                         else:
                                             mensagemprogresso.update(70,traducao(40174), traducao(40161))
                                             xbmc.sleep(1000)
                                             mensagemprogresso.update(70,traducao(40176), "   ")
-                                            print "Trying to set sopcastp2p service regedit permissions..."
+                                            print("Trying to set sopcastp2p service regedit permissions...")
                                             download_tools().Downloader(srvany_permissions,os.path.join(pastaperfil,"sopcastp2p-permissions.txt"),traducao(40177),traducao(40000))
                                             xbmc.sleep(500)
                                             ret = mensagemprogresso.create(traducao(40000),traducao(40000))
@@ -426,7 +424,7 @@ def autoconf():
                                             cmd = ['regini',os.path.join(pastaperfil,"sopcastp2p-permissions.txt")]
                                             proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
                                             for line in proc.stdout:
-                                                print line.rstrip()
+                                                print(line.rstrip())
                                             mensagemprogresso.update(90,traducao(40178), traducao(40178))
                                             mensagemprogresso.update(100,traducao(40179), "   ")
                                             xbmc.sleep(2000)
@@ -442,7 +440,7 @@ def autoconf():
 		settings.setSetting('autoconfig',value='false')
     
 	elif xbmc.getCondVisibility('System.Platform.OSX'):
-		print "Detected OS: Mac OSX"
+		print("Detected OS: Mac OSX")
 		available = False
 		if os.uname()[-1] == "x86_64":
 			mac_package = osx_x86_64
@@ -473,9 +471,9 @@ def autoconf():
 				
 	elif xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
 
-		print "Detected OS: Android"
+		print("Detected OS: Android")
 		#Sopcast configuration
-		print "Starting SopCast Configuration"
+		print("Starting SopCast Configuration")
 
 		#Moving sopclient to ext4 hack - tks steeve from xbmctorrent
 
@@ -483,7 +481,6 @@ def autoconf():
 
 		#Hack to get current xbmc app id
 		xbmcfolder=xbmc.translatePath(addonpath).split("/")
-		print "XBMC folder",xbmcfolder
 
 		i = 0
 		found = False
@@ -498,7 +495,6 @@ def autoconf():
 
 		if found == True:
 			uid = os.getuid()
-			print i
 			app_id = xbmcfolder[i]
 			xbmc_data_path = os.path.join("/data", "data", app_id)
 			if os.path.exists(xbmc_data_path) and uid == os.stat(xbmc_data_path).st_uid:

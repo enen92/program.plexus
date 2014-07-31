@@ -38,13 +38,11 @@ def addon_favourites():
 def add_to_addon_favourites(name,url,iconimage):
 	name = name.replace("[b]","").replace("[/b]","").replace("[color orange]","").replace("[/color]","").replace("[B]","").replace("[/B]","")
 	if "runplugin" in url:
-		print "Existe Runplugin"
 		match = re.compile("url=(.+?)&mode=(.+?)&").findall(url.replace(";",""))
 		for url,mode in match:
 			favourite_text = name + " (" + url + ")|" + str(mode) + "|" + url + '|' + iconimage
 			favouritetxt = os.path.join(pastaperfil,"Favourites",url.replace(":","").replace("/","") + ".txt")
 			if not xbmcvfs.exists(os.path.join(pastaperfil,"Favourites")): xbmcvfs.mkdir(os.path.join(pastaperfil,"Favourites"))
-			print favouritetxt
 			save(favouritetxt, favourite_text)
 			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), traducao(40148), 1,addonpath+"/icon.png"))
 	else:
@@ -66,7 +64,6 @@ def add_to_addon_favourites(name,url,iconimage):
 		xbmc.executebuiltin("Container.Refresh")
 			
 def remove_addon_favourites(url):
-	print url
 	if "runplugin" in url:
 		match = re.compile("url=(.+?)&mode").findall(url.replace(";",""))
 		if match: ficheiro = os.path.join(pastaperfil,"Favourites",match[0].replace("/","").replace(":","") + ".txt")

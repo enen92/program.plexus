@@ -50,7 +50,7 @@ def sopstreams(name,iconimage,sop):
 	if not iconimage: iconimage = os.path.join(addonpath,'resources','art','sopcast_logo.jpg')
 	if "sop://" not in sop: sop = "sop://broker.sopcast.com:3912/" + sop
 	else: pass
-	print "Starting Player Sop URL: " + str(sop)
+	print("Starting Player Sop URL: " + str(sop))
 	if not xbmc.getCondVisibility('system.platform.windows'):
 	    if xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
 	    	if  settings.getSetting('external_sopcast') == "0":
@@ -68,7 +68,7 @@ def sopstreams(name,iconimage,sop):
             for line in proc.stdout:
                     if " 1060:" in line.rstrip():
                         config = False
-                        print "Configuration is not DONE!"
+                        print("Sopcast configuration is not done!")
             if config == False: mensagemok(traducao(40000),traducao(40180),traducao(40181), traducao(40182))
             else:
                 import _winreg
@@ -90,11 +90,11 @@ def sopstreams(name,iconimage,sop):
                 proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
                 servicecreator = False
                 for line in proc.stdout:
-                        print "linha " + line.rstrip()
+                        print("result line: " + line.rstrip())
                 res = handle_wait_socket(int(settings.getSetting('socket_time')),traducao(40000),traducao(40183))
-                print "rest",res
+
                 if res == True:
-                        print "Server created, waiting 5 seconds for confirmation"
+                        print("Server created - waiting x seconds for confirmation")
                         try: sock.close()
                         except: pass
                         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -121,13 +121,13 @@ def sopstreams(name,iconimage,sop):
                                 while player._playbackLock:
                                     xbmc.sleep(5000)
                         else: xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), traducao(40040), 1,addonpath+"/icon.png"))
-                print "Player reached the end"
+                print("Player reached the end")
                 cmd = ['sc','stop','sopcastp2p']
                 import subprocess
                 proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
                 servicecreator = False
                 for line in proc.stdout:
-                        print "linha " + line.rstrip()
+                        print("result line" + line.rstrip())
 			 #dirty hack to break sopcast.exe player codec - renaming the file later
                 import _winreg
                 aReg = _winreg.ConnectRegistry(None,_winreg.HKEY_LOCAL_MACHINE)
@@ -173,8 +173,7 @@ def sopstreams_builtin(name,iconimage,sop):
 			cmd = [str(settings.getSetting('android_sopclient')), str(sop), str(LOCAL_PORT), str(VIDEO_PORT)]
 		else:
 			cmd = [str(settings.getSetting('android_sopclient')), str(sop), str(LOCAL_PORT), str(VIDEO_PORT),">",str(SPSC_LOG)]	
-	print sop
-        print cmd
+        print(cmd)
         spsc = subprocess.Popen(cmd, shell=False, bufsize=BUFER_SIZE,stdin=None, stdout=None, stderr=None)
         listitem = xbmcgui.ListItem(name, iconImage=iconimage, thumbnailImage=iconimage)
         listitem.setLabel(name)
@@ -184,9 +183,7 @@ def sopstreams_builtin(name,iconimage,sop):
         xbmc.sleep(int(settings.getSetting('wait_time')))
         res=False
         counter=50
-        print "tou aqui"
         ret = mensagemprogresso.create(traducao(40000),"SopCast",traducao(40039))
-        print "criei a msg progresso"
         mensagemprogresso.update(0)
         while counter > 0 and spsc.pid:
 	    if mensagemprogresso.iscanceled():
@@ -229,7 +226,7 @@ def sopstreams_builtin(name,iconimage,sop):
     try: os.kill(spsc.pid,9)
     except: pass
     mensagemprogresso.close()
-    print "Player chegou mesmo ao fim"
+    print("Player ended at last")
     
     
 """ Sopcast Player classes """   
@@ -238,24 +235,24 @@ def sopstreams_builtin(name,iconimage,sop):
 class SopWindowsPlayer(xbmc.Player):
       def __init__(self):
             self._playbackLock = True
-            print "Criou o player"
+            print("Player created")
             
       def onPlayBackStarted(self):
-            print "Comecou o player"
+            print("Player has started")
                               
       def onPlayBackStopped(self):
-            print "Parou o player"
+            print("Player stoped")
             self._playbackLock = False
             import subprocess
             cmd = ['sc','stop','sopcastp2p']
             proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
             for line in proc.stdout:
-                    print line.rstrip()
+                    print(line.rstrip())
 
 
       def onPlayBackEnded(self):              
             self.onPlayBackStopped()
-            print 'Chegou ao fim. Playback terminou.'
+            print("Player ended")
 
 
 
@@ -306,11 +303,11 @@ def handle_wait_socket(time_to_wait,title,text,segunda=''):
                 try:
                         result = sock.connect(('127.0.0.1',8902))
                         connected = True
-                        print "Connected to port 8902, server is working"
+                        print("Connected to port 8902, server is working")
                         break
                         sock.close()
                 except:
-                        print "Still hasn't connected"
+                        print("Stil trying to connect")
                 secs = secs + 1
                 percent = increment*secs
                 secs_left = str((time_to_wait - secs))
@@ -324,7 +321,6 @@ def handle_wait_socket(time_to_wait,title,text,segunda=''):
         if cancelled == True:
                 return False
         elif connected == True:
-                print "connected true na condicao"
                 mensagemprogresso.close()
                 return True
         else:
@@ -344,7 +340,7 @@ def sop_sleep(time , spsc_pid):
     if counter < time: return False
     else: return True
 
-#dirty hack to break sopcast.exe player codec - renaming the file again in case xbmc crashed    
+#dirty hack to break sopcast.exe player codec to avoid double sound   
 def break_sopcast():
 	if xbmc.getCondVisibility('system.platform.windows'):
 		import _winreg

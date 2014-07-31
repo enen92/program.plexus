@@ -59,22 +59,21 @@ def addon_parsers_menu():
 			settings.setSetting('parsers_last_sync',value=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f"))
 		
 	for key in sorted(parser_dict.keys()):
-		print parser_dict[key][1]
 		addDir(key,MainURL,401,parser_dict[key][1],total_parsers,True,parser=parser_dict[key][0])
-	addDir('[B]Adicionar um Website-Parser plugin [/B]',MainURL,402,addonpath + art + 'plus-menu.png',2,False)
+	addDir(traducao(400011),MainURL,402,addonpath + art + 'plus-menu.png',2,False)
 	xbmc.executebuiltin("Container.SetViewMode(51)")
 	
 def add_new_parser(url):
 	if not url:
-		opcao= xbmcgui.Dialog().yesno(traducao(40000), "Localizacao do plugin?","","",traducao(40124),traducao(40125))
+		opcao= xbmcgui.Dialog().yesno(traducao(40000),traducao(400012),"","",traducao(40124),traducao(40125))
 		if opcao:
 			dialog = xbmcgui.Dialog()
-			parser_tball = dialog.browse(int(1), "Escolha a tarball", 'myprograms','.tar.gz')
+			parser_tball = dialog.browse(int(1), traducao(400013), 'myprograms','.tar.gz')
 			if '.tar.gz' in parser_tball:
 				parser_name = parser_tball.split('/')
 				if not parser_name: parser_name = parser_tball.split('\\')
 				parser_name=parser_name[-1].replace('.tar.gz','')	
-				print "a lista e ",parser_tball,parser_name
+				print("the list is: " + parser_tball,parser_name)
 				future_parser_tball = os.path.join(parser_folder,parser_name+'.tar.gz')
 				xbmcvfs.copy(parser_tball,future_parser_tball)
 				import tarfile
@@ -85,18 +84,18 @@ def add_new_parser(url):
 				module_file = os.path.join(parser_folder,parser_name + '.txt')
 				text = str({})
 				save(module_file,str(text))
-				xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), "Parser instalado com sucesso",1,addonpath+"/icon.png"))
+				xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), traducao(400014),1,addonpath+"/icon.png"))
 				xbmc.executebuiltin("Container.Refresh")
 			else:
-				mensagemok(traducao(40000),"Ocorreu um erro a adicionar o parser")
+				mensagemok(traducao(40000),traducao(400015))
 				sys.exit(0) 			
 		else:
-			keyb = xbmc.Keyboard("", "Introduza o url do plugin")
+			keyb = xbmc.Keyboard("", traducao(400016))
 			keyb.doModal()
 			if (keyb.isConfirmed()):
 				search = keyb.getText()
 				if search=='': sys.exit(0)
-				if '.tar.gz' not in search: mensagemok(traducao(40000),"Endereco nao e valido. Necessaria extensao tar.gz"); sys.exit(0)
+				if '.tar.gz' not in search: mensagemok(traducao(40000),traducao(400017)); sys.exit(0)
 				else: 
 					md5checksum = search.replace('.tar.gz','.md5')
 					modulename = search.split('/')[-1].replace('.tar.gz','').replace('?raw=true','')
@@ -110,16 +109,16 @@ def add_new_parser(url):
 						module_file = os.path.join(parser_folder,modulename + '.txt')
 						module_tar_location = os.path.join(parser_core_folder,modulename+'tar.gz')
 						save(module_file,str(text))
-						download_tools().Downloader(search,module_tar_location,"A transferir parser",traducao(40000))
+						download_tools().Downloader(search,module_tar_location,traducao(400018),traducao(40000))
 						import tarfile            
 						if tarfile.is_tarfile(module_tar_location):
 							download_tools().extract(module_tar_location,parser_core_folder)
 							xbmc.sleep(500)
 							download_tools().remove(module_tar_location)
-						xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), "Parser instalado com sucesso",1,addonpath+"/icon.png"))
+						xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000),traducao(400014),1,addonpath+"/icon.png"))
 						xbmc.executebuiltin("Container.Refresh")
 					else:
-						mensagemok(traducao(40000),"Ocorreu um erro a adicionar o parser")
+						mensagemok(traducao(40000),traducao(400015))
 						sys.exit(0)
 	else:
 		md5checksum = url.replace('.tar.gz','.md5')
@@ -132,17 +131,15 @@ def add_new_parser(url):
 		if md5_up: text['md5'] = abrir_url(md5checksum)
 		if text:
 			module_file = os.path.join(parser_folder,modulename + '.txt')
-			print module_file
 			module_tar_location = os.path.join(parser_core_folder,modulename+'.tar.gz')
-			print module_tar_location
 			save(module_file,str(text))
-			download_tools().Downloader(url,module_tar_location,"A transferir parser",traducao(40000))
+			download_tools().Downloader(url,module_tar_location,traducao(400018),traducao(40000))
 			import tarfile 
 			if tarfile.is_tarfile(module_tar_location):
 				download_tools().extract(module_tar_location,parser_core_folder)
 				xbmc.sleep(500)
 				download_tools().remove(module_tar_location)
-				print modulename," : Module installed sucessfully"
+				print(str(modulename) + " : Module installed sucessfully")
 				return
 	
 def remove_parser(iconimage):
@@ -160,7 +157,7 @@ def remove_parser(iconimage):
 	except:
 		import shutil
 		shutil.rmtree(module_folder)
-	xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), "Parser removido com sucesso",1,addonpath+"/icon.png"))
+	xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), traducao(400019),1,addonpath+"/icon.png"))
 	xbmc.executebuiltin("Container.Refresh")
 	
 def sync_parser():
@@ -174,7 +171,7 @@ def sync_parser():
 	for file in files:
 		i += 1
 		error = False
-		mensagemprogresso.update(int(float(i)/number_of_files*100),"Syncing parsers...",file.replace('.txt',''),"Checking")
+		mensagemprogresso.update(int(float(i)/number_of_files*100),traducao(400020),file.replace('.txt',''),traducao(400021))
 		module_file = os.path.join(parser_folder,file)
 		text = eval(readfile(module_file))
 		if not text: pass
@@ -187,14 +184,14 @@ def sync_parser():
 				except: current_md5 = installed_md5; error = True
 				if current_md5 != installed_md5:
 					print('Module requires update ' + str(file.replace('.txt','')) + ' ' + str(installed_md5) + ' != ' + str(current_md5))
-					mensagemprogresso.update(int(float(i)/number_of_files*100),"Syncing parsers...",file.replace('.txt',''),"Updating...")
+					mensagemprogresso.update(int(float(i)/number_of_files*100),traducao(400020),file.replace('.txt',''),traducao(400025))
 					add_new_parser(module_url)
-					mensagemprogresso.create(traducao(40000),"Syncing parsers...",file.replace('.txt',''),"Updated!")
+					mensagemprogresso.create(traducao(40000),traducao(400020),file.replace('.txt',''),traducao(400022))
 				else:
 					print('Module is up to date: ' + str(file.replace('.txt','')))
-					if error == False: message = "Already up to date..."
-					else: message = "Error: invalid url for parser repository"
-					mensagemprogresso.update(int(float(i)/number_of_files*100),"Syncing parsers...",file.replace('.txt',''),message)
+					if error == False: message = traducao(400023)
+					else: message = traducao(400024)
+					mensagemprogresso.update(int(float(i)/number_of_files*100),traducao(400020),file.replace('.txt',''),message)
 		xbmc.sleep(1000)
 	try:
 		mensagemprogresso.update(100,"","")
@@ -209,19 +206,19 @@ def sync_single_parser(parser):
 		string = eval(readfile(parser_file))
 		if string:
 			add_new_parser(string['url'])
-			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), "Parser module was updated!",1,addonpath+"/icon.png"))	
+			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000),traducao(400026),1,addonpath+"/icon.png"))	
 	
 def runscript():
-	keyb = xbmc.Keyboard("", "Introduza o url do plugin")
+	keyb = xbmc.Keyboard("", traducao(400016))
 	keyb.doModal()
 	if (keyb.isConfirmed()):
 		search = keyb.getText()
 		if search=='': sys.exit(0)
 		else:
 			search = 'https://github.com/enen92/P2P-STREAMS-Parsers/blob/master/all.py?raw=true'
-			download_tools().Downloader(search,os.path.join(pastaperfil,'rscript.py'),"A transferir script",traducao(40000))
+			download_tools().Downloader(search,os.path.join(pastaperfil,'rscript.py'),traducao(400027),traducao(40000))
 			xbmc.executebuiltin('XBMC.RunScript('+os.path.join(pastaperfil,'rscript.py')+')')
-			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), "Script executado com sucesso",1,addonpath+"/icon.png"))
+			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000),traducao(400028),1,addonpath+"/icon.png"))
 			
 			
 	

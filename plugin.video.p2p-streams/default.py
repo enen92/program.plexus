@@ -4,7 +4,7 @@
    
    This file contains the main menu and the addon directory tree.
    All the necessary modules are present in ~/resources/core directory
-   Parsers are in ~resources/core/parsers
+   Parsers are in ~/resources/core/parsers
     
 """
 
@@ -85,16 +85,16 @@ try:parserfunction=params["parserfunction"]
 except: pass
 
 
-print "Mode: "+str(mode)
-print "URL: "+str(url)
-print "Name: "+str(name)
-print "Iconimage: "+str(iconimage)
-print "Parser: "+str(parser)
-print "Parserfunction: "+str(parserfunction)
+print("Mode: "+str(mode))
+print("URL: "+str(url))
+print("Name: "+str(name))
+print("Iconimage: "+str(iconimage))
+print("Parser: "+str(parser))
+print("Parserfunction: "+str(parserfunction))
 
 #from 1-99 functions related to the addon menu functions 
 if mode==None or url==None or len(url)<1:
-      print "Installed version: v" + versao
+      print("Installed version: v" + versao)
       if settings.getSetting('autoconfig') == "true": autoconf()
       main_menu()
 elif mode==1: ace.acestreams(name,iconimage,url)

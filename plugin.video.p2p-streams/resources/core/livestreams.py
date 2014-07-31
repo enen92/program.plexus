@@ -139,7 +139,7 @@ def parse_m3u(url):
 def get_groups(url):
     from xml.etree import ElementTree
     try:
-        print "Sopcast xml-type list detected"
+        print("Sopcast xml-type list detected")
 	if "http" in url:
 		source = abrir_url(url)
 		save(os.path.join(pastaperfil,"working.xml"),source)
@@ -467,7 +467,7 @@ def getSoup(url):
         return BeautifulSOAP(data, convertEntities=BeautifulStoneSoup.XML_ENTITIES)
 
 def addon_log(string):
-	print string
+	print(string)
 
 def getRegexParsed(regexs, url):
         regexs = eval(urllib.unquote(regexs))

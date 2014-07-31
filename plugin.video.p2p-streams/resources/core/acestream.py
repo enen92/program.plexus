@@ -32,7 +32,7 @@ def acestreams(name,iconimage,chid):
 	else: iconimage = urllib.unquote(iconimage)
 	if settings.getSetting('aceplay_type') == "2":
 		pDialog = xbmcgui.DialogProgress()
-		ret = pDialog.create('P2P-Streams', traducao(40154),traducao(40155),traducao(40156))
+		ret = pDialog.create(traducao(40000), traducao(40154),traducao(40155),traducao(40156))
 		pDialog.update(0)
 		xbmc.sleep(3000)
 		pDialog.update(100)
@@ -58,7 +58,7 @@ def acestreams_builtin(name,iconimage,chid):
     	xbmcvfs.delete(lock_file)
     if chid != '':
         chid=chid.replace('acestream://','').replace('ts://','').replace('st://','')
-        print "Starting Player Ace hash: " + chid
+        print("Starting Player Ace hash: " + chid)
         TSPlayer = tsengine()
         out = None
         if chid.find('http://') == -1 and chid.find('.torrent') == -1:

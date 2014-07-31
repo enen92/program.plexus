@@ -106,9 +106,9 @@ def import_advancedxml():
 	advancedsettings_var = os.path.join(userdatapath,'advancedsettings.xml')
 	advancedsettingsbackup_var = os.path.join(userdatapath,'advancedsettingsbackup.xml')
 	if xbmcvfs.exists(advancedsettings_var):
-		print "An advanced settings XML file already exists"
+		print("An advanced settings XML file already exists")
 		if xbmcvfs.exists(advancedsettingsbackup_var):
-			print "An advanced settings backup already exists"
+			print("An advanced settings backup already exists")
 			xbmcvfs.delete(advancedsettingsbackup_var)
 			xbmcvfs.rename(advancedsettings_var,advancedsettingsbackup_var)
 			advancedname = ["Cachemembuffer=252420","freememorycachepercent=5"]
@@ -126,7 +126,7 @@ def import_advancedxml():
     				download_tools().Downloader(advancedurl[index],advancedsettings_var,traducao(40059),traducao(40000))
 				mensagemok(traducao(40000),traducao(40060))
 	else:
-		print "No advancedsettings.xml in the system yet"
+		print("No advancedsettings.xml in the system yet")
 		advancedname = ["Cachemembuffer=252420","freememorycachepercent=5"]
 		advancedurl = ["http://p2p-strm.googlecode.com/svn/trunk/Advancedsettings/advancedsettings.xml","http://p2p-strm.googlecode.com/svn/trunk/Advancedsettings/advancedsettingstonicillo.xml"]
 		index = xbmcgui.Dialog().select(traducao(40185), advancedname)
