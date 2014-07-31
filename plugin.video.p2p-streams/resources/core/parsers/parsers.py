@@ -106,17 +106,19 @@ def add_new_parser(url):
 					if module_up: text['url'] = search
 					if md5_up: text['md5'] = abrir_url(md5checksum)
 					if text:
-						module_file = os.path.join(parser_folder,modulename + '.txt')
-						module_tar_location = os.path.join(parser_core_folder,modulename+'tar.gz')
-						save(module_file,str(text))
-						download_tools().Downloader(search,module_tar_location,traducao(400018),traducao(40000))
-						import tarfile            
-						if tarfile.is_tarfile(module_tar_location):
-							download_tools().extract(module_tar_location,parser_core_folder)
-							xbmc.sleep(500)
-							download_tools().remove(module_tar_location)
-						xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000),traducao(400014),1,addonpath+"/icon.png"))
-						xbmc.executebuiltin("Container.Refresh")
+						try:
+							module_file = os.path.join(parser_folder,modulename + '.txt')
+							module_tar_location = os.path.join(parser_core_folder,modulename+'tar.gz')
+							save(module_file,str(text))
+							download_tools().Downloader(search,module_tar_location,traducao(400018),traducao(40000))
+							import tarfile            
+							if tarfile.is_tarfile(module_tar_location):
+								download_tools().extract(module_tar_location,parser_core_folder)
+								xbmc.sleep(500)
+								download_tools().remove(module_tar_location)
+							xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000),traducao(400014),1,addonpath+"/icon.png"))
+							xbmc.executebuiltin("Container.Refresh")
+						except: mensagemok(traducao(40000),traducao(400024))
 					else:
 						mensagemok(traducao(40000),traducao(400015))
 						sys.exit(0)
@@ -215,9 +217,11 @@ def runscript():
 		search = keyb.getText()
 		if search=='': sys.exit(0)
 		else:
-			download_tools().Downloader(search,os.path.join(pastaperfil,'rscript.py'),traducao(400027),traducao(40000))
-			xbmc.executebuiltin('XBMC.RunScript('+os.path.join(pastaperfil,'rscript.py')+')')
-			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000),traducao(400028),1,addonpath+"/icon.png"))
+			try:
+				download_tools().Downloader(search,os.path.join(pastaperfil,'rscript.py'),traducao(400027),traducao(40000))
+				xbmc.executebuiltin('XBMC.RunScript('+os.path.join(pastaperfil,'rscript.py')+')')
+				xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000),traducao(400028),1,addonpath+"/icon.png"))
+			except: mensagemok(traducao(40000),traducao(40128))
 			
 			
 	
