@@ -60,4 +60,13 @@ The addon can accept general acestream:// based url, .torrent urls, local .torre
 
 Addon aditional functionalities
 ----------
+The addon provides aditional functionalities you can use to create your own experience:
+* Parser plugins
+Built-in plugin engine that lets you create simple pure python plugins for website scrapping. Installing, removing and syncing code with remote repositories for a given parser. More information on the plugin structure and how to create your parser can be found here: Coiso. No piracy related sites discussion or support!
+* Lists
+You can easily add and remove local or remote (internet) lists. The addon supports sopcast based lists (like: http://sopcast.org/chlist.xml) or general livestreams addon lists. Also, it supports general m3u lists. No sharing or discussion of lists containing piracy related content!
+* Favourites
+Easily add channels from parsers or lists to the addon favourites.
+* Advanced tools
+Easily import recommended advancedsettings.xml files that are known to provide the best experience, backup advancedsettings.xml configuration or remove it. Change acestreamengine related settings in some platforms.
 
