@@ -119,8 +119,8 @@ This addon would not be possible without the help and first work of some develop
 
 Contribute
 ----------
-[**Source code**](https://github.com/enen92/P2P-Streams-XBMC/tree/master/plugin.video.p2p-streams)
-[**External modules**](https://github.com/enen92/P2P-Streams-XBMC--Modules-)
-[**Translations**](https://github.com/enen92/P2P-Streams-XBMC/blob/master/plugin.video.p2p-streams/resources/language/English/strings.xml)
-[**Issues or feature requests**](https://github.com/enen92/P2P-Streams-XBMC/issues)
+* [**Source code**](https://github.com/enen92/P2P-Streams-XBMC/tree/master/plugin.video.p2p-streams)
+* [**External modules**](https://github.com/enen92/P2P-Streams-XBMC--Modules-)
+* [**Translations**](https://github.com/enen92/P2P-Streams-XBMC/blob/master/plugin.video.p2p-streams/resources/language/English/strings.xml)
+* [**Issues or feature requests**](https://github.com/enen92/P2P-Streams-XBMC/issues)
 
