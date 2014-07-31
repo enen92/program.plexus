@@ -38,6 +38,7 @@
     <string id="30015">Kill AceEngine if player stops</string>
     <string id="49999">Show Acestream engine status on videoosd</string>
     <string id="49998">Debug mode</string>
+    <string id="70002">Stop mode for AceStreams</string>
     <string id="400000">Lists/Parsers</string>
     <string id="400001">Lists</string>
     <string id="40134">Enable sopcast.org official list</string>
@@ -68,6 +69,8 @@
     <string id="40040">Channel initialization failed</string>
     <string id="40039">Loading stream. Please wait till 20 seconds.</string>
     <string id="40187">Waiting till timeout...</string>
+    <string id="70000">SopCast instance still running on the background</string>
+    <string id="70001">Do you want to play it?</string>
     
     <!-- acecore.py -->
     <string id="40052">Starting...</string>
@@ -177,6 +180,7 @@
     	<string id="600019">Upload limit (Kb/s) (0=no limit) </string>
     	<string id="600020">Max number of connections (0=no limit) </string>
     	<string id="600021">Max number of connections per stream (0=no limit) </string>
+    	<string id="70003">Clean engine cache</string>
     	<string id="600027">Please re-do the configuration to get the new modules</string>
     	<string id="40185">Select one of the advancedsettings.xml</string>
  	<string id="40059">Downloaded advancedsettings.xml</string>

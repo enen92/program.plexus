@@ -215,7 +215,6 @@ def runscript():
 		search = keyb.getText()
 		if search=='': sys.exit(0)
 		else:
-			search = 'https://github.com/enen92/P2P-STREAMS-Parsers/blob/master/all.py?raw=true'
 			download_tools().Downloader(search,os.path.join(pastaperfil,'rscript.py'),traducao(400027),traducao(40000))
 			xbmc.executebuiltin('XBMC.RunScript('+os.path.join(pastaperfil,'rscript.py')+')')
 			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000),traducao(400028),1,addonpath+"/icon.png"))

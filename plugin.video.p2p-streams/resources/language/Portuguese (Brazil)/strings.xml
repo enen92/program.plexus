@@ -38,6 +38,7 @@
     <string id="30015">Terminar AceEngine se o player estiver parado</string>
     <string id="49999">Mostrar status da Acestream Engine no videoosd</string>
     <string id="49998">Modo de debug</string>
+    <string id="70002">Modo de stop para AceStreams</string>
     <string id="400000">Listas/Parsers</string>
     <string id="400001">Listas</string>
     <string id="40134">Activar a lista oficial do sopcast.org </string>
@@ -68,6 +69,8 @@
     <string id="40040">Falhou a inicialização do canal</string>
     <string id="40039">A carregar stream. Aguarde até 20 segundos.</string>
     <string id="40187">Esperando o timeout...</string>
+    <string id="70000">Sopcast está ainda a correr no background</string>
+    <string id="70001">Deseja retomar a emissão anterior?</string>
     
     <!-- acecore.py -->
     <string id="40052">Iniciando...</string>
@@ -177,13 +180,14 @@
     	<string id="600019">Limite de Upload (Kb/s) (0=ilimitado) </string>
     	<string id="600020">Número máximo de conexões (0=ilimitado) </string>
     	<string id="600021">Número máximo de conexões por stream (0=ilimitado) </string>
+    	<string id="70003">Eliminar cache da AceStream Engine</string>
     	<string id="600027">Por favor repita a configuração para obter os novos módulos</string>
     	<string id="40185">Seleccione o advancedsettings.xml desejado</string>
  	<string id="40059">Transferindo advancedsettings.xml</string>
- 	<string id="40060">Xml importado. Por favor reínicie XBMC!</string>
- 	<string id="40064">Backup com sucesso. Por favor reínicie o XBMC!</string>
+ 	<string id="40060">Xml importado. Por favor reinicie XBMC!</string>
+ 	<string id="40064">Backup com sucesso. Por favor reinicie o XBMC!</string>
  	<string id="40062">Backup recuperado com sucesso. Reinicie o XBMC!</string>
- 	<string id="40066">O XML foi apagado. Por favor reínicie o XBMC!</string>
+ 	<string id="40066">O XML foi apagado. Por favor reinicie o XBMC!</string>
  	<string id="600024">Introduza um valor inteiro</string>
  	<string id="600026">Definição alterada com sucesso</string>
  	<string id="600025">Valor inválido. Apenas valores inteiros!</string>

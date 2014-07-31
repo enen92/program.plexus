@@ -1,3 +1,9 @@
+[B]v0.4.5 (29/7/2014)[/B]
+-Plugin engine added
+-Parsers removed
+-Code cosmetics
+-Translation organization
+
 [B]v0.4.4 (29/7/2014)[/B]
 -Fixes from 0.4.3
 
