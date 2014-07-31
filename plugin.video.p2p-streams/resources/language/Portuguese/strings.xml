@@ -29,13 +29,13 @@
     <string id="30018">[COLOR blue]Configurações de Acestream[/COLOR]</string>
     <string id="40152">Acestream - tipo de player</string>
     <string id="40108">Porta de conexão</string>
-    <string id="40153">Porta de connecção (player)</string>
+    <string id="40153">Porta de conexão (player)</string>
     <string id="30010">Pausa Automática</string>
     <string id="30011">Caminho alternativo para Aceengine</string>
     <string id="30012">Manter ficheiro transferido no disco</string>
     <string id="30013">Caminho para transferência</string>
     <string id="30014">Mostrar estado de buffer</string>
-    <string id="30015">Terminar Aceengine se o player estiver parado</string>
+    <string id="30015">Terminar AceEngine se o player estiver parado</string>
     <string id="49999">Mostrar status da Acestream Engine no videoosd</string>
     <string id="49998">Modo de debug</string>
     <string id="400000">Listas/Parsers</string>
@@ -45,7 +45,7 @@
     <string id="400003">Executar script python</string>
     <string id="400004">Sincronizar parsers agora</string>
     <string id="400005">Activar auto-sincronizacao de parsers</string>
-    <string id="400006">Intervalo na pesquisa de alteracoes</string>
+    <string id="400006">Intervalo na pesquisa de alterações</string>
     
     <!-- Default.py -->
     <string id="40115">-Listas xml do addon</string>
@@ -54,14 +54,14 @@
     <string id="600029">Carregar ficheiro .torrent local</string>
     <string id="40005">Ir para ID Sopcast</string>
     <string id="40006">Ir para URL Sopcast</string>
-    <string id="40056">Sistema Operativo incompatível. :(</string>
+    <string id="40056">Sistema Operativo incompatível!</string>
     <string id="40057">[COLOR orange]Menu de opções avançadas[/COLOR]</string>
     
     <!-- sopcast.py -->
     <string id="40196">Só pode usar o player externo com versões</string>
     <string id="40197">superiores a XBMC 13.0 Gotham!</string>
     <string id="40180">(Windows) Não fez a configuração do SopCast!</string>
-    <string id="40181">Seleccione 'Transferir modulos no arranque' nas Defs do addon</string>
+    <string id="40181">Active 'Transferir módulos no arranque' nas definições do addon</string>
     <string id="40182">e entre novamente (como administrador!)</string>
     <string id="40183">SopCast - Verificando se o servidor foi criado. Aguarde...</string>
     <string id="40184">Servidor foi criado. Tentando reproduzir...</string>
@@ -103,10 +103,10 @@
 	<!-- acestream.py -->
 	<string id="600028">Seleccione o ficheiro torrent local.</string>
 	<string id="40154">Iniciando AceStream (modo ValdikSS proxy)</string>
-	<string id="40155">Se a stream não começar tente aumentar o timeout</string>
+	<string id="40155">Se a reprodução falhar aumente o timeout</string>
 	<string id="40156">do player!</string>
-	<string id="40037">O modulo acestream não está instalado.</string>
-	<string id="40038">O torrent não está disponível ou é inválido.</string>
+	<string id="40037">O módulo acestream não está instalado.</string>
+	<string id="40038">Torrent não disponível ou inválido.</string>
 	
     	<!-- autoconf.py -->
     	<string id="400007">Não conseguiu detectar o seu sistema operativo</string>
@@ -124,7 +124,7 @@
     	<string id="40158">Necessita de iniciar o XBMC como administrador.</string>
     	<string id="40159">para configurar o sopcast no Windows.</string>
     	<string id="40160">Verificando se o SopCast está instalado...</string>
-    	<string id="40161">Feito!</string>
+    	<string id="40161">Concluído!</string>
     	<string id="40162">O SopCast não está instalado no seu pc!</string>
     	<string id="40163">Faça o download em SopCast.org e instale!</string>
     	<string id="40164">Obtendo ID's dos users do Windows...</string>
@@ -145,20 +145,20 @@
     	<string id="40179">Sopcast: Tudo concluído com sucesso!</string>
     	<string id="600014">Não está disponível para a arquitectura do seu Mac</string>
     	<string id="50011">Por defeito o Sopcast usa o player do XBMC.</string>
-    	<string id="50012">Quer usar uma aplicação externa?</string>
+    	<string id="50012">Deseja usar uma aplicação externa?</string>
     	<string id="50014">Tudo concluído para o SopCast!</string>
     	<string id="50013">Clique ok para transferir a SopCast.apk</string>
     	<string id="40190">Seleccione uma pasta para transferir os apks</string>
     	<string id="40073">Transferindo SopCast.apk</string>
     	<string id="50015">SopCast.apk transferida para a pasta:</string>
     	<string id="50016">Por favor instale!</string>
-    	<string id="50017">Não conseguimos detectar a AppID</string>
-    	<string id="50018">É necessário ter a acestreamengine.apk</string>
-    	<string id="50019">instalada para reproduzir Acestreams.</string>
+    	<string id="50017">AppID não detectada</string>
+    	<string id="50018">É necessário ter o acestreamengine.apk</string>
+    	<string id="50019">instalado para reproduzir Acestreams.</string>
     	<string id="50020">Será transferida agora!</string>
     	<string id="40072">Transferindo AcestreamEngine.apk</string>
     	<string id="50021">Acestream.apk transferida para a pasta:</string>
-    	<string id="50022">Tudo concluído para as Acestreams!</string>
+    	<string id="50022">Acestream: Tudo concluído!</string>
     	<string id="50023">Não se esqueça que a AcestreamEngine app</string>
     	<string id="50024">deve estar em execução antes de lançar</string>
     	<string id="50025">qualquer acestream!</string>
@@ -175,8 +175,8 @@
     	<string id="600017">Live buffer (streams em directo) (s) </string>
     	<string id="600018">Limite de Download (Kb/s) (0=ilimitado) </string>
     	<string id="600019">Limite de Upload (Kb/s) (0=ilimitado) </string>
-    	<string id="600020">Número máximo de connecções (0=ilimitado) </string>
-    	<string id="600021">Número máximo de connecções por stream (0=ilimitado) </string>
+    	<string id="600020">Número máximo de conexões (0=ilimitado) </string>
+    	<string id="600021">Número máximo de conexões por stream (0=ilimitado) </string>
     	<string id="600027">Por favor repita a configuração para obter os novos módulos</string>
     	<string id="40185">Seleccione o advancedsettings.xml desejado</string>
  	<string id="40059">Transferindo advancedsettings.xml</string>
@@ -185,7 +185,7 @@
  	<string id="40062">Backup recuperado com sucesso. Reinicie o XBMC!</string>
  	<string id="40066">O XML foi apagado. Por favor reínicie o XBMC!</string>
  	<string id="600024">Introduza um valor inteiro</string>
- 	<string id="600026">Definicao alterada com sucesso</string>
+ 	<string id="600026">Definição alterada com sucesso</string>
  	<string id="600025">Valor inválido. Apenas valores inteiros!</string>
  	<string id="40069">ts.lock removido com sucesso</string>
     
@@ -231,19 +231,19 @@
 	
 	<!-- parser.py -->	
 	<string id="400011">[B]Adicionar um Website-Parser plugin [/B]</string>
-	<string id="400012">Localizacao do plugin?</string>
+	<string id="400012">Localização do plugin?</string>
 	<string id="400013">Escolha a tarball (.tar.gz)</string>
 	<string id="400014">Parser instalado com sucesso</string>
 	<string id="400015">Ocorreu um erro a adicionar o parser</string>
 	<string id="400016">Introduza o url do plugin</string>
-	<string id="400017">Endereco nao e valido. Necessaria extensao tar.gz</string>
+	<string id="400017">Endereco não é válido. Necessária extensão tar.gz</string>
 	<string id="400018">A transferir parser</string>
 	<string id="400019">Parser removido com sucesso</string>
 	<string id="400020">A sincronizar parsers</string>
 	<string id="400021">Verificando...</string>
 	<string id="400022">Actualizado!</string>
 	<string id="400023">Ja estava actualizado.</string>
-	<string id="400024">Erro: url invalido para o repositorio do parser</string>
+	<string id="400024">Erro: url invalido para o repositório do parser</string>
 	<string id="400025">Actualizando...</string>
 	<string id="400026">Parser actualizado com sucesso!</string>
 	<string id="400027">A transferir script...</string>
