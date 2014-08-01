@@ -1,3 +1,6 @@
+[B]v0.4.7 (1/8/2014)[/B]
+-Fix parser delete
+
 [B]v0.4.6 (1/8/2014)[/B]
 -Added italian translation (tks to axlt2002)
 -Added dutch translation (tks to quihico)

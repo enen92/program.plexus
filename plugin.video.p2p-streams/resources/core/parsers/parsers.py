@@ -28,6 +28,13 @@ parser_core_folder = os.path.join(addonpath,'resources','core','parsers')
 
 def addon_parsers_menu():
 	dirs,files = xbmcvfs.listdir(base_dir)
+	if not dirs:
+		dirsuserdata,files = xbmcvfs.listdir(parser_folder)
+		for fich in files:
+			dictionary_module = eval(readfile(os.path.join(parser_folder,fich)))
+			if "url" in dictionary_module.keys():
+				add_new_parser(dictionary_module["url"])
+	dirs,files = xbmcvfs.listdir(base_dir)
 	parser_dict = {}
 	for module in dirs:
 		module_dir = os.path.join(base_dir,module)
