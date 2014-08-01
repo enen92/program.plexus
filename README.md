@@ -104,7 +104,7 @@ Port forward port 8621 and change the main engine settings. This site has some u
 ####Some acestreams play fine in windows but not on Android, Raspberry Pi and Linux (Torrent unavailable).
 The AcestreamEngine for windows is several versions above and seems to receive much more support and development. Streams created in the windows 2.2 version of acestream engine (and above) are not supported in older versions (which are used in all the other platforms).
 
-###Can I run the engine on a different computer?
+####Can I run the engine on a different computer?
 Yes. [Read this](https://github.com/enen92/P2P-Streams-XBMC/wiki/Using-an-acestream-engine-running-on-a-different-location)
 
 ####Can I stream normal torrents with this plugin? 
