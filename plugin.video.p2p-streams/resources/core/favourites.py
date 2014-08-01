@@ -71,5 +71,7 @@ def remove_addon_favourites(url):
 		ficheiro = os.path.join(pastaperfil,"Favourites",url.replace(":","").replace("/","") + ".txt")
 	xbmcvfs.delete(ficheiro)
 	xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), traducao(40147), 1,addonpath+"/icon.png"))
-	xbmc.executebuiltin("Container.Refresh")    
+	dirs, files = xbmcvfs.listdir(os.path.join(pastaperfil,"Favourites"))
+	if files:
+		xbmc.executebuiltin("Container.Refresh")
 
