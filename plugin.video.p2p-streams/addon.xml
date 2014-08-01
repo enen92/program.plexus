@@ -17,7 +17,7 @@
     <summary>P2P-Streams addon</summary>
     <description lang="en">AceStream and Sopcast in your favourite media center! Watch peer-to-peer streams in XBMC without the need for external players. Project page: https://code.google.com/p/p2p-strm/</description>
     <description lang="pt">AceStream e Sopcast no seu Media-Center de eleição! Assista a streams peer-to-peer no XBMC sem a necessidade de players externos. Página do projecto: https://code.google.com/p/p2p-strm/</description>
-    <disclaimer lang="en">The authors does not host nor distribute any of the content displayed by this addon. The authors have no affiliation with any of the content providers. This addon does not track its users.</disclaimer>
+    <disclaimer lang="en">The authors does not host nor distribute any of the content you may watch using this addon. The authors have no affiliation with any of the content providers. This addon does not track its users.</disclaimer>
     <disclaimer lang="pt">Os autores não alojam nem distribuem nenhum do conteúdo acessível a partir deste addon. Os autores não têm qualquer afiliação com nenhum dos sites utilizados por este addon. O addon não contem nenhuma ferramenta de tracking.</disclaimer>
     <forum>http://www.xbmchub.com/forums/threads/18099-RELEASE-p2p-streams-Acestream-and-Sopcast-*BETA*</forum>
     <source>https://github.com/enen92/P2P-Streams-XBMC | https://github.com/enen92/P2P-Streams-XBMC--Modules-</source>
