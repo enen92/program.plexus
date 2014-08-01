@@ -1,3 +1,7 @@
+[B]v0.4.6 (1/8/2014)[/B]
+-Added italian translation (tks to axlt2002)
+-Added dutch translation (tks to quihico)
+
 [B]v0.4.5 (29/7/2014)[/B]
 -Plugin engine added
 -Parsers removed
