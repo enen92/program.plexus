@@ -29,14 +29,15 @@ System → settings → addons → get addons → p2p-streams repository → p2p
 ###Platform specific configuration instructions:
 The addon includes a configuration function which tries to make the configuration really easy. However it is platform dependent. Please check the specific FAQ's for your platform.
 
-* [Windows](coiso)
-* [OSX](coiso)
-* [Android](coiso)
+* [Windows](https://github.com/enen92/P2P-Streams-XBMC/wiki/Windows-configuration)
+* [Mac OSX](https://github.com/enen92/P2P-Streams-XBMC/wiki/Mac-OSX-configuration)
+* [Android](https://github.com/enen92/P2P-Streams-XBMC/wiki/Android-Configuration)
 * Linux
-  * [Armv6 (Raspberry PI including OpenELEC)](ciso)
-  * [Armv7 (OpenELEC,Xbian,MXLinux)](coiso)
-  * [i386 (including OpenELEC)](coiso)
-  * [x86_64 (including OpenELEC)](coiso)
+  * [OpenELEC](https://github.com/enen92/P2P-Streams-XBMC/wiki/OpenELEC-configuration)
+  * [Armv6 (Raspberry PI)](https://github.com/enen92/P2P-Streams-XBMC/wiki/Linux-Armv6-Configuration)
+  * [Armv7 (OpenELEC,Xbian,MXLinux)](https://github.com/enen92/P2P-Streams-XBMC/wiki/Linux-Armv7-Configuration)
+  * [i386 (Debian,Ubuntu,Arch...)](https://github.com/enen92/P2P-Streams-XBMC/wiki/Linux-(i386-and-x86_64)-configuration)
+  * [x86_64 (Debian,Ubuntu,Arch)](https://github.com/enen92/P2P-Streams-XBMC/wiki/Linux-(i386-and-x86_64)-configuration)
   
 About the technologies (and addon integration)
 ----------
@@ -47,6 +48,7 @@ SopCast is a simple, free way to broadcast video and audio or watch the video an
 The addon can accept sop url or id's as following:
 
 `plugin://plugin.video.p2p-streams/?url=sop://124.232.150.188:3912/11265&mode=2&name=title+sopcast`
+
 `plugin://plugin.video.p2p-streams/?url=11265&mode=2&name=title+sopcast`
 
 ###AceStream
@@ -54,8 +56,11 @@ Acestream (formerly known as TorrentStream) is a recent peer-to-peer technology 
 The addon can accept general acestream:// based url, .torrent urls, local .torrent files, .acelive urls or just acestream hashes. Eg:
 
 `plugin://plugin.video.p2p-streams/?url=_some_hash&mode=1&name=acestream+title`
+
 `plugin://plugin.video.p2p-streams/?url=acestream://_some_hash&mode=1&name=acestream+title`
+
 `plugin://plugin.video.p2p-streams/?url=http://something.torrent&mode=1&name=acestream+title`
+
 `plugin://plugin.video.p2p-streams/?url=http://something.acelive&mode=1&name=acestream+title`
 
 Addon aditional functionalities
@@ -69,16 +74,16 @@ The addon provides aditional functionalities you can use to create your own expe
 FAQ
 ----------
 ####Are the devs related to acestream.org or sopcast.org?
-No, we are not affiliated with any. We do this addon in our free time. Hence, we do not provide support for possible errors or issues in both technologies. 
+No, we are not affiliated with any of them. We do this addon in our free time. Hence, we do not provide support for possible errors or issues in both technologies. 
 
 ####Why does the addon come with just one list and no parsers? There are plenty of sop and ace links out there...
 The plugin goal is to extend xbmc functionality and to make peer-to-peer streams playable in XBMC. Website parsers are difficult to maintain and can provide non-legal content. So, for obvious reasons we do not provide any support nor include any of them in the core addon. Also we want to keep updates at a minimum level.
 
 ####Am I allowed to discuss and share websites containg sopcast and acestream links?
-If the content is legal yes. If not, don't. 
+If the content is legal yes. If not, please don't. You won't receive any support if that's the case. 
 
 ####Is it available for iOS or atv2? I get a “not available for your os message”
-Sopcast or Acestream are closed source softwares and are not available for both of the mentioned platforms. So, no and might never be. Back to question 1...we are not affiliated with any of the technologies. You're free to provide a pull request that implements any functionality.
+Sopcast or Acestream are closed source softwares and are not available for ios and atv. So, not available and might never be. You might want to consider [this option](https://github.com/enen92/P2P-Streams-XBMC/wiki/Using-an-acestream-engine-running-on-a-different-location)
 
 ####Why do I need to run xbmc as administrator in Windows when doing the initial configuration?
 For the addon to play sopcast links a windows service is created (using the srvany microsoft tool) that makes sopcast.exe to run headless in your system. To create and modify the service permissions you need administration previledges.
@@ -87,7 +92,7 @@ For the addon to play sopcast links a windows service is created (using the srva
 To simplify the configuration, make it easier for the average user and to have better control of the files the addon needs. You're free to get those executables from the official channels and also compare the checksums with the ones downloaded from the addon (to confirm they are exactly the same). Also, you can check the addon code on github to understand what the addon is doing.
 
 ####Sopcast in OSX only lasts 3 seconds...
-Unfortunately since xbmc gotham beta 3 this behaviour started to happen. Frodo and gotham till beta 3 seem to handle the streams just fine. 
+Unfortunately since xbmc gotham beta 3 this behaviour started to happen. Frodo and gotham versions till beta 3 seem to handle the streams just fine. 
 
 ####Sometimes I get the message “Channel initialization failed” in Sopcast. Why?
 Either the sopcast executable failed to login, the channel is offline or has been removed by SopCast because of proprietary content. Either the reason, there's nothing we can do about it. 
@@ -96,11 +101,14 @@ Either the sopcast executable failed to login, the channel is offline or has bee
 There are several aditional configurations you might have to do to improve acestream behaviour.  Try to limit the cache by importing one of the recommended advancedsettings.xml (advanced tools menu). However most of the reasons fall out of the bounds of this addon.
 Port forward port 8621 and change the main engine settings. This site has some usefull information: [acestream buffer guide](http://acestreamguide.com/buffering/) . If that doesn't solve your problem your ISP is probably throttling your traffic.
 
-####Some acestreams play fine in windows but not on Android, Raspberry Pi and Linux (Torrent unavailable). Why?
+####Some acestreams play fine in windows but not on Android, Raspberry Pi and Linux (Torrent unavailable).
 The AcestreamEngine for windows is several versions above and seems to receive much more support and development. Streams created in the windows 2.2 version of acestream engine (and above) are not supported in older versions (which are used in all the other platforms).
 
+###Can I run the engine on a different computer?
+Yes. [Read this](https://github.com/enen92/P2P-Streams-XBMC/wiki/Using-an-acestream-engine-running-on-a-different-location)
+
 ####Can I stream normal torrents with this plugin? 
-The AcestreamEngine can stream regular torrent files. So, the addon can do this as well.
+The AcestreamEngine can stream normal .torrent files. So, the addon can do this as well.
 However in our opinion there are better alternatives to do this in XBMC. Check XBMCtorrent or Pulsar.
 
 Authors
@@ -123,4 +131,3 @@ Contribute
 * [**External modules**](https://github.com/enen92/P2P-Streams-XBMC--Modules-)
 * [**Translations**](https://github.com/enen92/P2P-Streams-XBMC/blob/master/plugin.video.p2p-streams/resources/language/English/strings.xml)
 * [**Issues or feature requests**](https://github.com/enen92/P2P-Streams-XBMC/issues)
-
