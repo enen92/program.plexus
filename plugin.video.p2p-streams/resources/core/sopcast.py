@@ -141,92 +141,118 @@ def sopstreams(name,iconimage,sop):
 
 
 def sopstreams_builtin(name,iconimage,sop):
-    try:
-        os.system("killall -9 "+SPSC_BINARY)
-        global spsc
-        if xbmc.getCondVisibility('System.Platform.Linux') and settings.getSetting('force_android') == "false":
+	try:
+		global spsc
+        	if xbmc.getCondVisibility('System.Platform.Linux') and settings.getSetting('force_android') == "false":
 
-        	if os.uname()[4] == "armv6l" or os.uname()[4] == "armv7l" or settings.getSetting('openelecx86_64') == "true":
-        		if settings.getSetting('sop_debug_mode') == "false":
-        			cmd = [os.path.join(pastaperfil,'sopcast','qemu-i386'),os.path.join(pastaperfil,'sopcast','lib/ld-linux.so.2'),"--library-path",os.path.join(pastaperfil,'sopcast',"lib"),os.path.join(pastaperfil,'sopcast','sp-sc-auth'),sop,str(LOCAL_PORT),str(VIDEO_PORT)]
+			if os.uname()[4] == "armv6l" or os.uname()[4] == "armv7l" or settings.getSetting('openelecx86_64') == "true":
+				if settings.getSetting('sop_debug_mode') == "false":
+					cmd = [os.path.join(pastaperfil,'sopcast','qemu-i386'),os.path.join(pastaperfil,'sopcast','lib/ld-linux.so.2'),"--library-path",os.path.join(pastaperfil,'sopcast',"lib"),os.path.join(pastaperfil,'sopcast','sp-sc-auth'),sop,str(LOCAL_PORT),str(VIDEO_PORT)]
+				else: 
+					cmd = [os.path.join(pastaperfil,'sopcast','qemu-i386'),os.path.join(pastaperfil,'sopcast','lib/ld-linux.so.2'),"--library-path",os.path.join(pastaperfil,'sopcast',"lib"),os.path.join(pastaperfil,'sopcast','sp-sc-auth'),sop,str(LOCAL_PORT),str(VIDEO_PORT),">",SPSC_LOG]
+
+			elif settings.getSetting('openeleci386') == "true":
+				if settings.getSetting('sop_debug_mode') == "false":
+					cmd = [os.path.join(pastaperfil,'sopcast','lib/ld-linux.so.2'),"--library-path",os.path.join(pastaperfil,'sopcast',"lib"),os.path.join(pastaperfil,'sopcast','sp-sc-auth'),sop,str(LOCAL_PORT),str(VIDEO_PORT)]
+				else: 
+					cmd = [os.path.join(pastaperfil,'sopcast','lib/ld-linux.so.2'),"--library-path",os.path.join(pastaperfil,'sopcast',"lib"),os.path.join(pastaperfil,'sopcast','sp-sc-auth'),sop,str(LOCAL_PORT),str(VIDEO_PORT),">",SPSC_LOG]
+
 			else: 
-				cmd = [os.path.join(pastaperfil,'sopcast','qemu-i386'),os.path.join(pastaperfil,'sopcast','lib/ld-linux.so.2'),"--library-path",os.path.join(pastaperfil,'sopcast',"lib"),os.path.join(pastaperfil,'sopcast','sp-sc-auth'),sop,str(LOCAL_PORT),str(VIDEO_PORT),">",SPSC_LOG]
-
-		elif settings.getSetting('openeleci386') == "true":
-        		if settings.getSetting('sop_debug_mode') == "false":
-        			cmd = [os.path.join(pastaperfil,'sopcast','lib/ld-linux.so.2'),"--library-path",os.path.join(pastaperfil,'sopcast',"lib"),os.path.join(pastaperfil,'sopcast','sp-sc-auth'),sop,str(LOCAL_PORT),str(VIDEO_PORT)]
-			else: 
-				cmd = [os.path.join(pastaperfil,'sopcast','lib/ld-linux.so.2'),"--library-path",os.path.join(pastaperfil,'sopcast',"lib"),os.path.join(pastaperfil,'sopcast','sp-sc-auth'),sop,str(LOCAL_PORT),str(VIDEO_PORT),">",SPSC_LOG]
-
-		else: 
+				if settings.getSetting('sop_debug_mode') == "false":
+					cmd = [os.path.join(pastaperfil,'sopcast','ld-linux.so.2'),'--library-path',os.path.join(pastaperfil,'sopcast','lib'),os.path.join(pastaperfil,'sopcast',SPSC_BINARY), sop, str(LOCAL_PORT), str(VIDEO_PORT)]
+				else:
+					cmd = [os.path.join(pastaperfil,'sopcast','ld-linux.so.2'),'--library-path',os.path.join(pastaperfil,'sopcast','lib'),os.path.join(pastaperfil,'sopcast',SPSC_BINARY), sop, str(LOCAL_PORT), str(VIDEO_PORT),">",SPSC_LOG]
+		elif xbmc.getCondVisibility('System.Platform.OSX'):
 			if settings.getSetting('sop_debug_mode') == "false":
-				cmd = [os.path.join(pastaperfil,'sopcast','ld-linux.so.2'),'--library-path',os.path.join(pastaperfil,'sopcast','lib'),os.path.join(pastaperfil,'sopcast',SPSC_BINARY), sop, str(LOCAL_PORT), str(VIDEO_PORT)]
+				cmd = [os.path.join(pastaperfil,'sopcast','sp-sc-auth'), str(sop), str(LOCAL_PORT), str(VIDEO_PORT)]
 			else:
-				cmd = [os.path.join(pastaperfil,'sopcast','ld-linux.so.2'),'--library-path',os.path.join(pastaperfil,'sopcast','lib'),os.path.join(pastaperfil,'sopcast',SPSC_BINARY), sop, str(LOCAL_PORT), str(VIDEO_PORT),">",SPSC_LOG]
-        elif xbmc.getCondVisibility('System.Platform.OSX'):
-        	if settings.getSetting('sop_debug_mode') == "false":
-			cmd = [os.path.join(pastaperfil,'sopcast','sp-sc-auth'), str(sop), str(LOCAL_PORT), str(VIDEO_PORT)]
-		else:
-			cmd = [os.path.join(pastaperfil,'sopcast','sp-sc-auth'), str(sop), str(LOCAL_PORT), str(VIDEO_PORT),">",str(SPSC_LOG)]	
-        elif xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
-        	if settings.getSetting('sop_debug_mode') == "false":
-			cmd = [str(settings.getSetting('android_sopclient')), str(sop), str(LOCAL_PORT), str(VIDEO_PORT)]
-		else:
-			cmd = [str(settings.getSetting('android_sopclient')), str(sop), str(LOCAL_PORT), str(VIDEO_PORT),">",str(SPSC_LOG)]	
-        print(cmd)
-        spsc = subprocess.Popen(cmd, shell=False, bufsize=BUFER_SIZE,stdin=None, stdout=None, stderr=None)
-        listitem = xbmcgui.ListItem(name, iconImage=iconimage, thumbnailImage=iconimage)
-        listitem.setLabel(name)
-        listitem.setInfo('video', {'Title': name})
-        url = "http://"+LOCAL_IP+":"+str(VIDEO_PORT)+"/"
-	listitem.setPath(path=url)
-        xbmc.sleep(int(settings.getSetting('wait_time')))
-        res=False
-        counter=50
-        ret = mensagemprogresso.create(traducao(40000),"SopCast",traducao(40039))
-        mensagemprogresso.update(0)
-        while counter > 0 and spsc.pid:
-	    if mensagemprogresso.iscanceled():
-	    	mensagemprogress.close()
-           	try: os.kill(self.spsc_pid,9)
-            	except: pass
-                break
-            xbmc.sleep(400)
-            counter -= 1
-	    mensagemprogresso.update(int((1-(counter/50.0))*100))
-            try:
-                urllib2.urlopen(url)
-                counter=0
-                res=sop_sleep(200 , spsc.pid)
-                break
-            except:pass
+				cmd = [os.path.join(pastaperfil,'sopcast','sp-sc-auth'), str(sop), str(LOCAL_PORT), str(VIDEO_PORT),">",str(SPSC_LOG)]	
+		elif xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
+			if settings.getSetting('sop_debug_mode') == "false":
+				cmd = [str(settings.getSetting('android_sopclient')), str(sop), str(LOCAL_PORT), str(VIDEO_PORT)]
+			else:
+				cmd = [str(settings.getSetting('android_sopclient')), str(sop), str(LOCAL_PORT), str(VIDEO_PORT),">",str(SPSC_LOG)]	
+		print(cmd)
+				
+		#Check if another instance of the sopcast executable might still be running on the same port. Attempt to connect to server and video ports giving the user the choice before creating a new subprocess
+		try:
+			sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+			sock.connect((LOCAL_IP, int(LOCAL_PORT)))
+			sock.close()
+			sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+			sock.connect((LOCAL_IP, int(VIDEO_PORT)))
+			sock.close()
+			existing_instance = True
+		except: existing_instance = False
+		if existing_instance == True:
+			option = xbmcgui.Dialog().yesno(traducao(40000), traducao(70000),traducao(70001))
+			if not option:
+				if xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
+					os.system("kill $(ps aux | grep '[s]opclient' | awk '{print $2}')")
+				elif xbmc.getCondVisibility('System.Platform.Linux'):
+					os.system("kill $(ps aux | grep '[s]p-sc-auth' | awk '{print $1}')") #openelec
+					os.system("kill $(ps aux | grep '[s]p-sc-auth' | awk '{print $2}')")
+				elif xbmc.getCondVisibility('System.Platform.OSX'):
+					os.system("kill $(ps aux | grep '[s]p-sc-auth')")
+			else: pass
+		else: pass
+		
+		#opening the subprocess
+
+		spsc = subprocess.Popen(cmd, shell=False, bufsize=BUFER_SIZE,stdin=None, stdout=None, stderr=None)
+		listitem = xbmcgui.ListItem(name, iconImage=iconimage, thumbnailImage=iconimage)
+		listitem.setLabel(name)
+		listitem.setInfo('video', {'Title': name})
+		url = "http://"+LOCAL_IP+":"+str(VIDEO_PORT)+"/"
+		listitem.setPath(path=url)
+		xbmc.sleep(int(settings.getSetting('wait_time')))
+		res=False
+		counter=50
+		ret = mensagemprogresso.create(traducao(40000),"SopCast",traducao(40039))
+		mensagemprogresso.update(0)
+		while counter > 0 and spsc.pid:
+			if mensagemprogresso.iscanceled():
+				mensagemprogress.close()
+				try: os.kill(self.spsc_pid,9)
+				except: pass
+				break
+			xbmc.sleep(400)
+			counter -= 1
+			mensagemprogresso.update(int((1-(counter/50.0))*100))
+			try:
+				urllib2.urlopen(url)
+				counter=0
+				res=sop_sleep(200 , spsc.pid)
+				break
+			except:print("Other instance of sopcast is still running")
                     
-        if res:
-	    mensagemprogresso.update(100)
-	    xbmcplugin.setResolvedUrl(int(sys.argv[1]),True,listitem)
-            player = streamplayer(xbmc.PLAYER_CORE_AUTO , spsc_pid=spsc.pid , listitem=listitem)
-            if int(sys.argv[1]) < 0:
-            	player.play(url, listitem)
-            while player._playbackLock:
-                xbmc.sleep(500)
-        else: xbmc.executebuiltin("Notification(%s,%s,%i)" % (traducao(40000), traducao(40040), 1))
-    except: pass
-    try: os.kill(self.spsc_pid,9)
-    except: pass
-    xbmc.sleep(100)
-    try:os.system("killall -9 "+SPSC_BINARY)
-    except:pass
-    xbmc.sleep(100)
-    try:spsc.kill()
-    except:pass
-    xbmc.sleep(100)
-    try:spsc.wait()
-    except:pass
-    xbmc.sleep(100)           
-    try: os.kill(spsc.pid,9)
-    except: pass
-    mensagemprogresso.close()
-    print("Player ended at last")
+		if res:
+			mensagemprogresso.update(100)
+			xbmcplugin.setResolvedUrl(int(sys.argv[1]),True,listitem)
+			player = streamplayer(xbmc.PLAYER_CORE_AUTO , spsc_pid=spsc.pid , listitem=listitem)
+			if int(sys.argv[1]) < 0:
+				player.play(url, listitem)
+			while player._playbackLock:
+				xbmc.sleep(500)
+		else: xbmc.executebuiltin("Notification(%s,%s,%i)" % (traducao(40000), traducao(40040), 1))
+
+	except: pass
+	try: os.kill(self.spsc_pid,9)
+	except: pass
+	xbmc.sleep(100)
+	try:os.system("killall -9 "+SPSC_BINARY)
+	except:pass
+	xbmc.sleep(100)
+	try:spsc.kill()
+	except:pass
+	xbmc.sleep(100)
+	try:spsc.wait()
+	except:pass
+	xbmc.sleep(100)           
+	try: os.kill(spsc.pid,9)
+	except: pass
+	mensagemprogresso.close()
+	print("Player ended at last")
     
     
 """ Sopcast Player classes """   
