@@ -68,8 +68,7 @@ def addon_parsers_menu():
 	for key in sorted(parser_dict.keys()):
 		addDir(key,MainURL,401,parser_dict[key][1],total_parsers,True,parser=parser_dict[key][0])
 	addDir(traducao(400011),MainURL,402,addonpath + art + 'plus-menu.png',2,False)
-	xbmc.executebuiltin("Container.SetViewMode(51)")
-	
+
 def add_new_parser(url):
 	if not url:
 		opcao= xbmcgui.Dialog().yesno(traducao(40000),traducao(400012),"","",traducao(40124),traducao(40125))
