@@ -62,6 +62,9 @@ def advanced_menu():
 	else: eligible = False
 	if eligible and xbmcvfs.exists(os.path.join(pastaperfil,'acestream','ace','ACEStream','values')):
 		addLink('[COLOR orange]Acestream engine settings:[/COLOR]','',addonpath + art + 'settings_menu.png')
+		acestream_cachefolder = os.path.join(os.getenv("HOME"),'.ACEStream')
+		acestream_cache_size = str(sum(os.path.getsize(f) for f in os.listdir(acestream_cachefolder) if os.path.isfile(f)))
+		addDir('[B][COLOR orange]' + traducao(70003) + '[/B][/COLOR] [' + acestream_cache_size + ']',acestream_cachefolder,307,'p2p',1,False)
 		try:
 			porta = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","port.txt"))
 		except: porta = "N/A"
@@ -195,4 +198,10 @@ def remove_lock():
 	xbmcvfs.delete(lock_file)
 	mensagemok(traducao(40000),traducao(40069))
 	xbmc.executebuiltin("Container.Refresh")
+	
+def clear_cache(url):
+	dirs, files = xbmcvfs.listdir(url)
+	for fich in files:
+		xbmcvfs.delete(os.path.join(url,fich))
+	xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), traducao(40161), 1,addonpath+"/icon.png"))
 
