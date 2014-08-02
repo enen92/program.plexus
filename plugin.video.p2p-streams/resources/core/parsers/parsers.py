@@ -110,7 +110,7 @@ def add_new_parser(url):
 					if not xbmcvfs.exists(parser_folder): xbmcvfs.mkdir(parser_folder)
 					text = {}
 					if module_up: text['url'] = search
-					if md5_up: text['md5'] = abrir_url(md5checksum)
+					if md5_up: text['md5'] = get_page_source(md5checksum)
 					if text:
 						try:
 							module_file = os.path.join(parser_folder,modulename + '.txt')
@@ -136,7 +136,7 @@ def add_new_parser(url):
 		if not xbmcvfs.exists(parser_folder): xbmcvfs.mkdir(parser_folder)
 		text = {}
 		if module_up: text['url'] = url
-		if md5_up: text['md5'] = abrir_url(md5checksum)
+		if md5_up: text['md5'] = get_page_source(md5checksum)
 		if text:
 			module_file = os.path.join(parser_folder,modulename + '.txt')
 			module_tar_location = os.path.join(parser_core_folder,modulename+'.tar.gz')
@@ -188,7 +188,7 @@ def sync_parser():
 				installed_md5 = text['md5']
 				module_url = text['url']
 				module_md5 = text['url'].replace('.tar.gz','.md5')
-				try: current_md5 = abrir_url(module_md5)
+				try: current_md5 = get_page_source(module_md5)
 				except: current_md5 = installed_md5; error = True
 				if current_md5 != installed_md5:
 					print('Module requires update ' + str(file.replace('.txt','')) + ' ' + str(installed_md5) + ' != ' + str(current_md5))

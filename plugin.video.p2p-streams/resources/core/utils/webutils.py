@@ -10,7 +10,7 @@
     
     Functions:
     
-    abrir_url -> Get a webpage source code through urllib2
+    get_page_source -> Get a webpage source code through urllib2
     mechanize_browser(url) -> Get a webpage source code through mechanize module. To avoid DDOS protections.
     makeRequest(url, headers=None) -> check if a page is up and retrieve its source code
     clean(text) -> Remove specific characters from the page source
@@ -56,7 +56,7 @@ class download_tools():
 		dp.update(100)
 		dp.close()
 
-def abrir_url(url):
+def get_page_source(url):
       req = urllib2.Request(url)
       req.add_header('User-Agent', user_agent)
       response = urllib2.urlopen(req)

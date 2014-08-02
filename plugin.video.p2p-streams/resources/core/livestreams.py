@@ -86,7 +86,7 @@ def addlista():
 			if encode.split(".")[-1] != "xml" and encode.split(".")[-1] != "m3u": mensagemok(traducao(40000),traducao(40128)); sys.exit(0)
 			else:
 				try:
-					code = abrir_url(search)
+					code = get_page_source(search)
 				except:
 					mensagemok(traducao(40000),traducao(40128))
 					sys.exit(0)
@@ -126,13 +126,17 @@ def list_type(url):
 	else: pass
 	
 def parse_m3u(url):
-	if "http" in url: content = abrir_url(url)
+	if "http" in url: content = get_page_source(url)
 	else: content = readfile(url)
 	match = re.compile('#EXTINF:0,(.*?)\n(.*)').findall(content)
 	for channel_name,stream_url in match:
 		if 'plugin://' in stream_url: 
 			stream_url = 'XBMC.RunPlugin('+stream_url+')'
 			addDir(channel_name,stream_url,106,'',1,False)
+		elif 'sop://' in stream_url:
+			addDir(channel_name,stream_url,'',2,False)
+		elif ('acestream://' in stream_url) or ('.acelive' in stream_url) or ('.torrent' in stream_url):
+			addDir(channel_name,stream_url,'',1,False)
 		else: addLink(channel_name,stream_url,'')
 
 
@@ -141,7 +145,7 @@ def get_groups(url):
     try:
         print("Sopcast xml-type list detected")
 	if "http" in url:
-		source = abrir_url(url)
+		source = get_page_source(url)
 		save(os.path.join(pastaperfil,"working.xml"),source)
 		workingxml = os.path.join(pastaperfil,"working.xml")
 	else:
@@ -175,7 +179,7 @@ def get_groups(url):
 
 def get_channels(name,url):
         from xml.etree import ElementTree
-	source = abrir_url(url)
+	source = get_page_source(url)
 	save(os.path.join(pastaperfil,"working.xml"),source)
 	chlist_tree = ElementTree.parse(os.path.join(pastaperfil,"working.xml"))
 	LANGUAGE = "en"
