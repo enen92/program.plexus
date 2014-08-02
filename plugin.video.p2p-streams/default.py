@@ -126,7 +126,7 @@ elif mode==303: backup_advancedxml()
 elif mode==304: delete_advancedxml()
 elif mode==305: set_engine_setting(url)
 elif mode==306: remove_lock()
-#from 400-499 Advanced functions
+#from 400-499 Site parsers
 elif mode==400: parsers.addon_parsers_menu()
 elif mode==401:
 	package = 'resources.core.parsers.' + parser
