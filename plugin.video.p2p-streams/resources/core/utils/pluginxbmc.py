@@ -23,6 +23,7 @@ mensagemok = xbmcgui.Dialog().ok
 mensagemprogresso = xbmcgui.DialogProgress()
 pastaperfil = xbmc.translatePath(settings.getAddonInfo('profile')).decode('utf-8')
 MainURL = 'https://code.google.com/p/p2p-strm/'
+addon_icon    = settings.getAddonInfo('icon')
       
 def translate(text):
       return settings.getLocalizedString(text).encode('utf-8')
