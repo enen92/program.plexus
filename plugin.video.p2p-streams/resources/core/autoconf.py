@@ -57,7 +57,7 @@ def autoconf():
 					acestream_rpi = acestream_generic_raspberry
 					settings.setSetting('python_cmd',value='python2')
 				else:
-					mensagemok(traducao(40000),traducao(400007),traducao(400008))
+					mensagemok(translate(40000),translate(400007),translate(400008))
 					OS_list = ["OpenELEC","Raspbmc","Xbian","Pipplware","Arch Linux Arm"]
 					url_packagerpi_list = [acestream_openelec_raspberry, acestream_generic_raspberry, acestream_generic_raspberry,acestream_generic_raspberry, acestream_generic_raspberry]
 					OS_Rpi_choose = xbmcgui.Dialog().select
@@ -70,7 +70,7 @@ def autoconf():
 			#Sop
 
 			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
-			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,traducao(40025),traducao(40000))
+			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(40025),translate(40000))
 			import tarfile            
 			if tarfile.is_tarfile(SPSC_KIT):
 				path_libraries = os.path.join(pastaperfil,"sopcast")
@@ -80,7 +80,7 @@ def autoconf():
 
             		#Ace
 			SPSC_KIT = os.path.join(addonpath,acestream_rpi.split("/")[-1])
-			download_tools().Downloader(acestream_rpi,SPSC_KIT,traducao(40026),traducao(40000))
+			download_tools().Downloader(acestream_rpi,SPSC_KIT,translate(40026),translate(40000))
         
 			if tarfile.is_tarfile(SPSC_KIT):
 				path_libraries = os.path.join(pastaperfil,"acestream")
@@ -97,7 +97,7 @@ def autoconf():
 			elif os.path.isfile("/etc/xbian_version"):
 				OS_Choose = "Xbian"
 			else:
-                		mensagemok(traducao(40000),traducao(40109),traducao(40110))
+                		mensagemok(translate(40000),translate(40109),translate(40110))
                 		OS_list = ["MXLinux","OpenELEC","Xbian"]
                 		choose=xbmcgui.Dialog().select('Select your OS',OS_list)
                 		if choose > -1:
@@ -111,7 +111,7 @@ def autoconf():
 				sopcast_installed = False
                			print("Detected MXLinux armv7")
                			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
-               			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,traducao(40025),traducao(40000))
+               			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(40025),translate(40000))
                			import tarfile
 				if tarfile.is_tarfile(SPSC_KIT):
 					path_libraries = os.path.join(pastaperfil,"sopcast")
@@ -121,7 +121,7 @@ def autoconf():
 					sopcast_installed = True
 
 				SPSC_KIT = os.path.join(addonpath,acestream_mxlinux.split("/")[-1])
-				download_tools().Downloader(acestream_mxlinux,SPSC_KIT,traducao(40026),traducao(40000))
+				download_tools().Downloader(acestream_mxlinux,SPSC_KIT,translate(40026),translate(40000))
         			if tarfile.is_tarfile(SPSC_KIT):
 					path_libraries = os.path.join(pastaperfil,"acestream")
 					download_tools().extract(SPSC_KIT,path_libraries)
@@ -139,7 +139,7 @@ def autoconf():
 				sopcast_installed = False
                 		print("Openelec armv7 platform detected")
                 		SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
-                		download_tools().Downloader(sopcast_raspberry,SPSC_KIT,traducao(40025),traducao(40000))
+                		download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(40025),translate(40000))
 				if tarfile.is_tarfile(SPSC_KIT):
 					path_libraries = os.path.join(pastaperfil,"sopcast")
 					download_tools().extract(SPSC_KIT,path_libraries)
@@ -147,7 +147,7 @@ def autoconf():
 					download_tools().remove(SPSC_KIT)
 					sopcast_installed = True
 				SPSC_KIT = os.path.join(addonpath,acestream_armv7_openelec.split("/")[-1])
-				download_tools().Downloader(acestream_armv7_openelec,SPSC_KIT,traducao(40026),traducao(40000))
+				download_tools().Downloader(acestream_armv7_openelec,SPSC_KIT,translate(40026),translate(40000))
         			if tarfile.is_tarfile(SPSC_KIT):
 					path_libraries = os.path.join(pastaperfil,"acestream")
 					download_tools().extract(SPSC_KIT,path_libraries)
@@ -164,7 +164,7 @@ def autoconf():
 				sopcast_installed = False
                			print("Xbian armv7 platform detected")
                			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
-               			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,traducao(40025),traducao(40000))
+               			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(40025),translate(40000))
 				if tarfile.is_tarfile(SPSC_KIT):
 					path_libraries = os.path.join(pastaperfil,"sopcast")
 					download_tools().extract(SPSC_KIT,path_libraries)
@@ -172,7 +172,7 @@ def autoconf():
 					download_tools().remove(SPSC_KIT)
 					sopcast_installed = True
 				SPSC_KIT = os.path.join(addonpath,acestream_armv7_xbian.split("/")[-1])
-				download_tools().Downloader(acestream_armv7_xbian,SPSC_KIT,traducao(40026),traducao(40000))
+				download_tools().Downloader(acestream_armv7_xbian,SPSC_KIT,translate(40026),translate(40000))
        				if tarfile.is_tarfile(SPSC_KIT):
 					path_libraries = os.path.join(pastaperfil,"acestream")
 					download_tools().extract(SPSC_KIT,path_libraries)
@@ -188,7 +188,7 @@ def autoconf():
 			settings.setSetting('openelecx86_64',value='true')
 			print("Detected OpenELEC x86_64")
 			SPSC_KIT = os.path.join(addonpath,openelecx86_64_package.split("/")[-1])
-			download_tools().Downloader(openelecx86_64_package,SPSC_KIT,traducao(40112),traducao(40000))
+			download_tools().Downloader(openelecx86_64_package,SPSC_KIT,translate(40112),translate(40000))
 			import tarfile
 			if tarfile.is_tarfile(SPSC_KIT):
 				download_tools().extract(SPSC_KIT,pastaperfil)
@@ -200,7 +200,7 @@ def autoconf():
 			settings.setSetting('openeleci386',value='true')
 			print("Detected OpenELEC i386")
 			SPSC_KIT = os.path.join(addonpath,openeleci386_package.split("/")[-1])
-			download_tools().Downloader(openeleci386_package,SPSC_KIT,traducao(40112),traducao(40000))
+			download_tools().Downloader(openeleci386_package,SPSC_KIT,translate(40112),translate(40000))
 			import tarfile
 			if tarfile.is_tarfile(SPSC_KIT):
 				download_tools().extract(SPSC_KIT,pastaperfil)
@@ -210,17 +210,17 @@ def autoconf():
 	
 		else:
 			if os.uname()[4] == "x86_64":
-				opcao= xbmcgui.Dialog().yesno(traducao(40000), traducao(40113))
+				opcao= xbmcgui.Dialog().yesno(translate(40000), translate(40113))
 				if opcao: 
 					settings.setSetting('openelecx86_64',value='true')
 					autoconf()
 			elif os.uname()[4] == "i386" or os.uname()[4] == "i686":
-				opcao= xbmcgui.Dialog().yesno(traducao(40000), traducao(600023))
+				opcao= xbmcgui.Dialog().yesno(translate(40000), translate(600023))
 				if opcao: 
 					settings.setSetting('openeleci386',value='true')
 					autoconf()
 
-			else: mensagemok(traducao(40000),traducao(40056))
+			else: mensagemok(translate(40000),translate(40056))
 			
 
 			#Linux but not openelec i386 nor openelec x86_64 - General Linux platforms configuration
@@ -232,7 +232,7 @@ def autoconf():
             		#Sop
             		#Download and extract sopcast-bundle
 				SPSC_KIT = os.path.join(addonpath,sopcast_linux_generico.split("/")[-1])
-				download_tools().Downloader(sopcast_linux_generico,SPSC_KIT,traducao(40025),traducao(40000))
+				download_tools().Downloader(sopcast_linux_generico,SPSC_KIT,translate(40025),translate(40000))
 				import tarfile
 				if tarfile.is_tarfile(SPSC_KIT):
 					path_libraries = os.path.join(pastaperfil,"sopcast")
@@ -270,7 +270,7 @@ def autoconf():
 							proc.wait()
 						except:pass
 					else:
-						mensagemok(AceStream,traducao(40027),traducao(40028) + linkwiki,traducao(40029))
+						mensagemok(AceStream,translate(40027),translate(40028) + linkwiki,translate(40029))
 						sys.exit(0)
 				settings.setSetting('autoconfig',value='false')
 
@@ -282,7 +282,7 @@ def autoconf():
 		import ctypes
                 is_admin=ctypes.windll.shell32.IsUserAnAdmin() != 0
                 if is_admin == False:
-                    mensagemok(traducao(40000),traducao(40158),traducao(40159))
+                    mensagemok(translate(40000),translate(40158),translate(40159))
                 else:
 		    import subprocess
                     cmd = ['sc','delete','sopcastp2p']
@@ -290,8 +290,8 @@ def autoconf():
                     for line in proc.stdout:
                         print("cmd out: " + line.rstrip())
                     xbmc.sleep(1000)
-                    ret = mensagemprogresso.create(traducao(40000),traducao(40000))
-                    mensagemprogresso.update(0,traducao(40160),"  ")
+                    ret = mensagemprogresso.create(translate(40000),translate(40000))
+                    mensagemprogresso.update(0,translate(40160),"  ")
                     xbmc.sleep(1000)
                     import _winreg
                     aReg = _winreg.ConnectRegistry(None,_winreg.HKEY_LOCAL_MACHINE)
@@ -301,14 +301,14 @@ def autoconf():
                         sopcast_executable = value
                         print("Installation executable of sopcast was found: " + sopcast_executable)
                         _winreg.CloseKey(aKey)
-                        mensagemprogresso.update(10,traducao(40160),traducao(40161))
+                        mensagemprogresso.update(10,translate(40160),translate(40161))
                     except:
                         sopcast_executable = ""
-                        mensagemok(traducao(40000),traducao(40162),traducao(40163))
+                        mensagemok(translate(40000),translate(40162),translate(40163))
                     if not sopcast_executable: pass
                     else:
                         xbmc.sleep(1000)
-                        mensagemprogresso.update(20,traducao(40164),"  ")
+                        mensagemprogresso.update(20,translate(40164),"  ")
                         xbmc.sleep(1000)
                         print ("Getting windows users IDS")
                         aReg = _winreg.ConnectRegistry(None,_winreg.HKEY_LOCAL_MACHINE)
@@ -331,15 +331,15 @@ def autoconf():
                             except:
                                 pass
                         if not users:
-                            mensagemok(traducao(40000),traducao(40165))
+                            mensagemok(translate(40000),translate(40165))
                         else:
-                            mensagemprogresso.update(30,traducao(40164),traducao(40161))
+                            mensagemprogresso.update(30,translate(40164),translate(40161))
                             xbmc.sleep(200)
-                            mensagemprogresso.update(30,traducao(40166),"   ")
+                            mensagemprogresso.update(30,translate(40166),"   ")
                             xbmc.sleep(1000)
                             print("System Users", users)
 			    srvanytargz = os.path.join(sopcast_executable.replace("SopCast.exe",""),"srvany.tar.gz")                               
-                            download_tools().Downloader(srvany_executable,srvanytargz,traducao(40167),traducao(40000)) 
+                            download_tools().Downloader(srvany_executable,srvanytargz,translate(40167),translate(40000)) 
                             xbmc.sleep(1000)
                             import tarfile
                             if tarfile.is_tarfile(srvanytargz):
@@ -347,9 +347,9 @@ def autoconf():
                                 download_tools().extract(srvanytargz,path_libraries)
                                 download_tools().remove(srvanytargz)
                             xbmc.sleep(1000)
-                            ret = mensagemprogresso.create(traducao(40000),traducao(40000))
+                            ret = mensagemprogresso.create(translate(40000),translate(40000))
                             xbmc.sleep(200)
-                            mensagemprogresso.update(35,traducao(40168),"  ")
+                            mensagemprogresso.update(35,translate(40168),"  ")
                             xbmc.sleep(1000)
                             import subprocess
                             cmd = ['sc','create','sopcastp2p','binpath=',os.path.join(os.path.join(sopcast_executable.replace("SopCast.exe","")),'srvany.exe')]
@@ -359,11 +359,11 @@ def autoconf():
                                 print ("cmd out: " + line.rstrip())
                                 servicecreator = True
                             if servicecreator == False:
-                                mensagemok(traducao(40000),traducao(40169))
+                                mensagemok(translate(40000),translate(40169))
                             else:
-                                mensagemprogresso.update(40,traducao(40168),traducao(40161))
+                                mensagemprogresso.update(40,translate(40168),translate(40161))
                                 xbmc.sleep(1000)
-                                mensagemprogresso.update(45,traducao(40170),"  ")
+                                mensagemprogresso.update(45,translate(40170),"  ")
                                 xbmc.sleep(1000)
                                 print("Trying to modify regedit....")
                                 try:
@@ -372,15 +372,15 @@ def autoconf():
                                     _winreg.SetValueEx(key, 'AppDirectory', 0, _winreg.REG_SZ, os.path.join(sopcast_executable.replace("SopCast.exe","")))
                                     _winreg.SetValueEx(key, 'Application', 0, _winreg.REG_SZ, os.path.join(os.path.join(sopcast_executable.replace("SopCast.exe","")),"SopCast.exe"))
                                     _winreg.SetValueEx(key, 'AppParameters', 0, _winreg.REG_SZ, "sop://")
-                                    mensagemprogresso.update(50,traducao(40170), traducao(40161))
+                                    mensagemprogresso.update(50,translate(40170), translate(40161))
                                     regedit = True
                                 except:
-                                    mensagemok(traducao(40000),traducao(40171))
+                                    mensagemok(translate(40000),translate(40171))
                                     regedit = False
                                 if regedit == False: pass
                                 else:
                                     xbmc.sleep(1000)
-                                    mensagemprogresso.update(50,traducao(40172), "   ")
+                                    mensagemprogresso.update(50,translate(40172), "   ")
                                     cmd = ['sc','sdshow','sopcastp2p']
                                     proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
                                     lines = []
@@ -388,7 +388,7 @@ def autoconf():
 					print(line.rstrip())
                                         if line.rstrip() != "" and "(" in line.rstrip(): lines.append(line.rstrip())
                                         else: pass
-                                    if len(lines) != 1: mensagemok(traducao(40000),traducao(40173))
+                                    if len(lines) != 1: mensagemok(translate(40000),translate(40173))
                                     else:
                                         linha_arr = []
                                         for user in users:
@@ -401,37 +401,37 @@ def autoconf():
                                         print("Final line: " + linha_final)
                                         permissions = False
                                         xbmc.sleep(500)
-                                        mensagemprogresso.update(60,traducao(40172), traducao(40161))
+                                        mensagemprogresso.update(60,translate(40172), translate(40161))
                                         xbmc.sleep(500)
-                                        mensagemprogresso.update(60,traducao(40174), "   ")
+                                        mensagemprogresso.update(60,translate(40174), "   ")
                                         cmd = ['sc','sdset','sopcastp2p',linha_final]
                                         proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
                                         for line in proc.stdout:
                                             print(line.rstrip())
                                             permissions = True
-                                        if permissions == False: mensagemok(traducao(40000),traducao(40175))
+                                        if permissions == False: mensagemok(translate(40000),translate(40175))
                                         else:
-                                            mensagemprogresso.update(70,traducao(40174), traducao(40161))
+                                            mensagemprogresso.update(70,translate(40174), translate(40161))
                                             xbmc.sleep(1000)
-                                            mensagemprogresso.update(70,traducao(40176), "   ")
+                                            mensagemprogresso.update(70,translate(40176), "   ")
                                             print("Trying to set sopcastp2p service regedit permissions...")
-                                            download_tools().Downloader(srvany_permissions,os.path.join(pastaperfil,"sopcastp2p-permissions.txt"),traducao(40177),traducao(40000))
+                                            download_tools().Downloader(srvany_permissions,os.path.join(pastaperfil,"sopcastp2p-permissions.txt"),translate(40177),translate(40000))
                                             xbmc.sleep(500)
-                                            ret = mensagemprogresso.create(traducao(40000),traducao(40000))
+                                            ret = mensagemprogresso.create(translate(40000),translate(40000))
                                             xbmc.sleep(500)
-                                            mensagemprogresso.update(80,traducao(40178), "   ")
+                                            mensagemprogresso.update(80,translate(40178), "   ")
                                             xbmc.sleep(1000)
                                             cmd = ['regini',os.path.join(pastaperfil,"sopcastp2p-permissions.txt")]
                                             proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
                                             for line in proc.stdout:
                                                 print(line.rstrip())
-                                            mensagemprogresso.update(90,traducao(40178), traducao(40178))
-                                            mensagemprogresso.update(100,traducao(40179), "   ")
+                                            mensagemprogresso.update(90,translate(40178), translate(40178))
+                                            mensagemprogresso.update(100,translate(40179), "   ")
                                             xbmc.sleep(2000)
                                             mensagemprogresso.close()
         #Ace
 		SPSC_KIT = os.path.join(addonpath,acestream_windows.split("/")[-1])
-		download_tools().Downloader(acestream_windows,SPSC_KIT,traducao(40026),traducao(40000))
+		download_tools().Downloader(acestream_windows,SPSC_KIT,translate(40026),translate(40000))
 		import tarfile
 		if tarfile.is_tarfile(SPSC_KIT):
 			path_libraries = os.path.join(pastaperfil)
@@ -454,7 +454,7 @@ def autoconf():
 			if not xbmcvfs.exists(pastaperfil):
 				xbmcvfs.mkdir(pastaperfil)		
 			MAC_KIT = os.path.join(addonpath,mac_package.split("/")[-1])
-			download_tools().Downloader(mac_package,MAC_KIT,traducao(40112),traducao(40000))
+			download_tools().Downloader(mac_package,MAC_KIT,translate(40112),translate(40000))
 			import tarfile
 			if tarfile.is_tarfile(MAC_KIT):
 				path_libraries = os.path.join(pastaperfil)
@@ -466,7 +466,7 @@ def autoconf():
 				os.chmod(sp_sc_auth, st.st_mode | stat.S_IEXEC)
 				settings.setSetting('autoconfig',value='false')
 		else:
-			mensagemok(traducao(40000),traducao(600014))
+			mensagemok(translate(40000),translate(600014))
 			sys.exit(0)
 				
 	elif xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
@@ -510,52 +510,52 @@ def autoconf():
 				import stat
 				os.chmod(binary_path, st.st_mode | stat.S_IEXEC)
 				settings.setSetting('android_sopclient',value=binary_path)
-				opcao= xbmcgui.Dialog().yesno(traducao(40000), traducao(50011),traducao(50012))
+				opcao= xbmcgui.Dialog().yesno(translate(40000), translate(50011),translate(50012))
 				if not opcao:
 					settings.setSetting('external_sopcast',value='1')
 					settings.setSetting('force_android',value='true')
 					sopcast_installed = True
-					mensagemok(traducao(40000),traducao(50014))
+					mensagemok(translate(40000),translate(50014))
 				else:
-					mensagemok(traducao(40000),traducao(50013))
+					mensagemok(translate(40000),translate(50013))
 					if xbmcvfs.exists(os.path.join("sdcard","Download")):
 						pasta = os.path.join("sdcard","Download")
 						sopfile = os.path.join("sdcard","Download",sopcast_apk.split("/")[-1])
 					else:
 						dialog = xbmcgui.Dialog()
-						pasta = dialog.browse(int(0), traducao(40190), 'myprograms')
+						pasta = dialog.browse(int(0), translate(40190), 'myprograms')
 						sopfile = os.path.join(pasta,sopcast_apk.split("/")[-1])
-					download_tools().Downloader(sopcast_apk,sopfile,traducao(40073),traducao(40000))
+					download_tools().Downloader(sopcast_apk,sopfile,translate(40073),translate(40000))
 					import tarfile
 					if tarfile.is_tarfile(sopfile):
 						download_tools().extract(sopfile,pasta)
 						download_tools().remove(sopfile)
-					mensagemok(traducao(40000),traducao(50015),pasta,traducao(50016))
+					mensagemok(translate(40000),translate(50015),pasta,translate(50016))
 					sopcast_installed = True
 					settings.setSetting('external_sopcast',value='0')
-					mensagemok(traducao(40000),traducao(50014))
+					mensagemok(translate(40000),translate(50014))
 
 		else:
-			mensagemok(traducao(40000),traducao(50017))
+			mensagemok(translate(40000),translate(50017))
 
 		#acestream config for android
 
 		if sopcast_installed == True:
-			mensagemok(traducao(40000),traducao(50018),traducao(50019),traducao(50020))
+			mensagemok(translate(40000),translate(50018),translate(50019),translate(50020))
 			if xbmcvfs.exists(os.path.join("sdcard","Download")):
 				pasta = os.path.join("sdcard","Download")
 				acefile = os.path.join("sdcard","Download",acestreamengine_apk.split("/")[-1])
 			else:
 				dialog = xbmcgui.Dialog()
-				pasta = dialog.browse(int(0), traducao(40190), 'myprograms')
+				pasta = dialog.browse(int(0), translate(40190), 'myprograms')
 				acefile = os.path.join(pasta,acestreamengine_apk.split("/")[-1])
-			download_tools().Downloader(acestreamengine_apk,acefile,traducao(40072),traducao(40000))
+			download_tools().Downloader(acestreamengine_apk,acefile,translate(40072),translate(40000))
 			import tarfile
 			if tarfile.is_tarfile(acefile):
 				download_tools().extract(acefile,pasta)
 				download_tools().remove(acefile)
 			xbmc.sleep(2000)
-			mensagemok(traducao(40000),traducao(50021),pasta,traducao(50016))
-			mensagemok(traducao(40000),traducao(50022))
-			mensagemok(traducao(40000),traducao(50023),traducao(50024),traducao(50025))
+			mensagemok(translate(40000),translate(50021),pasta,translate(50016))
+			mensagemok(translate(40000),translate(50022))
+			mensagemok(translate(40000),translate(50023),translate(50024),translate(50025))
 			settings.setSetting('autoconfig',value='false')	

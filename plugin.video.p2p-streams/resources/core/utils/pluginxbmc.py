@@ -6,7 +6,7 @@
     
     Functions:
     
-    traducao(texto) -> Translate a string
+    translate(text) -> Translate a string based on the addon language strings
    	
 """
     
@@ -23,11 +23,7 @@ mensagemok = xbmcgui.Dialog().ok
 mensagemprogresso = xbmcgui.DialogProgress()
 pastaperfil = xbmc.translatePath(settings.getAddonInfo('profile')).decode('utf-8')
 MainURL = 'https://code.google.com/p/p2p-strm/'
-
-#to be removed
-def traducao(texto):
-      return settings.getLocalizedString(texto).encode('utf-8')
       
 def translate(text):
-	return traducao(text)
+      return settings.getLocalizedString(texto).encode('utf-8')
 

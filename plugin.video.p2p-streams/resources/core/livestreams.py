@@ -41,7 +41,7 @@ Main Menu
 
 def xml_lists_menu():
       if settings.getSetting('sopcast-oficial') == "true":
-      	    addDir(traducao(40116),"http://sopcast.org/chlist.xml",101,addonpath + art + 'xml_list_sopcast.png',2,True)
+      	    addDir(translate(40116),"http://sopcast.org/chlist.xml",101,addonpath + art + 'xml_list_sopcast.png',2,True)
       try:
             if xbmcvfs.exists(os.path.join(pastaperfil,"Lists")):
 		   dirs, files = xbmcvfs.listdir(os.path.join(pastaperfil,"Lists"))
@@ -50,7 +50,7 @@ def xml_lists_menu():
 	                string = f.read()
                         addDir("[B][COLOR orange]" + file.replace(".txt","") + "[/B][/COLOR]",string,101,addonpath + art + 'xml_lists.png',2,True)
       except: pass
-      addDir(traducao(40121),MainURL,107,addonpath + art + 'plus-menu.png',2,False)
+      addDir(translate(40121),MainURL,107,addonpath + art + 'plus-menu.png',2,False)
       xbmc.executebuiltin("Container.SetViewMode(51)")
       
 """ 
@@ -60,11 +60,11 @@ Add a new list function
 """
 
 def addlista():
-	opcao= xbmcgui.Dialog().yesno(traducao(40000), traducao(40123),"","",traducao(40124),traducao(40125))
+	opcao= xbmcgui.Dialog().yesno(translate(40000), translate(40123),"","",translate(40124),translate(40125))
 	if opcao:
 		dialog = xbmcgui.Dialog()
-		lista_xml = dialog.browse(int(1), traducao(40186), 'myprograms','.xml|.m3u')
-		keybdois = xbmc.Keyboard("", traducao(40130))
+		lista_xml = dialog.browse(int(1), translate(40186), 'myprograms','.xml|.m3u')
+		keybdois = xbmc.Keyboard("", translate(40130))
 		keybdois.doModal()
 		if (keybdois.isConfirmed()):
 			searchname = keybdois.getText()
@@ -74,23 +74,23 @@ def addlista():
 			else: xbmcvfs.mkdir(os.path.join(pastaperfil,"Lists"))
 			txt_name = searchname + ".txt"
 			save(os.path.join(pastaperfil,"Lists",txt_name),lista_xml)
-			mensagemok(traducao(40000),traducao(40129))
+			mensagemok(translate(40000),translate(40129))
 			xbmc.executebuiltin("XBMC.Container.Refresh")
 	else:
-		keyb = xbmc.Keyboard("", traducao(40127))
+		keyb = xbmc.Keyboard("", translate(40127))
 		keyb.doModal()
 		if (keyb.isConfirmed()):
 			search = keyb.getText()
 			if search=='': sys.exit(0)
 			encode=urllib.quote(search)
-			if encode.split(".")[-1] != "xml" and encode.split(".")[-1] != "m3u": mensagemok(traducao(40000),traducao(40128)); sys.exit(0)
+			if encode.split(".")[-1] != "xml" and encode.split(".")[-1] != "m3u": mensagemok(translate(40000),translate(40128)); sys.exit(0)
 			else:
 				try:
 					code = get_page_source(search)
 				except:
-					mensagemok(traducao(40000),traducao(40128))
+					mensagemok(translate(40000),translate(40128))
 					sys.exit(0)
-			keybdois = xbmc.Keyboard("", traducao(40130))
+			keybdois = xbmc.Keyboard("", translate(40130))
 			keybdois.doModal()
 			if (keybdois.isConfirmed()):
 				searchname = keybdois.getText()
@@ -100,7 +100,7 @@ def addlista():
 				else: xbmcvfs.mkdir(os.path.join(pastaperfil,"Lists"))
 				txt_name = searchname + ".txt"
 				save(os.path.join(pastaperfil,"Lists",txt_name),search)
-				mensagemok(traducao(40000),traducao(40129))
+				mensagemok(translate(40000),translate(40129))
 				xbmc.executebuiltin("XBMC.Container.Refresh")
 
 """ 
@@ -111,7 +111,7 @@ Remove a List
 				
 def remove_list(name):
 	xbmcvfs.delete(name)
-	xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), traducao(40150), 1,addonpath+"/icon.png"))
+	xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(40150), 1,addonpath+"/icon.png"))
 	xbmc.executebuiltin("Container.Refresh")
 	
 """ 

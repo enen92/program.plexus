@@ -33,7 +33,7 @@ def addon_favourites():
 				addDir("[B][COLOR orange]" + match[0] + "[/B][/COLOR]",match[2],int(match[1]),iconimage,1,False)
 			xbmc.executebuiltin("Container.SetViewMode(51)")
 		else:
-			mensagemok(traducao(40000),traducao(40145));sys.exit(0)
+			mensagemok(translate(40000),translate(40145));sys.exit(0)
 			
 def add_to_addon_favourites(name,url,iconimage):
 	name = name.replace("[b]","").replace("[/b]","").replace("[color orange]","").replace("[/color]","").replace("[B]","").replace("[/B]","")
@@ -44,7 +44,7 @@ def add_to_addon_favourites(name,url,iconimage):
 			favouritetxt = os.path.join(pastaperfil,"Favourites",url.replace(":","").replace("/","") + ".txt")
 			if not xbmcvfs.exists(os.path.join(pastaperfil,"Favourites")): xbmcvfs.mkdir(os.path.join(pastaperfil,"Favourites"))
 			save(favouritetxt, favourite_text)
-			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), traducao(40148), 1,addonpath+"/icon.png"))
+			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(40148), 1,addonpath+"/icon.png"))
 	else:
 		if "sop://" in url:
 			tipo = "sopcast"
@@ -60,7 +60,7 @@ def add_to_addon_favourites(name,url,iconimage):
 		favouritetxt = os.path.join(pastaperfil,"Favourites",url.replace(":","").replace("/","") + ".txt")
 		if not xbmcvfs.exists(os.path.join(pastaperfil,"Favourites")): xbmcvfs.mkdir(os.path.join(pastaperfil,"Favourites"))
 		save(favouritetxt, favourite_text)
-		xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), traducao(40148), 1,addonpath+"/icon.png"))
+		xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(40148), 1,addonpath+"/icon.png"))
 		xbmc.executebuiltin("Container.Refresh")
 			
 def remove_addon_favourites(url):
@@ -70,7 +70,7 @@ def remove_addon_favourites(url):
 	else:
 		ficheiro = os.path.join(pastaperfil,"Favourites",url.replace(":","").replace("/","") + ".txt")
 	xbmcvfs.delete(ficheiro)
-	xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), traducao(40147), 1,addonpath+"/icon.png"))
+	xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(40147), 1,addonpath+"/icon.png"))
 	dirs, files = xbmcvfs.listdir(os.path.join(pastaperfil,"Favourites"))
 	if files:
 		xbmc.executebuiltin("Container.Refresh")

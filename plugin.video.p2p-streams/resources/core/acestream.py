@@ -19,7 +19,7 @@ from utils.pluginxbmc import *
 aceport=62062
 
 def load_local_torrent():
-	torrent_file = xbmcgui.Dialog().browse(int(1), traducao(600028), 'myprograms','.torrent')
+	torrent_file = xbmcgui.Dialog().browse(int(1), translate(600028), 'myprograms','.torrent')
 	if torrent_file:
 		if xbmc.getCondVisibility('system.platform.windows'):
 			acestreams("Local .torrent","",'file:\\' + torrent_file)
@@ -32,7 +32,7 @@ def acestreams(name,iconimage,chid):
 	else: iconimage = urllib.unquote(iconimage)
 	if settings.getSetting('aceplay_type') == "2":
 		pDialog = xbmcgui.DialogProgress()
-		ret = pDialog.create(traducao(40000), traducao(40154),traducao(40155),traducao(40156))
+		ret = pDialog.create(translate(40000), translate(40154),translate(40155),translate(40156))
 		pDialog.update(0)
 		xbmc.sleep(3000)
 		pDialog.update(100)
@@ -50,7 +50,7 @@ def acestreams(name,iconimage,chid):
 def acestreams_builtin(name,iconimage,chid):
     try:from acecore import TSengine as tsengine
     except:
-        mensagemok(traducao(40000),traducao(40037))
+        mensagemok(translate(40000),translate(40037))
         return
     xbmc.executebuiltin('Action(Stop)')
     lock_file = xbmc.translatePath('special://temp/'+ 'ts.lock')
@@ -72,7 +72,7 @@ def acestreams_builtin(name,iconimage,chid):
             TSPlayer.end()
             return
         else:    
-            mensagemok(traducao(40000),traducao(40038))
+            mensagemok(translate(40000),translate(40038))
             TSPlayer.end()
             return
     else:

@@ -25,7 +25,7 @@ def handle_wait(time_to_wait,title,text,segunda=''):
                 secs = secs + 1
                 percent = increment*secs
                 secs_left = str((time_to_wait - secs))
-                if segunda=='': remaining_display = traducao(40188) + str(secs_left) + traducao(40189)
+                if segunda=='': remaining_display = translate(40188) + str(secs_left) + translate(40189)
                 else: remaining_display=segunda
                 mensagemprogresso.update(percent,text,remaining_display)
                 xbmc.sleep(1000)

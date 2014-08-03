@@ -57,7 +57,7 @@ def sopstreams(name,iconimage,sop):
 			versionNumber = int(xbmc.getInfoLabel("System.BuildVersion" )[0:2])
 			if versionNumber >= 13:
 				xbmc.executebuiltin('XBMC.StartAndroidActivity("org.sopcast.android","android.intent.action.VIEW","",'+sop+')')
-			else:	mensagemok(traducao(40000),traducao(40196),traducao(40197))    
+			else:	mensagemok(translate(40000),translate(40196),translate(40197))    
 		else: sopstreams_builtin(name,iconimage,sop)
             else: sopstreams_builtin(name,iconimage,sop)
         else:
@@ -69,7 +69,7 @@ def sopstreams(name,iconimage,sop):
                     if " 1060:" in line.rstrip():
                         config = False
                         print("Sopcast configuration is not done!")
-            if config == False: mensagemok(traducao(40000),traducao(40180),traducao(40181), traducao(40182))
+            if config == False: mensagemok(translateo(40000),translate(40180),translate(40181), translate(40182))
             else:
                 import _winreg
                 aReg = _winreg.ConnectRegistry(None,_winreg.HKEY_LOCAL_MACHINE)
@@ -91,14 +91,14 @@ def sopstreams(name,iconimage,sop):
                 servicecreator = False
                 for line in proc.stdout:
                         print("result line: " + line.rstrip())
-                res = handle_wait_socket(int(settings.getSetting('socket_time')),traducao(40000),traducao(40183))
+                res = handle_wait_socket(int(settings.getSetting('socket_time')),translate(40000),translate(40183))
 
                 if res == True:
                         print("Server created - waiting x seconds for confirmation")
                         try: sock.close()
                         except: pass
                         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                        handle_wait(int(settings.getSetting('stream_time')),traducao(40000),traducao(40184),segunda='')
+                        handle_wait(int(settings.getSetting('stream_time')),translate(40000),translate(40184),segunda='')
                         try:
                                 result = sock.connect(('127.0.0.1',8902))
                                 connected = True
@@ -120,7 +120,7 @@ def sopstreams(name,iconimage,sop):
                                 	player.play(playlist)
                                 while player._playbackLock:
                                     xbmc.sleep(5000)
-                        else: xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (traducao(40000), traducao(40040), 1,addonpath+"/icon.png"))
+                        else: xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(40040), 1,addonpath+"/icon.png"))
                 print("Player reached the end")
                 cmd = ['sc','stop','sopcastp2p']
                 import subprocess
@@ -185,7 +185,7 @@ def sopstreams_builtin(name,iconimage,sop):
 			existing_instance = True
 		except: existing_instance = False
 		if existing_instance == True:
-			option = xbmcgui.Dialog().yesno(traducao(40000), traducao(70000),traducao(70001))
+			option = xbmcgui.Dialog().yesno(translate(40000), translate(70000),translate(70001))
 			if not option:
 				if xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
 					os.system("kill $(ps aux | grep '[s]opclient' | awk '{print $2}')")
@@ -208,7 +208,7 @@ def sopstreams_builtin(name,iconimage,sop):
 		xbmc.sleep(int(settings.getSetting('wait_time')))
 		res=False
 		counter=50
-		ret = mensagemprogresso.create(traducao(40000),"SopCast",traducao(40039))
+		ret = mensagemprogresso.create(translate(40000),"SopCast",translate(40039))
 		mensagemprogresso.update(0)
 		while counter > 0 and spsc.pid:
 			if mensagemprogresso.iscanceled():
@@ -234,7 +234,7 @@ def sopstreams_builtin(name,iconimage,sop):
 				player.play(url, listitem)
 			while player._playbackLock:
 				xbmc.sleep(500)
-		else: xbmc.executebuiltin("Notification(%s,%s,%i)" % (traducao(40000), traducao(40040), 1))
+		else: xbmc.executebuiltin("Notification(%s,%s,%i)" % (translate(40000), translate(40040), 1))
 
 	except: pass
 	try: os.kill(self.spsc_pid,9)
@@ -337,7 +337,7 @@ def handle_wait_socket(time_to_wait,title,text,segunda=''):
                 secs = secs + 1
                 percent = increment*secs
                 secs_left = str((time_to_wait - secs))
-                if segunda=='': remaining_display = traducao(40187) + " " + str(percent) + " %"
+                if segunda=='': remaining_display = translate(40187) + " " + str(percent) + " %"
                 else: remaining_display=segunda
                 mensagemprogresso.update(percent,text,remaining_display)
                 xbmc.sleep(1000)
