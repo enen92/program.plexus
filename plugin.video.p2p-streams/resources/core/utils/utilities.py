@@ -8,10 +8,11 @@
     
     handle_wait(time_to_wait,title,text,segunda='') -> Timer with dialog progress capabilities
     clean_text(text) -> Function to remove specific characters from a string
+    getDirectorySize(directory) -> returns a directory size recursively
    	
 """
     
-import xbmc,xbmcplugin,xbmcgui,xbmcaddon,re
+import xbmc,xbmcplugin,xbmcgui,xbmcaddon,re,os
 from pluginxbmc import *
 
 def handle_wait(time_to_wait,title,text,segunda=''):
@@ -41,3 +42,11 @@ def clean_text(text):
       command={'\r':'','\n':'','\t':'','&nbsp;':' ','&quot;':'"','&#039;':'','&#39;':"'",'&#227;':'ã','&170;':'ª','&#233;':'é','&#231;':'ç','&#243;':'ó','&#226;':'â','&ntilde;':'ñ','&#225;':'á','&#237;':'í','&#245;':'õ','&#201;':'É','&#250;':'ú','&amp;':'&','&#193;':'Á','&#195;':'Ã','&#202;':'Ê','&#199;':'Ç','&#211;':'Ó','&#213;':'Õ','&#212;':'Ó','&#218;':'Ú'}
       regex = re.compile("|".join(map(re.escape, command.keys())))
       return regex.sub(lambda mo: command[mo.group(0)], text)
+      
+def getDirectorySize(directory):
+	dir_size = 0
+	for (path, dirs, files) in os.walk(directory):
+		for file in files:
+			filename = os.path.join(path, file)
+			dir_size += os.path.getsize(filename)
+	return dir_size
