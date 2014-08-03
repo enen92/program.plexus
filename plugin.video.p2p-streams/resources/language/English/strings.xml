@@ -34,7 +34,6 @@
     <string id="30011">Alternative path/cmd for Aceengine</string>
     <string id="30012">Keep downloaded files in disk</string>
     <string id="30013">Download path</string>
-    <string id="30014">Show buffer state</string>
     <string id="30015">Kill AceEngine if player stops</string>
     <string id="49999">Show Acestream engine status on videoosd</string>
     <string id="49998">Debug mode</string>
