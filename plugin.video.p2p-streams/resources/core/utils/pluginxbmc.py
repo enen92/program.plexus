@@ -25,5 +25,5 @@ pastaperfil = xbmc.translatePath(settings.getAddonInfo('profile')).decode('utf-8
 MainURL = 'https://code.google.com/p/p2p-strm/'
       
 def translate(text):
-      return settings.getLocalizedString(texto).encode('utf-8')
+      return settings.getLocalizedString(text).encode('utf-8')
 
