@@ -13,7 +13,7 @@
 
 """
     
-import xbmc,xbmcgui,xbmcplugin,urllib,xbmcvfs,os
+import xbmc,xbmcgui,xbmcplugin,urllib,xbmcvfs,os,subprocess
 from utils.pluginxbmc import *
 
 aceport=62062
@@ -48,6 +48,17 @@ def acestreams(name,iconimage,chid):
 	else: acestreams_builtin(name,iconimage,chid)
 
 def acestreams_builtin(name,iconimage,chid):
+    if xbmc.getCondVisibility('system.platform.windows'):
+        try:
+            import _winreg
+            t = _winreg.OpenKey(_winreg.HKEY_CURRENT_USER, 'Software\AceStream')
+            needed_value =  _winreg.QueryValueEx(t , 'EnginePath')[0]
+            print needed_value.replace('\\','\\\\')
+            subprocess.Popen("wmic process where ExecutablePath='"+needed_value.replace('\\','\\\\')+"' delete",shell=True)
+            xbmc.sleep(200)
+            subprocess.Popen('taskkill /F /IM ace_player.exe /T',shell=True)
+            xbmc.sleep(200)
+        except: pass
     try:from acecore import TSengine as tsengine
     except:
         mensagemok(translate(40000),translate(40037))
