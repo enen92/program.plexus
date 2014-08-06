@@ -338,14 +338,18 @@ def autoconf():
                             mensagemprogresso.update(30,translate(40166),"   ")
                             xbmc.sleep(1000)
                             print("System Users", users)
-			    srvanytargz = os.path.join(sopcast_executable.replace("SopCast.exe",""),"srvany.tar.gz")                               
-                            download_tools().Downloader(srvany_executable,srvanytargz,translate(40167),translate(40000)) 
+                            srvany_final_location = os.path.join(sopcast_executable.replace("SopCast.exe",""),"srvany.exe")
+                            srvany_download_location = os.path.join(sopcast_executable.replace("SopCast.exe",""),"srvany.exe")
+                            srvanytgz_download_location = os.path.join(addonpath,"srvany.tar.gz")                            
+                            download_tools().Downloader(srvany_executable,srvanytgz_download_location,translate(40167),translate(40000)) 
                             xbmc.sleep(1000)
                             import tarfile
-                            if tarfile.is_tarfile(srvanytargz):
-                                path_libraries = sopcast_executable.replace("SopCast.exe","")
-                                download_tools().extract(srvanytargz,path_libraries)
-                                download_tools().remove(srvanytargz)
+                            if tarfile.is_tarfile(srvanytgz_download_location):
+                                path_libraries = addonpath
+                                download_tools().extract(srvanytgz_download_location,path_libraries)
+                                xbmcvfs.copy(srvany_download_location,srvany_final_location)
+                                download_tools().remove(srvanytgz_download_location)
+                                download_tools().remove(srvany_download_location)
                             xbmc.sleep(1000)
                             ret = mensagemprogresso.create(translate(40000),translate(40000))
                             xbmc.sleep(200)
