@@ -1,3 +1,15 @@
+[B]v0.4.8 (6/8/2014)[/B]
+-Fix sopcast logging
+-Detect if sopcast process is still running on the background and let the user choose
+-Force kill acestream-engine option for linux,linux arm,OSX
+-Prior killing of the acestream-engine in OSX if shutdown_engine option is enabled
+-Prior killing of the official ace_engine.exe + ace_player.exe to avoid no-connection issues
+-Translated some functions to use in parser development
+-Added option to clear acestream-engine cache (advanced tools menu) for platforms in which it is impossible to do in any other way (linux/linux arm/osx)
+-Cleanup unused settings + code cosmetics
+-Parsers updated to work with the new version + some of the last minor improvements on them
+
+
 [B]v0.4.7 (1/8/2014)[/B]
 -Fix parser delete
 
