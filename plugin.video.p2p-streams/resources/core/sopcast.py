@@ -10,13 +10,13 @@
      
 import xbmc,xbmcgui,xbmcplugin,urllib2,os,sys,subprocess,xbmcvfs,socket    
 from utils.pluginxbmc import *
-from utils.utilities import handle_wait    
+from utils.utilities import handle_wait
+from utils.iofile import *
     
 """ Sopcast Dependent variables are listed below"""   
     
 LISTA_SOP='http://www.sopcast.com/chlist.xml'
 SPSC_BINARY = "sp-sc-auth"
-SPSC_LOG = os.path.join(pastaperfil,'sopcast','sopcast.log')
 LOCAL_PORT = settings.getSetting('local_port')
 VIDEO_PORT = settings.getSetting('video_port')
 BUFER_SIZE = int(settings.getSetting('buffer_size'))
@@ -73,7 +73,9 @@ def sopstreams(name,iconimage,sop):
             else:
                 import _winreg
                 aReg = _winreg.ConnectRegistry(None,_winreg.HKEY_LOCAL_MACHINE)
+                
                 #Dirty hack to break sopcast h264 codec so double sound can be avoided
+
                 try:
                 	aKey = _winreg.OpenKey(aReg, r'SOFTWARE\SopCast\Player\InstallPath',0, _winreg.KEY_READ)
                 	name, value, type = _winreg.EnumValue(aKey, 0)
@@ -146,32 +148,18 @@ def sopstreams_builtin(name,iconimage,sop):
         	if xbmc.getCondVisibility('System.Platform.Linux') and settings.getSetting('force_android') == "false":
 
 			if os.uname()[4] == "armv6l" or os.uname()[4] == "armv7l" or settings.getSetting('openelecx86_64') == "true":
-				if settings.getSetting('sop_debug_mode') == "false":
-					cmd = [os.path.join(pastaperfil,'sopcast','qemu-i386'),os.path.join(pastaperfil,'sopcast','lib/ld-linux.so.2'),"--library-path",os.path.join(pastaperfil,'sopcast',"lib"),os.path.join(pastaperfil,'sopcast','sp-sc-auth'),sop,str(LOCAL_PORT),str(VIDEO_PORT)]
-				else: 
-					cmd = [os.path.join(pastaperfil,'sopcast','qemu-i386'),os.path.join(pastaperfil,'sopcast','lib/ld-linux.so.2'),"--library-path",os.path.join(pastaperfil,'sopcast',"lib"),os.path.join(pastaperfil,'sopcast','sp-sc-auth'),sop,str(LOCAL_PORT),str(VIDEO_PORT),">",SPSC_LOG]
-
+				cmd = [os.path.join(pastaperfil,'sopcast','qemu-i386'),os.path.join(pastaperfil,'sopcast','lib/ld-linux.so.2'),"--library-path",os.path.join(pastaperfil,'sopcast',"lib"),os.path.join(pastaperfil,'sopcast','sp-sc-auth'),sop,str(LOCAL_PORT),str(VIDEO_PORT)]
 			elif settings.getSetting('openeleci386') == "true":
-				if settings.getSetting('sop_debug_mode') == "false":
-					cmd = [os.path.join(pastaperfil,'sopcast','lib/ld-linux.so.2'),"--library-path",os.path.join(pastaperfil,'sopcast',"lib"),os.path.join(pastaperfil,'sopcast','sp-sc-auth'),sop,str(LOCAL_PORT),str(VIDEO_PORT)]
-				else: 
-					cmd = [os.path.join(pastaperfil,'sopcast','lib/ld-linux.so.2'),"--library-path",os.path.join(pastaperfil,'sopcast',"lib"),os.path.join(pastaperfil,'sopcast','sp-sc-auth'),sop,str(LOCAL_PORT),str(VIDEO_PORT),">",SPSC_LOG]
-
+				cmd = [os.path.join(pastaperfil,'sopcast','lib/ld-linux.so.2'),"--library-path",os.path.join(pastaperfil,'sopcast',"lib"),os.path.join(pastaperfil,'sopcast','sp-sc-auth'),sop,str(LOCAL_PORT),str(VIDEO_PORT)]
 			else: 
-				if settings.getSetting('sop_debug_mode') == "false":
-					cmd = [os.path.join(pastaperfil,'sopcast','ld-linux.so.2'),'--library-path',os.path.join(pastaperfil,'sopcast','lib'),os.path.join(pastaperfil,'sopcast',SPSC_BINARY), sop, str(LOCAL_PORT), str(VIDEO_PORT)]
-				else:
-					cmd = [os.path.join(pastaperfil,'sopcast','ld-linux.so.2'),'--library-path',os.path.join(pastaperfil,'sopcast','lib'),os.path.join(pastaperfil,'sopcast',SPSC_BINARY), sop, str(LOCAL_PORT), str(VIDEO_PORT),">",SPSC_LOG]
+				cmd = [os.path.join(pastaperfil,'sopcast','ld-linux.so.2'),'--library-path',os.path.join(pastaperfil,'sopcast','lib'),os.path.join(pastaperfil,'sopcast',SPSC_BINARY), sop, str(LOCAL_PORT), str(VIDEO_PORT)]
+				
 		elif xbmc.getCondVisibility('System.Platform.OSX'):
-			if settings.getSetting('sop_debug_mode') == "false":
-				cmd = [os.path.join(pastaperfil,'sopcast','sp-sc-auth'), str(sop), str(LOCAL_PORT), str(VIDEO_PORT)]
-			else:
-				cmd = [os.path.join(pastaperfil,'sopcast','sp-sc-auth'), str(sop), str(LOCAL_PORT), str(VIDEO_PORT),">",str(SPSC_LOG)]	
+			cmd = [os.path.join(pastaperfil,'sopcast','sp-sc-auth'), str(sop), str(LOCAL_PORT), str(VIDEO_PORT)]
+			
 		elif xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
-			if settings.getSetting('sop_debug_mode') == "false":
-				cmd = [str(settings.getSetting('android_sopclient')), str(sop), str(LOCAL_PORT), str(VIDEO_PORT)]
-			else:
-				cmd = [str(settings.getSetting('android_sopclient')), str(sop), str(LOCAL_PORT), str(VIDEO_PORT),">",str(SPSC_LOG)]	
+			cmd = [str(settings.getSetting('android_sopclient')), str(sop), str(LOCAL_PORT), str(VIDEO_PORT)]
+
 		print(cmd)
 				
 		#Check if another instance of the sopcast executable might still be running on the same port. Attempt to connect to server and video ports giving the user the choice before creating a new subprocess
@@ -198,8 +186,10 @@ def sopstreams_builtin(name,iconimage,sop):
 		else: pass
 		
 		#opening the subprocess
-
-		spsc = subprocess.Popen(cmd, shell=False, bufsize=BUFER_SIZE,stdin=None, stdout=None, stderr=None)
+		if settings.getSetting('sop_debug_mode') == "false":
+			spsc = subprocess.Popen(cmd, shell=False, bufsize=BUFER_SIZE,stdin=None, stdout=None, stderr=None)
+		else:
+			spsc = subprocess.Popen(cmd, shell=False, bufsize=BUFER_SIZE,stdin=None, stdout=subprocess.PIPE, stderr=subprocess.PIPE)    
 		listitem = xbmcgui.ListItem(name, iconImage=iconimage, thumbnailImage=iconimage)
 		listitem.setLabel(name)
 		listitem.setInfo('video', {'Title': name})
@@ -237,6 +227,9 @@ def sopstreams_builtin(name,iconimage,sop):
 		else: xbmc.executebuiltin("Notification(%s,%s,%i)" % (translate(40000), translate(40040), 1))
 
 	except: pass
+	if settings.getSetting('sop_debug_mode') == "true":
+		stdout, stderr = spsc.communicate()
+		print(stdout,stderr)
 	try: os.kill(self.spsc_pid,9)
 	except: pass
 	xbmc.sleep(100)
