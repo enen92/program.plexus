@@ -59,6 +59,9 @@ def acestreams_builtin(name,iconimage,chid):
             subprocess.Popen('taskkill /F /IM ace_player.exe /T',shell=True)
             xbmc.sleep(200)
         except: pass
+    elif xbmc.getCondVisibility('System.Platform.OSX'):
+        if settings.getSetting('shutdown-engine') == "true":
+            os.system("kill $(ps aux | grep '[s]tart.py')")
     try:from acecore import TSengine as tsengine
     except:
         mensagemok(translate(40000),translate(40037))
