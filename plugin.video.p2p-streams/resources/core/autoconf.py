@@ -339,7 +339,7 @@ def autoconf():
                             xbmc.sleep(1000)
                             print("System Users", users)
                             srvany_final_location = os.path.join(sopcast_executable.replace("SopCast.exe",""),"srvany.exe")
-                            srvany_download_location = os.path.join(sopcast_executable.replace("SopCast.exe",""),"srvany.exe")
+                            srvany_download_location = os.path.join(addonpath,"srvany.exe")
                             srvanytgz_download_location = os.path.join(addonpath,"srvany.tar.gz")                            
                             download_tools().Downloader(srvany_executable,srvanytgz_download_location,translate(40167),translate(40000)) 
                             xbmc.sleep(1000)
