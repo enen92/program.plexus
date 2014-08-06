@@ -11,8 +11,7 @@
 import xbmc,xbmcgui,xbmcplugin,urllib2,os,sys,subprocess,xbmcvfs,socket    
 from utils.pluginxbmc import *
 from utils.utilities import handle_wait
-from utils.iofile import *
-    
+
 """ Sopcast Dependent variables are listed below"""   
     
 LISTA_SOP='http://www.sopcast.com/chlist.xml'
