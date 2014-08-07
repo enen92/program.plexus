@@ -88,7 +88,7 @@ def add_new_parser(url):
 			parser_tball = dialog.browse(int(1), translate(400013), 'myprograms','.tar.gz')
 			if '.tar.gz' in parser_tball:
 				parser_name = parser_tball.split('/')
-				if not parser_name: parser_name = parser_tball.split('\\')
+				if len(parser_name) == 1: parser_name = parser_tball.split('\\')
 				parser_name=parser_name[-1].replace('.tar.gz','')	
 				print("the list is: " + parser_tball,parser_name)
 				future_parser_tball = os.path.join(parser_folder,parser_name+'.tar.gz')
