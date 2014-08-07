@@ -251,6 +251,9 @@
 	<string id="400026">Parser actualizado com sucesso!</string>
 	<string id="400027">A transferir script...</string>
 	<string id="400028">Script executado com sucesso</string>
+	<string id="70004">Qualquer plugin aqui encontrado é desenvolvido por terceiros.</string>
+	<string id="70005">Não são parte do addon nem mantidos pelos desenvolvedores.</string>
+	<string id="70006">Não peça nem espere qualquer tipo de suporte.</string>
 	
 	<!-- Misc -->	
 	<string id="40009">*No Ar*</string>

@@ -23,10 +23,15 @@ from utils.directoryhandle import addDir,addLink
 from utils.pluginxbmc import *
 from utils.iofile import *
 
-parser_folder = os.path.join(pastaperfil,'parsers')
+parser_folder = os.path.join(pastaperfil,'parser')
 parser_core_folder = os.path.join(addonpath,'resources','core','parsers')
+parser_packages_folder = os.path.join(pastaperfil,'parser-packages')
+
 
 def addon_parsers_menu():
+	if settings.getSetting('parser_disclaimer') == "true":
+		opcao= xbmcgui.Dialog().yesno(translate(40000),translate(70004),translate(70005),translate(70006))
+		if opcao: settings.setSetting('parser_disclaimer',"false") 
 	dirs,files = xbmcvfs.listdir(base_dir)
 	if not dirs:
 		dirsuserdata,files = xbmcvfs.listdir(parser_folder)
@@ -34,6 +39,12 @@ def addon_parsers_menu():
 			dictionary_module = eval(readfile(os.path.join(parser_folder,fich)))
 			if "url" in dictionary_module.keys():
 				add_new_parser(dictionary_module["url"])
+			else:
+				xbmcvfs.copy(os.path.join(parser_packages_folder,fich.replace('.txt','.tar.gz')),os.path.join(parser_core_folder,fich.replace('.txt','.tar.gz')))
+				import tarfile
+				if tarfile.is_tarfile(os.path.join(parser_core_folder,fich.replace('.txt','.tar.gz'))):
+					download_tools().extract(os.path.join(parser_core_folder,fich.replace('.txt','.tar.gz')),parser_core_folder)
+					download_tools().remove(os.path.join(parser_core_folder,fich.replace('.txt','.tar.gz')))
 	dirs,files = xbmcvfs.listdir(base_dir)
 	parser_dict = {}
 	for module in dirs:
@@ -82,6 +93,9 @@ def add_new_parser(url):
 				print("the list is: " + parser_tball,parser_name)
 				future_parser_tball = os.path.join(parser_folder,parser_name+'.tar.gz')
 				xbmcvfs.copy(parser_tball,future_parser_tball)
+				if not xbmcvfs.exists(os.path.join(pastaperfil,"parser-packages")): xbmcvfs.mkdir(os.path.join(pastaperfil,"parser-packages"))
+				parser_package_directory_file = os.path.join(pastaperfil,"parser-packages",parser_name+'.tar.gz')
+				xbmcvfs.copy(future_parser_tball,parser_package_directory_file)
 				import tarfile
 				if tarfile.is_tarfile(future_parser_tball):
 					download_tools().extract(future_parser_tball,parser_core_folder)
@@ -157,22 +171,22 @@ def remove_parser(iconimage):
 	parser_plugin = parser_plugin[-2]
 	xbmcvfs.delete(os.path.join(parser_folder,parser_plugin +'.txt'))
 	module_folder = os.path.join(parser_core_folder,parser_plugin)
+	module_package_backup = os.path.join(parser_packages_folder,parser_plugin + '.tar.gz')
 	dirs, files = xbmcvfs.listdir(module_folder)
 	for file in files:
 			xbmcvfs.delete(os.path.join(module_folder,file))
-	try:
-		xbmcvfs.rmdir(module_folder)
-	except:
-		import shutil
-		shutil.rmtree(module_folder)
-	xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), ttranslate(400019),1,addonpath+"/icon.png"))
+	import shutil
+	shutil.rmtree(module_folder)
+	try: xbmcvfs.delete(module_package_backup)
+	except: pass
+	xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(400019),1,addonpath+"/icon.png"))
 	xbmc.executebuiltin("Container.Refresh")
 	
 def sync_parser():
 	dirs, files = xbmcvfs.listdir(parser_folder)
 	if files: 
-		mensagemprogresso.create(translate(40000),"Syncing parsers...","")
-		mensagemprogresso.update(0,"Syncing parsers...","")
+		mensagemprogresso.create(translate(40000),translate(400020),"")
+		mensagemprogresso.update(0,translate(400020),"")
 		xbmc.sleep(1000)
 		number_of_files = len(files)
 		i = 0

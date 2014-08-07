@@ -251,6 +251,10 @@
 	<string id="400026">Parser sucessfully updated!</string>
 	<string id="400027">Downloading script...</string>
 	<string id="400028">Script sucessfully executed</string>
+	<string id="70004">Any plugins you may find here are 3rd party.</string>
+	<string id="70005">They are not developed nor part of the core addon.</string>
+	<string id="70006">Do not ask for support regarding any of them.</string>
+	
 	
 	<!-- Misc -->	
 	<string id="40009">*Now Live*</string>
