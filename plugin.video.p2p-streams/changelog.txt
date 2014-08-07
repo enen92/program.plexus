@@ -1,3 +1,13 @@
+[B]v0.4.9 (8/8/2014)[/B]
+-Fix windows configuration (tarfile write permissions)
+-Fix Android sopclient kill if another instance is still running
+-Fixed lists (can now accept just acestream:// sop:// .acelive .torrent in both .m3u or .xml extensions)
+-New parser folder in userdata (intentionally break previous config as the github repository for parsers doesn't exist anymore)
+-Fixed local instalation of parsers in windows
+-Added disclaimer for parsers
+-Fixed minor issues with sopcast notifications/labels
+
+
 [B]v0.4.8 (6/8/2014)[/B]
 -Fix sopcast logging
 -Detect if sopcast process is still running on the background and let the user choose
