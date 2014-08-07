@@ -436,6 +436,11 @@ def autoconf():
         #Ace
 		SPSC_KIT = os.path.join(addonpath,acestream_windows.split("/")[-1])
 		download_tools().Downloader(acestream_windows,SPSC_KIT,translate(40026),translate(40000))
+		import shutil
+		if xbmcvfs.exists(os.path.join(pastaperfil,"acestream")):
+			shutil.rmtree(os.path.join(pastaperfil,"acestream"))
+		if xbmcvfs.exists(os.path.join(pastaperfil,"player")):
+			shutil.rmtree(os.path.join(pastaperfil,"player"))
 		import tarfile
 		if tarfile.is_tarfile(SPSC_KIT):
 			path_libraries = os.path.join(pastaperfil)
