@@ -243,6 +243,22 @@ def runscript():
 				xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000),translate(400028),1,addonpath+"/icon.png"))
 			except: mensagemok(translate(40000),translate(40128))
 			
+def clear_parser_trace():
+	dirs,files = xbmcvfs.listdir(parser_core_folder)
+	import shutil
+	for directory in dirs:
+		shutil.rmtree(os.path.join(parser_core_folder,directory))
+	dirs,files = xbmcvfs.listdir(parser_packages_folder)
+	for fich in files:
+		xbmcvfs.delete(os.path.join(parser_packages_folder,fich))
+	dirs,files = xbmcvfs.listdir(parser_folder)
+	for fich in files:
+		xbmcvfs.delete(os.path.join(parser_folder,fich))
+	xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000),translate(70007),1,addonpath+"/icon.png"))
+	
+		
+	
+			
 			
 	
 	

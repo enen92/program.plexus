@@ -140,5 +140,6 @@ elif mode==404: parsers.runscript()
 elif mode==405: parsers.add_new_parser(url)
 elif mode==406: parsers.sync_parser()
 elif mode==407: parsers.sync_single_parser(parser)
+elif mode==408: parsers.clear_parser_trace()
     
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
