@@ -50,6 +50,7 @@ def sopstreams(name,iconimage,sop):
 	if "sop://" not in sop: sop = "sop://broker.sopcast.com:3912/" + sop
 	else: pass
 	print("Starting Player Sop URL: " + str(sop))
+	labelname=name
 	if not xbmc.getCondVisibility('system.platform.windows'):
 	    if xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
 	    	if  settings.getSetting('external_sopcast') == "0":
@@ -107,9 +108,9 @@ def sopstreams(name,iconimage,sop):
                         if connected == True:
                                 playlist = xbmc.PlayList(1)
                                 playlist.clear()
-                                listitem = xbmcgui.ListItem(name, iconImage=iconimage, thumbnailImage=iconimage)
-                                listitem.setLabel(name)
-                                listitem.setInfo("Video", {"Title":name})
+                                listitem = xbmcgui.ListItem(labelname, iconImage=iconimage, thumbnailImage=iconimage)
+                                listitem.setLabel(labelname)
+                                listitem.setInfo("Video", {"Title":labelname})
                                 listitem.setProperty('mimetype', 'video/x-msvideo')
                                 listitem.setProperty('IsPlayable', 'true')
 				windows_sop_url = "http://127.0.0.1:8902/tv.asf"
