@@ -65,7 +65,7 @@
     <string id="40182">e entre novamente (como administrador!)</string>
     <string id="40183">SopCast - Verificando se o servidor foi criado. Aguarde...</string>
     <string id="40184">Servidor foi criado. Tentando reproduzir...</string>
-    <string id="40040">Falhou a inicialização do canal</string>
+    <string id="40040">Falhou a inicializacao do canal</string>
     <string id="40039">A carregar stream. Aguarde até 20 segundos.</string>
     <string id="40187">Esperando o timeout...</string>
     <string id="70000">Sopcast está ainda a correr no background</string>
