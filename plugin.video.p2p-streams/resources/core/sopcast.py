@@ -8,7 +8,7 @@
 
 """
      
-import xbmc,xbmcgui,xbmcplugin,urllib2,os,sys,subprocess,xbmcvfs,socket    
+import xbmc,xbmcgui,xbmcplugin,urllib2,os,sys,subprocess,xbmcvfs,socket,re 
 from utils.pluginxbmc import *
 from utils.utilities import handle_wait
 
@@ -175,7 +175,13 @@ def sopstreams_builtin(name,iconimage,sop):
 			option = xbmcgui.Dialog().yesno(translate(40000), translate(70000),translate(70001))
 			if not option:
 				if xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
-					os.system("kill $(ps aux | grep '[s]opclient' | awk '{print $2}')")
+					procshut = subprocess.Popen(['ps','|','grep','sopclient'],shell=False,stdout=subprocess.PIPE)
+					for line in procshut.stdout:
+						match = re.findall(r'\S+', line.rstrip())
+						if match:
+							if 'xbmc' in match[-1] and len(match)>2:
+								os.system("kill " + match[1])
+								xbmc.sleep(200)
 				elif xbmc.getCondVisibility('System.Platform.Linux'):
 					os.system("kill $(ps aux | grep '[s]p-sc-auth' | awk '{print $1}')") #openelec
 					os.system("kill $(ps aux | grep '[s]p-sc-auth' | awk '{print $2}')")
