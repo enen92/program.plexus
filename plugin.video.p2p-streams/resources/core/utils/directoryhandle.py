@@ -96,7 +96,7 @@ def addDir_livestreams(name,url,mode,iconimage,fanart,description,genre,date,cre
             date = None
         else:
             description += '\n\nDate: %s' %date
-        if "RunPlugin" in url: pasta = False
+        if ("RunPlugin" in url) or ("sop://" in url) or ("acestream://" in url) or (".acelive" in url) or (".torrent" in url): pasta = False
         else: pasta = True
         liz=xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage=iconimage)
 	if mode == 106:

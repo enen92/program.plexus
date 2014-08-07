@@ -10,6 +10,7 @@ Functions:
 	remove_parser(iconimage) -> Remove a parser
 	sync_parser() -> Syncs the parser code with remote repository
 	runscript() -> Executes a remote python script 
+	clear_parser_trace() -> Remove all traces of parsers instalation
 
 """
 
