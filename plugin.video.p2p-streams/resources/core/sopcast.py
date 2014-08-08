@@ -69,7 +69,7 @@ def sopstreams(name,iconimage,sop):
                     if " 1060:" in line.rstrip():
                         config = False
                         print("Sopcast configuration is not done!")
-            if config == False: mensagemok(translateo(40000),translate(40180),translate(40181), translate(40182))
+            if config == False: mensagemok(translate(40000),translate(40180),translate(40181), translate(40182))
             else:
                 import _winreg
                 aReg = _winreg.ConnectRegistry(None,_winreg.HKEY_LOCAL_MACHINE)
