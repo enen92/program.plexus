@@ -1,7 +1,7 @@
 P2P-Streams XBMC Addon
 ================
 
-[![screenshot1](http://t.imgbox.com/E9TRJ1gS.jpg)](http://i.imgbox.com/E9TRJ1gS.jpg) [![screenshot2](http://t.imgbox.com/d8VVi46K.jpg)](http://i.imgbox.com/d8VVi46K.jpg) 
+[![screenshot1](http://t.imgbox.com/DtEF1B3b)](http://i.imgbox.com/DtEF1B3b) [![screenshot2](http://t.imgbox.com/d8VVi46K.jpg)](http://i.imgbox.com/d8VVi46K.jpg) 
 [![screenshot3](http://t.imgbox.com/actvy5rQ.jpg)](http://i.imgbox.com/actvy5rQ.jpg) 
 [![screenshot4](http://t.imgbox.com/acwlf35k.jpg)](http://i.imgbox.com/acwlf35k.jpg)  
 
