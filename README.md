@@ -122,7 +122,7 @@ Yes. [Read this](https://github.com/enen92/P2P-Streams-XBMC/wiki/Using-an-acestr
 
 ####Can I stream normal torrents with this plugin? 
 The Acestream-Engine provided by acestream.org can stream normal .torrent files. Since this addon is nothing more than the implementation of its public API...it can play them in XBMC as well.
-However in our opinion there are better alternatives to do this. Check XBMCtorrent or Pulsar.
+However in our opinion there are better alternatives to do this. Check [XBMCTorrent](http://forum.xbmc.org/showthread.php?tid=174736) or [Pulsar](http://forum.xbmc.org/showthread.php?tid=200957).
 
 Authors
 ----------
