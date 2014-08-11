@@ -1,9 +1,14 @@
 P2P-Streams XBMC Addon
 ================
 
-[![screenshot1](http://t.imgbox.com/DtEF1B3b)](http://i.imgbox.com/DtEF1B3b) [![screenshot2](http://t.imgbox.com/d8VVi46K.jpg)](http://i.imgbox.com/d8VVi46K.jpg) 
-[![screenshot3](http://t.imgbox.com/actvy5rQ.jpg)](http://i.imgbox.com/actvy5rQ.jpg) 
-[![screenshot4](http://t.imgbox.com/acwlf35k.jpg)](http://i.imgbox.com/acwlf35k.jpg)  
+[![screenshot1](http://imgbox.com/DtEF1B3b)](http://i.imgbox.com/DtEF1B3b)
+[![screenshot2](http://imgbox.com/QtmPKURK)](http://i.imgbox.com/QtmPKURK)
+[![screenshot3](http://imgbox.com/UMa9SpHi)](http://i.imgbox.com/UMa9SpHi)
+[![screenshot4](http://imgbox.com/PN8YALYm)](http://i.imgbox.com/PN8YALYm)
+[![screenshot5](http://imgbox.com/5L4R9PrT)](http://i.imgbox.com/5L4R9PrT)
+[![screenshot6](http://imgbox.com/9wYcPmNp)](http://i.imgbox.com/9wYcPmNp)
+[![screenshot7](http://imgbox.com/Pg0q8R6u)](http://i.imgbox.com/Pg0q8R6u)
+[![screenshot8](http://imgbox.com/aUSDYYma)](http://i.imgbox.com/aUSDYYma)
 
 About the addon
 ----------
