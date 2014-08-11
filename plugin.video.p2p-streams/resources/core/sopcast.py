@@ -122,7 +122,7 @@ def sopstreams(name,iconimage,sop):
                                 	player.play(playlist)
                                 while player._playbackLock:
                                     xbmc.sleep(5000)
-                        else: xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(40040), 1,addonpath+"/icon.png"))
+                        else: xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(40040), 1,os.path.join(addonpath,"icon.png")))
                 print("Player reached the end")
                 cmd = ['sc','stop','sopcastp2p']
                 import subprocess
@@ -230,12 +230,14 @@ def sopstreams_builtin(name,iconimage,sop):
 				player.play(url, listitem)
 			while player._playbackLock:
 				xbmc.sleep(500)
-		else: xbmc.executebuiltin("Notification(%s,%s,%i)" % (translate(40000), translate(40040), 1))
+		else: xbmc.executebuiltin("Notification(%s,%s,%i)" % (translate(40000), translate(40040), 1,os.path.join(addonpath,"icon.png")))
 
 	except: pass
 	if settings.getSetting('sop_debug_mode') == "true":
-		stdout, stderr = spsc.communicate()
-		print(stdout,stderr)
+		try:	
+			stdout, stderr = spsc.communicate()
+			print(stdout,stderr)
+		except: pass
 	try: os.kill(self.spsc_pid,9)
 	except: pass
 	xbmc.sleep(100)

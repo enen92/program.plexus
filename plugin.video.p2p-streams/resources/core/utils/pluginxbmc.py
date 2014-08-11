@@ -12,6 +12,7 @@
     
 import xbmc,xbmcplugin,xbmcgui,xbmcaddon
 
+linkwiki="http://bit.ly/1r5uGQT"
 addon_id = 'plugin.video.p2p-streams'
 art = '/resources/art/'
 settings = xbmcaddon.Addon(id=addon_id)
