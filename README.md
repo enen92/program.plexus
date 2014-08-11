@@ -1,6 +1,10 @@
 P2P-Streams XBMC Addon
 ================
 
+[![screenshot1](http://t.imgbox.com/E9TRJ1gS.jpg)](http://i.imgbox.com/E9TRJ1gS.jpg) [![screenshot2](http://t.imgbox.com/d8VVi46K.jpg)](http://i.imgbox.com/d8VVi46K.jpg) 
+[![screenshot3](http://t.imgbox.com/actvy5rQ.jpg)](http://i.imgbox.com/actvy5rQ.jpg) 
+[![screenshot4](http://t.imgbox.com/acwlf35k.jpg)](http://i.imgbox.com/acwlf35k.jpg)  
+
 About the addon
 ----------
 p2p-streams is an XBMC addon for watching peer-to-peer streams in XBMC without the need for external players. Peer-to-peer (P2P) computing or networking is a distributed application architecture that partitions tasks or workloads between peers. Peers are equally privileged, equipotent participants in the application. They are said to form a peer-to-peer network of nodes.
