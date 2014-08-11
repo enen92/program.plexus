@@ -67,9 +67,12 @@ The addon can accept general `acestream://` based url, `.torrent urls, local .to
 Addon aditional functionalities
 ----------
 The addon provides aditional functionalities you can use to create your own experience:
-* **Parser plugins** - Built-in plugin engine that lets you create simple pure python plugins for website scrapping. Installing, removing and syncing code with remote repositories for a given parser. More information on the plugin structure and how to create your parser can be found here: Coiso. No piracy related sites discussion or support!
-* **Lists** - You can easily add and remove local or remote (internet) lists. The addon supports sopcast based lists (like: http://sopcast.org/chlist.xml) or general livestreams addon lists. Also, it supports general m3u lists. No sharing or discussion of lists containing piracy content!
+* **Parser plugins** - Built-in plugin engine that lets you create simple pure python plugins for website scrapping. Installing, removing and syncing code with remote repositories for a given parser. More information on the plugin structure and how to create your parser can be found here: [Website-parser tutorial and reference guide](https://github.com/enen92/P2P-Streams-XBMC/wiki/Website-Parser-tutorial). _Any plugin you might find in this addon is third party, not hosted nor maintained by the plugin authors_!
+  
+* **Lists** - You can easily add and remove local or remote (internet) lists. The addon supports sopcast based lists, m3u livetv lists and xml livestreams addon type lists. Click [here](https://github.com/enen92/P2P-Streams-XBMC/wiki/Lists) to know more about the formats._The only list included is the sopcast.org. The authors are not responsible for any lists you may install_
+  
 * **Favourites** - Easily add channels from parsers or lists to the addon favourites.
+  
 * **Advanced tools** - Easily import recommended advancedsettings.xml files that are known to provide the best behaviour, backup advancedsettings.xml configuration or remove them. Change AcestreamEngine settings in platforms where a gui is not available.
 
 FAQ
