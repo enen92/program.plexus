@@ -33,7 +33,7 @@ openelecx86_64_package = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux
 openeleci386_package = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/openelec/openeleci386-acestream-sopcast.tar.gz"
 #Android
 sopcast_apk = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/SopCast.apk.tar.gz"
-acestreamengine_apk = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/acestream-2.1.11.apk.tar.gz"
+acestreamengine_apk = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AceStream-2.2.5-armv7.apk.tar.gz"
 #Mac OSX
 osx_x86_64 = "https://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/MacOSX_x86_64_ace_and_sop.tar.gz"
 osx_i386 = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/MacOSX_i386_ace_and_sop.tar.gz"
