@@ -1,4 +1,8 @@
 ===== Stable Versions ========
+[B]v1.0.1 (17/8/2014)[/B]
+-Fixed handshake for acestreamengine api versions > 2.x
+-Added new android acestreamengine (addon configuration)
+
 [B]v1.0.0 (11/8/2014)[/B]
 -First stable release
 
