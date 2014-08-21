@@ -31,6 +31,8 @@ acestream_armv7_xbian = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/
 sopcast_linux_generico =  "https://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Sopcastx86_64i386/sopcast_linux.tar.gz"
 openelecx86_64_package = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/Openelec/openelec_x86_64_userdata.tar.gz"
 openeleci386_package = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/openelec/openeleci386-acestream-sopcast.tar.gz"
+acestream_linux_x64_generic = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/acestream-linux-x86_64.tar.gz"
+acestream_linux_i386_generic = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/acestream-linux-i386generic.tar.gz"
 #Android
 sopcast_apk = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/SopCast.apk.tar.gz"
 acestreamengine_apk = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AceStream-2.2.5-armv7.apk.tar.gz"
@@ -257,22 +259,27 @@ def autoconf():
 	   		 
 	   		 #Ace
 	   		 
-				import subprocess
-				proc_response = []
-				proc = subprocess.Popen(['whereis','acestreamengine'],stdout=subprocess.PIPE)
-				for line in proc.stdout:
-					print("Output of acestream subprocess check",line.rstrip())
-					proc_response.append(line.rstrip())
-					if "acestreamengine: /" in str(proc_response):
-						print("Acestream engine is already installed")
-						try:
-							proc.kill()
-							proc.wait()
-						except:pass
-					else:
-						mensagemok(AceStream,translate(40027),translate(40028) + linkwiki,translate(40029))
-						sys.exit(0)
-				settings.setSetting('autoconfig',value='false')
+				if os.uname()[4] == "x86_64":
+					ACE_KIT = os.path.join(addonpath,acestream_linux_x64_generic.split("/")[-1])
+					download_tools().Downloader(acestream_linux_x64_generic,ACE_KIT,"Download Acestream Engine",translate(40000))
+					import tarfile
+					if tarfile.is_tarfile(ACE_KIT):
+						download_tools().extract(ACE_KIT,pastaperfil)
+						xbmc.sleep(500)
+						download_tools().remove(ACE_KIT)
+				
+					settings.setSetting('autoconfig',value='false')
+					
+				elif os.uname()[4] == "i386" or os.uname()[4] == "i686":
+					ACE_KIT = os.path.join(addonpath,acestream_linux_i386_generic.split("/")[-1])
+					download_tools().Downloader(acestream_linux_i386_generic,ACE_KIT,"Download Acestream Engine",translate(40000))
+					import tarfile
+					if tarfile.is_tarfile(ACE_KIT):
+						download_tools().extract(ACE_KIT,pastaperfil)
+						xbmc.sleep(500)
+						download_tools().remove(ACE_KIT)
+				
+					settings.setSetting('autoconfig',value='false')
 
 
 	elif xbmc.getCondVisibility('system.platform.windows'):
