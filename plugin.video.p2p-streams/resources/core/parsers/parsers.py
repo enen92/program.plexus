@@ -11,6 +11,7 @@ Functions:
 	sync_parser() -> Syncs the parser code with remote repository
 	runscript() -> Executes a remote python script 
 	clear_parser_trace() -> Remove all traces of parsers instalation
+	parser_check() -> Function to check if parser folder is empty and info is in userdata
 
 """
 
@@ -270,10 +271,30 @@ def clear_parser_trace():
 		xbmcvfs.delete(os.path.join(parser_folder,fich))
 	xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000),translate(70007),1,addonpath+"/icon.png"))
 	
-		
-	
-			
-			
-	
-	
+def parser_check():
+	dirs,files = xbmcvfs.listdir(base_dir)
+	if not dirs:
+		dirpackages,filespackages = xbmcvfs.listdir(parser_packages_folder)
+		if filespackages:
+			for fich in filespackages:
+				shutil.copyfile(os.path.join(parser_packages_folder,fich), os.path.join(parser_core_folder,fich))
+				xbmc.sleep(100)
+				import tarfile
+				if tarfile.is_tarfile(os.path.join(parser_core_folder,fich)):
+					download_tools().extract(os.path.join(parser_core_folder,fich),parser_core_folder)
+					download_tools().remove(os.path.join(parser_core_folder,fich))
+		else:
+			dirsuserdata,files = xbmcvfs.listdir(parser_folder)
+			for fich in files:
+				dictionary_module = eval(readfile(os.path.join(parser_folder,fich)))
+				if "url" in dictionary_module.keys():
+					add_new_parser(dictionary_module["url"])
+				else:
+					xbmcvfs.copy(os.path.join(parser_packages_folder,fich.replace('.txt','.tar.gz')),os.path.join(parser_core_folder,fich.replace('.txt','.tar.gz')))
+					import tarfile
+					if tarfile.is_tarfile(os.path.join(parser_core_folder,fich.replace('.txt','.tar.gz'))):
+						download_tools().extract(os.path.join(parser_core_folder,fich.replace('.txt','.tar.gz')),parser_core_folder)
+						download_tools().remove(os.path.join(parser_core_folder,fich.replace('.txt','.tar.gz')))
+	else: pass
+	return
 

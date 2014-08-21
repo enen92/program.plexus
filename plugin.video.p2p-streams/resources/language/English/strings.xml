@@ -56,6 +56,7 @@
     <string id="40006">Play SopCast URL</string>
     <string id="40056">Not available for your OS!</string>
     <string id="40057">[COLOR orange]Advanced tools menu[/COLOR]</string>
+    <string id="400029">An error has occured</string>
     
     <!-- sopcast.py -->
     <string id="40196">You can only use external players for versions</string>

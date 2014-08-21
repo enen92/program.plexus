@@ -56,6 +56,7 @@
     <string id="40006">Ir para URL Sopcast</string>
     <string id="40056">Sistema Operativo incompatível!</string>
     <string id="40057">[COLOR orange]Menu de opções avançadas[/COLOR]</string>
+    <string id="400029">Ocorreu um erro</string>
     
     <!-- sopcast.py -->
     <string id="40196">Só pode usar o player externo com versões</string>

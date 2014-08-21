@@ -56,6 +56,7 @@
      <string id="40006">Riproduci SopCast URL</string>
      <string id="40056">Non disponibile per il tuo sistema operativo!</string>
      <string id="40057">[COLOR orange]Menu strumenti avanzati[/COLOR]</string>
+     <string id="400029">Errore!</string>
     
      <!-- sopcast.py -->
      <string id="40196">È possibile utilizzare solo player esterni dalla versione</string>

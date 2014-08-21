@@ -56,6 +56,7 @@
     <string id="40006">Speel SopCast URL</string>
     <string id="40056">Niet beschikbaar voor jouw besturingssysteem!</string>
     <string id="40057">[COLOR orange]Geavanceerde [/COLOR]</string>
+    <string id="400029">Fout!</string>
     
     <!-- sopcast.py -->
     <string id="40196">Je kun alleen externe spelers gebruiken voor versies</string>
