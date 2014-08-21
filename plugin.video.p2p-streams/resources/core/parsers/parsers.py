@@ -15,7 +15,7 @@ Functions:
 """
 
 
-import os,sys,xbmc,xbmcgui,xbmcvfs,re,datetime,time
+import os,sys,xbmc,xbmcgui,xbmcvfs,re,datetime,time,shutil
 base_dir =  os.path.dirname(os.path.realpath(__file__))
 core_dir =  os.path.dirname(os.path.realpath(__file__)).replace('parsers','')
 sys.path.append(core_dir)
@@ -35,17 +35,27 @@ def addon_parsers_menu():
 		if opcao: settings.setSetting('parser_disclaimer',"false") 
 	dirs,files = xbmcvfs.listdir(base_dir)
 	if not dirs:
-		dirsuserdata,files = xbmcvfs.listdir(parser_folder)
-		for fich in files:
-			dictionary_module = eval(readfile(os.path.join(parser_folder,fich)))
-			if "url" in dictionary_module.keys():
-				add_new_parser(dictionary_module["url"])
-			else:
-				xbmcvfs.copy(os.path.join(parser_packages_folder,fich.replace('.txt','.tar.gz')),os.path.join(parser_core_folder,fich.replace('.txt','.tar.gz')))
+		dirpackages,filespackages = xbmcvfs.listdir(parser_packages_folder)
+		if filespackages:
+			for fich in filespackages:
+				shutil.copyfile(os.path.join(parser_packages_folder,fich), os.path.join(parser_core_folder,fich))
+				xbmc.sleep(100)
 				import tarfile
-				if tarfile.is_tarfile(os.path.join(parser_core_folder,fich.replace('.txt','.tar.gz'))):
-					download_tools().extract(os.path.join(parser_core_folder,fich.replace('.txt','.tar.gz')),parser_core_folder)
-					download_tools().remove(os.path.join(parser_core_folder,fich.replace('.txt','.tar.gz')))
+				if tarfile.is_tarfile(os.path.join(parser_core_folder,fich)):
+					download_tools().extract(os.path.join(parser_core_folder,fich),parser_core_folder)
+					download_tools().remove(os.path.join(parser_core_folder,fich))
+		else:
+			dirsuserdata,files = xbmcvfs.listdir(parser_folder)
+			for fich in files:
+				dictionary_module = eval(readfile(os.path.join(parser_folder,fich)))
+				if "url" in dictionary_module.keys():
+					add_new_parser(dictionary_module["url"])
+				else:
+					xbmcvfs.copy(os.path.join(parser_packages_folder,fich.replace('.txt','.tar.gz')),os.path.join(parser_core_folder,fich.replace('.txt','.tar.gz')))
+					import tarfile
+					if tarfile.is_tarfile(os.path.join(parser_core_folder,fich.replace('.txt','.tar.gz'))):
+						download_tools().extract(os.path.join(parser_core_folder,fich.replace('.txt','.tar.gz')),parser_core_folder)
+						download_tools().remove(os.path.join(parser_core_folder,fich.replace('.txt','.tar.gz')))
 	dirs,files = xbmcvfs.listdir(base_dir)
 	parser_dict = {}
 	for module in dirs:
@@ -149,17 +159,20 @@ def add_new_parser(url):
 		md5_up=url_isup(md5checksum)
 		module_up=url_isup(url)
 		if not xbmcvfs.exists(parser_folder): xbmcvfs.mkdir(parser_folder)
+		if not xbmcvfs.exists(parser_packages_folder): xbmcvfs.mkdir(parser_packages_folder)
 		text = {}
 		if module_up: text['url'] = url
 		if md5_up: text['md5'] = get_page_source(md5checksum)
 		if text:
 			module_file = os.path.join(parser_folder,modulename + '.txt')
 			module_tar_location = os.path.join(parser_core_folder,modulename+'.tar.gz')
+			module_parser_backup = os.path.join(parser_packages_folder,modulename+'.tar.gz')
 			save(module_file,str(text))
 			download_tools().Downloader(url,module_tar_location,translate(400018),translate(40000))
 			import tarfile 
 			if tarfile.is_tarfile(module_tar_location):
 				download_tools().extract(module_tar_location,parser_core_folder)
+				shutil.copyfile(module_tar_location, module_parser_backup)
 				xbmc.sleep(500)
 				download_tools().remove(module_tar_location)
 				print(str(modulename) + " : Module installed sucessfully")
