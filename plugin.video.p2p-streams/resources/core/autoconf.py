@@ -261,7 +261,7 @@ def autoconf():
 	   		 
 				if os.uname()[4] == "x86_64":
 					ACE_KIT = os.path.join(addonpath,acestream_linux_x64_generic.split("/")[-1])
-					download_tools().Downloader(acestream_linux_x64_generic,ACE_KIT,"Download Acestream Engine",translate(40000))
+					download_tools().Downloader(acestream_linux_x64_generic,ACE_KIT,translate(40026),translate(40000))
 					import tarfile
 					if tarfile.is_tarfile(ACE_KIT):
 						download_tools().extract(ACE_KIT,pastaperfil)
@@ -272,7 +272,7 @@ def autoconf():
 					
 				elif os.uname()[4] == "i386" or os.uname()[4] == "i686":
 					ACE_KIT = os.path.join(addonpath,acestream_linux_i386_generic.split("/")[-1])
-					download_tools().Downloader(acestream_linux_i386_generic,ACE_KIT,"Download Acestream Engine",translate(40000))
+					download_tools().Downloader(acestream_linux_i386_generic,ACE_KIT,translate(40026),translate(40000))
 					import tarfile
 					if tarfile.is_tarfile(ACE_KIT):
 						download_tools().extract(ACE_KIT,pastaperfil)
