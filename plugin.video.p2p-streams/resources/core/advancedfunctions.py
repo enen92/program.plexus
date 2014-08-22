@@ -58,7 +58,7 @@ def advanced_menu():
 		if os.uname()[4] == "armv6l" or os.uname()[4] == "armv7l":
 			eligible = True
 	elif xbmc.getCondVisibility('system.platform.OSX'): eligible = True
-	elif settings.getSetting('openeleci386') == "true": eligible = True
+	elif settings.getSetting('openeleci386') == "true": eligible = False
 	elif settings.getSetting('force_android') == "true": eligible = False
 	else: eligible = False
 	if eligible and xbmcvfs.exists(os.path.join(pastaperfil,'acestream','ace','ACEStream','values')):

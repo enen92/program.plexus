@@ -244,7 +244,7 @@ class TSengine():
                 self.progress.update(0,"Acestreamengine.apk not installed","")
         else:
             print "Linux not android.."
-            if os.uname()[4] == "armv6l" or os.uname()[4] == "armv7l" or settings.getSetting('openeleci386') == "true":
+            if os.uname()[4] == "armv6l" or os.uname()[4] == "armv7l":
                 try:
                     self.proc = subprocess.Popen([settings.getSetting('python_cmd'),os.path.join(pastaperfil,'acestream','ace','start.py')])
                 except:
@@ -252,7 +252,7 @@ class TSengine():
                     self.log.out("Not installed")
                     self.progress.update(0,"Acestream engine not installed")
 
-            elif settings.getSetting('openelecx86_64') == "true":
+            elif settings.getSetting('openelecx86_64') == "true" or settings.getSetting('openeleci386') == "true":
                 try:
                     self.proc = subprocess.Popen(["sh",os.path.join(pastaperfil,'acestream','start.sh')])
                 except:
@@ -532,7 +532,7 @@ class TSengine():
                     try:
                         self.proc.kill()
                         self.proc.wait()
-                        if settings.getSetting('openelecx86_64') == "true":
+                        if settings.getSetting('openelecx86_64') == "true" or settings.getSetting('openeleci386') == "true":
                             os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $1}')")
                     except: pass
             elif xbmc.getCondVisibility('system.platform.OSX'):
