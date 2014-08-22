@@ -114,8 +114,8 @@ Either the sopcast executable failed to login, the channel is offline or has bee
 There are several aditional configurations you might have to do to improve acestreams behaviour and... most of them fall out of the bounds of this addon.  Try to limit the cache in XBMC by importing one of the recommended advancedsettings.xml (advanced tools menu). Port forward port 8621 and change the acestream-engine settings. This site has some usefull information: [acestream buffer guide](http://acestreamguide.com/buffering/) . If these don't improve the behaviour your ISP is probably throttling your traffic.
 Again, we are not affiliated with acestream.org and we can't do anything about it.
 
-####Some acestreams play fine in windows but not on Android, Raspberry Pi and Linux (Torrent unavailable).
-The AcestreamEngine for windows is several versions above the others and seems to receive much more support and development by acestream developers. Streams created in the windows 2.2 version of acestream engine (and above) are not supported in older versions (which are used in all the other platforms). For linux (x86_64 only) you can check the [Acestream-Engine Alpha 3.0 ](http://wiki.acestream.org/wiki/index.php/AceStream_3.0.0_alpha/en).
+####Some acestreams play fine in windows, linux and android but not on the Raspberry Pi,Linux Armv7 and Mac OSX (Torrent unavailable / Failed to load list of files).
+For the platforms mentioned we are using an old opensource version of the acestreamengine. Streams created with the newer versions (available only for windows, android and linux) are not supported in older versions of the engine. We can do much about this...
 
 ####Can I run the engine on a different computer?
 Yes. [Read this](https://github.com/enen92/P2P-Streams-XBMC/wiki/Using-an-acestream-engine-running-on-a-different-location)
