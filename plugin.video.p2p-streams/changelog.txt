@@ -1,5 +1,8 @@
 ===== Stable Versions ========
-[B]v1.0.2 (22/8/2014)[/B]
+[B]v1.0.3 (23/8/2014)[/B]
+-Updated acestreamengine for windows + android
+
+B]v1.0.2 (22/8/2014)[/B]
 -Updated acestreamengine for linux i386/x64_86
 -Simplified configuration for linux i386/x64_86
 -Updated engines for openelec i386/x64_86
