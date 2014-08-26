@@ -27,73 +27,54 @@ acestream_openelec_raspberry = "http://p2p-strm.googlecode.com/svn/trunk/Modules
 acestream_mxlinux = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Armv7/mxlinux/mxlinux_armv7_acestream.tar.gz"
 acestream_armv7_openelec = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Armv7/openelec/openelec-acestream.tar.gz"
 acestream_armv7_xbian = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Armv7/xbian/xbian_acestream.tar.gz"
-#Linux i386 and x86_64 (including openelec
-sopcast_linux_generico =  "https://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Sopcastx86_64i386/sopcast_linux.tar.gz"
-openelecx86_64_package = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/Openelec/openelec_x86_64_userdata.tar.gz"
-openeleci386_package = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/openelec/openeleci386-acestream-sopcast.tar.gz"
+#Linux i386 and x86_64 (including openelec)
+sopcast_linux_generico =  "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Sopcastx86_64i386/sopcast_linux.tar.gz"
+openelecx86_64_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/Openelec/sopcast_openelec64.tar.gz"
+openeelcx86_64_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/Openelec/acestream_openelec64.tar.gz"
+openelecxi386_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/openelec/sopcast_openeleci386.tar.gz"
+openeelcxi386_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/openelec/acestream_openeleci386.tar.gz"
+#gen linux
 acestream_linux_x64_generic = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/acestream-linux-x86_64.tar.gz"
 acestream_linux_i386_generic = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/acestream-linux-i386generic.tar.gz"
 #Android
 sopcast_apk = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/SopCast.apk.tar.gz"
 acestreamengine_apk = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AceStream-2.2.10-armv7.apk.tar.gz"
 #Mac OSX
-osx_x86_64 = "https://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/MacOSX_x86_64_ace_and_sop.tar.gz"
-osx_i386 = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/MacOSX_i386_ace_and_sop.tar.gz"
+osx_i386_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/i386/sopcast_osxi386.tar.gz"
+osx_i386_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/i386/acestream_osxi386.tar.gz"
+osx_x64_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/x86_64/sopcast_osx64.tar.gz"
+osx_x64_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/x86_64/acestream_osx64.tar.gz"
 #Windows Files
 acestream_windows = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/acewindows-aceengine2.2.10.tar.gz"
 srvany_executable = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/srvany.tar.gz"
 srvany_permissions = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/sopcastp2p-permissions.txt"
 
+def check_for_updates():
+	pass
 
-def autoconf():
-	#Configuration for LINUX 
+
+def first_conf():
 	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":
-		print("Detected OS: Linux")
-		#Linux Armv6
 		if os.uname()[4] == "armv6l":
-			try:
-				if re.search(os.uname()[1],"openelec",re.IGNORECASE): acestream_rpi = acestream_openelec_raspberry
-				elif re.search(os.uname()[1],"raspbmc",re.IGNORECASE): acestream_rpi = acestream_generic_raspberry
-				elif os.path.isfile("/etc/xbian_version"): acestream_rpi = acestream_generic_raspberry
-				elif "ARCH" in os.uname()[2]:
-					acestream_rpi = acestream_generic_raspberry
-					settings.setSetting('python_cmd',value='python2')
-				else:
-					mensagemok(translate(40000),translate(400007),translate(400008))
-					OS_list = ["OpenELEC","Raspbmc","Xbian","Pipplware","Arch Linux Arm"]
-					url_packagerpi_list = [acestream_openelec_raspberry, acestream_generic_raspberry, acestream_generic_raspberry,acestream_generic_raspberry, acestream_generic_raspberry]
-					OS_Rpi_choose = xbmcgui.Dialog().select
-					choose=OS_Rpi_choose('Select your OS',OS_list)
-					if choose > -1:
-						acestream_rpi= url_packagerpi_list[choose]
-						if OS_list[choose] == "Arch Linux Arm": settings.setSetting('python_cmd',value='python2')
-			except: acestream_rpi = ""
-			print("Detected linux armv6 - possible Raspberry PI")
-			#Sop
-
-			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
-			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(40025),translate(40000))
-			import tarfile            
-			if tarfile.is_tarfile(SPSC_KIT):
-				path_libraries = os.path.join(pastaperfil,"sopcast")
-				download_tools().extract(SPSC_KIT,path_libraries)
-				xbmc.sleep(500)
-				download_tools().remove(SPSC_KIT)
-
-            		#Ace
-			SPSC_KIT = os.path.join(addonpath,acestream_rpi.split("/")[-1])
-			download_tools().Downloader(acestream_rpi,SPSC_KIT,translate(40026),translate(40000))
-        
-			if tarfile.is_tarfile(SPSC_KIT):
-				path_libraries = os.path.join(pastaperfil,"acestream")
-				download_tools().extract(SPSC_KIT,path_libraries)
-				xbmc.sleep(500)
-				download_tools().remove(SPSC_KIT)
-
-			settings.setSetting('autoconfig',value='false')
-
-
-                elif os.uname()[4] == "armv7l":
+			if re.search(os.uname()[1],"openelec",re.IGNORECASE): settings.setSetting('openelecarm6',value='true')
+			elif re.search(os.uname()[1],"raspbmc",re.IGNORECASE): settings.setSetting('raspberrypi',value='true')
+			elif os.path.isfile("/etc/xbian_version"): acestream_rpi = settings.setSetting('raspberrypi',value='true')
+			elif "ARCH" in os.uname()[2]:
+				settings.setSetting('raspberrypi',value='true')
+				settings.setSetting('python_cmd',value='python2')
+			else:
+				mensagemok(translate(40000),translate(400007),translate(400008))
+				OS_list = ["OpenELEC","Raspbmc","Xbian","Pipplware","Arch Linux Arm"]
+				OS_Rpi_choose = xbmcgui.Dialog().select
+				choose=OS_Rpi_choose('Select your OS',OS_list)
+				if choose > -1:
+					if OS_list[choose] == "OpenELEC": settings.setSetting('openelecarm6',value='true')
+					elif OS_list[choose] == "Arch Linux Arm": settings.setSetting('raspberrypi',value='true');settings.setSetting('python_cmd',value='python2')
+					else: settings.setSetting('raspberrypi',value='true')
+			configure_sopcast()
+			xbmc.sleep(200)
+			configure_acestream()
+		elif os.uname()[4] == "armv7l":
 			if re.search(os.uname()[1],"openelec",re.IGNORECASE):
 				OS_Choose = "OpenELEC"
 			elif os.path.isfile("/etc/xbian_version"):
@@ -104,182 +85,126 @@ def autoconf():
                 		choose=xbmcgui.Dialog().select('Select your OS',OS_list)
                 		if choose > -1:
                 			OS_Choose= OS_list[choose]
-
-			#Linux armv7 configuration according to platform
-
-			#MXLINUX
-                	if OS_Choose == "MXLinux":
-				acestream_installed = False
-				sopcast_installed = False
-               			print("Detected MXLinux armv7")
-               			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
-               			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(40025),translate(40000))
-               			import tarfile
-				if tarfile.is_tarfile(SPSC_KIT):
-					path_libraries = os.path.join(pastaperfil,"sopcast")
-					download_tools().extract(SPSC_KIT,path_libraries)
-					xbmc.sleep(500)
-					download_tools().remove(SPSC_KIT)
-					sopcast_installed = True
-
-				SPSC_KIT = os.path.join(addonpath,acestream_mxlinux.split("/")[-1])
-				download_tools().Downloader(acestream_mxlinux,SPSC_KIT,translate(40026),translate(40000))
-        			if tarfile.is_tarfile(SPSC_KIT):
-					path_libraries = os.path.join(pastaperfil,"acestream")
-					download_tools().extract(SPSC_KIT,path_libraries)
-					xbmc.sleep(500)
-					download_tools().remove(SPSC_KIT)
-					acestream_installed = True
-				if acestream_installed and sopcast_installed:
-					settings.setSetting('autoconfig',value='false')	
-
-			#OPENELEC
-
-                	if OS_Choose == "OpenELEC":
-                		import tarfile
-				acestream_installed = False
-				sopcast_installed = False
-                		print("Openelec armv7 platform detected")
-                		SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
-                		download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(40025),translate(40000))
-				if tarfile.is_tarfile(SPSC_KIT):
-					path_libraries = os.path.join(pastaperfil,"sopcast")
-					download_tools().extract(SPSC_KIT,path_libraries)
-					xbmc.sleep(500)
-					download_tools().remove(SPSC_KIT)
-					sopcast_installed = True
-				SPSC_KIT = os.path.join(addonpath,acestream_armv7_openelec.split("/")[-1])
-				download_tools().Downloader(acestream_armv7_openelec,SPSC_KIT,translate(40026),translate(40000))
-        			if tarfile.is_tarfile(SPSC_KIT):
-					path_libraries = os.path.join(pastaperfil,"acestream")
-					download_tools().extract(SPSC_KIT,path_libraries)
-					xbmc.sleep(500)
-					download_tools().remove(SPSC_KIT)
-					acestream_installed = True
-				if acestream_installed and sopcast_installed:
-					settings.setSetting('autoconfig',value='false')	
-
-			#XBIAN
-               		if OS_Choose == "Xbian":
-               			import tarfile
-				acestream_installed = False
-				sopcast_installed = False
-               			print("Xbian armv7 platform detected")
-               			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
-               			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(40025),translate(40000))
-				if tarfile.is_tarfile(SPSC_KIT):
-					path_libraries = os.path.join(pastaperfil,"sopcast")
-					download_tools().extract(SPSC_KIT,path_libraries)
-					xbmc.sleep(500)
-					download_tools().remove(SPSC_KIT)
-					sopcast_installed = True
-				SPSC_KIT = os.path.join(addonpath,acestream_armv7_xbian.split("/")[-1])
-				download_tools().Downloader(acestream_armv7_xbian,SPSC_KIT,translate(40026),translate(40000))
-       				if tarfile.is_tarfile(SPSC_KIT):
-					path_libraries = os.path.join(pastaperfil,"acestream")
-					download_tools().extract(SPSC_KIT,path_libraries)
-					xbmc.sleep(500)
-					download_tools().remove(SPSC_KIT)
-					acestream_installed = True
-				if acestream_installed and sopcast_installed:
-					settings.setSetting('autoconfig',value='false')	
-
-
-			
-		elif (os.uname()[4] == "x86_64" and re.search(os.uname()[1],"openelec",re.IGNORECASE)) or settings.getSetting('openelecx86_64') == "true":
-			settings.setSetting('openelecx86_64',value='true')
-			print("Detected OpenELEC x86_64")
-			SPSC_KIT = os.path.join(addonpath,openelecx86_64_package.split("/")[-1])
-			download_tools().Downloader(openelecx86_64_package,SPSC_KIT,translate(40112),translate(40000))
-			import tarfile
-			if tarfile.is_tarfile(SPSC_KIT):
-				download_tools().extract(SPSC_KIT,pastaperfil)
-				xbmc.sleep(500)
-				download_tools().remove(SPSC_KIT)
-			settings.setSetting('autoconfig',value='false')
-
-		elif (os.uname()[4] == "i386" and re.search(os.uname()[1],"openelec",re.IGNORECASE)) or (os.uname()[4] == "i686" and re.search(os.uname()[1],"openelec",re.IGNORECASE)) or settings.getSetting('openeleci386') == "true":
-			settings.setSetting('openeleci386',value='true')
-			print("Detected OpenELEC i386")
-			SPSC_KIT = os.path.join(addonpath,openeleci386_package.split("/")[-1])
-			download_tools().Downloader(openeleci386_package,SPSC_KIT,translate(40112),translate(40000))
-			import tarfile
-			if tarfile.is_tarfile(SPSC_KIT):
-				download_tools().extract(SPSC_KIT,pastaperfil)
-				xbmc.sleep(500)
-				download_tools().remove(SPSC_KIT)
-			settings.setSetting('autoconfig',value='false')		
-	
+                			if OS_Choose == "OpenELEC": settings.setSetting('openelecarm7',value='true')
+                			elif OS_Choose == "Xbian": settings.setSetting('xbianarm7',value='true')
+                			elif OS_Choose == "MXLinux": settings.setSetting('mxlinuxarm7',value='true')
+			configure_sopcast()
+			xbmc.sleep(200)
+			configure_acestream()
 		else:
+			#32bit and 64bit
 			if os.uname()[4] == "x86_64":
-				opcao= xbmcgui.Dialog().yesno(translate(40000), translate(40113))
-				if opcao: 
+				if re.search(os.uname()[1],"openelec",re.IGNORECASE):
 					settings.setSetting('openelecx86_64',value='true')
-					autoconf()
+				else:
+					opcao= xbmcgui.Dialog().yesno(translate(40000), translate(40113))
+					if opcao: 
+						settings.setSetting('openelecx86_64',value='true')
 			elif os.uname()[4] == "i386" or os.uname()[4] == "i686":
-				opcao= xbmcgui.Dialog().yesno(translate(40000), translate(600023))
-				if opcao: 
+				if re.search(os.uname()[1],"openelec",re.IGNORECASE):	
 					settings.setSetting('openeleci386',value='true')
-					autoconf()
-
-			else: mensagemok(translate(40000),translate(40056))
+				else:
+					opcao= xbmcgui.Dialog().yesno(translate(40000), translate(600023))
+					if opcao: 
+						settings.setSetting('openeleci386',value='true')
+			configure_sopcast()
+			xbmc.sleep(200)
+			configure_acestream()
 			
+	elif xbmc.getCondVisibility('system.platform.windows'):
+		configure_sopcast()
+		xbmc.sleep(200)
+		configure_acestream()
 
-			#Linux but not openelec i386 nor openelec x86_64 - General Linux platforms configuration
-			
-			if settings.getSetting('openeleci386') == "false" and settings.getSetting('openelecx86_64') == "false":
+	elif xbmc.getCondVisibility('system.platform.Android'):
+		configure_sopcast()
+		xbmc.sleep(200)
+		configure_acestream()
+		
+	elif xbmc.getCondVisibility('System.Platform.OSX'):
+		configure_sopcast()
+		xbmc.sleep(200)
+		configure_acestream()
+	
+def configure_sopcast():
+	#Configuration for LINUX 
+	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":
+		print("Detected OS: Linux")
+		#Linux Armv6
+		if os.uname()[4] == "armv6l":
+			print("Detected linux armv6 - possible Raspberry PI")
+			#Sop
+			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
+			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(40025),translate(40000))
+			import tarfile            
+			if tarfile.is_tarfile(SPSC_KIT):
+				path_libraries = os.path.join(pastaperfil,"sopcast")
+				download_tools().extract(SPSC_KIT,path_libraries)
+				xbmc.sleep(500)
+				download_tools().remove(SPSC_KIT)
+			return
 
-				print("Detected Other Linux i386 Plataform")
+		elif os.uname()[4] == "armv7l":
+			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
+			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(40025),translate(40000))
+			import tarfile
+			if tarfile.is_tarfile(SPSC_KIT):
+				path_libraries = os.path.join(pastaperfil,"sopcast")
+				download_tools().extract(SPSC_KIT,path_libraries)
+				xbmc.sleep(500)
+				download_tools().remove(SPSC_KIT)
+			return
 
-            		#Sop
-            		#Download and extract sopcast-bundle
-				SPSC_KIT = os.path.join(addonpath,sopcast_linux_generico.split("/")[-1])
-				download_tools().Downloader(sopcast_linux_generico,SPSC_KIT,translate(40025),translate(40000))
+		elif os.uname()[4] == "x86_64":
+			generic = False
+			if settings.getSetting('openelecx86_64') == "true":
+				print("Detected OpenELEC x86_64")
+				SPSC_KIT = os.path.join(addonpath,openelecx86_64_sopcast.split("/")[-1])
+				download_tools().Downloader(openelecx86_64_sopcast,SPSC_KIT,translate(40025),translate(40000))
 				import tarfile
 				if tarfile.is_tarfile(SPSC_KIT):
-					path_libraries = os.path.join(pastaperfil,"sopcast")
-					download_tools().extract(SPSC_KIT,path_libraries)
+					download_tools().extract(SPSC_KIT,pastaperfil)
 					xbmc.sleep(500)
 					download_tools().remove(SPSC_KIT)
-				#set every single file from the bundle as executable
+				return
+			else: generic = True
+		elif os.uname()[4] == "i386" or os.uname()[4] == "i686":
+			generic = False
+			if settings.getSetting('openeleci386') == "true":
+				SPSC_KIT = os.path.join(addonpath,openelecxi386_sopcast.split("/")[-1])
+				download_tools().Downloader(openelecxi386_sopcast,SPSC_KIT,translate(40025),translate(40000))
+				import tarfile
+				if tarfile.is_tarfile(SPSC_KIT):
+					download_tools().extract(SPSC_KIT,pastaperfil)
+					xbmc.sleep(500)
+					download_tools().remove(SPSC_KIT)
+				return
+			else: generic = True
+		if generic == True:
+			SPSC_KIT = os.path.join(addonpath,sopcast_linux_generico.split("/")[-1])
+			download_tools().Downloader(sopcast_linux_generico,SPSC_KIT,translate(40025),translate(40000))
+			import tarfile
+			if tarfile.is_tarfile(SPSC_KIT):
 				path_libraries = os.path.join(pastaperfil,"sopcast")
-				dirs, files = xbmcvfs.listdir(path_libraries)
-				for ficheiro in files:
-					binary_path = os.path.join(path_libraries,ficheiro)
-					st = os.stat(binary_path)
-					import stat
-					os.chmod(binary_path, st.st_mode | stat.S_IEXEC)
-				path_libraries = os.path.join(path_libraries,"lib")
-				dirs, files = xbmcvfs.listdir(path_libraries)
-				for ficheiro in files:
-					binary_path = os.path.join(path_libraries,ficheiro)
-					st = os.stat(binary_path)
-					import stat
-					os.chmod(binary_path, st.st_mode | stat.S_IEXEC)
-	   		 
-	   		 #Ace
-	   		 
-				if os.uname()[4] == "x86_64":
-					ACE_KIT = os.path.join(addonpath,acestream_linux_x64_generic.split("/")[-1])
-					download_tools().Downloader(acestream_linux_x64_generic,ACE_KIT,translate(40026),translate(40000))
-					import tarfile
-					if tarfile.is_tarfile(ACE_KIT):
-						download_tools().extract(ACE_KIT,pastaperfil)
-						xbmc.sleep(500)
-						download_tools().remove(ACE_KIT)
-				
-					settings.setSetting('autoconfig',value='false')
-					
-				elif os.uname()[4] == "i386" or os.uname()[4] == "i686":
-					ACE_KIT = os.path.join(addonpath,acestream_linux_i386_generic.split("/")[-1])
-					download_tools().Downloader(acestream_linux_i386_generic,ACE_KIT,translate(40026),translate(40000))
-					import tarfile
-					if tarfile.is_tarfile(ACE_KIT):
-						download_tools().extract(ACE_KIT,pastaperfil)
-						xbmc.sleep(500)
-						download_tools().remove(ACE_KIT)
-				
-					settings.setSetting('autoconfig',value='false')
+				download_tools().extract(SPSC_KIT,path_libraries)
+				xbmc.sleep(500)
+				download_tools().remove(SPSC_KIT)
+			#set every single file from the bundle as executable
+			path_libraries = os.path.join(pastaperfil,"sopcast")
+			dirs, files = xbmcvfs.listdir(path_libraries)
+			for ficheiro in files:
+				binary_path = os.path.join(path_libraries,ficheiro)
+				st = os.stat(binary_path)
+				import stat
+				os.chmod(binary_path, st.st_mode | stat.S_IEXEC)
+			path_libraries = os.path.join(path_libraries,"lib")
+			dirs, files = xbmcvfs.listdir(path_libraries)
+			for ficheiro in files:
+				binary_path = os.path.join(path_libraries,ficheiro)
+				st = os.stat(binary_path)
+				import stat
+				os.chmod(binary_path, st.st_mode | stat.S_IEXEC)
+			return
 
 
 	elif xbmc.getCondVisibility('system.platform.windows'):
@@ -440,29 +365,16 @@ def autoconf():
                                             mensagemprogresso.update(100,translate(40179), "   ")
                                             xbmc.sleep(2000)
                                             mensagemprogresso.close()
-        #Ace
-		SPSC_KIT = os.path.join(addonpath,acestream_windows.split("/")[-1])
-		download_tools().Downloader(acestream_windows,SPSC_KIT,translate(40026),translate(40000))
-		import shutil
-		if xbmcvfs.exists(os.path.join(pastaperfil,"acestream")):
-			shutil.rmtree(os.path.join(pastaperfil,"acestream"))
-		if xbmcvfs.exists(os.path.join(pastaperfil,"player")):
-			shutil.rmtree(os.path.join(pastaperfil,"player"))
-		import tarfile
-		if tarfile.is_tarfile(SPSC_KIT):
-			path_libraries = os.path.join(pastaperfil)
-			download_tools().extract(SPSC_KIT,path_libraries)
-			download_tools().remove(SPSC_KIT)
-		settings.setSetting('autoconfig',value='false')
+                                            return
     
 	elif xbmc.getCondVisibility('System.Platform.OSX'):
 		print("Detected OS: Mac OSX")
 		available = False
 		if os.uname()[-1] == "x86_64":
-			mac_package = osx_x86_64
+			mac_package = osx_x64_sopcast
 			available = True
 		elif os.uname()[-1] == "i386":
-			mac_package = osx_i386
+			mac_package = osx_i386_sopcast
 			available = True
 		else:
 			available = False
@@ -480,10 +392,10 @@ def autoconf():
 				st = os.stat(sp_sc_auth)
 				import stat
 				os.chmod(sp_sc_auth, st.st_mode | stat.S_IEXEC)
-				settings.setSetting('autoconfig',value='false')
+			return
 		else:
 			mensagemok(translate(40000),translate(600014))
-			sys.exit(0)
+			return
 				
 	elif xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
 
@@ -550,10 +462,145 @@ def autoconf():
 					sopcast_installed = True
 					settings.setSetting('external_sopcast',value='0')
 					mensagemok(translate(40000),translate(50014))
+				return
 
 		else:
 			mensagemok(translate(40000),translate(50017))
+			return
+			
+			
+			
+def configure_acestream():
+	#Configuration for LINUX 
+	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":
+		print("Detected OS: Linux")
+		#Linux Armv6
+		if os.uname()[4] == "armv6l":
+			print("Detected linux armv6 - possible Raspberry PI")
+			if settings.getSetting('openelecarm6') == "true": acestream_rpi = acestream_openelec_raspberry
+			else: acestream_rpi = acestream_generic_raspberry
+			ACE_KIT = os.path.join(addonpath,acestream_rpi.split("/")[-1])
+			download_tools().Downloader(acestream_rpi,ACE_KIT,translate(40026),translate(40000))
+			import tarfile            
+			if tarfile.is_tarfile(ACE_KIT):
+				path_libraries = os.path.join(pastaperfil,"acestream")
+				download_tools().extract(ACE_KIT,path_libraries)
+				xbmc.sleep(500)
+				download_tools().remove(ACE_KIT)
+			return
+		#Linux Armv7
+		elif os.uname()[4] == "armv7l":
+			if settings.getSetting('openelecarm7') == "true": acestream_package = acestream_armv7_openelec
+			elif settings.getSetting('xbianarm7') == "true": acestream_package = acestream_armv7_xbian
+			elif settings.getSetting('mxlinuxarm7') == "true": acestream_package = acestream_mxlinux
+		
+			ACE_KIT = os.path.join(addonpath,acestream_package.split("/")[-1])
+			download_tools().Downloader(acestream_package,ACE_KIT,translate(40026),translate(40000))
+			import tarfile
+			if tarfile.is_tarfile(ACE_KIT):
+				path_libraries = os.path.join(pastaperfil,"acestream")
+				download_tools().extract(ACE_KIT,path_libraries)
+				xbmc.sleep(500)
+				download_tools().remove(ACE_KIT)
+			return
 
+		elif os.uname()[4] == "x86_64":
+			if settings.getSetting('openelecx86_64') == "true":
+				print("OpenELEC x86_64 Acestream configuration")
+				ACE_KIT = os.path.join(addonpath,openeelcx86_64_acestream.split("/")[-1])
+				download_tools().Downloader(openeelcx86_64_acestream ,ACE_KIT,translate(40026),translate(40000))
+				import tarfile
+				if tarfile.is_tarfile(ACE_KIT):
+					download_tools().extract(ACE_KIT,pastaperfil)
+					xbmc.sleep(500)
+					download_tools().remove(ACE_KIT)
+				return
+
+			else:
+				print("64 bit Linux Disto Acestream Configuration")
+				ACE_KIT = os.path.join(addonpath,acestream_linux_x64_generic.split("/")[-1])
+				download_tools().Downloader(acestream_linux_x64_generic,ACE_KIT,translate(40026),translate(40000))
+				import tarfile
+				if tarfile.is_tarfile(ACE_KIT):
+					download_tools().extract(ACE_KIT,os.path.join(pastaperfil,'acestream'))
+					xbmc.sleep(500)
+					download_tools().remove(ACE_KIT)
+				return
+
+		elif os.uname()[4] == "i386" or os.uname()[4] == "i686":
+			if settings.getSetting('openeleci386') == "true":
+				print("32 bit Openelec Acestream Configuration")
+				ACE_KIT = os.path.join(addonpath,openeelcxi386_acestream.split("/")[-1])
+				download_tools().Downloader(openeelcxi386_acestream,ACE_KIT,translate(40026),translate(40000))
+				import tarfile
+				if tarfile.is_tarfile(ACE_KIT):
+					download_tools().extract(ACE_KIT,pastaperfil)
+					xbmc.sleep(500)
+					download_tools().remove(ACE_KIT)
+				return
+			else:
+				print("32 bit Linux general distro Acestream Configuration")
+				ACE_KIT = os.path.join(addonpath,acestream_linux_i386_generic.split("/")[-1])
+				download_tools().Downloader(acestream_linux_i386_generic,ACE_KIT,translate(40026),translate(40000))
+				import tarfile
+				if tarfile.is_tarfile(ACE_KIT):
+					download_tools().extract(ACE_KIT,pastaperfil)
+					xbmc.sleep(500)
+					download_tools().remove(ACE_KIT)
+				return
+
+	elif xbmc.getCondVisibility('system.platform.windows'):
+		print("Detected OS: Windows")
+		if not xbmcvfs.exists(pastaperfil): xbmcvfs.mkdir(pastaperfil)
+          #Ace
+		SPSC_KIT = os.path.join(addonpath,acestream_windows.split("/")[-1])
+		download_tools().Downloader(acestream_windows,SPSC_KIT,translate(40026),translate(40000))
+		import shutil
+		if xbmcvfs.exists(os.path.join(pastaperfil,"acestream")):
+			shutil.rmtree(os.path.join(pastaperfil,"acestream"))
+		if xbmcvfs.exists(os.path.join(pastaperfil,"player")):
+			shutil.rmtree(os.path.join(pastaperfil,"player"))
+		import tarfile
+		if tarfile.is_tarfile(SPSC_KIT):
+			path_libraries = os.path.join(pastaperfil)
+			download_tools().extract(SPSC_KIT,path_libraries)
+			download_tools().remove(SPSC_KIT)
+		return
+    
+	elif xbmc.getCondVisibility('System.Platform.OSX'):
+		print("Detected OS: Mac OSX")
+		available = False
+		if os.uname()[-1] == "x86_64":
+			mac_package = osx_x64_acestream
+			available = True
+		elif os.uname()[-1] == "i386":
+			mac_package = osx_i386_acestream
+			available = True
+		else:
+			available = False
+		if available == True:		
+			if not xbmcvfs.exists(pastaperfil):
+				xbmcvfs.mkdir(pastaperfil)		
+			MAC_KIT = os.path.join(addonpath,mac_package.split("/")[-1])
+			download_tools().Downloader(mac_package,MAC_KIT,translate(40112),translate(40000))
+			import tarfile
+			if tarfile.is_tarfile(MAC_KIT):
+				path_libraries = os.path.join(pastaperfil)
+				download_tools().extract(MAC_KIT,pastaperfil)
+				download_tools().remove(MAC_KIT)
+				sp_sc_auth = os.path.join(pastaperfil,"sopcast","sp-sc-auth")
+				st = os.stat(sp_sc_auth)
+				import stat
+				os.chmod(sp_sc_auth, st.st_mode | stat.S_IEXEC)
+		else:
+			mensagemok(translate(40000),translate(600014))
+			return
+			
+				
+	elif xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
+
+		print("Detected OS: Android")
+		print("Starting Acestream Configuration")
 		#acestream config for android
 
 		if sopcast_installed == True:
@@ -574,4 +621,4 @@ def autoconf():
 			mensagemok(translate(40000),translate(50021),pasta,translate(50016))
 			mensagemok(translate(40000),translate(50022))
 			mensagemok(translate(40000),translate(50023),translate(50024),translate(50025))
-			settings.setSetting('autoconfig',value='false')	
+			return
