@@ -18,29 +18,9 @@
 	     <setting id="xbianarm7" type="bool" visible="false" default="false"/>
 		<!--  Auto-updates background modules -->  
 		<setting id="last_version_check" type="text" label="last version check" default="" visible="False"/>
-		<!--  Windows --> 
-		<setting id="sop_win_md5" type="text" label="sopcast windows md5" default="" visible="False"/>
-		<setting id="acewin_win_md5" type="text" label="acestream windows md5" default="" visible="False"/>
-		<!--  Mac OSX --> 
-		<setting id="sop_osxi386_md5" type="text" label="sopcast osx i386 md5" default="" visible="False"/>
-		<setting id="ace_osxi386_md5" type="text" label="acestream osx i386 md5" default="" visible="False"/>
-		<setting id="sop_osx64_md5" type="text" label="sopcast osx x64 md5" default="" visible="False"/>
-		<setting id="ace_osx64_md5" type="text" label="acestream osx x64 md5" default="" visible="False"/>
-		<!--  Android armv7 --> 
-		<setting id="sop_android_md5" type="text" label="sopcast android arm md5" default="" visible="False"/>
-		<setting id="ace_android_md5" type="text" label="acestream android arm md5" default="" visible="False"/>
-		<!--  Linux --> 
-		<setting id="sop_linuxi386_md5" type="text" label="sopcast linuxi386 md5" default="" visible="False"/>
-		<setting id="ace_linuxi386_md5" type="text" label="sopcast linuxi386 md5" default="" visible="False"/>
-		<setting id="sop_linux64_md5" type="text" label="sopcast linux64 md5" default="" visible="False"/>
-		<setting id="ace_linux64_md5" type="text" label="sopcast linux64 md5" default="" visible="False"/> 
-		<!--  Linux arm -->  
-		<setting id="sop_linuxarm_md5" type="text" label="sopcast linux arm all md5" default="" visible="False"/>
-		<setting id="ace_linuxarm6_all_md5" type="text" label="acestream linux arm all except openelec md5" default="" visible="False"/>
-		<setting id="ace_linuxarm6_openelec_md5" type="text" label="acestream linux arm6 openelec md5" default="" visible="False"/>
-		<setting id="ace_linuxarm7_openelec_md5" type="text" label="acestream linux arm7 openelec md5" default="" visible="False"/>
-		<setting id="ace_linuxarm7_xbian_md5" type="text" label="acestream linux arm7 xbian md5" default="" visible="False"/>
-		<setting id="ace_linuxarm7_mxlinux_md5" type="text" label="acestream linux arm7 mxlinux md5" default="" visible="False"/>
+		<setting id="sopcast_version" type="text" label="sopcast md5" default="" visible="False"/>
+		<setting id="acestream_version" type="text" label="acestream md5" default="" visible="False"/>
+
 	</category>
 	<category label="Sopcast">
 		<setting label="30017" type="lsep" />

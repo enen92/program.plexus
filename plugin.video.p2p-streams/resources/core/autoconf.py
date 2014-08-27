@@ -7,14 +7,17 @@
     
     Functions:
     
-   	autoconf() -> Autoconfiguration tool
+   	check_for_updates() -> Look for module updates between versions, force download them
+   	firstconf() -> Configuration function, detects the platform, saves to settings, run configure sopcast/acestream functions
+   	configure_sopcast() -> Configure Sopcast
+   	configure_acestream() -> Configure Acestream
 
 """
      
 import xbmc,xbmcgui,xbmcplugin,xbmcvfs
 import tarfile,os,re,sys,subprocess
 from utils.pluginxbmc import *
-from utils.webutils import download_tools
+from utils.webutils import download_tools,get_page_source
 
 
 """ Platform dependent files downloaded during the addon configuration"""
@@ -50,9 +53,44 @@ srvany_executable = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/sr
 srvany_permissions = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/sopcastp2p-permissions.txt"
 
 def check_for_updates():
-	pass
-
-
+	try:
+		version_source = get_page_source("http://p2p-strm.googlecode.com/svn/trunk/ModuleVersions/versions.info")
+	except: version_source = ""
+	if version_source:
+		version_source = eval(version_source)
+		if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":
+			if os.uname()[4] == "armv6l":
+				if settings.getSetting('openelecarm6') == "true": platf = "openelec_arm6"
+				else: platf = "raspberrypi"
+			elif os.uname()[4] == "armv7l":
+				if settings.getSetting('openelecarm7') == "true": platf = "openelec_armv7"
+				elif settings.getSetting('mxlinuxarm7') == "true": platf = "mxlinux_armv7"
+				elif settings.getSetting('xbianarm7') == "true": platf = "xbian_armv7"
+			elif os.uname()[4] == "i386" or os.uname()[4] == "i686":
+				if settings.getSetting('openeleci386') == "true": platf = "openeleci386"
+				else: platf = "linuxi386"
+			elif os.uname()[4] == "x86_64": 
+				if settings.getSetting('openelecx86_64') == "true": platf = "openelecx64"
+				else: platf = "linux_x86_64"
+		elif xbmc.getCondVisibility('system.platform.windows'): platf = "windows"
+		elif xbmc.getCondVisibility('system.platform.Android') or settings.getSetting('force_android') == "true": platf = "android"
+		elif xbmc.getCondVisibility('System.Platform.OSX'):
+			if os.uname()[4] == "i386" or os.uname()[4] == "i686": platf = "osx32"
+			elif os.uname()[4] == "x86_64": platf = "osx64"
+		try:
+			if version_source["sopcast"][platf] != settings.getSetting('sopcast_version'): configure_sopcast(version_source["sopcast"][platf])
+			sopcast_update = True
+		except: sopcast_update = False
+		try:
+			if version_source["acestream"][platf] != settings.getSetting('acestream_version'): configure_acestream(version_source["acestream"][platf])
+			acestream_update = True
+		except: acestream_update = False
+		if acestream_update and sopcast_update: settings.setSetting('last_version_check',value=versao)
+		return
+		
+				
+		
+			
 def first_conf():
 	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":
 		if os.uname()[4] == "armv6l":
@@ -71,9 +109,7 @@ def first_conf():
 					if OS_list[choose] == "OpenELEC": settings.setSetting('openelecarm6',value='true')
 					elif OS_list[choose] == "Arch Linux Arm": settings.setSetting('raspberrypi',value='true');settings.setSetting('python_cmd',value='python2')
 					else: settings.setSetting('raspberrypi',value='true')
-			configure_sopcast()
-			xbmc.sleep(200)
-			configure_acestream()
+			check_for_updates()
 		elif os.uname()[4] == "armv7l":
 			if re.search(os.uname()[1],"openelec",re.IGNORECASE):
 				OS_Choose = "OpenELEC"
@@ -88,9 +124,7 @@ def first_conf():
                 			if OS_Choose == "OpenELEC": settings.setSetting('openelecarm7',value='true')
                 			elif OS_Choose == "Xbian": settings.setSetting('xbianarm7',value='true')
                 			elif OS_Choose == "MXLinux": settings.setSetting('mxlinuxarm7',value='true')
-			configure_sopcast()
-			xbmc.sleep(200)
-			configure_acestream()
+			check_for_updates()
 		else:
 			#32bit and 64bit
 			if os.uname()[4] == "x86_64":
@@ -107,26 +141,22 @@ def first_conf():
 					opcao= xbmcgui.Dialog().yesno(translate(40000), translate(600023))
 					if opcao: 
 						settings.setSetting('openeleci386',value='true')
-			configure_sopcast()
-			xbmc.sleep(200)
-			configure_acestream()
+			check_for_updates()
 			
 	elif xbmc.getCondVisibility('system.platform.windows'):
-		configure_sopcast()
-		xbmc.sleep(200)
-		configure_acestream()
+		check_for_updates()
 
 	elif xbmc.getCondVisibility('system.platform.Android'):
-		configure_sopcast()
-		xbmc.sleep(200)
-		configure_acestream()
+		check_for_updates()
 		
 	elif xbmc.getCondVisibility('System.Platform.OSX'):
-		configure_sopcast()
-		xbmc.sleep(200)
-		configure_acestream()
+		check_for_updates()
+		
+	settings.setSetting('autoconfig',value="false")
+		
+
 	
-def configure_sopcast():
+def configure_sopcast(latest_version):
 	#Configuration for LINUX 
 	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":
 		print("Detected OS: Linux")
@@ -142,6 +172,7 @@ def configure_sopcast():
 				download_tools().extract(SPSC_KIT,path_libraries)
 				xbmc.sleep(500)
 				download_tools().remove(SPSC_KIT)
+			if latest_version: settings.setSetting('sopcast_version',value=latest_version)
 			return
 
 		elif os.uname()[4] == "armv7l":
@@ -153,6 +184,7 @@ def configure_sopcast():
 				download_tools().extract(SPSC_KIT,path_libraries)
 				xbmc.sleep(500)
 				download_tools().remove(SPSC_KIT)
+			if latest_version: settings.setSetting('sopcast_version',value=latest_version)
 			return
 
 		elif os.uname()[4] == "x86_64":
@@ -166,6 +198,7 @@ def configure_sopcast():
 					download_tools().extract(SPSC_KIT,pastaperfil)
 					xbmc.sleep(500)
 					download_tools().remove(SPSC_KIT)
+				if latest_version: settings.setSetting('sopcast_version',value=latest_version)
 				return
 			else: generic = True
 		elif os.uname()[4] == "i386" or os.uname()[4] == "i686":
@@ -178,6 +211,7 @@ def configure_sopcast():
 					download_tools().extract(SPSC_KIT,pastaperfil)
 					xbmc.sleep(500)
 					download_tools().remove(SPSC_KIT)
+				if latest_version: settings.setSetting('sopcast_version',value=latest_version)
 				return
 			else: generic = True
 		if generic == True:
@@ -204,6 +238,7 @@ def configure_sopcast():
 				st = os.stat(binary_path)
 				import stat
 				os.chmod(binary_path, st.st_mode | stat.S_IEXEC)
+			if latest_version: settings.setSetting('sopcast_version',value=latest_version)
 			return
 
 
@@ -365,6 +400,7 @@ def configure_sopcast():
                                             mensagemprogresso.update(100,translate(40179), "   ")
                                             xbmc.sleep(2000)
                                             mensagemprogresso.close()
+                                            if latest_version: settings.setSetting('sopcast_version',value=latest_version)
                                             return
     
 	elif xbmc.getCondVisibility('System.Platform.OSX'):
@@ -392,6 +428,7 @@ def configure_sopcast():
 				st = os.stat(sp_sc_auth)
 				import stat
 				os.chmod(sp_sc_auth, st.st_mode | stat.S_IEXEC)
+			if latest_version: settings.setSetting('sopcast_version',value=latest_version)
 			return
 		else:
 			mensagemok(translate(40000),translate(600014))
@@ -462,6 +499,7 @@ def configure_sopcast():
 					sopcast_installed = True
 					settings.setSetting('external_sopcast',value='0')
 					mensagemok(translate(40000),translate(50014))
+				if latest_version: settings.setSetting('sopcast_version',value=latest_version)
 				return
 
 		else:
@@ -470,7 +508,7 @@ def configure_sopcast():
 			
 			
 			
-def configure_acestream():
+def configure_acestream(latest_version):
 	#Configuration for LINUX 
 	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":
 		print("Detected OS: Linux")
@@ -487,6 +525,7 @@ def configure_acestream():
 				download_tools().extract(ACE_KIT,path_libraries)
 				xbmc.sleep(500)
 				download_tools().remove(ACE_KIT)
+			if latest_version: settings.setSetting('acestream_version',value=latest_version)
 			return
 		#Linux Armv7
 		elif os.uname()[4] == "armv7l":
@@ -502,6 +541,7 @@ def configure_acestream():
 				download_tools().extract(ACE_KIT,path_libraries)
 				xbmc.sleep(500)
 				download_tools().remove(ACE_KIT)
+			if latest_version: settings.setSetting('acestream_version',value=latest_version)
 			return
 
 		elif os.uname()[4] == "x86_64":
@@ -514,6 +554,7 @@ def configure_acestream():
 					download_tools().extract(ACE_KIT,pastaperfil)
 					xbmc.sleep(500)
 					download_tools().remove(ACE_KIT)
+				if latest_version: settings.setSetting('acestream_version',value=latest_version)
 				return
 
 			else:
@@ -522,9 +563,10 @@ def configure_acestream():
 				download_tools().Downloader(acestream_linux_x64_generic,ACE_KIT,translate(40026),translate(40000))
 				import tarfile
 				if tarfile.is_tarfile(ACE_KIT):
-					download_tools().extract(ACE_KIT,os.path.join(pastaperfil,'acestream'))
+					download_tools().extract(ACE_KIT,pastaperfil)
 					xbmc.sleep(500)
 					download_tools().remove(ACE_KIT)
+				if latest_version: settings.setSetting('acestream_version',value=latest_version)
 				return
 
 		elif os.uname()[4] == "i386" or os.uname()[4] == "i686":
@@ -537,6 +579,7 @@ def configure_acestream():
 					download_tools().extract(ACE_KIT,pastaperfil)
 					xbmc.sleep(500)
 					download_tools().remove(ACE_KIT)
+				if latest_version: settings.setSetting('acestream_version',value=latest_version)
 				return
 			else:
 				print("32 bit Linux general distro Acestream Configuration")
@@ -547,6 +590,7 @@ def configure_acestream():
 					download_tools().extract(ACE_KIT,pastaperfil)
 					xbmc.sleep(500)
 					download_tools().remove(ACE_KIT)
+				if latest_version: settings.setSetting('acestream_version',value=latest_version)
 				return
 
 	elif xbmc.getCondVisibility('system.platform.windows'):
@@ -565,6 +609,7 @@ def configure_acestream():
 			path_libraries = os.path.join(pastaperfil)
 			download_tools().extract(SPSC_KIT,path_libraries)
 			download_tools().remove(SPSC_KIT)
+		if latest_version: settings.setSetting('acestream_version',value=latest_version)
 		return
     
 	elif xbmc.getCondVisibility('System.Platform.OSX'):
@@ -592,6 +637,8 @@ def configure_acestream():
 				st = os.stat(sp_sc_auth)
 				import stat
 				os.chmod(sp_sc_auth, st.st_mode | stat.S_IEXEC)
+			if latest_version: settings.setSetting('acestream_version',value=latest_version)
+			return
 		else:
 			mensagemok(translate(40000),translate(600014))
 			return
@@ -621,4 +668,5 @@ def configure_acestream():
 			mensagemok(translate(40000),translate(50021),pasta,translate(50016))
 			mensagemok(translate(40000),translate(50022))
 			mensagemok(translate(40000),translate(50023),translate(50024),translate(50025))
+			if latest_version: settings.setSetting('acestream_version',value=latest_version)
 			return

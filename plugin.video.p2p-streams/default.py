@@ -95,7 +95,8 @@ print("Parserfunction: "+str(parserfunction))
 #from 1-99 functions related to the addon menu functions 
 if mode==None or url==None or len(url)<1:
       print("Installed version: v" + versao)
-      if settings.getSetting('autoconfig') == "true": autoconf()
+      if settings.getSetting('autoconfig') == "true": first_conf()
+      if settings.getSetting('last_version_check') != versao: check_for_updates()
       main_menu()
 elif mode==1: ace.acestreams(name,iconimage,url)
 elif mode==2: sop.sopstreams(name,iconimage,url)
