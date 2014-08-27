@@ -98,6 +98,31 @@ def advanced_menu():
 		addLink("[COLOR red][B]"+translate(600027)+"[/COLOR][/B]","",addonpath + art + 'processwarning.png')
 	else:
 		pass
+	if not eligible and xbmc.getCondVisibility('system.platform.linux'):
+		addLink('[COLOR orange]Acestream engine settings:[/COLOR]','',addonpath + art + 'settings_menu.png')
+		acestream_cachefolder = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
+		acestream_cache_size = str(int(getDirectorySize(acestream_cachefolder))/(1024*1024))
+		addDir(translate(70003) + '[COLOR orange] [' + acestream_cache_size + ' MB][/COLOR]',acestream_cachefolder,307,'p2p',1,False)
+		acestream_settings_file = os.path.join(os.getenv("HOME"),'.ACEStream','playerconf.pickle')
+		settings_content = readfile(acestream_settings_file)
+		number_of_settings = re.compile('p(\d+)\n').findall(settings_content)
+		livebuffervalue = re.compile("S'live_buffer_time'\np(\d+)\nI(\d+)").findall(settings_content)
+		if livebuffervalue:	addDir(translate(600017)+"[COLOR orange][ " + livebuffervalue[0][1] + " ][/COLOR]",'live_buffer_time|' + str(livebuffervalue)+'|'+str(len(number_of_settings)),308,'p2p',2,False)
+		else: addDir(translate(600017)+"[COLOR orange][3][/COLOR]",'live_buffer_time|'+str(len(number_of_settings)),308,'p2p',2,False)
+		vodbuffervalue = re.compile("S'player_buffer_time'\np(\d+)\nI(\d+)").findall(settings_content)
+		if vodbuffervalue: addDir(translate(600016)+"[COLOR orange][ " + vodbuffervalue[0][1] + " ][/COLOR]",'player_buffer_time|'+str(vodbuffervalue)+'|'+str(len(number_of_settings)),308,'p2p',2,False)
+		else: addDir(translate(600016)+"[COLOR orange][10][/COLOR]",'player_buffer_time|'+str(len(number_of_settings)),308,'p2p',2,False)
+		downloadlimit = re.compile("S'total_max_download_rate'\np(\d+)\nI(\d+)").findall(settings_content)
+		if downloadlimit: addDir(translate(600018)+"[COLOR orange][ " + downloadlimit[0][1] + " ][/COLOR]",'total_max_download_rate|'+str(downloadlimit)+'|'+str(len(number_of_settings)),308,'p2p',2,False)
+		else: addDir(translate(600018)+"[COLOR orange][0][/COLOR]",'total_max_download_rate|'+str(len(number_of_settings)),308,'p2p',2,False)
+		uploadlimit = re.compile("S'total_max_upload_rate'\np(\d+)\nI(\d+)").findall(settings_content)
+		if uploadlimit: addDir(translate(600019)+"[COLOR orange][ " + uploadlimit[0][1] + " ][/COLOR]",'total_max_upload_rate|'+str(uploadlimit)+'|'+str(len(number_of_settings)),308,'p2p',2,False)
+		else: addDir(translate(600019)+"[COLOR orange][0][/COLOR]",'total_max_upload_rate|'+str(len(number_of_settings)),308,'p2p',2,False)
+		maxconnection_per_stream = re.compile("S'max_peers'\np(\d+)\nI(\d+)").findall(settings_content)
+		if maxconnection_per_stream: addDir(translate(600021)+"[COLOR orange][ " + maxconnection_per_stream[0][1] + " ][/COLOR]",'max_peers|'+str(maxconnection_per_stream)+'|'+str(len(number_of_settings)),308,'p2p',2,False)
+		else: addDir(translate(600021)+"[COLOR orange][50][/COLOR]",'max_peers|'+str(len(number_of_settings)),308,'p2p',2,False)
+
+		
 
 """
 
@@ -206,4 +231,31 @@ def clear_cache(url):
 		xbmcvfs.delete(os.path.join(url,fich))
 	if files: xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(40161), 1,addonpath+"/icon.png"))
 	xbmc.executebuiltin("Container.Refresh")
+	
+def set_linux_engine_setting(url):
+	print url
+	acestream_settings_file = os.path.join(os.getenv("HOME"),'.ACEStream','playerconf.pickle')
+	settings_content = readfile(acestream_settings_file)
+	keyb = xbmc.Keyboard('',translate(600024))
+	keyb.doModal()
+	if (keyb.isConfirmed()):
+		search = keyb.getText()
+		try:
+			int(search)
+			integer = True
+		except: integer = False
+		if integer == True:
+			if len(url.split('|')) == 3:
+				settings_content = settings_content.replace('p'+str(eval(url.split('|')[1])[0][0])+'\nI'+str(eval(url.split('|')[1])[0][1]),'p'+str(eval(url.split('|')[1])[0][0])+'\nI'+search)
+				save(acestream_settings_file, settings_content)
+				xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(600026), 1,addonpath+"/icon.png"))
+				xbmc.executebuiltin("Container.Refresh")
+			else:
+				settings_content = settings_content.replace('s.',"sS'"+url.split('|')[0]+"'\np"+url.split('|')[1]+"\nI"+search+"\ns.")
+				save(acestream_settings_file, settings_content)
+				xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(600026), 1,addonpath+"/icon.png"))
+				xbmc.executebuiltin("Container.Refresh")		
+		else:
+			mensagemok(translate(40000),translate(600025))
+			sys.exit(0)
 

@@ -128,6 +128,7 @@ elif mode==304: delete_advancedxml()
 elif mode==305: set_engine_setting(url)
 elif mode==306: remove_lock()
 elif mode==307: clear_cache(url)
+elif mode==308: set_linux_engine_setting(url)
 #from 400-499 Site parsers
 elif mode==400: parsers.addon_parsers_menu()
 elif mode==401:
