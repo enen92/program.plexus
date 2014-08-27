@@ -53,6 +53,9 @@
 		<setting id="shutdown-engine" type="bool" label="30015" default="true"/>
 		<setting id="engine-status" type="bool" label="49999" default="true"/>
 		<setting id="ace-debug" type="bool" label="49998" default="false"/>
+		<!-- Linux settings to pass to the engine -->
+		<setting id="total_max_download_rate" type="text" label="" visible="False" default="0"/>
+		<setting id="total_max_upload_rate" type="text" label="" visible="False" default="0"/>
 	</category>
 	<category label="400000">
 	 	<setting label="400001" type="lsep" />

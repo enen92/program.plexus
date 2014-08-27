@@ -265,6 +265,12 @@ class TSengine():
                     acefolder = os.path.join(pastaperfil,'acestream')
                     acebin = os.path.join(pastaperfil,'acestream','acestreamengine')
                     command = [acebin,'--client-console','--lib-path',acefolder]
+                    if settings.getSetting('total_max_download_rate') != "0":
+                        command.append('--download-limit')
+                        command.append(settings.getSetting('total_max_download_rate'))
+                    if settings.getSetting('total_max_upload_rate') != "0":
+                        command.append('--upload-limit')
+                        command.append(settings.getSetting('total_max_upload_rate'))
                     print command
                 elif settings.getSetting('ace_cmd') == "1": command = ["acestreamengine","--client-console"]
                 elif settings.getSetting('ace_cmd') == "2": command = settings.getSetting('ace_cmd_alternative').split(' ')

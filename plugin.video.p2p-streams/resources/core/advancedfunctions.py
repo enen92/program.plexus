@@ -98,7 +98,7 @@ def advanced_menu():
 		addLink("[COLOR red][B]"+translate(600027)+"[/COLOR][/B]","",addonpath + art + 'processwarning.png')
 	else:
 		pass
-	if not eligible and xbmc.getCondVisibility('system.platform.linux'):
+	if not eligible and xbmc.getCondVisibility('system.platform.linux') and settings.getSetting('ace_cmd') == "0":
 		addLink('[COLOR orange]Acestream engine settings:[/COLOR]','',addonpath + art + 'settings_menu.png')
 		acestream_cachefolder = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
 		acestream_cache_size = str(int(getDirectorySize(acestream_cachefolder))/(1024*1024))
@@ -254,7 +254,9 @@ def set_linux_engine_setting(url):
 				settings_content = settings_content.replace('s.',"sS'"+url.split('|')[0]+"'\np"+url.split('|')[1]+"\nI"+search+"\ns.")
 				save(acestream_settings_file, settings_content)
 				xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(600026), 1,addonpath+"/icon.png"))
-				xbmc.executebuiltin("Container.Refresh")		
+				xbmc.executebuiltin("Container.Refresh")
+			if 'total_max_download_rate' in url: settings.setSetting('total_max_download_rate',value=search)
+			if 'total_max_upload_rate' in url:	settings.setSetting('total_max_upload_rate',value=search)	
 		else:
 			mensagemok(translate(40000),translate(600025))
 			sys.exit(0)
