@@ -210,7 +210,6 @@ class TSengine():
             i=i-1
             xbmc.sleep(1000)
             if xbmc.getCondVisibility('system.platform.OSX'):
-                print "here"
                 self._sock.close()
                 self._sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sm('Cant connect')
@@ -652,7 +651,6 @@ class TSServ(threading.Thread):
         comm=self.last_received.split(' ')[0]
         params=self.last_received.split(' ')[1::]
         self.msg=line
-        print line
         if settings.getSetting('ace-debug') == "true":
             print('Sent command: ' + str(comm))
         if comm=='HELLOTS':
