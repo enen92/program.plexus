@@ -206,6 +206,7 @@ def sopstreams_builtin(name,iconimage,sop):
 		counter=50
 		ret = mensagemprogresso.create(translate(40000),"SopCast",translate(40039))
 		mensagemprogresso.update(0)
+		warning = 0
 		while counter > 0 and spsc.pid:
 			if mensagemprogresso.iscanceled():
 				mensagemprogress.close()
@@ -220,7 +221,11 @@ def sopstreams_builtin(name,iconimage,sop):
 				counter=0
 				res=sop_sleep(200 , spsc.pid)
 				break
-			except:print("Other instance of sopcast is still running")
+			except:
+				if warning == 0:
+				    print("Other instance of sopcast is still running")
+				    warning += 1
+				else: pass
                     
 		if res:
 			mensagemprogresso.update(100)
@@ -230,7 +235,9 @@ def sopstreams_builtin(name,iconimage,sop):
 				player.play(url, listitem)
 			while player._playbackLock:
 				xbmc.sleep(500)
-		else: xbmc.executebuiltin("Notification(%s,%s,%i)" % (translate(40000), translate(40040), 1,os.path.join(addonpath,"icon.png")))
+		else:
+		    xbmc.sleep(200)
+		    xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(40040), 1,os.path.join(addonpath,"icon.png")))
 
 	except: pass
 	if settings.getSetting('sop_debug_mode') == "true":
