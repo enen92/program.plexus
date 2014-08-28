@@ -246,6 +246,7 @@ def sync_single_parser(parser):
 			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000),translate(400026),1,addonpath+"/icon.png"))	
 	
 def runscript():
+	if not xbmcvfs.exists(pastaperfil): xbmcvfs.mkdir(pastaperfil)
 	keyb = xbmc.Keyboard("", translate(400016))
 	keyb.doModal()
 	if (keyb.isConfirmed()):
@@ -259,6 +260,9 @@ def runscript():
 			except: mensagemok(translate(40000),translate(40128))
 			
 def clear_parser_trace():
+	if not xbmcvfs.exists(pastaperfil): xbmcvfs.mkdir(pastaperfil)
+	if not xbmcvfs.exists(parser_packages_folder): xbmcvfs.mkdir(parser_packages_folder)
+	if not xbmcvfs.exists(parser_folder): xbmcvfs.mkdir(parser_folder)
 	dirs,files = xbmcvfs.listdir(parser_core_folder)
 	import shutil
 	for directory in dirs:
