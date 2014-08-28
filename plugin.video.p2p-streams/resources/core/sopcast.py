@@ -123,6 +123,7 @@ def sopstreams(name,iconimage,sop):
                                 while player._playbackLock:
                                     xbmc.sleep(5000)
                         else: xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(40040), 1,os.path.join(addonpath,"icon.png")))
+                else: xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(40040), 1,os.path.join(addonpath,"icon.png")))
                 print("Player reached the end")
                 cmd = ['sc','stop','sopcastp2p']
                 import subprocess
