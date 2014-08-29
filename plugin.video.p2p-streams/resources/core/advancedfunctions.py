@@ -98,7 +98,7 @@ def advanced_menu():
 		addLink("[COLOR red][B]"+translate(600027)+"[/COLOR][/B]","",addonpath + art + 'processwarning.png')
 	else:
 		pass
-	if not eligible and xbmc.getCondVisibility('system.platform.linux') and settings.getSetting('ace_cmd') == "0":
+	if not eligible and xbmc.getCondVisibility('system.platform.linux') and settings.getSetting('ace_cmd') == "0" and not xbmc.getCondVisibility('system.platform.Android') and settings.getSetting('force_android') != "true" :
 		addLink('[COLOR orange]Acestream engine settings:[/COLOR]','',addonpath + art + 'settings_menu.png')
 		acestream_cachefolder = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
 		acestream_cache_size = str(int(getDirectorySize(acestream_cachefolder))/(1024*1024))
