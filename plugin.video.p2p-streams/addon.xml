@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.p2p-streams"
        name="p2p-streams"
-       version="1.0.3a"
+       version="1.0.4"
        provider-name="enen92,fightnight">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>

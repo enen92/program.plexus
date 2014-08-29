@@ -1,4 +1,12 @@
 ===== Stable Versions ========
+[B]v1.0.4 (29/8/2014)[/B]
+-Configuration has been written "from scratch". It's now possible for us to force the user to push module updates between versions.
+-It is now possible to change acestreamengine settings from the advanced tools menu for linux
+-Fixed non-existing folder if the first thing a user does after instalation is to clear the parser traces or run a remote python script
+-Added sleep before sopcast "channel initialization failed" notification
+-Minor bug fixes
+-Wiki updated
+
 [B]v1.0.3 (23/8/2014)[/B]
 -Updated acestreamengine for windows + android
 

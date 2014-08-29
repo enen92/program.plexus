@@ -418,7 +418,7 @@ def configure_sopcast(latest_version):
 			if not xbmcvfs.exists(pastaperfil):
 				xbmcvfs.mkdir(pastaperfil)		
 			MAC_KIT = os.path.join(addonpath,mac_package.split("/")[-1])
-			download_tools().Downloader(mac_package,MAC_KIT,translate(40112),translate(40000))
+			download_tools().Downloader(mac_package,MAC_KIT,translate(40025),translate(40000))
 			import tarfile
 			if tarfile.is_tarfile(MAC_KIT):
 				path_libraries = os.path.join(pastaperfil)
@@ -627,7 +627,7 @@ def configure_acestream(latest_version):
 			if not xbmcvfs.exists(pastaperfil):
 				xbmcvfs.mkdir(pastaperfil)		
 			MAC_KIT = os.path.join(addonpath,mac_package.split("/")[-1])
-			download_tools().Downloader(mac_package,MAC_KIT,translate(40112),translate(40000))
+			download_tools().Downloader(mac_package,MAC_KIT,translate(40026),translate(40000))
 			import tarfile
 			if tarfile.is_tarfile(MAC_KIT):
 				path_libraries = os.path.join(pastaperfil)
