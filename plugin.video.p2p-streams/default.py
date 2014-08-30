@@ -133,12 +133,10 @@ elif mode==308: set_linux_engine_setting(url)
 elif mode==400: parsers.addon_parsers_menu()
 elif mode==401:
 	parsers.parser_check()
-	try:
-		package = 'resources.core.parsers.' + parser
-		tree = "main"
-		parser_module = getattr(__import__(package, fromlist=[tree]), tree)
-		parser_module.module_tree(name,url,iconimage,mode,parser,parserfunction)
-	except: mensagemok(translate(40000),translate(400029))
+	package = 'resources.core.parsers.' + parser
+	tree = "main"
+	parser_module = getattr(__import__(package, fromlist=[tree]), tree)
+	parser_module.module_tree(name,url,iconimage,mode,parser,parserfunction)
 elif mode==402: parsers.add_new_parser(url='')
 elif mode==403: parsers.remove_parser(iconimage)
 elif mode==404: parsers.runscript()
