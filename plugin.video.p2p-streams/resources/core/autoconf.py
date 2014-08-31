@@ -92,6 +92,9 @@ def check_for_updates():
 		
 			
 def first_conf():
+	settings.setSetting('last_version_check',value='')
+	settings.setSetting('sopcast_version',value='')
+	settings.setSetting('acestream_version',value='')
 	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":
 		if os.uname()[4] == "armv6l":
 			if re.search(os.uname()[1],"openelec",re.IGNORECASE): settings.setSetting('openelecarm6',value='true')
@@ -515,18 +518,21 @@ def configure_acestream(latest_version):
 		#Linux Armv6
 		if os.uname()[4] == "armv6l":
 			print("Detected linux armv6 - possible Raspberry PI")
-			if settings.getSetting('openelecarm6') == "true": acestream_rpi = acestream_openelec_raspberry
-			else: acestream_rpi = acestream_generic_raspberry
-			ACE_KIT = os.path.join(addonpath,acestream_rpi.split("/")[-1])
-			download_tools().Downloader(acestream_rpi,ACE_KIT,translate(40026),translate(40000))
-			import tarfile            
-			if tarfile.is_tarfile(ACE_KIT):
-				path_libraries = os.path.join(pastaperfil,"acestream")
-				download_tools().extract(ACE_KIT,path_libraries)
-				xbmc.sleep(500)
-				download_tools().remove(ACE_KIT)
-			if latest_version: settings.setSetting('acestream_version',value=latest_version)
-			return
+			if settings.getSetting('openelecarm6') == "false" and setting.getSetting('rasberrypi') == "false":
+				first_conf()
+			else:
+				if settings.getSetting('openelecarm6') == "true": acestream_rpi = acestream_openelec_raspberry
+				else: acestream_rpi = acestream_generic_raspberry
+				ACE_KIT = os.path.join(addonpath,acestream_rpi.split("/")[-1])
+				download_tools().Downloader(acestream_rpi,ACE_KIT,translate(40026),translate(40000))
+				import tarfile            
+				if tarfile.is_tarfile(ACE_KIT):
+					path_libraries = os.path.join(pastaperfil,"acestream")
+					download_tools().extract(ACE_KIT,path_libraries)
+					xbmc.sleep(500)
+					download_tools().remove(ACE_KIT)
+				if latest_version: settings.setSetting('acestream_version',value=latest_version)
+				return
 		#Linux Armv7
 		elif os.uname()[4] == "armv7l":
 			if settings.getSetting('openelecarm7') == "true": acestream_package = acestream_armv7_openelec
