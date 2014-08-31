@@ -251,13 +251,6 @@ class TSengine():
                     self.log.out("Not installed")
                     self.progress.update(0,"Acestream engine not installed")
 
-            elif settings.getSetting('openeleci386') == "true":
-                try:
-                    self.proc = subprocess.Popen(["sh",os.path.join(pastaperfil,'acestream','start.sh')])
-                except:
-                    self.sm("Not installed")
-                    self.log.out("Not installed")
-                    self.progress.update(0,"Acestream engine not installed")
             else:
                 print("Not armv7 or armv6")
                 if settings.getSetting('ace_cmd') == "0":
