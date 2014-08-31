@@ -518,8 +518,7 @@ def configure_acestream(latest_version):
 		#Linux Armv6
 		if os.uname()[4] == "armv6l":
 			print("Detected linux armv6 - possible Raspberry PI")
-			if settings.getSetting('openelecarm6') == "false" and setting.getSetting('rasberrypi') == "false":
-				first_conf()
+			if settings.getSetting('openelecarm6') == "false" and setting.getSetting('rasberrypi') == "false": first_conf()
 			else:
 				if settings.getSetting('openelecarm6') == "true": acestream_rpi = acestream_openelec_raspberry
 				else: acestream_rpi = acestream_generic_raspberry
@@ -535,20 +534,22 @@ def configure_acestream(latest_version):
 				return
 		#Linux Armv7
 		elif os.uname()[4] == "armv7l":
-			if settings.getSetting('openelecarm7') == "true": acestream_package = acestream_armv7_openelec
-			elif settings.getSetting('xbianarm7') == "true": acestream_package = acestream_armv7_xbian
-			elif settings.getSetting('mxlinuxarm7') == "true": acestream_package = acestream_mxlinux
+			if settings.getSetting('openelecarm7') == "false" and settings.getSetting('xbianarm7') == "false" and settings.getSetting('mxlinuxarm7') == "false": first_conf()
+			else:
+				if settings.getSetting('openelecarm7') == "true": acestream_package = acestream_armv7_openelec
+				elif settings.getSetting('xbianarm7') == "true": acestream_package = acestream_armv7_xbian
+				elif settings.getSetting('mxlinuxarm7') == "true": acestream_package = acestream_mxlinux
 		
-			ACE_KIT = os.path.join(addonpath,acestream_package.split("/")[-1])
-			download_tools().Downloader(acestream_package,ACE_KIT,translate(40026),translate(40000))
-			import tarfile
-			if tarfile.is_tarfile(ACE_KIT):
-				path_libraries = os.path.join(pastaperfil,"acestream")
-				download_tools().extract(ACE_KIT,path_libraries)
-				xbmc.sleep(500)
-				download_tools().remove(ACE_KIT)
-			if latest_version: settings.setSetting('acestream_version',value=latest_version)
-			return
+				ACE_KIT = os.path.join(addonpath,acestream_package.split("/")[-1])
+				download_tools().Downloader(acestream_package,ACE_KIT,translate(40026),translate(40000))
+				import tarfile
+				if tarfile.is_tarfile(ACE_KIT):
+					path_libraries = os.path.join(pastaperfil,"acestream")
+					download_tools().extract(ACE_KIT,path_libraries)
+					xbmc.sleep(500)
+					download_tools().remove(ACE_KIT)
+				if latest_version: settings.setSetting('acestream_version',value=latest_version)
+				return
 
 		elif os.uname()[4] == "x86_64":
 			if settings.getSetting('openelecx86_64') == "true":
