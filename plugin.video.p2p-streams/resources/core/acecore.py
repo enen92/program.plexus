@@ -251,7 +251,7 @@ class TSengine():
                     self.log.out("Not installed")
                     self.progress.update(0,"Acestream engine not installed")
 
-            elif settings.getSetting('openelecx86_64') == "true" or settings.getSetting('openeleci386') == "true":
+            elif settings.getSetting('openeleci386') == "true":
                 try:
                     self.proc = subprocess.Popen(["sh",os.path.join(pastaperfil,'acestream','start.sh')])
                 except:
