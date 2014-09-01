@@ -69,7 +69,13 @@ def advanced_menu():
 		try:
 			porta = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","port.txt"))
 		except: porta = "N/A"
-		addDir(translate(600015) +"[COLOR orange][ " + str(int(porta))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","port.txt"),305,'p2p',2,False)
+		try:
+			acestream_settings_file = os.path.join(os.getenv("HOME"),'.ACEStream','sessconfig.pickle')
+			sessconfig = readfile(acestream_settings_file)
+			portvector = re.compile("S'minport'\np(\d+)\nI(\d+)\n").findall(sessconfig)
+			maxport = re.compile("S'maxport'\np(\d+)\nI(\d+)\n").findall(sessconfig)
+		except: portvector = [];maxport=[]
+		addDir(translate(600015) +"[COLOR orange][ " + str(int(porta))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","port.txt") + '|' + str(portvector)+'|'+str(maxport),305,'p2p',2,False)
 		try:
 			vodbuffer = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","vodbuffer.txt"))
 		except: vodbuffer = "N/A"
@@ -203,7 +209,11 @@ Acestream/Sopcast Engine Related functions
 """
 		
 def set_engine_setting(file):
-	value = readfile(file)
+	if 'port.txt' in file:
+		ficheiro = file.split('|')[0]
+	else: ficheiro = file
+	acestream_settings_file = os.path.join(os.getenv("HOME"),'.ACEStream','sessconfig.pickle')
+	value = readfile(ficheiro)
 	keyb = xbmc.Keyboard(str(int(value)), translate(600024))
 	keyb.doModal()
 	if (keyb.isConfirmed()):
@@ -213,8 +223,16 @@ def set_engine_setting(file):
 			integer = True
 		except: integer = False
 		if integer == True:
-			save(file, search)
-			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(600026), 1,addonpath+"/icon.png"))
+			save(ficheiro, search)
+			if 'port.txt' in file:
+				try:
+					text = readfile(acestream_settings_file)
+					minport = eval(file.split('|')[1])
+					maxport = eval(file.split('|')[2])
+					text = text.replace("S'minport'\np" + minport[0][0] +"\nI" + minport[0][1] +"\n","S'minport'\np" + minport[0][0] +"\nI" + search +"\n").replace("S'maxport'\np" + maxport[0][0] +"\nI" + maxport[0][1] +"\n","S'maxport'\np" + maxport[0][0] +"\nI" + search +"\n")
+					save(acestream_settings_file,text)
+				except: pass
+			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(600026), 1,os.path.join(addonpath,"icon.png")))
 			xbmc.executebuiltin("Container.Refresh")
 		else:
 			mensagemok(translate(40000),translate(600025))
