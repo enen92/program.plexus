@@ -251,6 +251,20 @@ class TSengine():
                     self.log.out("Not installed")
                     self.progress.update(0,"Acestream engine not installed")
 
+            elif settings.getSetting('openeleci386') == "true":
+                try:
+                    command = ["sh",os.path.join(pastaperfil,'acestream','start.sh')]
+                    if settings.getSetting('total_max_download_rate') != "0":
+                        command.append('--download-limit')
+                        command.append(settings.getSetting('total_max_download_rate'))
+                    if settings.getSetting('total_max_upload_rate') != "0":
+                        command.append('--upload-limit')
+                        command.append(settings.getSetting('total_max_upload_rate'))
+                    self.proc = subprocess.Popen(command)
+                except:
+                    self.sm("Not installed")
+                    self.log.out("Not installed")
+                    self.progress.update(0,"Acestream engine not installed")
             else:
                 print("Not armv7 or armv6")
                 if settings.getSetting('ace_cmd') == "0":
