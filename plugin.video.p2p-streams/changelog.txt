@@ -1,4 +1,17 @@
 ===== Stable Versions ========
+[B]v1.0.5 (1/9/2014)[/B]
+-Fix download modules on boot function
+-Fixed script error in advancedsettings.xml
+-Fixed "An error has occured" notification after sys.exit
+-Bug fixes in the configuration function to avoid the download of wrong modules
+-Fixed change port function for platforms using the tarasian666 acestreamengine
+-Minor fix regarding disk cache determination in tarasian666 acestreamengine
+-Updated acestream bundle for openelec i386
+-Updated acestream bundle for openelec x86_64
+-Fixed acestream bundle for linux i386
+-Bump acestreamengine md5 to force transfer the new acestreambundles for linux_i386, linux_armv6, linux_armv7, osx_i386, osx_x86_64,openeleci386,openelecx86_64
+
+
 [B]v1.0.4 (29/8/2014)[/B]
 -Configuration has been written "from scratch". It's now possible for us to force the user to push module updates between versions.
 -It is now possible to change acestreamengine settings from the advanced tools menu for linux
