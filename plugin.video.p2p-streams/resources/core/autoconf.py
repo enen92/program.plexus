@@ -27,6 +27,7 @@ sopcast_raspberry = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Rasp
 acestream_generic_raspberry = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/raspberry-acestream.tar.gz"
 acestream_openelec_raspberry = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/openelec-acestream.tar.gz"
 #Linux Armv7 packages
+sopcast_jynxbox = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Armv7/sopcast-jynxbox_purelinux.tar.gz"
 acestream_mxlinux = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Armv7/mxlinux/mxlinux_armv7_acestream.tar.gz"
 acestream_armv7_openelec = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Armv7/openelec/openelec-acestream.tar.gz"
 acestream_armv7_xbian = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Armv7/xbian/xbian_acestream.tar.gz"
@@ -66,6 +67,7 @@ def check_for_updates():
 				if settings.getSetting('openelecarm7') == "true": platf = "openelec_armv7"
 				elif settings.getSetting('mxlinuxarm7') == "true": platf = "mxlinux_armv7"
 				elif settings.getSetting('xbianarm7') == "true": platf = "xbian_armv7"
+				elif settings.getSetting('jynxbox_arm7') == "true": platf = "jynxbox_armv7"
 			elif os.uname()[4] == "i386" or os.uname()[4] == "i686":
 				if settings.getSetting('openeleci386') == "true": platf = "openeleci386"
 				else: platf = "linuxi386"
@@ -120,13 +122,14 @@ def first_conf():
 				OS_Choose = "Xbian"
 			else:
                 		mensagemok(translate(40000),translate(40109),translate(40110))
-                		OS_list = ["MXLinux","OpenELEC","Xbian"]
+                		OS_list = ["MXLinux","OpenELEC","Xbian","Jynxbox Pure Linux"]
                 		choose=xbmcgui.Dialog().select('Select your OS',OS_list)
                 		if choose > -1:
                 			OS_Choose= OS_list[choose]
                 			if OS_Choose == "OpenELEC": settings.setSetting('openelecarm7',value='true')
                 			elif OS_Choose == "Xbian": settings.setSetting('xbianarm7',value='true')
                 			elif OS_Choose == "MXLinux": settings.setSetting('mxlinuxarm7',value='true')
+                			elif OS_Choose == "Jynxbox Pure Linux": settings.setSetting('jynxbox_arm7',value='true')
 			check_for_updates()
 		else:
 			#32bit and 64bit
@@ -179,16 +182,28 @@ def configure_sopcast(latest_version):
 			return
 
 		elif os.uname()[4] == "armv7l":
-			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
-			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(40025),translate(40000))
-			import tarfile
-			if tarfile.is_tarfile(SPSC_KIT):
-				path_libraries = os.path.join(pastaperfil,"sopcast")
-				download_tools().extract(SPSC_KIT,path_libraries)
-				xbmc.sleep(500)
-				download_tools().remove(SPSC_KIT)
-			if latest_version: settings.setSetting('sopcast_version',value=latest_version)
-			return
+			if settings.getSetting('jynxbox_arm7') == "true":
+				SPSC_KIT = os.path.join(addonpath,sopcast_jynxbox.split("/")[-1])
+				download_tools().Downloader(sopcast_jynxbox,SPSC_KIT,translate(40025),translate(40000))
+				import tarfile
+				if tarfile.is_tarfile(SPSC_KIT):
+					path_libraries = os.path.join(pastaperfil)
+					download_tools().extract(SPSC_KIT,path_libraries)
+					xbmc.sleep(500)
+					download_tools().remove(SPSC_KIT)
+				if latest_version: settings.setSetting('sopcast_version',value=latest_version)
+				return
+			else:
+				SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
+				download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(40025),translate(40000))
+				import tarfile
+				if tarfile.is_tarfile(SPSC_KIT):
+					path_libraries = os.path.join(pastaperfil,"sopcast")
+					download_tools().extract(SPSC_KIT,path_libraries)
+					xbmc.sleep(500)
+					download_tools().remove(SPSC_KIT)
+				if latest_version: settings.setSetting('sopcast_version',value=latest_version)
+				return
 
 		elif os.uname()[4] == "x86_64":
 			generic = False
@@ -534,11 +549,11 @@ def configure_acestream(latest_version):
 				return
 		#Linux Armv7
 		elif os.uname()[4] == "armv7l":
-			if settings.getSetting('openelecarm7') == "false" and settings.getSetting('xbianarm7') == "false" and settings.getSetting('mxlinuxarm7') == "false": first_conf()
+			if settings.getSetting('openelecarm7') == "false" and settings.getSetting('xbianarm7') == "false" and settings.getSetting('mxlinuxarm7') == "false" and settings.getSetting('jynxbox_arm7') == "false": first_conf()
 			else:
 				if settings.getSetting('openelecarm7') == "true": acestream_package = acestream_armv7_openelec
 				elif settings.getSetting('xbianarm7') == "true": acestream_package = acestream_armv7_xbian
-				elif settings.getSetting('mxlinuxarm7') == "true": acestream_package = acestream_mxlinux
+				elif settings.getSetting('mxlinuxarm7') == "true" or settings.getSetting('jynxbox_arm7') == "true": acestream_package = acestream_mxlinux
 		
 				ACE_KIT = os.path.join(addonpath,acestream_package.split("/")[-1])
 				download_tools().Downloader(acestream_package,ACE_KIT,translate(40026),translate(40000))

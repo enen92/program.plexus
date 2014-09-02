@@ -16,6 +16,7 @@
 	     <setting id="openelecarm7" type="bool" visible="false" default="false"/>
 	     <setting id="mxlinuxarm7" type="bool" visible="false" default="false"/>
 	     <setting id="xbianarm7" type="bool" visible="false" default="false"/>
+	     <setting id="jynxbox_arm7" type="bool" visible="false" default="false"/>
 		<!--  Auto-updates background modules -->  
 		<setting id="last_version_check" type="text" label="last version check" default="" visible="False"/>
 		<setting id="sopcast_version" type="text" label="sopcast md5" default="3.9.2" visible="False"/>
