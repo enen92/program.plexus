@@ -672,23 +672,22 @@ def configure_acestream(latest_version):
 		print("Starting Acestream Configuration")
 		#acestream config for android
 
-		if sopcast_installed == True:
-			mensagemok(translate(40000),translate(50018),translate(50019),translate(50020))
-			if xbmcvfs.exists(os.path.join("sdcard","Download")):
-				pasta = os.path.join("sdcard","Download")
-				acefile = os.path.join("sdcard","Download",acestreamengine_apk.split("/")[-1])
-			else:
-				dialog = xbmcgui.Dialog()
-				pasta = dialog.browse(int(0), translate(40190), 'myprograms')
-				acefile = os.path.join(pasta,acestreamengine_apk.split("/")[-1])
-			download_tools().Downloader(acestreamengine_apk,acefile,translate(40072),translate(40000))
-			import tarfile
-			if tarfile.is_tarfile(acefile):
-				download_tools().extract(acefile,pasta)
-				download_tools().remove(acefile)
-			xbmc.sleep(2000)
-			mensagemok(translate(40000),translate(50021),pasta,translate(50016))
-			mensagemok(translate(40000),translate(50022))
-			mensagemok(translate(40000),translate(50023),translate(50024),translate(50025))
-			if latest_version: settings.setSetting('acestream_version',value=latest_version)
-			return
+		mensagemok(translate(40000),translate(50018),translate(50019),translate(50020))
+		if xbmcvfs.exists(os.path.join("sdcard","Download")):
+			pasta = os.path.join("sdcard","Download")
+			acefile = os.path.join("sdcard","Download",acestreamengine_apk.split("/")[-1])
+		else:
+			dialog = xbmcgui.Dialog()
+			pasta = dialog.browse(int(0), translate(40190), 'myprograms')
+			acefile = os.path.join(pasta,acestreamengine_apk.split("/")[-1])
+		download_tools().Downloader(acestreamengine_apk,acefile,translate(40072),translate(40000))
+		import tarfile
+		if tarfile.is_tarfile(acefile):
+			download_tools().extract(acefile,pasta)
+			download_tools().remove(acefile)
+		xbmc.sleep(2000)
+		mensagemok(translate(40000),translate(50021),pasta,translate(50016))
+		mensagemok(translate(40000),translate(50022))
+		mensagemok(translate(40000),translate(50023),translate(50024),translate(50025))
+		if latest_version: settings.setSetting('acestream_version',value=latest_version)
+		return
