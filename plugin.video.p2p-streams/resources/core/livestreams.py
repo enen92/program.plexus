@@ -175,11 +175,15 @@ def get_groups(url):
             except: pass
         xbmc.executebuiltin("Container.SetViewMode(51)")
     except:
+        print("Other type of xml list")
         getData(url,"")
 
 def get_channels(name,url):
     from xml.etree import ElementTree
-    source = get_page_source(url)
+    if url.startswith('http://'):
+        source = get_page_source(url)
+    else:
+        source = readfile(url)
     save(os.path.join(pastaperfil,"working.xml"),source)
     chlist_tree = ElementTree.parse(os.path.join(pastaperfil,"working.xml"))
     LANGUAGE = "en"
