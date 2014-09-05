@@ -20,7 +20,7 @@ The addon currently supports SopCast and AceStream and several platforms:
 * Android
 * Linux
   * Armv6 (Raspberry PI including OpenELEC)
-  * Armv7 (OpenELEC,Xbian,MXLinux)
+  * Armv7 (OpenELEC,Xbian,MXLinux,Jynxbox Pure Linux)
   * i386 (including OpenELEC)
   * x86_64 (including OpenELEC)
   
@@ -45,7 +45,7 @@ Although we try to make the configuration as simple as possible it is platform d
 * Linux
   * [OpenELEC](https://github.com/enen92/P2P-Streams-XBMC/wiki/OpenELEC-configuration)
   * [Armv6 (Raspberry PI)](https://github.com/enen92/P2P-Streams-XBMC/wiki/Linux-Armv6-Configuration)
-  * [Armv7 (OpenELEC,Xbian,MXLinux)](https://github.com/enen92/P2P-Streams-XBMC/wiki/Linux-Armv7-Configuration)
+  * [Armv7 (OpenELEC,Xbian,MXLinux,Jynxbox Pure Linux)](https://github.com/enen92/P2P-Streams-XBMC/wiki/Linux-Armv7-Configuration)
   * [i386 (Debian,Ubuntu,Arch...)](https://github.com/enen92/P2P-Streams-XBMC/wiki/Linux-(i386-and-x86_64)-configuration)
   * [x86_64 (Debian,Ubuntu,Arch)](https://github.com/enen92/P2P-Streams-XBMC/wiki/Linux-(i386-and-x86_64)-configuration)
   
