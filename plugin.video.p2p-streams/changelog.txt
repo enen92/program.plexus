@@ -1,4 +1,12 @@
 ===== Stable Versions ========
+[B]v1.0.6 (5/9/2014)[/B]
+-Fixed issue with mobile networks
+-Updated italian strings (tks axlt2002)
+-Fix download modules on boot (acestream) android
+-Fix local lists
+-Added support for Jynxbox Pure linux custom firmware (added to the list of supported OS's)
+
+
 [B]v1.0.5 (1/9/2014)[/B]
 -Fix download modules on boot function
 -Fixed script error in advancedsettings.xml
