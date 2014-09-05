@@ -117,9 +117,9 @@ def first_conf():
 			check_for_updates()
 		elif os.uname()[4] == "armv7l":
 			if re.search(os.uname()[1],"openelec",re.IGNORECASE):
-				OS_Choose = "OpenELEC"
+				settings.setSetting('openelecarm7',value='true')
 			elif os.path.isfile("/etc/xbian_version"):
-				OS_Choose = "Xbian"
+				settings.setSetting('xbianarm7',value='true')
 			else:
                 		mensagemok(translate(40000),translate(40109),translate(40110))
                 		OS_list = ["MXLinux","OpenELEC","Xbian","Jynxbox Pure Linux"]
