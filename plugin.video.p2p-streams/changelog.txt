@@ -1,4 +1,7 @@
 ===== Stable Versions ========
+[B]v1.0.7 (8/9/2014)[/B]
+-Fix download modules on boot on arm
+
 [B]v1.0.6 (5/9/2014)[/B]
 -Fixed issue with mobile networks
 -Updated italian strings (tks axlt2002)
