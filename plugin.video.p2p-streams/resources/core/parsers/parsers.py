@@ -130,7 +130,7 @@ def add_new_parser(url):
 				if '.tar.gz' not in search: mensagemok(translate(40000),translate(400017)); sys.exit(0)
 				else: 
 					md5checksum = search.replace('.tar.gz','.md5')
-					modulename = search.split('/')[-1].replace('.tar.gz','').replace('?raw=true','')
+					modulename = search.split('/')[-1].replace('.tar.gz','').replace('?raw=true','').replace('?dl=1','')
 					md5_up=url_isup(md5checksum)
 					module_up=url_isup(search)
 					if not xbmcvfs.exists(parser_folder): xbmcvfs.mkdir(parser_folder)
@@ -155,15 +155,24 @@ def add_new_parser(url):
 						mensagemok(translate(40000),translate(400015))
 						sys.exit(0)
 	else:
-		md5checksum = url.replace('.tar.gz','.md5')
-		modulename = url.split('/')[-1].replace('.tar.gz','').replace('?raw=true','')
-		md5_up=url_isup(md5checksum)
-		module_up=url_isup(url)
+		modulename = url.split('/')[-1].replace('.tar.gz','').replace('?raw=true','').replace('?dl=1','')
 		if not xbmcvfs.exists(parser_folder): xbmcvfs.mkdir(parser_folder)
 		if not xbmcvfs.exists(parser_packages_folder): xbmcvfs.mkdir(parser_packages_folder)
+		if xbmcvfs.exists(os.path.join(parser_folder,modulename + '.txt')):
+			texto = readfile(os.path.join(parser_folder,modulename + '.txt'))
+			texto = eval(texto)
+			if type(texto) == dict:
+				if 'md5_url' in texto.keys(): md5checksum = texto['md5_url']
+				else: md5checksum = url.replace('.tar.gz','.md5')
+			else: md5checksum = url.replace('.tar.gz','.md5')		
+		else: md5checksum = url.replace('.tar.gz','.md5')
+		md5_up=url_isup(md5checksum)
+		module_up=url_isup(url)
 		text = {}
 		if module_up: text['url'] = url
-		if md5_up: text['md5'] = get_page_source(md5checksum)
+		if md5_up: 
+			text['md5'] = get_page_source(md5checksum)
+			text['md5_url'] = md5checksum
 		if text:
 			module_file = os.path.join(parser_folder,modulename + '.txt')
 			module_tar_location = os.path.join(parser_core_folder,modulename+'.tar.gz')
@@ -216,7 +225,8 @@ def sync_parser():
 			if 'url' and 'md5' in text.keys():
 				installed_md5 = text['md5']
 				module_url = text['url']
-				module_md5 = text['url'].replace('.tar.gz','.md5')
+				if 'md5_url' in text.keys(): module_md5 = text['md5_url']
+				else: module_md5 = text['url'].replace('.tar.gz','.md5')
 				try: current_md5 = get_page_source(module_md5)
 				except: current_md5 = installed_md5; error = True
 				if current_md5 != installed_md5:
