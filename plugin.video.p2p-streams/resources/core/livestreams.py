@@ -128,7 +128,7 @@ def list_type(url):
 def parse_m3u(url):
     if "http" in url: content = get_page_source(url)
     else: content = readfile(url)
-    match = re.compile('#EXTINF:.+?,(.*?)\n(.*)').findall(content)
+    match = re.compile('#EXTINF:.+?,(.*?)\n(.*?)(?:\r|\n)').findall(content)
     for channel_name,stream_url in match:
         if 'plugin://' in stream_url:
             stream_url = 'XBMC.RunPlugin('+stream_url+')'
