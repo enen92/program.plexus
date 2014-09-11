@@ -9,10 +9,11 @@
     handle_wait(time_to_wait,title,text,segunda='') -> Timer with dialog progress capabilities
     clean_text(text) -> Function to remove specific characters from a string
     getDirectorySize(directory) -> returns a directory size recursively
+    recursive_overwrite(src, dest, ignore=None) -> Copy and replace an entire directory recursively
    	
 """
     
-import xbmc,xbmcplugin,xbmcgui,xbmcaddon,re,os
+import xbmc,xbmcplugin,xbmcgui,xbmcaddon,re,os,shutil
 from pluginxbmc import *
 
 def handle_wait(time_to_wait,title,text,segunda=''):
@@ -50,3 +51,21 @@ def getDirectorySize(directory):
 			filename = os.path.join(path, file)
 			dir_size += os.path.getsize(filename)
 	return dir_size
+	
+def recursive_overwrite(src, dest, ignore=None):
+    if os.path.isdir(src):
+        if not os.path.isdir(dest):
+            os.makedirs(dest)
+        files = os.listdir(src)
+        if ignore is not None:
+            ignored = ignore(src, files)
+        else:
+            ignored = set()
+        for f in files:
+            if f not in ignored:
+                recursive_overwrite(os.path.join(src, f), 
+                                    os.path.join(dest, f), 
+                                    ignore)
+    else:
+        shutil.copyfile(src, dest)
+    return

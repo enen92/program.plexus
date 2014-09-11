@@ -62,8 +62,8 @@ def acestreams_builtin(name,iconimage,chid):
     elif xbmc.getCondVisibility('System.Platform.OSX'):
         if settings.getSetting('shutdown-engine') == "true":
             os.system("kill $(ps aux | grep '[s]tart.py')")
-    try:from acecore import TSengine as tsengine
-    except:
+    if 1==1:from acecore import TSengine as tsengine
+    else:
         mensagemok(translate(40000),translate(40037))
         return
     xbmc.executebuiltin('Action(Stop)')

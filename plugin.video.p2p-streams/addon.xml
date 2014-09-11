@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.p2p-streams"
        name="p2p-streams"
-       version="1.0.7"
+       version="1.0.7z3"
        provider-name="enen92,fightnight">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -14,7 +14,7 @@
         <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary>P2P-Streams addon</summary>
+    <summary>SopCast and AceStream for XBMC/Kodi</summary>
     <description lang="en">AceStream and Sopcast in your favourite media center! Watch peer-to-peer streams in XBMC without the need for external players. Project page: https://github.com/enen92/P2P-Streams-XBMC</description>
     <description lang="pt">AceStream e Sopcast no seu Media-Center de eleição! Assista a streams peer-to-peer no XBMC sem a necessidade de players externos. Página do projecto: https://github.com/enen92/P2P-Streams-XBMC</description>
     <description lang="nl">Acestream en Sopcast in jouw favoriete media center. Kijk peer-to-peer streams in XBMC zonder de noodzaak voor externe spelers. Project pagina: https://github.com/enen92/P2P-Streams-XBMC/</description>

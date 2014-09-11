@@ -104,9 +104,13 @@ def advanced_menu():
 		addLink("[COLOR red][B]"+translate(600027)+"[/COLOR][/B]","",addonpath + art + 'processwarning.png')
 	else:
 		pass
-	if not eligible and xbmc.getCondVisibility('system.platform.linux') and settings.getSetting('ace_cmd') == "0" and not xbmc.getCondVisibility('system.platform.Android') and settings.getSetting('force_android') != "true" :
-		acestream_cachefolder = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
-		acestream_settings_file = os.path.join(os.getenv("HOME"),'.ACEStream','playerconf.pickle')
+	if (not eligible and xbmc.getCondVisibility('system.platform.linux') and settings.getSetting('ace_cmd') == "0") or (not eligible and xbmc.getCondVisibility('system.platform.Android') and settings.getSetting('engine_app') == "0") or (settings.getSetting('force_android') == "true" and settings.getSetting('engine_app') == "0"):
+		if not xbmc.getCondVisibility('system.platform.Android'):
+			acestream_cachefolder = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
+			acestream_settings_file = os.path.join(os.getenv("HOME"),'.ACEStream','playerconf.pickle')
+		else:
+			acestream_cachefolder = os.path.join('/sdcard','.ACEStream','cache')
+			acestream_settings_file = os.path.join('/sdcard','.ACEStream','playerconf.pickle')
 		if xbmcvfs.exists(acestream_settings_file) and xbmcvfs.exists(acestream_cachefolder):
 			addLink('[COLOR orange]Acestream engine settings:[/COLOR]','',addonpath + art + 'settings_menu.png')
 			acestream_cache_size = str(int(getDirectorySize(acestream_cachefolder))/(1024*1024))
@@ -252,8 +256,10 @@ def clear_cache(url):
 	xbmc.executebuiltin("Container.Refresh")
 	
 def set_linux_engine_setting(url):
-	print url
-	acestream_settings_file = os.path.join(os.getenv("HOME"),'.ACEStream','playerconf.pickle')
+	if not xbmc.getCondVisibility('system.platform.Android'):
+		acestream_settings_file = os.path.join(os.getenv("HOME"),'.ACEStream','playerconf.pickle')
+	else:
+		acestream_settings_file = os.path.join('/sdcard','.ACEStream','playerconf.pickle')
 	settings_content = readfile(acestream_settings_file)
 	keyb = xbmc.Keyboard('',translate(600024))
 	keyb.doModal()

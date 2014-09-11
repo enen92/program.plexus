@@ -18,6 +18,7 @@ import xbmc,xbmcgui,xbmcplugin,xbmcvfs
 import tarfile,os,re,sys,subprocess
 from utils.pluginxbmc import *
 from utils.webutils import download_tools,get_page_source
+from utils.utilities import *
 
 
 """ Platform dependent files downloaded during the addon configuration"""
@@ -43,6 +44,7 @@ acestream_linux_i386_generic = "http://p2p-strm.googlecode.com/svn/trunk/Modules
 #Android
 sopcast_apk = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/SopCast.apk.tar.gz"
 acestreamengine_apk = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AceStream-2.2.10-armv7.apk.tar.gz"
+android_aceengine = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/org.acestream.engine.tar.gz"
 #Mac OSX
 osx_i386_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/i386/sopcast_osxi386.tar.gz"
 osx_i386_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/i386/acestream_osxi386.tar.gz"
@@ -667,23 +669,73 @@ def configure_acestream(latest_version):
 		print("Detected OS: Android")
 		print("Starting Acestream Configuration")
 		#acestream config for android
+		if not xbmcvfs.exists(pastaperfil): xbmcvfs.mkdir(pastaperfil)
+		#Hack to get xbmc app id
+		xbmcfolder=xbmc.translatePath(addonpath).split("/")
+		
+		i = 0
+		found = False
+		sopcast_installed = False
+		
+		for folder in xbmcfolder:
+			if folder.count('.') >= 2 and folder != addon_id :
+				found = True
+				break
+			else:
+				i+=1
 
-		mensagemok(translate(40000),translate(50018),translate(50019),translate(50020))
-		if xbmcvfs.exists(os.path.join("sdcard","Download")):
-			pasta = os.path.join("sdcard","Download")
-			acefile = os.path.join("sdcard","Download",acestreamengine_apk.split("/")[-1])
+		if found == True:
+			uid = os.getuid()
+			app_id = xbmcfolder[i]
+			settings.setSetting('app_id',app_id)
+			#Acestreamconfiguration for android starts here
+			acebundle = os.path.join(pastaperfil,android_aceengine.split("/")[-1])
+			download_tools().Downloader(android_aceengine,acebundle,"Download acestreamengine bundle android",translate(40000))
+			import tarfile
+			if tarfile.is_tarfile(acebundle):
+				download_tools().extract(acebundle,pastaperfil)
+				download_tools().remove(acebundle)
+			orgacestreamenginefolder = os.path.join(pastaperfil,"org.acestream.engine")
+			xbmc_data_path = os.path.join("/data", "data", app_id)
+			if os.path.exists(xbmc_data_path) and uid == os.stat(xbmc_data_path).st_uid:
+				android_binary_dir = os.path.join(xbmc_data_path, "files", "plugin.video.p2p-streams")
+				if not os.path.exists(android_binary_dir): os.makedirs(android_binary_dir)
+            		android_acestream_folder = os.path.join(android_binary_dir,"org.acestream.engine")
+            		if not os.path.exists(android_acestream_folder): os.makedirs(android_acestream_folder)
+            		xbmc.sleep(200)
+            		recursive_overwrite(orgacestreamenginefolder, android_acestream_folder, ignore=None)
+            		pythonbin = os.path.join(android_acestream_folder,"files","python","bin","python")
+            		st = os.stat(pythonbin)
+            		import stat
+            		os.chmod(pythonbin, st.st_mode | stat.S_IEXEC)
+			opcao= xbmcgui.Dialog().yesno(translate(40000), "By default p2p-streams will use its included engine","Do you want to download and use the app instead?")
+			if not opcao:
+				settings.setSetting('engine_app','0')
+			else:
+				mensagemok(translate(40000),translate(50018),translate(50019),translate(50020))
+				if xbmcvfs.exists(os.path.join("sdcard","Download")):
+					pasta = os.path.join("sdcard","Download")
+					acefile = os.path.join("sdcard","Download",acestreamengine_apk.split("/")[-1])
+				else:
+					dialog = xbmcgui.Dialog()
+					pasta = dialog.browse(int(0), translate(40190), 'myprograms')
+					acefile = os.path.join(pasta,acestreamengine_apk.split("/")[-1])
+				download_tools().Downloader(acestreamengine_apk,acefile,translate(40072),translate(40000))
+				import tarfile
+				if tarfile.is_tarfile(acefile):
+					download_tools().extract(acefile,pasta)
+					download_tools().remove(acefile)
+				xbmc.sleep(2000)
+				mensagemok(translate(40000),translate(50021),pasta,translate(50016))
+				mensagemok(translate(40000),translate(50023),translate(50024),translate(50025))
+				settings.setSetting('engine_app','1')
+			if latest_version: settings.setSetting('acestream_version',value=latest_version)
+			mensagemok(translate(40000),translate(50022))
+			return			
 		else:
-			dialog = xbmcgui.Dialog()
-			pasta = dialog.browse(int(0), translate(40190), 'myprograms')
-			acefile = os.path.join(pasta,acestreamengine_apk.split("/")[-1])
-		download_tools().Downloader(acestreamengine_apk,acefile,translate(40072),translate(40000))
-		import tarfile
-		if tarfile.is_tarfile(acefile):
-			download_tools().extract(acefile,pasta)
-			download_tools().remove(acefile)
-		xbmc.sleep(2000)
-		mensagemok(translate(40000),translate(50021),pasta,translate(50016))
-		mensagemok(translate(40000),translate(50022))
-		mensagemok(translate(40000),translate(50023),translate(50024),translate(50025))
-		if latest_version: settings.setSetting('acestream_version',value=latest_version)
-		return
+			mensagemok(translate(40000),translate(50017))
+			return
+			
+			
+
+

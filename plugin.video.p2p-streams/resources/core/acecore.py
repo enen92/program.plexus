@@ -236,7 +236,16 @@ class TSengine():
         import subprocess
         if xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
             try:
-                xbmc.executebuiltin('XBMC.StartAndroidActivity("org.acestream.engine")')
+                if settings.getSetting('engine_app') == "1": xbmc.executebuiltin('XBMC.StartAndroidActivity("org.acestream.engine")')
+                else:
+                    command = ["sh","/data/data/"+settings.getSetting('app_id')+"/files/plugin.video.p2p-streams/org.acestream.engine/files/droidace.sh",settings.getSetting('app_id')]
+                    if settings.getSetting('total_max_download_rate') != "0":
+                        command.append('--download-limit')
+                        command.append(settings.getSetting('total_max_download_rate'))
+                    if settings.getSetting('total_max_upload_rate') != "0":
+                        command.append('--upload-limit')
+                        command.append(settings.getSetting('total_max_upload_rate'))
+                    self.proc = subprocess.Popen(command)
             except:
                 self.sm("Not installed")
                 self.log.out("Not installed")
@@ -517,7 +526,7 @@ class TSengine():
         return "Ok"
 
     def end(self):
-        if settings.getSetting("kill_type") == "1" or xbmc.getCondVisibility('System.Platform.Android') or xbmc.getCondVisibility('system.platform.windows'):
+        if settings.getSetting("kill_type") == "1" or xbmc.getCondVisibility('system.platform.windows'):
             self.active=False
             comm='SHUTDOWN'
             if self.conn:self.TSpush(comm)
@@ -539,7 +548,7 @@ class TSengine():
                 if settings.getSetting('shutdown-engine') == "true":
                     subprocess.Popen('taskkill /F /IM ace_engine.exe /T',shell=True)
                 else: pass
-            elif xbmc.getCondVisibility('system.platform.linux'):
+            elif xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('System.Platform.Android'):
                 if settings.getSetting('shutdown-engine') == "true":
                     try:
                         self.proc.kill()
@@ -553,9 +562,25 @@ class TSengine():
                         self.proc.kill()
                         self.proc.wait()
                     except: pass
+            elif xbmc.getCondVisibility('System.Platform.Android') and settings.getSetting("engine_app") == "0":
+                if settings.getSetting('shutdown-engine') == "true":
+                    try:
+                        self.proc.kill()
+                        self.proc.wait()
+                    except: pass
+                    try:
+                        procshut_ace = subprocess.Popen(['ps','|','grep','python'],shell=False,stdout=subprocess.PIPE)
+                        for line in procshut_ace.stdout:
+                            match = re.findall(r'\S+', line.rstrip())
+                            if match:
+                                if 'acestream' in match[-1] and len(match)>2:
+                                    os.system("kill " + match[1])
+                                    xbmc.sleep(200)
+                    except: pass
+            
 
-        if settings.getSetting("kill_type") == "0" and not xbmc.getCondVisibility('System.Platform.Android') and not xbmc.getCondVisibility('system.platform.windows'):
-            if xbmc.getCondVisibility('system.platform.linux'):
+        if settings.getSetting("kill_type") == "0" and not xbmc.getCondVisibility('system.platform.windows'):
+            if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('System.Platform.Android'):
                 os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $1}')")
                 os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $2}')")
                 os.system("kill $(ps aux | grep '[s]tart.py' | awk '{print $2}')")
@@ -572,6 +597,23 @@ class TSengine():
                     try:
                         cache_file = self.lnk.split('/')[-2]
                         acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache',cache_file)
+                        xbmcvfs.delete(acestream_cachefolder_file)
+                    except: pass
+                    
+            elif xbmc.getCondVisibility('System.Platform.Android'):
+                try:
+                    procshut_ace = subprocess.Popen(['ps','|','grep','python'],shell=False,stdout=subprocess.PIPE)
+                    for line in procshut_ace.stdout:
+                        match = re.findall(r'\S+', line.rstrip())
+                        if match:
+                            if 'acestream' in match[-1] and len(match)>2:
+                                os.system("kill " + match[1])
+                                xbmc.sleep(200)
+                except: pass
+                if settings.getSetting('save') != "true":
+                    try:
+                        cache_file = self.lnk.split('/')[-2]
+                        acestream_cachefolder_file = os.path.join('/sdcard','.ACEStream','cache',cache_file)
                         xbmcvfs.delete(acestream_cachefolder_file)
                     except: pass
 

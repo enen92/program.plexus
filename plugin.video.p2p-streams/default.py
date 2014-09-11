@@ -24,7 +24,7 @@ def main_menu():
       addDir(translate(40114),MainURL,400,addonpath + art + 'web-parsers-menu.png',2,True)
       addDir(translate(40115),MainURL,100,addonpath + art + 'xml_lists.png',2,True)
       addDir(translate(40144),MainURL,200,addonpath + art + 'Favorites-menu.png',2,True)
-      addLink('','','p2p')
+      if "confluence" in xbmc.getSkinDir(): addLink('','','p2p')
       if xbmc.getCondVisibility('system.platform.windows') or xbmc.getCondVisibility('system.platform.linux') or xbmc.getCondVisibility('System.Platform.OSX') or xbmc.getCondVisibility('System.Platform.Android'):
           addDir('[COLOR orange]AceStream: [/COLOR]' + translate(40004),MainURL,4,addonpath + art + 'acestream-menu-item.png',1,False)
           addDir('[COLOR orange]AceStream: [/COLOR]' + translate(600029),MainURL,6,addonpath + art + 'acestream-menu-item.png',1,False)
@@ -33,7 +33,7 @@ def main_menu():
           addDir('[COLOR orange]SopCast: [/COLOR]' + translate(40006),MainURL,5,addonpath + art + 'sopcast-menu-item.png',1,False)
       if xbmc.getCondVisibility('System.Platform.IOS') or xbmc.getCondVisibility('System.Platform.ATV2'):
           addLink(translate(40056),'',addonpath + art + 'processwarning.png')
-      addLink('','','p2p')
+      if "confluence" in xbmc.getSkinDir(): addLink('','','p2p')
       addDir('[B]' + translate(40057) + '[/B]',MainURL,300,addonpath + art + 'settings_menu.png',2,True)       
       xbmc.executebuiltin("Container.SetViewMode(50)")
       #break_sopcast is a function used in windows to intentionally break the sopcast.exe setup by renaming one of its codec files. It's ran here to rename the file again in case it failed when played before
