@@ -569,13 +569,16 @@ class TSengine():
                         self.proc.wait()
                     except: pass
                     try:
+                        xbmc_user = os.getlogin()
                         procshut_ace = subprocess.Popen(['ps','|','grep','python'],shell=False,stdout=subprocess.PIPE)
                         for line in procshut_ace.stdout:
                             match = re.findall(r'\S+', line.rstrip())
                             if match:
                                 if 'acestream' in match[-1] and len(match)>2:
-                                    os.system("kill " + match[1])
-                                    xbmc.sleep(200)
+                                    if xbmc_user == match[0]:
+                                        os.system("kill " + match[1])
+                                    else:
+                                        os.system("su -c kill " + match[1])
                     except: pass
             
 
