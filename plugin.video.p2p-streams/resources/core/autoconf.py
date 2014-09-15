@@ -497,7 +497,7 @@ def configure_sopcast(latest_version):
 				settings.setSetting('android_sopclient',value=binary_path)
 				opcao= xbmcgui.Dialog().yesno(translate(40000), translate(50011),translate(50012))
 				if not opcao:
-					settings.setSetting('external_sopcast',value='1')
+					settings.setSetting('external-sopcast',value='1')
 					settings.setSetting('force_android',value='true')
 					sopcast_installed = True
 					mensagemok(translate(40000),translate(50014))
@@ -517,7 +517,7 @@ def configure_sopcast(latest_version):
 						download_tools().remove(sopfile)
 					mensagemok(translate(40000),translate(50015),pasta,translate(50016))
 					sopcast_installed = True
-					settings.setSetting('external_sopcast',value='0')
+					settings.setSetting('external-sopcast',value='0')
 					mensagemok(translate(40000),translate(50014))
 				if latest_version: settings.setSetting('sopcast_version',value=latest_version)
 				return

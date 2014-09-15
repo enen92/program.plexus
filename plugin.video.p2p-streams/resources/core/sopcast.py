@@ -53,7 +53,7 @@ def sopstreams(name,iconimage,sop):
 	labelname=name
 	if not xbmc.getCondVisibility('system.platform.windows'):
 	    if xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
-	    	if  settings.getSetting('external_sopcast') == "0":
+	    	if  settings.getSetting('external-sopcast') == "0":
 			versionNumber = int(xbmc.getInfoLabel("System.BuildVersion" )[0:2])
 			if versionNumber >= 13:
 				xbmc.executebuiltin('XBMC.StartAndroidActivity("org.sopcast.android","android.intent.action.VIEW","",'+sop+')')
