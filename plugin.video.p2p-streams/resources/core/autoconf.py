@@ -45,6 +45,7 @@ acestream_linux_i386_generic = "http://p2p-strm.googlecode.com/svn/trunk/Modules
 sopcast_apk = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/SopCast.apk.tar.gz"
 acestreamengine_apk = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AceStream-2.2.10-armv7.apk.tar.gz"
 android_aceengine = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/org.acestream.engine.tar.gz"
+android_aceplayer = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AcePlayer-2.2.10-armv7.apk.tar.gz"
 #Mac OSX
 osx_i386_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/i386/sopcast_osxi386.tar.gz"
 osx_i386_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/i386/acestream_osxi386.tar.gz"
@@ -708,7 +709,7 @@ def configure_acestream(latest_version):
             		st = os.stat(pythonbin)
             		import stat
             		os.chmod(pythonbin, st.st_mode | stat.S_IEXEC)
-			opcao= xbmcgui.Dialog().yesno(translate(40000), "By default p2p-streams will use its included engine","Do you want to download and use the app instead?")
+			opcao= xbmcgui.Dialog().yesno(translate(40000), "By default p2p-streams will use its included acestream engine","Do you want to download and use the app instead?")
 			if not opcao:
 				settings.setSetting('engine_app','0')
 			else:
@@ -729,13 +730,28 @@ def configure_acestream(latest_version):
 				mensagemok(translate(40000),translate(50021),pasta,translate(50016))
 				mensagemok(translate(40000),translate(50023),translate(50024),translate(50025))
 				settings.setSetting('engine_app','1')
+			opcao= xbmcgui.Dialog().yesno(translate(40000), "Do you want to download Ace Player?","This will enable you to use the external player option.")
+			if opcao:
+				if xbmcvfs.exists(os.path.join("sdcard","Download")):
+					pasta = os.path.join("sdcard","Download")
+					acefile = os.path.join("sdcard","Download",android_aceplayer.split("/")[-1])
+				else:
+					dialog = xbmcgui.Dialog()
+					pasta = dialog.browse(int(0), translate(40190), 'myprograms')
+					acefile = os.path.join(pasta,acestreamengine_apk.split("/")[-1])
+				download_tools().Downloader(android_aceplayer,acefile,"Downloading Ace Player",translate(40000))
+				import tarfile
+				if tarfile.is_tarfile(acefile):
+					download_tools().extract(acefile,pasta)
+					download_tools().remove(acefile)
+				xbmc.sleep(2000)
+				mensagemok(translate(40000),"Aceplayer.apk downladed to folder:",pasta,translate(50016))
+				opcao= xbmcgui.Dialog().yesno(translate(40000), "Do you want to use the external player as default?")
+				if opcao:
+					settings.setSetting('engine_app','2')							
 			if latest_version: settings.setSetting('acestream_version',value=latest_version)
 			mensagemok(translate(40000),translate(50022))
 			return			
 		else:
 			mensagemok(translate(40000),translate(50017))
-			return
-			
-			
-
-
+			return	

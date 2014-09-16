@@ -43,7 +43,7 @@
 		<setting id="aceplay_type" type="enum" values="Local|Server remote engine|ValdikSS proxy" label="40152" default="0" enable="True"/>
 		<setting id="ace_cmd" type="enum" values="Default|acestreamengine --client-console|Use my own" label="Acestream CMD" default="0" visible="System.Platform.Linux+!System.Platform.Android" enable="eq(-1,0)"/>
 		<setting id="ace_cmd_alternative" type="text" label="Alternative cmd" default="" visible="System.Platform.Linux+!System.Platform.Android" enable="eq(-1,3)"/>
-		<setting id="engine_app" type="enum" values="Addon|External App" label="Engine" default="0" visible="System.Platform.Android"/>
+		<setting id="engine_app" type="enum" values="All Addon|External App+XBMCPlayer|Official Ace Player" label="Engine" default="0" visible="System.Platform.Android"/>
 		<setting id="ip_addr" type="text" label="30004" default="127.0.0.1" />
 		<setting id="aceporta" type="text" label="40108" default="62062" />
 		<setting id="playerport" type="text" label="40153" default="6878" visible="eq(-6,1)" />

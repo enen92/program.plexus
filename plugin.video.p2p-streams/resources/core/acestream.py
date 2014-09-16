@@ -28,24 +28,32 @@ def load_local_torrent():
 	else: pass
 
 def acestreams(name,iconimage,chid):
-	if not iconimage: iconimage=os.path.join(addonpath,'resources','art','acelogofull.jpg')
-	else: iconimage = urllib.unquote(iconimage)
-	if settings.getSetting('aceplay_type') == "2":
-		pDialog = xbmcgui.DialogProgress()
-		ret = pDialog.create(translate(40000), translate(40154),translate(40155),translate(40156))
-		pDialog.update(0)
-		xbmc.sleep(3000)
-		pDialog.update(100)
-		pDialog.close()
-		ip_adress = settings.getSetting('ip_addr')
-		proxy_port = settings.getSetting('aceporta')
-		chid=chid.replace('acestream://','').replace('ts://','')
-		strm = "http://" + ip_adress + ":" + proxy_port + "/pid/" + chid + "/stream.mp4"
-		listitem = xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
-		listitem.setLabel(name + " (" + chid + ")")
-		listitem.setInfo('video', {'Title': name + " (" + chid + ")"})
-		xbmc.Player().play(strm,listitem)
-	else: acestreams_builtin(name,iconimage,chid)
+	if settings.getSetting('engine_app') != '2':
+		if not iconimage: iconimage=os.path.join(addonpath,'resources','art','acelogofull.jpg')
+		else: iconimage = urllib.unquote(iconimage)
+		if settings.getSetting('aceplay_type') == "2":
+			pDialog = xbmcgui.DialogProgress()
+			ret = pDialog.create(translate(40000), translate(40154),translate(40155),translate(40156))
+			pDialog.update(0)
+			xbmc.sleep(3000)
+			pDialog.update(100)
+			pDialog.close()
+			ip_adress = settings.getSetting('ip_addr')
+			proxy_port = settings.getSetting('aceporta')
+			chid=chid.replace('acestream://','').replace('ts://','')
+			strm = "http://" + ip_adress + ":" + proxy_port + "/pid/" + chid + "/stream.mp4"
+			listitem = xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
+			listitem.setLabel(name + " (" + chid + ")")
+			listitem.setInfo('video', {'Title': name + " (" + chid + ")"})
+			xbmc.Player().play(strm,listitem)
+		else: acestreams_builtin(name,iconimage,chid)
+	else:
+		if '.acelive' in chid: pass
+		elif '.torrent' in chid: pass
+		else:
+			if 'acestream://' in chid: pass
+			else: chid = 'acestream://' + chid
+		xbmc.executebuiltin('XBMC.StartAndroidActivity("org.acestream","android.intent.action.VIEW","","'+chid+'")')
 
 def acestreams_builtin(name,iconimage,chid):
     if xbmc.getCondVisibility('system.platform.windows'):
