@@ -278,6 +278,7 @@ def sopstreams_builtin(name,iconimage,sop):
 class SopWindowsPlayer(xbmc.Player):
       def __init__(self):
             self._playbackLock = True
+            if settings.getSetting('force_dvplayer'): xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER)
             print("Player created")
             
       def onPlayBackStarted(self):
