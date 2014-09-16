@@ -62,7 +62,7 @@ class _TSPlayer(xbmc.Player):
         self.vod=True
         self.duration=None
         self.coms=[]
-        if settings.getSetting('force_dvplayer'): xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER)
+        if settings.getSetting('force_dvplayer') == 'true': xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER)
     def onPlayBackPaused( self ):
         self.log.out('paused')
         
