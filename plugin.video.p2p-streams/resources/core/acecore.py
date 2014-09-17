@@ -591,7 +591,8 @@ class TSengine():
                 if settings.getSetting('save') != "true":
                     try:
                         cache_file = self.lnk.split('/')[-2]
-                        acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache',cache_file)
+                        if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache',cache_file)
+                        else: acestream_cachefolder_file = os.path.join(settings.getSetting('acestream_cachefolder'),cache_file)
                         xbmcvfs.delete(acestream_cachefolder_file)
                     except: pass
                           
@@ -617,7 +618,8 @@ class TSengine():
                 if settings.getSetting('save') != "true":
                     try:
                         cache_file = self.lnk.split('/')[-2]
-                        acestream_cachefolder_file = os.path.join('/sdcard','.ACEStream','cache',cache_file)
+                        if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join('/sdcard','.ACEStream','cache',cache_file)
+                        else: acestream_cachefolder_file = os.path.join(settings.getSetting('acestream_cachefolder'),cache_file)
                         xbmcvfs.delete(acestream_cachefolder_file)
                     except: pass
 
