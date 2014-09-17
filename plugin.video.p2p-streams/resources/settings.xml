@@ -71,7 +71,7 @@
 		<setting id="parser_sync" type="bool" label="400005" default="true"/>
 		<setting id="parser_sync_cron" type="enum" label="400006" values="10h|15h|20h|24h" default="3" enable="!eq(-1,false)"/>
 		<setting id="parsers_last_sync" type="text" default="1970-01-01 23:59:00.000000" visible="false"/>
-		<setting id="parser_disclaimer" type="bool" default="true" visible="False"/>
+		<setting id="parser_disclaimer_two" type="bool" default="true" visible="False"/>
 
 	</category>
 
