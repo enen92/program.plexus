@@ -1,4 +1,18 @@
 ===== Stable Versions ========
+[B]v1.0.8 (17/9/2014)[/B]
+-Updated acestreamengine for Windows (version 2.3.0-Next)
+-Updated acestreamengine for Linux x64 and Openelec x64 (version 3.0.0 b1)
+-Plenty of new options for Android devices:
+ -The addon now includes its own engine like in other platforms (default option -> All addon). This allows you to change the acestreamengine settings from within the addon plus stop/killing the engine after you watch a stream.
+ -You can still use xbmc player + external acestream engine as before (xbmc player + external acestreamengine.apk)
+ -You can now use an external player (aceplayer.apk) (option external player)
+-Fixed bug in m3u lists not being properly scrapped
+-Added support for private parsers (hosted in dropbox)
+-Fixed timezones due to the pytz dependency being missing in addon.xml
+-In android rooted devices you can now kill the processes if for some reason xbmc crashed leaving the process running on the background (hence assigned to a different username)
+-It's now possibile to define the cache folder from within the addon
+-Bump parser disclaimer
+
 [B]v1.0.7 (8/9/2014)[/B]
 -Fix download modules on boot on arm
 
