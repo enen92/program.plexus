@@ -57,6 +57,7 @@
 		<setting id="engine-status" type="bool" label="49999" default="true"/>
 		<setting id="ace-debug" type="bool" label="49998" default="false"/>
 		<!-- Linux settings to pass to the engine -->
+		<setting id="acestream_cachefolder" type="text" label="" visible="False" default=""/>
 		<setting id="total_max_download_rate" type="text" label="" visible="False" default="0"/>
 		<setting id="total_max_upload_rate" type="text" label="" visible="False" default="0"/>
 	</category>
