@@ -691,7 +691,7 @@ def configure_acestream(latest_version):
 			settings.setSetting('app_id',app_id)
 			#Acestreamconfiguration for android starts here
 			acebundle = os.path.join(pastaperfil,android_aceengine.split("/")[-1])
-			download_tools().Downloader(android_aceengine,acebundle,"Download acestreamengine bundle android",translate(40000))
+			download_tools().Downloader(android_aceengine,acebundle,translate(70014),translate(40000))
 			import tarfile
 			if tarfile.is_tarfile(acebundle):
 				download_tools().extract(acebundle,pastaperfil)
@@ -709,7 +709,7 @@ def configure_acestream(latest_version):
             		st = os.stat(pythonbin)
             		import stat
             		os.chmod(pythonbin, st.st_mode | stat.S_IEXEC)
-			opcao= xbmcgui.Dialog().yesno(translate(40000), "By default p2p-streams will use its included acestream engine","Do you want to download and use the app instead?")
+			opcao= xbmcgui.Dialog().yesno(translate(40000), translate(70015),translate(70016))
 			if not opcao:
 				settings.setSetting('engine_app','0')
 			else:
@@ -730,7 +730,7 @@ def configure_acestream(latest_version):
 				mensagemok(translate(40000),translate(50021),pasta,translate(50016))
 				mensagemok(translate(40000),translate(50023),translate(50024),translate(50025))
 				settings.setSetting('engine_app','1')
-			opcao= xbmcgui.Dialog().yesno(translate(40000), "Do you want to download Ace Player?","This will enable you to use the external player option.")
+			opcao= xbmcgui.Dialog().yesno(translate(40000), translate(70017),translate(70018))
 			if opcao:
 				if xbmcvfs.exists(os.path.join("sdcard","Download")):
 					pasta = os.path.join("sdcard","Download")
@@ -739,14 +739,14 @@ def configure_acestream(latest_version):
 					dialog = xbmcgui.Dialog()
 					pasta = dialog.browse(int(0), translate(40190), 'myprograms')
 					acefile = os.path.join(pasta,acestreamengine_apk.split("/")[-1])
-				download_tools().Downloader(android_aceplayer,acefile,"Downloading Ace Player",translate(40000))
+				download_tools().Downloader(android_aceplayer,acefile,translate(70019),translate(40000))
 				import tarfile
 				if tarfile.is_tarfile(acefile):
 					download_tools().extract(acefile,pasta)
 					download_tools().remove(acefile)
 				xbmc.sleep(2000)
-				mensagemok(translate(40000),"Aceplayer.apk downladed to folder:",pasta,translate(50016))
-				opcao= xbmcgui.Dialog().yesno(translate(40000), "Do you want to use the external player as default?")
+				mensagemok(translate(40000),translate(70020),pasta,translate(50016))
+				opcao= xbmcgui.Dialog().yesno(translate(40000), translate(70021))
 				if opcao:
 					settings.setSetting('engine_app','2')							
 			if latest_version: settings.setSetting('acestream_version',value=latest_version)

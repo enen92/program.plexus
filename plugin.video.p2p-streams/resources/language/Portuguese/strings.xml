@@ -46,6 +46,11 @@
     <string id="400004">Sincronizar parsers agora</string>
     <string id="400005">Activar auto-sincronizacao de parsers</string>
     <string id="400006">Intervalo na pesquisa de alterações</string>
+    <string id="70009">Forçar utilização do DVD Player</string>
+    <string id="70010">Comando alternativo</string>
+    <string id="70011">Deseja alterar a pasta de cache?</string>
+    <string id="70012">Escolha a nova pasta</string>
+    <string id="70013">Pasta cache da AceStream engine</string>
     
     <!-- Default.py -->
     <string id="40115">-Listas xml do addon</string>
@@ -165,6 +170,14 @@
     	<string id="50023">Não se esqueça que a AcestreamEngine app</string>
     	<string id="50024">deve estar em execução antes de lançar</string>
     	<string id="50025">qualquer acestream!</string>
+  	<string id="70014">A transferir módulo AcestreamEngine para Android</string>
+  	<string id="70015">Por defeito o addon irá utilizar o seu próprio módulo AcestreamEngine.</string>
+  	<string id="70016">Deseja transferir e usar a aplicação externa oficial?</string>
+  	<string id="70017">Deseja trasnferir o Ace Player?</string>
+  	<string id="70018">Desta forma poderá utilizar a opção de player externo.</string>
+  	<string id="70019">Transferindo Ace Player...</string>
+  	<string id="70020">Aceplayer.apk transferido para a pasta:</string>
+  	<string id="70021">Deseja utilizar o player externo como opção padrão?</string>
     	
     	<!-- advancedfunctions.py -->
     	<string id="40068">Remover ficheiro ts.lock </string>

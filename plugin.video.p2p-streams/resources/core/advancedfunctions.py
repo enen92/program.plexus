@@ -134,8 +134,8 @@ def advanced_menu():
 			else: 
 				cachefoldersetting = '/' + cachefoldersetting[0].replace("'","")
 				settings.setSetting('acestream_cachefolder',cachefoldersetting)
-			if cachefoldersetting: addDir("Cache folder "+"[COLOR orange][ " + cachefoldersetting + " ][/COLOR]",str(cachefoldersetting),309,'p2p',2,False)
-			else: addDir("CacheFolder"+"[COLOR orange][" + cachefoldersetting + "][/COLOR]",cachefoldersetting,309,'p2p',2,False)
+			if cachefoldersetting: addDir(translate(70013)+"[COLOR orange][ " + cachefoldersetting + " ][/COLOR]",str(cachefoldersetting),309,'p2p',2,False)
+			else: addDir(translate(70013)+"[COLOR orange][" + cachefoldersetting + "][/COLOR]",cachefoldersetting,309,'p2p',2,False)
 			livebuffervalue = re.compile("S'live_buffer_time'\np(\d+)\nI(\d+)").findall(settings_content)
 			if livebuffervalue:	addDir(translate(600017)+"[COLOR orange][ " + livebuffervalue[0][1] + " ][/COLOR]",'live_buffer_time|' + str(livebuffervalue)+'|'+str(len(number_of_settings)),308,'p2p',2,False)
 			else: addDir(translate(600017)+"[COLOR orange][3][/COLOR]",'live_buffer_time|'+str(len(number_of_settings)),308,'p2p',2,False)
@@ -306,14 +306,14 @@ def set_linux_engine_setting(url):
 			sys.exit(0)
 			
 def set_acestream_engine_cache_folder(url):
-	opcao= xbmcgui.Dialog().yesno(translate(40000), "Do you want to change your Acestream cache folder?")
+	opcao= xbmcgui.Dialog().yesno(translate(40000), translate(70011))
 	if opcao:
 		if not xbmc.getCondVisibility('system.platform.Android'):
 			acestream_settings_file = os.path.join(os.getenv("HOME"),'.ACEStream','playerconf.pickle')
 		else:
 			acestream_settings_file = os.path.join('/sdcard','.ACEStream','playerconf.pickle')
 		settings_content = readfile(acestream_settings_file)
-		cachefolder = xbmcgui.Dialog().browse(3, "Choose new Acestream cache folder" , 'myprograms','')
+		cachefolder = xbmcgui.Dialog().browse(3, translate(70012) , 'myprograms','')
 		if cachefolder:
 			settings_content = settings_content.replace(url,cachefolder)
 			save(acestream_settings_file, settings_content)

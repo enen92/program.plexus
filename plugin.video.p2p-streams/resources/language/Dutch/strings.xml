@@ -46,6 +46,8 @@
     <string id="400004">Synchroniseer parsers nu</string>
     <string id="400005">Zet parser auto-synchronisatie aan</string>
     <string id="400006">Synchroniseer interval voor parsers</string>
+    <string id="70009">Force use DVD Player for ace and sop playback</string>
+    <string id="70010">Alternative CMD</string>
     
     <!-- Default.py -->
     <string id="40115">-Addon xml lijst</string>
@@ -165,6 +167,14 @@
     	<string id="50023">Vergeet niet dat de AcestreamEngine app</string>
     	<string id="50024">aan moet staan voordat je begint</string>
     	<string id="50025">met een Acestream!</string>
+  	<string id="70014">Downloading AcestreamEngine bundle for Android</string>
+  	<string id="70015">By default p2p-streams will use its included Acestream Engine</string>
+  	<string id="70016">Do you want to download and use the app instead?</string>
+  	<string id="70017">Do you want to download Ace Player?</string>
+  	<string id="70018">This will enable you to use the external player option.</string>
+  	<string id="70019">Downloading Ace Player</string>
+  	<string id="70020">Aceplayer.apk downladed to folder:</string>
+  	<string id="70021">Do you want to use the external player as default?</string>
     	
     	<!-- advancedfunctions.py -->
     	<string id="40068">Verwijder ts.lock file </string>
@@ -192,6 +202,9 @@
  	<string id="600026">Instelling is gewijzigd</string>
  	<string id="600025">Ongeldige waarde. Alleen gehele getallen toegestaan!</string>
  	<string id="40069">ts.lock verwijderen gelukt</string>
+ 	<string id="70011">Do you want to change your Acestream cache folder?</string>
+  	<string id="70012">Choose new Acestream cache folder</string>
+  	<string id="70013">Cachefolder location</string>
     
      <!-- livestreams.py -->
      <string id="40116">[B][COLOR orange]Sopcast.org lijst[/COLOR][/B] (http://sopcast.org/chlist.xml)</string>
