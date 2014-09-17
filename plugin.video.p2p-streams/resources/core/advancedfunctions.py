@@ -132,7 +132,7 @@ def advanced_menu():
 					cachefoldersetting = os.path.join('/sdcard','.ACEStream','cache')
 					settings.setSetting('acestream_cachefolder',cachefoldersetting)
 			else: 
-				cachefoldersetting = '/' + cachefoldersetting[0]
+				cachefoldersetting = '/' + cachefoldersetting[0].replace("'","")
 				settings.setSetting('acestream_cachefolder',cachefoldersetting)
 			if cachefoldersetting: addDir("Cache folder "+"[COLOR orange][ " + cachefoldersetting + " ][/COLOR]",str(cachefoldersetting),309,'p2p',2,False)
 			else: addDir("CacheFolder"+"[COLOR orange][" + cachefoldersetting + "][/COLOR]",cachefoldersetting,309,'p2p',2,False)
