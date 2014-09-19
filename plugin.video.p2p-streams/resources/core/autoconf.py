@@ -43,9 +43,12 @@ acestream_linux_x64_generic = "http://p2p-strm.googlecode.com/svn/trunk/Modules/
 acestream_linux_i386_generic = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/acestream-linux-i386generic.tar.gz"
 #Android
 sopcast_apk = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/SopCast.apk.tar.gz"
-acestreamengine_apk = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AceStream-2.2.10-armv7.apk.tar.gz"
-android_aceengine = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/org.acestream.engine.tar.gz"
-android_aceplayer = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AcePlayer-2.2.10-armv7.apk.tar.gz"
+acestreamengine_apk_arm = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AceStream-2.3.1-armv7.apk.tar.gz"
+acestreamengine_apk_x86 = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AcePlayer-2.3.1-x86.apk.tar.gz"
+android_aceengine_arm = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/org.acestream.engine_arm.tar.gz"
+android_aceengine_x86 = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/org.acestream.engine_x86.tar.gz"
+android_aceplayer_arm = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AcePlayer-2.3.1-armv7.apk.tar.gz"
+android_aceplayer_x86 = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AcePlayer-2.3.1-x86.apk.tar.gz"
 #Mac OSX
 osx_i386_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/i386/sopcast_osxi386.tar.gz"
 osx_i386_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/i386/acestream_osxi386.tar.gz"
@@ -690,8 +693,12 @@ def configure_acestream(latest_version):
 			app_id = xbmcfolder[i]
 			settings.setSetting('app_id',app_id)
 			#Acestreamconfiguration for android starts here
-			acebundle = os.path.join(pastaperfil,android_aceengine.split("/")[-1])
-			download_tools().Downloader(android_aceengine,acebundle,translate(70014),translate(40000))
+			if "arm" in os.uname()[4]:
+				acebundle = os.path.join(pastaperfil,android_aceengine_arm.split("/")[-1])
+				download_tools().Downloader(android_aceengine_arm,acebundle,translate(70014),translate(40000))
+			else:
+				acebundle = os.path.join(pastaperfil,android_aceengine_x86.split("/")[-1])
+				download_tools().Downloader(android_aceengine_x86,acebundle,translate(70014),translate(40000))
 			import tarfile
 			if tarfile.is_tarfile(acebundle):
 				download_tools().extract(acebundle,pastaperfil)
@@ -716,12 +723,15 @@ def configure_acestream(latest_version):
 				mensagemok(translate(40000),translate(50018),translate(50019),translate(50020))
 				if xbmcvfs.exists(os.path.join("sdcard","Download")):
 					pasta = os.path.join("sdcard","Download")
-					acefile = os.path.join("sdcard","Download",acestreamengine_apk.split("/")[-1])
+					if "arm" in os.uname()[4]: acefile = os.path.join("sdcard","Download",acestreamengine_apk_arm.split("/")[-1])
+					else: acefile = os.path.join("sdcard","Download",acestreamengine_apk_x86.split("/")[-1])
 				else:
 					dialog = xbmcgui.Dialog()
 					pasta = dialog.browse(int(0), translate(40190), 'myprograms')
-					acefile = os.path.join(pasta,acestreamengine_apk.split("/")[-1])
-				download_tools().Downloader(acestreamengine_apk,acefile,translate(40072),translate(40000))
+					if "arm" in os.uname()[4]: acefile = os.path.join(pasta,acestreamengine_apk_arm.split("/")[-1])
+					else: acefile = os.path.join(pasta,acestreamengine_apk_x86.split("/")[-1])
+				if "arm" in os.uname()[4]: download_tools().Downloader(acestreamengine_apk_arm,acefile,translate(40072),translate(40000))
+				else: download_tools().Downloader(acestreamengine_apk_x86,acefile,translate(40072),translate(40000))
 				import tarfile
 				if tarfile.is_tarfile(acefile):
 					download_tools().extract(acefile,pasta)
@@ -734,12 +744,15 @@ def configure_acestream(latest_version):
 			if opcao:
 				if xbmcvfs.exists(os.path.join("sdcard","Download")):
 					pasta = os.path.join("sdcard","Download")
-					acefile = os.path.join("sdcard","Download",android_aceplayer.split("/")[-1])
+					if "arm" in os.uname()[4]: acefile = os.path.join("sdcard","Download",android_aceplayer_arm.split("/")[-1])
+					else: os.path.join("sdcard","Download",android_aceplayer_x86.split("/")[-1])
 				else:
 					dialog = xbmcgui.Dialog()
 					pasta = dialog.browse(int(0), translate(40190), 'myprograms')
-					acefile = os.path.join(pasta,acestreamengine_apk.split("/")[-1])
-				download_tools().Downloader(android_aceplayer,acefile,translate(70019),translate(40000))
+					if "arm" in os.uname()[4]: acefile = os.path.join(pasta,acestreamengine_apk_arm.split("/")[-1])
+					else: acefile = os.path.join(pasta,acestreamengine_apk_x86.split("/")[-1])
+				if "arm" in os.uname()[4]: download_tools().Downloader(android_aceplayer_arm,acefile,translate(70019),translate(40000))
+				else: download_tools().Downloader(android_aceplayer_x86,acefile,translate(70019),translate(40000))
 				import tarfile
 				if tarfile.is_tarfile(acefile):
 					download_tools().extract(acefile,pasta)
