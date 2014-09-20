@@ -862,7 +862,7 @@ class OverlayText(object):
         self._upload_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/3.85), origin_y + fst_setting + 2*text_h, text_w, text_h,'N/A', font=font_min)
         self._seeds_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/4.35), origin_y + fst_setting + 3*text_h, text_w, text_h,'N/A', font=font_min)
         self._total_download_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/2.65), origin_y + fst_stat_setting, text_w, text_h,'N/A', font=font_min)
-        self._total_upload_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/3.45), origin_y + fst_stat_setting + text_h, text_w, text_h,'N/A', font=font_min)
+        self._total_upload_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/3.15), origin_y + fst_stat_setting + text_h, text_w, text_h,'N/A', font=font_min)
 
 
     def show(self):
