@@ -849,21 +849,13 @@ class OverlayText(object):
         self._title = xbmcgui.ControlLabel(origin_x+int(float(window_w)/3.4), origin_y + text_h, window_w - 140, text_h, str(translate(50000)), font=font_max, textColor='0xFFEB9E17')
         self._total_stats_label = xbmcgui.ControlLabel(origin_x+int(float(window_h)/1.72), origin_y + int(float(window_h)/1.6), int(float(window_w)/1.7), 20, str(translate(50005)), font=font_min, textColor='0xFFEB9E17')
         #labels
-        self._action = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting, text_w, text_h, str(translate(50001)), font=font_min)
-        self._download = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting + text_h, text_w, text_h, str(translate(50002)), font=font_min)
-        self._upload = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting + 2*text_h, text_w, text_h, str(translate(50003)), font=font_min)
-        self._seeds = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting + 3*text_h, text_w, text_h, str(translate(50004)), font=font_min)
-        self._total_download = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_stat_setting, text_w, text_h, str(translate(50006)), font=font_min)
-        self._total_upload = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_stat_setting + text_h, text_w, text_h, str(translate(50007)), font=font_min)
-        #values
-        self._action_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/4.05), origin_y + fst_setting, text_w, text_h,'N/A', font=font_min)
-        self._percent_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/0.95), origin_y + fst_setting, text_w, text_h,'N/A', font=font_min)
-        self._download_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/3.05), origin_y + fst_setting + text_h, text_w, text_h,'N/A', font=font_min)
-        self._upload_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/3.85), origin_y + fst_setting + 2*text_h, text_w, text_h,'N/A', font=font_min)
-        self._seeds_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/4.35), origin_y + fst_setting + 3*text_h, text_w, text_h,'N/A', font=font_min)
-        self._total_download_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/2.65), origin_y + fst_stat_setting, text_w, text_h,'N/A', font=font_min)
-        self._total_upload_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/3.15), origin_y + fst_stat_setting + text_h, text_w, text_h,'N/A', font=font_min)
-
+        self._action = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting, text_w, text_h, str(translate(50001)) + '  N/A', font=font_min)
+        self._download = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting + text_h, int(float(text_w)*1.6), text_h, str(translate(50002)) + '  N/A', font=font_min)
+        self._upload = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting + 2*text_h, text_w, text_h, str(translate(50003)) + '  N/A', font=font_min)
+        self._seeds = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting + 3*text_h, text_w, text_h, str(translate(50004)) + '  N/A', font=font_min)
+        self._total_download = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_stat_setting, text_w, text_h, str(translate(50006)) + '  N/A', font=font_min)
+        self._total_upload = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_stat_setting + text_h, text_w, text_h, str(translate(50007)) + '  N/A', font=font_min)
+        self._percent_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/1.05), origin_y + fst_setting, text_w, text_h,'N/A', font=font_min)
 
     def show(self):
         self.showing=True
@@ -879,12 +871,6 @@ class OverlayText(object):
         self.window.addControl(self._total_stats_label)
         self.window.addControl(self._total_download)
         self.window.addControl(self._total_upload)
-        self.window.addControl(self._action_value)
-        self.window.addControl(self._download_value)
-        self.window.addControl(self._upload_value)
-        self.window.addControl(self._seeds_value)
-        self.window.addControl(self._total_download_value)
-        self.window.addControl(self._total_upload_value)
         self.window.addControl(self._percent_value)
 
 
@@ -892,12 +878,6 @@ class OverlayText(object):
         self.showing=False
         self.window.removeControl(self._total_download)
         self.window.removeControl(self._total_upload)
-        self.window.removeControl(self._action_value)
-        self.window.removeControl(self._download_value)
-        self.window.removeControl(self._upload_value)
-        self.window.removeControl(self._seeds_value)
-        self.window.removeControl(self._total_download_value)
-        self.window.removeControl(self._total_upload_value)
         self.window.removeControl(self._percent_value)
         self.window.removeControl(self._title)
         self.window.removeControl(self._action)
@@ -910,18 +890,16 @@ class OverlayText(object):
         self.window.removeControl(self._botseparator)
         self.window.removeControl(self._background)
 
-
     def set_information(self,engine_data):
         if self.showing == True:
-            self._action_value.setLabel(engine_data["action"])
+            self._action.setLabel(str(translate(50001)) + '  ' + engine_data["action"])
             self._percent_value.setLabel(engine_data["percent"])
-            self._download_value.setLabel(engine_data["download"])
-            self._upload_value.setLabel(engine_data["upload"])
-            self._seeds_value.setLabel(engine_data["seeds"])
-            self._total_download_value.setLabel(engine_data["total_download"])
-            self._total_upload_value.setLabel(engine_data["total_upload"])
+            self._download.setLabel(str(translate(50002))+ '  ' + engine_data["download"])
+            self._upload.setLabel(str(translate(50003)) + '  ' + engine_data["upload"])
+            self._seeds.setLabel(str(translate(50004)) + '  ' + engine_data["seeds"])
+            self._total_download.setLabel(str(translate(50006)) + '  ' + engine_data["total_download"])
+            self._total_upload.setLabel(str(translate(50007)) + '  ' + engine_data["total_upload"])
         else: pass
-
 
     def _close(self):
         if self.showing:
