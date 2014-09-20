@@ -1,4 +1,7 @@
 ===== Stable Versions ========
+[B]v1.1.0 (20/9/2014)[/B]
+-Fix acestream window for any skin rather than confluence
+
 [B]v1.0.9 (19/9/2014)[/B]
 -Updated linux x64 Acestreamengine to version 3.0.0-b2
 -Updated Openelec x64 Acestreamengine to version 3.0.0-b2

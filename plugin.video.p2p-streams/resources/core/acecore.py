@@ -849,7 +849,7 @@ class OverlayText(object):
         self._title = xbmcgui.ControlLabel(origin_x+int(float(window_w)/3.4), origin_y + text_h, window_w - 140, text_h, str(translate(50000)), font=font_max, textColor='0xFFEB9E17')
         self._total_stats_label = xbmcgui.ControlLabel(origin_x+int(float(window_h)/1.72), origin_y + int(float(window_h)/1.6), int(float(window_w)/1.7), 20, str(translate(50005)), font=font_min, textColor='0xFFEB9E17')
         #labels
-        self._action = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting, text_w, text_h, str(translate(50001)) + '  N/A', font=font_min)
+        self._action = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting, int(float(text_w)*1.6), text_h, str(translate(50001)) + '  N/A', font=font_min)
         self._download = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting + text_h, int(float(text_w)*1.6), text_h, str(translate(50002)) + '  N/A', font=font_min)
         self._upload = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting + 2*text_h, text_w, text_h, str(translate(50003)) + '  N/A', font=font_min)
         self._seeds = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting + 3*text_h, text_w, text_h, str(translate(50004)) + '  N/A', font=font_min)
