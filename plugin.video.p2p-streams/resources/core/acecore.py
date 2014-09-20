@@ -817,110 +817,128 @@ class TSServ(threading.Thread):
             if settings.getSetting('ace-debug') == "true":
                 print('Received command: ' + str(engine_data) )
 
-
     def end(self):
         self.active = False
         self.daemon = False
         self.log.out('Daemon Fully Dead')
 
-
-
 class OverlayText(object):
-        def __init__(self):
-                self.showing = False
-                self.window = xbmcgui.Window(12005)
-                origin_x = 920
-                origin_y = 90
-                #main window
-                self._background = xbmcgui.ControlImage(origin_x, origin_y, 340, 280, os.path.join(addonpath,"resources","art","lateral-fundo.png"))
-                self._acestreamlogo = xbmcgui.ControlImage(origin_x + 30, origin_y + 20, 40, 35, os.path.join(addonpath,"resources","art","acestreamlogo.png"))
-                self._supseparator = xbmcgui.ControlImage(origin_x, origin_y + 65, 330, 1, os.path.join(addonpath,"resources","art","lateral-separador.png"))
-                self._botseparator = xbmcgui.ControlImage(origin_x, origin_y + 260, 330, 1, os.path.join(addonpath,"resources","art","lateral-separador.png"))
-                self._title = xbmcgui.ControlLabel(origin_x+100, origin_y + 25, 200, 20, str(translate(50000)), font='font13', textColor='0xFFEB9E17')
-                self._total_stats_label = xbmcgui.ControlLabel(origin_x+125, origin_y + 175, 200, 20, str(translate(50005)), font='font10', textColor='0xFFEB9E17')
-                #labels
-                self._action = xbmcgui.ControlLabel(origin_x+20, origin_y + 80, 200, 20, str(translate(50001)), font='font10')
-                self._download = xbmcgui.ControlLabel(origin_x+20, origin_y + 105, 200, 20, str(translate(50002)), font='font10')
-                self._upload = xbmcgui.ControlLabel(origin_x+20, origin_y + 130, 200, 20, str(translate(50003)), font='font10')
-                self._seeds = xbmcgui.ControlLabel(origin_x+20, origin_y + 155, 200, 20, str(translate(50004)), font='font10')
-                self._total_download = xbmcgui.ControlLabel(origin_x+20, origin_y + 205, 200, 20, str(translate(50006)), font='font10')
-                self._total_upload = xbmcgui.ControlLabel(origin_x+20, origin_y + 230, 200, 20, str(translate(50007)), font='font10')
-                #values
-                self._action_value = xbmcgui.ControlLabel(origin_x+80, origin_y + 80, 200, 20,'N/A', font='font10')
-                self._percent_value = xbmcgui.ControlLabel(origin_x+280, origin_y + 80, 200, 20,'N/A', font='font10')
-                self._download_value = xbmcgui.ControlLabel(origin_x+105, origin_y + 105, 200, 20,'N/A', font='font10')
-                self._upload_value = xbmcgui.ControlLabel(origin_x+85, origin_y + 130, 200, 20,'N/A', font='font10')
-                self._seeds_value = xbmcgui.ControlLabel(origin_x+75, origin_y + 155, 200, 20,'N/A', font='font10')
-                self._total_download_value = xbmcgui.ControlLabel(origin_x+120, origin_y + 205, 200, 20,'N/A', font='font10')
-                self._total_upload_value = xbmcgui.ControlLabel(origin_x+100, origin_y + 230, 200, 20,'N/A', font='font10')
+    def __init__(self):
+        self.showing = False
+        self.window = xbmcgui.Window(12005)
+        viewport_w, viewport_h = self._get_skin_resolution()
+        font_max = 'font13'
+        font_min = 'font10'
+        origin_x = int(float(viewport_w)/1.3913)
+        origin_y = int(float(viewport_h)/8.0)
+        window_w = int(float(viewport_w)/3.7647)
+        window_h = int(float(viewport_h)/2.5714)
+        acelogo_w = int(float(window_w)/8.5)
+        acelogo_h = int(float(window_w)/11.0)
+        text_lat = int(float(window_w)/15)
+        text_w = int(float(window_w)/1.7)
+        text_h = int(float(window_h)/14)
+        fst_setting = int(float(window_h)/3.5)
+        fst_stat_setting = int(float(window_h)/1.4)
+
+        #main window
+        self._background = xbmcgui.ControlImage(origin_x, origin_y, window_w, window_h, os.path.join(addonpath,"resources","art","lateral-fundo.png"))
+        self._acestreamlogo = xbmcgui.ControlImage(origin_x + int(float(window_w)/11.3), origin_y + int(float(window_h)/14), acelogo_w, acelogo_h, os.path.join(addonpath,"resources","art","acestreamlogo.png"))
+        self._supseparator = xbmcgui.ControlImage(origin_x, origin_y + int(float(viewport_h)/12.176), window_w-10, 1, os.path.join(addonpath,"resources","art","lateral-separador.png"))
+        self._botseparator = xbmcgui.ControlImage(origin_x, origin_y + window_h - 30, window_w-10, 1, os.path.join(addonpath,"resources","art","lateral-separador.png"))
+        self._title = xbmcgui.ControlLabel(origin_x+int(float(window_w)/3.4), origin_y + text_h, window_w - 140, text_h, str(translate(50000)), font=font_max, textColor='0xFFEB9E17')
+        self._total_stats_label = xbmcgui.ControlLabel(origin_x+int(float(window_h)/1.72), origin_y + int(float(window_h)/1.6), int(float(window_w)/1.7), 20, str(translate(50005)), font=font_min, textColor='0xFFEB9E17')
+        #labels
+        self._action = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting, text_w, text_h, str(translate(50001)), font=font_min)
+        self._download = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting + text_h, text_w, text_h, str(translate(50002)), font=font_min)
+        self._upload = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting + 2*text_h, text_w, text_h, str(translate(50003)), font=font_min)
+        self._seeds = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting + 3*text_h, text_w, text_h, str(translate(50004)), font=font_min)
+        self._total_download = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_stat_setting, text_w, text_h, str(translate(50006)), font=font_min)
+        self._total_upload = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_stat_setting + text_h, text_w, text_h, str(translate(50007)), font=font_min)
+        #values
+        self._action_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/4.05), origin_y + fst_setting, text_w, text_h,'N/A', font=font_min)
+        self._percent_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/0.95), origin_y + fst_setting, text_w, text_h,'N/A', font=font_min)
+        self._download_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/3.05), origin_y + fst_setting + text_h, text_w, text_h,'N/A', font=font_min)
+        self._upload_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/3.85), origin_y + fst_setting + 2*text_h, text_w, text_h,'N/A', font=font_min)
+        self._seeds_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/4.35), origin_y + fst_setting + 3*text_h, text_w, text_h,'N/A', font=font_min)
+        self._total_download_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/2.65), origin_y + fst_stat_setting, text_w, text_h,'N/A', font=font_min)
+        self._total_upload_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/3.45), origin_y + fst_stat_setting + text_h, text_w, text_h,'N/A', font=font_min)
 
 
-        def show(self):
-                self.showing=True
-                self.window.addControl(self._background)
-                self.window.addControl(self._acestreamlogo)
-                self.window.addControl(self._supseparator)
-                self.window.addControl(self._botseparator)
-                self.window.addControl(self._title)
-                self.window.addControl(self._action)
-                self.window.addControl(self._download)
-                self.window.addControl(self._upload)
-                self.window.addControl(self._seeds)
-                self.window.addControl(self._total_stats_label)
-                self.window.addControl(self._total_download)
-                self.window.addControl(self._total_upload)
-                self.window.addControl(self._action_value)
-                self.window.addControl(self._download_value)
-                self.window.addControl(self._upload_value)
-                self.window.addControl(self._seeds_value)
-                self.window.addControl(self._total_download_value)
-                self.window.addControl(self._total_upload_value)
-                self.window.addControl(self._percent_value)
+    def show(self):
+        self.showing=True
+        self.window.addControl(self._background)
+        self.window.addControl(self._acestreamlogo)
+        self.window.addControl(self._supseparator)
+        self.window.addControl(self._botseparator)
+        self.window.addControl(self._title)
+        self.window.addControl(self._action)
+        self.window.addControl(self._download)
+        self.window.addControl(self._upload)
+        self.window.addControl(self._seeds)
+        self.window.addControl(self._total_stats_label)
+        self.window.addControl(self._total_download)
+        self.window.addControl(self._total_upload)
+        self.window.addControl(self._action_value)
+        self.window.addControl(self._download_value)
+        self.window.addControl(self._upload_value)
+        self.window.addControl(self._seeds_value)
+        self.window.addControl(self._total_download_value)
+        self.window.addControl(self._total_upload_value)
+        self.window.addControl(self._percent_value)
 
 
-        def hide(self):
-                self.showing=False
-                self.window.removeControl(self._total_download)
-                self.window.removeControl(self._total_upload)
-                self.window.removeControl(self._action_value)
-                self.window.removeControl(self._download_value)
-                self.window.removeControl(self._upload_value)
-                self.window.removeControl(self._seeds_value)
-                self.window.removeControl(self._total_download_value)
-                self.window.removeControl(self._total_upload_value)
-                self.window.removeControl(self._percent_value)
-                self.window.removeControl(self._title)
-                self.window.removeControl(self._action)
-                self.window.removeControl(self._download)
-                self.window.removeControl(self._upload)
-                self.window.removeControl(self._seeds)
-                self.window.removeControl(self._total_stats_label)
-                self.window.removeControl(self._acestreamlogo)
-                self.window.removeControl(self._supseparator)
-                self.window.removeControl(self._botseparator)
-                self.window.removeControl(self._background)
+    def hide(self):
+        self.showing=False
+        self.window.removeControl(self._total_download)
+        self.window.removeControl(self._total_upload)
+        self.window.removeControl(self._action_value)
+        self.window.removeControl(self._download_value)
+        self.window.removeControl(self._upload_value)
+        self.window.removeControl(self._seeds_value)
+        self.window.removeControl(self._total_download_value)
+        self.window.removeControl(self._total_upload_value)
+        self.window.removeControl(self._percent_value)
+        self.window.removeControl(self._title)
+        self.window.removeControl(self._action)
+        self.window.removeControl(self._download)
+        self.window.removeControl(self._upload)
+        self.window.removeControl(self._seeds)
+        self.window.removeControl(self._total_stats_label)
+        self.window.removeControl(self._acestreamlogo)
+        self.window.removeControl(self._supseparator)
+        self.window.removeControl(self._botseparator)
+        self.window.removeControl(self._background)
 
 
-        def set_information(self,engine_data):
-                if self.showing == True:
-                        self._action_value.setLabel(engine_data["action"])
-                        self._percent_value.setLabel(engine_data["percent"])
-                        self._download_value.setLabel(engine_data["download"])
-                        self._upload_value.setLabel(engine_data["upload"])
-                        self._seeds_value.setLabel(engine_data["seeds"])
-                        self._total_download_value.setLabel(engine_data["total_download"])
-                        self._total_upload_value.setLabel(engine_data["total_upload"])
-                else: pass
+    def set_information(self,engine_data):
+        if self.showing == True:
+            self._action_value.setLabel(engine_data["action"])
+            self._percent_value.setLabel(engine_data["percent"])
+            self._download_value.setLabel(engine_data["download"])
+            self._upload_value.setLabel(engine_data["upload"])
+            self._seeds_value.setLabel(engine_data["seeds"])
+            self._total_download_value.setLabel(engine_data["total_download"])
+            self._total_upload_value.setLabel(engine_data["total_upload"])
+        else: pass
 
 
-        def _close(self):
-                if self.showing:
-                        self.hide()
-                else:
-                        pass
-                try: 
-                        self.window.clearProperties()
-                        print("OverlayText window closed")
-                except: pass
+    def _close(self):
+        if self.showing:
+            self.hide()
+        else:
+            pass
+        try: 
+            self.window.clearProperties()
+            print("OverlayText window closed")
+        except: pass
+                
+    #Taken from xbmctorrent
+    def _get_skin_resolution(self):
+        import xml.etree.ElementTree as ET
+        skin_path = xbmc.translatePath("special://skin/")
+        tree = ET.parse(os.path.join(skin_path, "addon.xml"))
+        res = tree.findall("./extension/res")[0]
+        return int(res.attrib["width"]), int(res.attrib["height"])
 
     
