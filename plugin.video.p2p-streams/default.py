@@ -19,6 +19,7 @@ from resources.core.advancedfunctions import *
 from resources.core.livestreams import *
 from resources.core.parsers import parsers
 from resources.core.resolver import go_to_id
+from resources.core.acecore import stop_aceengine
                                                                                                                                                                                                                                                                   
 def main_menu():
       addDir(translate(40114),MainURL,400,addonpath + art + 'web-parsers-menu.png',2,True)
@@ -93,7 +94,7 @@ print("Parser: "+str(parser))
 print("Parserfunction: "+str(parserfunction))
 
 #from 1-99 functions related to the addon menu functions 
-if mode==None or url==None or len(url)<1:
+if mode==None:
       print("Installed version: v" + versao)
       if settings.getSetting('autoconfig') == "true": first_conf()
       else:
@@ -107,6 +108,7 @@ elif mode==3: go_to_id('sop_id')
 elif mode==4: go_to_id('ace')
 elif mode==5: go_to_id('sop_url')
 elif mode==6: ace.load_local_torrent()
+elif mode==7: stop_aceengine()
 #from 100-199 functions related to xml lists
 elif mode==100: xml_lists_menu()
 elif mode==101: list_type(url)
