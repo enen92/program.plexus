@@ -23,21 +23,21 @@
      <string id="30007">Porta video</string>
      <string id="30008">Dimensione del buffer</string>
      <string id="30005">Tempo di attesa player</string>
-     <string id="30009">ModalitÃ  debug</string>
+     <string id="30009">Modalità debug</string>
      <string id="40198">Timeout creazione server</string>
      <string id="40199">Timeout player</string>
      <string id="30018">[COLOR blue]Configurazione AceStream[/COLOR]</string>
      <string id="40152">Tipo player</string>
      <string id="40108">Porta</string>
      <string id="40153">Porta (player)</string>
-     <string id="30010">ModalitÃ  pausa automatica</string>
+     <string id="30010">Modalità pausa automatica</string>
      <string id="30011">Percorso/comando alternativo per AceStream Engine</string>
      <string id="30012">Mantenere i file scaricati</string>
      <string id="30013">Percorso download</string>
      <string id="30015">Chiudi AceStream Engine se il player si ferma</string>
      <string id="49999">Mostra stato AceStream Engine a video</string>
-     <string id="49998">ModalitÃ  debug</string>
-     <string id="70002">ModalitÃ  chiusura AceStream</string>
+     <string id="49998">Modalità debug</string>
+     <string id="70002">Modalità chiusura AceStream</string>
      <string id="400000">Elenchi/Parsers</string>
      <string id="400001">Elenchi</string>
      <string id="40134">Abilita elenchi ufficiali sopcast.org</string>
@@ -46,8 +46,8 @@
      <string id="400004">Sincronizza parsers</string>
      <string id="400005">Abilita sincronizzazione automatica parsers</string>
      <string id="400006">Intervallo di sincronizzazione parsers</string>
-     <string id="70009">Force use DVD Player for ace and sop playback</string>
-     <string id="70010">Alternative CMD</string>
+     <string id="70009">Forza l'utilizzo di DVDPlayer per la riproduzione degli stream</string>
+     <string id="70010">CMD alternativo</string>
     
      <!-- Default.py -->
      <string id="40115">Elenchi xml</string>
@@ -61,12 +61,12 @@
      <string id="400029">Si è verificato un errore</string>
     
      <!-- sopcast.py -->
-     <string id="40196">Ãˆ possibile utilizzare solo player esterni dalla versione</string>
+     <string id="40196">Si possono utilizzare player esterni solo dalla versione</string>
      <string id="40197">13.0 (Gotham) in avanti!</string>
-     <string id="40180">(Windows) SopCast non Ã¨ stato configurato!</string>
+     <string id="40180">(Windows) SopCast non è stato configurato!</string>
      <string id="40181">Attiva 'Scarica moduli all'avvio' nelle impostazioni generali</string>
      <string id="40182">e rientra nell'addon (come Amministratore)</string>
-     <string id="40183">Verifica se il servizio Ã¨ stato creato. Attendere prego...</string>
+     <string id="40183">Verifica se il servizio è stato creato. Attendere prego...</string>
      <string id="40184">Server creato. Tentativo di riproduzione...</string>
      <string id="40040">Inizializzazione canale fallita</string>
      <string id="40039">Caricamento stream. Si prega di attendere fino a 20 secondi.</string>
@@ -96,7 +96,7 @@
      <string id="50008">Buffering...</string>
 <!-- Overlaytext -->
 
-	 <string id="50000">AceStream Engine</string>
+      <string id="50000">AceStream Engine</string>
       <string id="50005">Statistiche</string>
       <string id="50001">Azione:</string>
       <string id="50002">Download:</string>
@@ -106,19 +106,19 @@
       <string id="50007">Caricato:</string>
 
 <!-- acestream.py -->
-	<string id="600028">Scegli file torrent locale</string>
-	<string id="40154">Avvio AceStream (modalitÃ  proxy ValdikSS)</string>
-	<string id="40155">Se la riproduzione fallisce prova ad aumentare</string>
-	<string id="40156">il timeout del lettore!</string>
-	<string id="40037">Modulo AceStream non installato</string>
-	<string id="40038">Torrent non disponibile o non valido</string>
+      <string id="600028">Scegli file torrent locale</string>
+      <string id="40154">Avvio AceStream (modalità proxy ValdikSS)</string>
+      <string id="40155">Se la riproduzione fallisce prova ad aumentare</string>
+      <string id="40156">il timeout del lettore!</string>
+      <string id="40037">Modulo AceStream non installato</string>
+      <string id="40038">Torrent non disponibile o non valido</string>
 
       <!-- autoconf.py  -->
       <string id="400007">Impossibile rilevare il sistema operativo</string>
       <string id="400008">Selezionare dall'elenco</string>
       <string id="40025">Scaricamento moduli SopCast...</string>
       <string id="40026">Scaricamento moduli AceStream...</string>
-      <string id="40109">L'addon per Linux ARMv7 Ã¨ sperimentale.</string>
+      <string id="40109">L'addon per Linux ARMv7 è sperimentale.</string>
       <string id="40110">Selezionare il sistema operativo dall'elenco seguente.</string>
       <string id="40112">Scaricamento moduli SopCast e AceStream...</string>
       <string id="40113">Stai usando OpenELEC x86_x64?</string>
@@ -128,9 +128,9 @@
       <string id="40029">Segui il tutorial e riprova.</string>
       <string id="40158">XBMC deve essere in esecuzione come Amministratore.</string>
       <string id="40159">Configurare SopCast in Windows.</string>
-      <string id="40160">Verificare se Ã¨ installato SopCast.</string>
+      <string id="40160">Verifica se è installato SopCast.</string>
       <string id="40161">Fatto!</string>
-      <string id="40162">SopCast non Ã¨ installato!</string>
+      <string id="40162">SopCast non è installato!</string>
       <string id="40163">Scarica SopCast da sopcast.org ed installalo!</string>
       <string id="40164">Ottengo ID utente di Windows...</string>
       <string id="40165">Impossibile ottenere l'elenco degli utenti</string>
@@ -147,9 +147,9 @@
       <string id="40176">Avvio scaricamento permessi file...</string>
       <string id="40177">Scaricamento permessi file (regini)...</string>
       <string id="40178">Esecuzione regini (permessi regedit) ...</string>
-      <string id="40179">Tutto fatto!</string>
+      <string id="40179">SopCast: tutto fatto!</string>
       <string id="600014">Non disponibile per l'architettura Mac</string>
-      <string id="50011">Come impostazione predefinita, SopCast utilizzerÃ  il player XBMC.</string>
+      <string id="50011">Come impostazione predefinita, SopCast utilizzerà il player XBMC.</string>
       <string id="50012">Vuoi utilizzare un'applicazione esterna?</string>
       <string id="50014">Tutto fatto per SopCast!</string>
       <string id="50013">Fare clic su OK per scaricare SopCast.apk</string>
@@ -160,21 +160,21 @@
       <string id="50017">AppID non rilevato</string>
       <string id="50018">E' necessario avere AceStreamEngine.apk</string>
       <string id="50019">installato per far funzionare AceStream.</string>
-      <string id="50020">VerrÃ  scaricato ora!</string>
+      <string id="50020">Verrà scaricato ora!</string>
       <string id="40072">Scaricare AceStreamEngine.apk</string>
-      <string id="50021">AceStream.apk scaricato nella cartella:</string>
+      <string id="50021">AceStreamEngine.apk scaricato nella cartella:</string>
       <string id="50022">Tutto fatto per AceStream!</string>
-      <string id="50023">Non dimenticare che l'applicazione AceStreamEngine</string>
+      <string id="50023">Non dimenticare che l'applicazione AceStream Engine</string>
       <string id="50024">deve essere in esecuzione prima di iniziare</string>
       <string id="50025">qualsiasi stream!</string>
-   	 <string id="70014">Downloading AcestreamEngine bundle for Android</string>
-      <string id="70015">By default p2p-streams will use its included Acestream Engine</string>
-  	 <string id="70016">Do you want to download and use the app instead?</string>
-  	 <string id="70017">Do you want to download Ace Player?</string>
-  	 <string id="70018">This will enable you to use the external player option.</string>
-  	 <string id="70019">Downloading Ace Player</string>
-  	 <string id="70020">Aceplayer.apk downladed to folder:</string>
-  	 <string id="70021">Do you want to use the external player as default?</string>
+      <string id="70014">Scaricamento pacchetto AceStream Engine per Android</string>P2P-Streams
+      <string id="70015">Per impostazione predefinita P2P-Streams utilizzerà il proprio AceStream Engine</string>
+      <string id="70016">Vuoi invece scaricare ed utilizzare l'apk?</string>
+      <string id="70017">Vuoi scaricare Ace Player?</string>
+      <string id="70018">Questo abiliterà l'opzione di utilizzo di un player esterno.</string>
+      <string id="70019">Scaricamento Ace Player</string>
+      <string id="70020">Aceplayer.apk scaricato nella cartella:</string>
+      <string id="70021">Vuoi utilizzare il player esterno come impostazione predefinita?</string>
     
       <!-- advancedfunctions.py -->
       <string id="40068">Rimuovere il file ts.lock</string>
@@ -193,7 +193,7 @@
       <string id="70003">Cancella cache</string>
       <string id="600027">Effettuare nuovamente la configurazione per ottenere i nuovi moduli</string>
       <string id="40185">Seleziona uno degli advancedsettings.xml</string>
-	 <string id="40059">advancedsettings.xml scaricato</string>
+      <string id="40059">advancedsettings.xml scaricato</string>
       <string id="40060">XML importato. Riavviare XBMC!</string>
       <string id="40064">Backup riuscito. Riavviare XBMC!</string>
       <string id="40062">Backup recuperato con successo. Riavviare XBMC!</string>
@@ -202,22 +202,22 @@
       <string id="600026">Impostazione cambiata con successo</string>
       <string id="600025">Valore non valido. Solo numeri interi ammessi!</string>
       <string id="40069">ts.lock rimosso con successo</string>
- 	 <string id="70011">Do you want to change your Acestream cache folder?</string>
-  	 <string id="70012">Choose new Acestream cache folder</string>
-  	 <string id="70013">Cachefolder location</string>
+      <string id="70011">Vuoi cambiare la cartella di cache di AceStream?</string>
+      <string id="70012">Scegli la nuova cartella di cache per AceStream</string>
+      <string id="70013">Percorso cartella di cache</string>
     
       <!-- livestreams.py -->
       <string id="40116">[B][COLOR orange]Elenco sopcast.org[/COLOR][/B] (http://sopcast.org/chlist.xml)</string>
       <string id="40121">[B]+ Aggiungi un altro elenco[/B]</string>
       <string id="40123">Selezionare un tipo di elenco:</string>
-    	 <string id="40124">Remoto</string>
-	 <string id="40125">Locale</string>
-	 <string id="40186">Seleziona elenco xml:</string>
-	 <string id="40130">Dare un nome all'elenco.</string>
-	 <string id="40129">Elenco aggiunto con successo</string>
-	 <string id="40127">Inserisci URL dell'elenco</string>
-	 <string id="40128">URL non valido</string>
- 	 <string id="40150">Elenco rimosso con successo!</string>
+      <string id="40124">Remoto</string>
+      <string id="40125">Locale</string>
+      <string id="40186">Seleziona elenco xml:</string>
+      <string id="40130">Dare un nome all'elenco.</string>
+      <string id="40129">Elenco aggiunto con successo</string>
+      <string id="40127">Inserisci URL dell'elenco</string>
+      <string id="40128">URL non valido</string>
+      <string id="40150">Elenco rimosso con successo!</string>
 
 <!-- favourites.py -->
 <string id="40145">Non ci sono preferiti!</string>
@@ -265,7 +265,7 @@
 <string id="400026">Parser aggiornato con successo!</string>
 <string id="400027">Scaricamento script...</string>
 <string id="400028">Script eseguito con successo</string>
-<string id="70004">Ogni parser presente Ã¨ fornito da terze parti.</string>
+<string id="70004">Ogni parser presente è fornito da terze parti.</string>
 <string id="70005">Non è stato sviluppato e non fa parte di questo addon.</string>
 <string id="70006">Non richiedere supporto per nessuno di essi.</string>
 <string id="70007">Tutte le tracce dei parser sono state cancellate</string>
