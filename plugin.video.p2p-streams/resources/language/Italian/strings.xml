@@ -223,9 +223,9 @@
 <string id="40145">Non ci sono preferiti!</string>
 <string id="40148">Inserito con successo nei preferiti</string>
 <string id="40147">Rimosso con successo dai preferiti</string>
-<string id="70022">Manually add a favourite</string>
-<string id="70023">Insert ace or sop url</string>
-<string id="70024">Insert a name for your channel</string>
+<string id="70022">Aggiungi manualmente un preferito</string>
+<string id="70023">Inserire un URL AceStream o SopCast</string>
+<string id="70024">Inserire un nome per il canale</string>
 
 <!-- directoryhandle.py -->
 <string id="40143">Aggiungi ai preferiti dell'addon</string>
