@@ -963,7 +963,8 @@ class OverlayText(object):
         import xml.etree.ElementTree as ET
         skin_path = xbmc.translatePath("special://skin/")
         tree = ET.parse(os.path.join(skin_path, "addon.xml"))
-        res = tree.findall("./extension/res")[0]
+        try: res = tree.findall("./res")[0]
+        except: res = tree.findall("./extension/res")[0]
         return int(res.attrib["width"]), int(res.attrib["height"])
 
     
