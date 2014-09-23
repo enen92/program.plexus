@@ -223,6 +223,9 @@
 	<string id="40145">Je hebt geen favorieten!</string>
 	<string id="40148">Sucessvol toegevoegd aan favorieten</string>
 	<string id="40147">Sucessvol verwijderd uit favorieten</string>
+	<string id="70022">Manually add a favourite</string>
+	<string id="70023">Insert ace or sop url</string>
+	<string id="70024">Insert a name for your channel</string>
 
 	<!-- directoryhandle.py -->
 	<string id="40143">Toevoegen aan addon favorieten</string>

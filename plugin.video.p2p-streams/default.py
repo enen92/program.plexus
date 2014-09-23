@@ -124,6 +124,7 @@ elif mode==109: get_groups(url)
 elif mode==200: addon_favourites()
 elif mode==201: add_to_addon_favourites(name,url,iconimage)
 elif mode==202: remove_addon_favourites(url)
+elif mode==203: manual_add_to_favourites()
 #from 300-399 Advanced functions
 elif mode==300: advanced_menu()
 elif mode==301: import_advancedxml()

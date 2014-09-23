@@ -7,6 +7,7 @@
     Functions:
     
 	addon_favourites() -> Main menu. It parses the userdata/Favourites folder for items and lists them
+	manual_add_to_favourites() -> Add a favourite to list manually
 	add_to_addon_favourites(name,url,iconimage) -> Add an item to the addon favourites. Receives the name of the channel, the url and the iconimage
 	remove_addon_favourites(url) -> Remove from addon favourites
     
@@ -17,6 +18,7 @@ import xbmc,xbmcgui,xbmcplugin,xbmcvfs,sys,os
 from utils.pluginxbmc import *
 from utils.iofile import *
 from utils.directoryhandle import addDir
+from random import randint
 
 def addon_favourites():
 	if xbmcvfs.exists(os.path.join(pastaperfil,"Favourites")):
@@ -31,9 +33,24 @@ def addon_favourites():
 					elif 'sop' in file: iconimage = addonpath + art + 'sopcast_logo.jpg'
 					else: iconimage = ''
 				addDir("[B][COLOR orange]" + match[0] + "[/B][/COLOR]",match[2],int(match[1]),iconimage,1,False)
-			xbmc.executebuiltin("Container.SetViewMode(51)")
+		addDir(translate(70022),MainURL,203,addonpath + art + 'plus-menu.png',2,False)	
+		xbmc.executebuiltin("Container.SetViewMode(51)")
+
+def manual_add_to_favourites():
+	keyb = xbmc.Keyboard("", translate(70023))
+	keyb.doModal()
+	if (keyb.isConfirmed()):
+		favourite_url = keyb.getText()
+		if ('acestream://' in favourite_url) or ('sop://' in favourite_url) or ('.acelive' in favourite_url) or ('.torrent' in favourite_url):
+			keyb = xbmc.Keyboard("", translate(70024))
+			keyb.doModal()
+			if (keyb.isConfirmed()):
+				favourite_name = keyb.getText()
+				if favourite_name: pass
+				else: favourite_name = 'p2p-streams ' + str(randint(1,100))
+				add_to_addon_favourites(favourite_name,favourite_url,'')
 		else:
-			mensagemok(translate(40000),translate(40145));sys.exit(0)
+			mensagemok(translate(40000),translate(40128))
 			
 def add_to_addon_favourites(name,url,iconimage):
 	name = name.replace("[b]","").replace("[/b]","").replace("[color orange]","").replace("[/color]","").replace("[B]","").replace("[/B]","")
@@ -48,8 +65,16 @@ def add_to_addon_favourites(name,url,iconimage):
 	else:
 		if "sop://" in url:
 			tipo = "sopcast"
+			if not iconimage: iconimage = os.path.join(addonpath,'resources','art','sopcast_logo.jpg')
 		elif "acestream://" in url:
 			tipo = "acestream"
+			if not iconimage: iconimage = os.path.join(addonpath,'resources','art','acelogofull.jpg')
+		elif ".torrent" in url:
+			tipo = "acestream"
+			if not iconimage: iconimage = os.path.join(addonpath,'resources','art','acelogofull.jpg')
+		elif ".acelive" in url:
+			tipo = "acestream"
+			if not iconimage: iconimage = os.path.join(addonpath,'resources','art','acelogofull.jpg')		
 		else:
 			if len(url) < 30: tipo = "sopcast"
 			else: tipo = "acestream"
@@ -71,7 +96,5 @@ def remove_addon_favourites(url):
 		ficheiro = os.path.join(pastaperfil,"Favourites",url.replace(":","").replace("/","") + ".txt")
 	xbmcvfs.delete(ficheiro)
 	xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(40147), 1,addonpath+"/icon.png"))
-	dirs, files = xbmcvfs.listdir(os.path.join(pastaperfil,"Favourites"))
-	if files:
-		xbmc.executebuiltin("Container.Refresh")
+	xbmc.executebuiltin("Container.Refresh")
 

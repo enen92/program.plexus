@@ -223,6 +223,9 @@
 	<string id="40145">Não tem favoritos!</string>
 	<string id="40148">Adicionado com sucesso aos favoritos</string>
 	<string id="40147">Removido com sucesso dos favoritos</string>
+	<string id="70022">Adicionar um favorito manualmente</string>
+	<string id="70023">Introduza um url sop ou ace</string>
+	<string id="70024">Insira um nome para o canal</string>
 	
 	<!-- directoryhandle.py -->
 	<string id="40143">Adicionar aos favoritos do addon</string>
