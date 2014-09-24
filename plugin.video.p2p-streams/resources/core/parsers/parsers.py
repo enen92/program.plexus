@@ -67,7 +67,7 @@ def addon_parsers_menu():
 		if xbmcvfs.exists(module_icon): thumbnail = module_icon
 		else: thumbnail = 'os.path.join(module_dir,"")'
 		if xbmcvfs.exists(module_fanart): fanart = module_fanart
-		else: fanart = ''
+		else: fanart = "%s/fanart.jpg"%settings.getAddonInfo("path")
 		if xbmcvfs.exists(module_cfg):
 			cfg = readfile(module_cfg)
 			try: 
@@ -89,7 +89,7 @@ def addon_parsers_menu():
 			settings.setSetting('parsers_last_sync',value=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f"))
 		
 	for key in sorted(parser_dict.keys()):
-		addDir(key,MainURL,401,parser_dict[key][1],total_parsers,True,parser=parser_dict[key][0])
+		addDir(key,MainURL,401,parser_dict[key][1],total_parsers,True,parser=parser_dict[key][0],fan_art=parser_dict[key][2])
 	addDir(translate(400011),MainURL,402,addonpath + art + 'plus-menu.png',2,False)
 
 def add_new_parser(url):
