@@ -109,13 +109,25 @@ def advanced_menu():
 		pass
 	if (not eligible and xbmc.getCondVisibility('system.platform.linux') and settings.getSetting('ace_cmd') == "0") or (not eligible and xbmc.getCondVisibility('system.platform.Android') and settings.getSetting('engine_app') == "0") or (settings.getSetting('force_android') == "true" and settings.getSetting('engine_app') == "0"):
 		if not xbmc.getCondVisibility('system.platform.Android'):
+			default_acefolder = os.path.join(os.getenv("HOME"),'.ACEStream')
+			default_cachefolder = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
+			pickle_repo = 'http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/playerconf.pickle'
 			if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
 			else: acestream_cachefolder = settings.getSetting('acestream_cachefolder')
 			acestream_settings_file = os.path.join(os.getenv("HOME"),'.ACEStream','playerconf.pickle')
 		else:
-			if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder = os.path.join('/sdcard','.ACEStream','cache')
+			default_acefolder = os.path.join('/sdcard','.ACEStream')
+			default_cachefolder = os.path.join('/sdcard','.ACEStream','.acestream_cache')
+			pickle_repo = 'http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/playerconf.pickle'
+			if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder = os.path.join('/sdcard','.ACEStream','.acestream_cache')
 			else: acestream_cachefolder = settings.getSetting('acestream_cachefolder')
 			acestream_settings_file = os.path.join('/sdcard','.ACEStream','playerconf.pickle')
+		#workaround to keep settings file in place if they get deleted
+		if not xbmcvfs.exists(default_acefolder): xbmcvfs.mkdir(default_acefolder)
+		if not xbmcvfs.exists(default_cachefolder): xbmcvfs.mkdir(default_cachefolder)
+		if not xbmcvfs.exists(acestream_settings_file):
+			local_file = os.path.join(default_acefolder,pickle_repo.split("/")[-1])
+			download_tools().Downloader(pickle_repo,local_file,'',translate(40000))
 		if xbmcvfs.exists(acestream_settings_file) and xbmcvfs.exists(acestream_cachefolder):
 			addLink('[COLOR orange]Acestream engine settings:[/COLOR]','',addonpath + art + 'settings_menu.png')
 			xbmc.sleep(200)
