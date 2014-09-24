@@ -28,7 +28,7 @@ def load_local_torrent():
 	else: pass
 
 def acestreams(name,iconimage,chid):
-	if settings.getSetting('engine_app') != '2':
+	if settings.getSetting('engine_app') != '2' or settings.getSetting('engine_app') != '3':
 		if not iconimage: iconimage=os.path.join(addonpath,'resources','art','acelogofull.jpg')
 		else: iconimage = urllib.unquote(iconimage)
 		if settings.getSetting('aceplay_type') == "2":
@@ -53,7 +53,10 @@ def acestreams(name,iconimage,chid):
 		else:
 			if 'acestream://' in chid: pass
 			else: chid = 'acestream://' + chid
-		xbmc.executebuiltin('XBMC.StartAndroidActivity("org.acestream","android.intent.action.VIEW","","'+chid+'")')
+		if settings.getSetting('engine_app') == '2':
+			xbmc.executebuiltin('XBMC.StartAndroidActivity("org.acestream","android.intent.action.VIEW","","'+chid+'")')
+		elif settings.getSetting('engine_app') == '3'
+			xbmc.executebuiltin('XBMC.StartAndroidActivity("ru.vidsoftware.acestreamcontroller.free","android.intent.action.VIEW","","'+chid+'")')
 
 def acestreams_builtin(name,iconimage,chid):
     if xbmc.getCondVisibility('system.platform.windows'):
