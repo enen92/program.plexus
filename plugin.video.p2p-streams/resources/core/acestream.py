@@ -55,7 +55,7 @@ def acestreams(name,iconimage,chid):
 			else: chid = 'acestream://' + chid
 		if settings.getSetting('engine_app') == '2':
 			xbmc.executebuiltin('XBMC.StartAndroidActivity("org.acestream","android.intent.action.VIEW","","'+chid+'")')
-		elif settings.getSetting('engine_app') == '3'
+		elif settings.getSetting('engine_app') == '3':
 			xbmc.executebuiltin('XBMC.StartAndroidActivity("ru.vidsoftware.acestreamcontroller.free","android.intent.action.VIEW","","'+chid+'")')
 
 def acestreams_builtin(name,iconimage,chid):
