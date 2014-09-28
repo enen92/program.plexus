@@ -824,20 +824,21 @@ class TSServ(threading.Thread):
         
         
 def stop_aceengine():
-    if re.findall('http://(\d+).(\d+).(\d+).(\d+):(\d+)/content/(.+?)/(\d+)\.(\d+)',xbmc.Player().getPlayingFile()):
-        if xbmc.getCondVisibility('system.platform.windows'):
-            subprocess.Popen('taskkill /F /IM ace_engine.exe /T',shell=True)
-        if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('System.Platform.Android'):
-            os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $1}')")
-            os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $2}')")
-            os.system("kill $(ps aux | grep '[s]tart.py' | awk '{print $2}')")
-            if settings.getSetting('save') != "true":
-                try:
-                    cache_file = self.lnk.split('/')[-2]
-                    if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache',cache_file)
-                    else: acestream_cachefolder_file = os.path.join(settings.getSetting('acestream_cachefolder'),cache_file)
-                    xbmcvfs.delete(acestream_cachefolder_file)
-                except: pass
+    if xbmc.getCondVisibility('Player.HasMedia'):
+        if re.findall('http://(\d+).(\d+).(\d+).(\d+):(\d+)/content/(.+?)/(\d+)\.(\d+)',xbmc.Player().getPlayingFile()):
+            if xbmc.getCondVisibility('system.platform.windows'):
+                subprocess.Popen('taskkill /F /IM ace_engine.exe /T',shell=True)
+            if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('System.Platform.Android'):
+                os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $1}')")
+                os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $2}')")
+                os.system("kill $(ps aux | grep '[s]tart.py' | awk '{print $2}')")
+                if settings.getSetting('save') != "true":
+                    try:
+                        cache_file = self.lnk.split('/')[-2]
+                        if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache',cache_file)
+                        else: acestream_cachefolder_file = os.path.join(settings.getSetting('acestream_cachefolder'),cache_file)
+                        xbmcvfs.delete(acestream_cachefolder_file)
+                    except: pass
                           
             elif xbmc.getCondVisibility('system.platform.OSX'):
                 os.system("kill $(ps aux | grep '[s]tart.py')")
@@ -865,7 +866,7 @@ def stop_aceengine():
                         else: acestream_cachefolder_file = os.path.join(settings.getSetting('acestream_cachefolder'),cache_file)
                         xbmcvfs.delete(acestream_cachefolder_file)
                     except: pass
-    xbmc.executebuiltin('PlayerControl(Stop)')       
+        xbmc.executebuiltin('PlayerControl(Stop)')       
         
         
         
