@@ -1,4 +1,13 @@
 ===== Stable Versions ========
+[B]v1.1.1 (29/9/2014)[/B]
+-Fix changing acestream settings from the addon for recent linux/android acestreamengine versions
+-Add possibility to call torrentstream controller proxy and use any media player (in android)
+-Fixed bug with costum fanart not showing in parsers
+-Added option to have a costum fanart for costum lists
+-Added option to mannually add channels to favourites
+-Added a costum stop function to replace the one used by the skin or the remote (credits of the remote option goes to takoi - keymap editor addon). This new function basically checks if the playing media matches the acestream url format and, if that's the case, it kills the engine and clears cache before stopping the stream.
+-Updated italian translation (thanks axlt2002)
+
 [B]v1.1.0 (20/9/2014)[/B]
 -Fix acestream window for any skin rather than confluence
 
