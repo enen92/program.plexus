@@ -135,6 +135,7 @@ This addon would not be possible without the help and first work of some develop
 * **Nouismons** – First version of tsengine plugin
 * **Cristi-Atlanta** – Xsopcast plugin
 * **Divingmule** – Livestreams addon
+* **Takoi** - Keymap editor addon
 * **Marquerite** – Addon art
 * **Tarasian666** – Alternative version of the acestreamengine written in python (which was tweaked to work on linux arm and mac osx)
 
