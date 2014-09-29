@@ -48,7 +48,8 @@ def xml_lists_menu():
             for file in files:
                 f = open(os.path.join(pastaperfil,"Lists",file), "r")
                 string = f.read()
-                addDir("[B][COLOR orange]" + file.replace(".txt","") + "[/B][/COLOR]",string,101,addonpath + art + 'xml_lists.png',2,True)
+                if xbmcvfs.exists(os.path.join(pastaperfil,"Lists-fanart",file.replace('.txt','.jpg'))):addDir("[B][COLOR orange]" + file.replace(".txt","") + "[/B][/COLOR]",string,101,addonpath + art + 'xml_lists.png',2,True,fan_art=os.path.join(pastaperfil,"Lists-fanart",file.replace('.txt','.jpg')))
+                else: addDir("[B][COLOR orange]" + file.replace(".txt","") + "[/B][/COLOR]",string,101,addonpath + art + 'xml_lists.png',2,True)
     except: pass
     addDir(translate(40121),MainURL,107,addonpath + art + 'plus-menu.png',2,False)
     xbmc.executebuiltin("Container.SetViewMode(51)")
