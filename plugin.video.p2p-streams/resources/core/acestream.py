@@ -28,7 +28,7 @@ def load_local_torrent():
 	else: pass
 
 def acestreams(name,iconimage,chid):
-	if settings.getSetting('engine_app') != '2' or settings.getSetting('engine_app') != '3':
+	if settings.getSetting('engine_app') != '2' and settings.getSetting('engine_app') != '3':
 		if not iconimage: iconimage=os.path.join(addonpath,'resources','art','acelogofull.jpg')
 		else: iconimage = urllib.unquote(iconimage)
 		if settings.getSetting('aceplay_type') == "2":
