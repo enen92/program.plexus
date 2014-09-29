@@ -33,8 +33,8 @@ def addon_favourites():
 					elif 'sop' in file: iconimage = addonpath + art + 'sopcast_logo.jpg'
 					else: iconimage = ''
 				addDir("[B][COLOR orange]" + match[0] + "[/B][/COLOR]",match[2],int(match[1]),iconimage,1,False)
-		addDir('[B]' + translate(70022) + '[/B]',MainURL,203,addonpath + art + 'plus-menu.png',2,False)	
-		xbmc.executebuiltin("Container.SetViewMode(51)")
+	addDir('[B]' + translate(70022) + '[/B]',MainURL,203,addonpath + art + 'plus-menu.png',2,False)	
+	xbmc.executebuiltin("Container.SetViewMode(51)")
 
 def manual_add_to_favourites():
 	keyb = xbmc.Keyboard("", translate(70023))
