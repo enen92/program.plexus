@@ -52,11 +52,11 @@ class KeyListener(WindowXMLDialog):
 
     def onInit(self):
         try:
-            self.getControl(401).addLabel('Press the key you want to assign now')
-            self.getControl(402).addLabel('Timeout in %.0f seconds...' % self.TIMEOUT)
+            self.getControl(401).addLabel(translate(70034))
+            self.getControl(402).addLabel(translate(70035) % self.TIMEOUT)
         except AttributeError:
-            self.getControl(401).setLabel('Press the key you want to assign now')
-            self.getControl(402).setLabel('Timeout in %.0f seconds...' % self.TIMEOUT)
+            self.getControl(401).setLabel(translate(70034))
+            self.getControl(402).setLabel(translate(70035) % self.TIMEOUT)
 
     def onAction(self, action):
         code = action.getButtonCode()

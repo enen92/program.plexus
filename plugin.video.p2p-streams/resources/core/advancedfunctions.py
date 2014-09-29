@@ -57,8 +57,8 @@ def advanced_menu():
 			addLink(translate(40067) +valuebuff+']','','p2p')
 			addLink('','','p2p')
 	#Apply shutdown hooks
-	addLink('[COLOR orange]P2P-Streams force stop hook:[/COLOR]','',addonpath + art + 'settings_menu.png')
-	addDir("Apply costum stop function",MainURL,310,'p2p',2,False)
+	addLink('[COLOR orange]'+translate(70025)+'[/COLOR]','',addonpath + art + 'settings_menu.png')
+	addDir(translate(70026),MainURL,310,'p2p',2,False)
 	#Change engine settings from xbmc menus
 	eligible = False
 	if xbmc.getCondVisibility('system.platform.linux') and settings.getSetting('force_android') != "true":
@@ -337,11 +337,11 @@ def set_acestream_engine_cache_folder(url):
 			xbmc.executebuiltin("Container.Refresh")
 		
 def shutdown_hooks():
-	opcao= xbmcgui.Dialog().yesno(translate(40000), "Do you want to replace the current skin stop button by our costumized stop function?","Current skin: " + str(xbmc.getSkinDir()) )
+	opcao= xbmcgui.Dialog().yesno(translate(40000), translate(70027),translate(70028) + str(xbmc.getSkinDir()) )
 	if opcao:
-		mensagemok(translate(40000),"This will only apply to the current skin","If it gets updated you might need to repeat this procedure")
-		mensagemok(translate(40000),"If you uninstall this addon you need to revert those changes otherwise you will break the xbmc default stop function!")
-		opcao= xbmcgui.Dialog().yesno(translate(40000), "Are you sure you want to continue?" )
+		mensagemok(translate(40000),translate(70029),translate(70030))
+		mensagemok(translate(40000),translate(70031))
+		opcao= xbmcgui.Dialog().yesno(translate(40000), translate(70032) )
 		if opcao:
 			import xml.etree.ElementTree as ET
 			skin_path = xbmc.translatePath("special://skin/")
@@ -353,7 +353,7 @@ def shutdown_hooks():
 			xml_content = readfile(xml_video_osd).replace('PlayerControl(Stop)','RunPlugin(plugin://plugin.video.p2p-streams/?mode=7)')
 			save(xml_video_osd,xml_content)
 			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(600026), 1,addonpath+"/icon.png"))
-			opcao= xbmcgui.Dialog().yesno(translate(40000), "Do you want to map a button on your remote to the stop function?" )
+			opcao= xbmcgui.Dialog().yesno(translate(40000), translate(70033) )
 			if opcao:
 				from utils.keymapeditor import *
 				run()			

@@ -205,6 +205,19 @@
       <string id="70011">Vuoi cambiare la cartella di cache di AceStream?</string>
       <string id="70012">Scegli la nuova cartella di cache per AceStream</string>
       <string id="70013">Percorso cartella di cache</string>
+  	<string id="70025">P2P-Streams force stop hook:</string>
+  	<string id="70026">Apply costum stop function</string>
+  	<string id="70027">Do you want to replace the current skin stop button by our costumized stop function?</string>
+	<string id="70028">Current skin: </string>
+	<string id="70029">This will only apply to the current skin</string>
+	<string id="70030">If it gets updated you might need to repeat this procedure</string>
+	<string id="70031">If you uninstall this addon you need to revert those changes otherwise you will break the xbmc default stop function!</string>
+	<string id="70032">Are you sure you want to continue?</string>
+	<string id="70033">Do you want to map a button on your remote to the stop function?</string>
+	
+	<!-- utils/keymapeditor.py -->
+	<string id="70034">Press the key you want to assign now</string>
+	<string id="70035">Timeout in %.0f seconds...</string>
     
       <!-- livestreams.py -->
       <string id="40116">[B][COLOR orange]Elenco sopcast.org[/COLOR][/B] (http://sopcast.org/chlist.xml)</string>
