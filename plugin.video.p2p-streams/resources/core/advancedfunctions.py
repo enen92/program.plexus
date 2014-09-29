@@ -20,6 +20,7 @@
    	set_acestream_engine_cache_folder(url) -> Change acestreamengine cache folder
    	set_linux_engine_setting(url) -> change acestreamengine settings from gui for linux/android
    	clear_cache(url) -> Clear the contents of the acestream cache folder
+   	shutdown_hooks() -> Function to set a costum shutdown hook to the used skin and costum stop shortcuts
    	
 
 """
@@ -55,6 +56,9 @@ def advanced_menu():
 			else : valuebuff =  '[COLOR green]' + match[0] + '[/COLOR]'
 			addLink(translate(40067) +valuebuff+']','','p2p')
 			addLink('','','p2p')
+	#Apply shutdown hooks
+	addLink('[COLOR orange]P2P-Streams force stop hook:[/COLOR]','',addonpath + art + 'settings_menu.png')
+	addDir("Apply costum stop function",MainURL,310,'p2p',2,False)
 	#Change engine settings from xbmc menus
 	eligible = False
 	if xbmc.getCondVisibility('system.platform.linux') and settings.getSetting('force_android') != "true":
@@ -332,4 +336,25 @@ def set_acestream_engine_cache_folder(url):
 			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(600026), 1,addonpath+"/icon.png"))
 			xbmc.executebuiltin("Container.Refresh")
 		
-
+def shutdown_hooks():
+	opcao= xbmcgui.Dialog().yesno(translate(40000), "Do you want to replace the current skin stop button by our costumized stop function?","Current skin: " + str(xbmc.getSkinDir()) )
+	if opcao:
+		mensagemok(translate(40000),"This will only apply to the current skin","If it gets updated you might need to repeat this procedure")
+		mensagemok(translate(40000),"If you uninstall this addon you need to revert those changes otherwise you will break the xbmc default stop function!")
+		opcao= xbmcgui.Dialog().yesno(translate(40000), "Are you sure you want to continue?" )
+		if opcao:
+			import xml.etree.ElementTree as ET
+			skin_path = xbmc.translatePath("special://skin/")
+			tree = ET.parse(os.path.join(skin_path, "addon.xml"))
+			try: res = tree.findall("./res")[0]
+			except: res = tree.findall("./extension/res")[0]
+			xml_specific_folder = str(res.attrib["folder"])
+			xml_video_osd = os.path.join(xbmc.translatePath("special://skin/"),xml_specific_folder,"VideoOSD.xml")
+			xml_content = readfile(xml_video_osd).replace('PlayerControl(Stop)','RunPlugin(plugin://plugin.video.p2p-streams/?mode=7)')
+			save(xml_video_osd,xml_content)
+			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(600026), 1,addonpath+"/icon.png"))
+			opcao= xbmcgui.Dialog().yesno(translate(40000), "Do you want to map a button on your remote to the stop function?" )
+			if opcao:
+				from utils.keymapeditor import *
+				run()			
+			
