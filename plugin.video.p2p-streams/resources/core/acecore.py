@@ -583,7 +583,16 @@ class TSengine():
                     except: pass
             
 
-        if settings.getSetting("kill_type") == "0" and not xbmc.getCondVisibility('system.platform.windows'):
+        if settings.getSetting("kill_type") == "0":
+            if xbmc.getCondVisibility('system.platform.windows'):
+                subprocess.Popen('taskkill /F /IM ace_engine.exe /T',shell=True)
+                if settings.getSetting('save') != "true":
+                    try:
+                        cache_file = self.lnk.split('/')[-2]
+                        acestream_cachefolder_file = os.path.join(os.getenv("SystemDrive"),'\_acestream_cache_',cache_file)
+                        xbmcvfs.delete(acestream_cachefolder_file)
+                    except: pass              
+   
             if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('System.Platform.Android'):
                 os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $1}')")
                 os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $2}')")
@@ -828,6 +837,13 @@ def stop_aceengine():
         if re.findall('http://(\d+).(\d+).(\d+).(\d+):(\d+)/content/(.+?)/(\d+)\.(\d+)',xbmc.Player().getPlayingFile()):
             if xbmc.getCondVisibility('system.platform.windows'):
                 subprocess.Popen('taskkill /F /IM ace_engine.exe /T',shell=True)
+                if settings.getSetting('save') != "true":
+                    try:
+                        cache_file = self.lnk.split('/')[-2]
+                        acestream_cachefolder_file = os.path.join(os.getenv("SystemDrive"),'\_acestream_cache_',cache_file)
+                        xbmcvfs.delete(acestream_cachefolder_file)
+                    except: pass
+ 
             if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('System.Platform.Android'):
                 os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $1}')")
                 os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $2}')")
