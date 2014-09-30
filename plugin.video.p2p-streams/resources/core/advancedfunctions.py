@@ -111,21 +111,27 @@ def advanced_menu():
 		addLink("[COLOR red][B]"+translate(600027)+"[/COLOR][/B]","",addonpath + art + 'processwarning.png')
 	else:
 		pass
-	if (not eligible and xbmc.getCondVisibility('system.platform.linux') and settings.getSetting('ace_cmd') == "0") or (not eligible and xbmc.getCondVisibility('system.platform.Android') and settings.getSetting('engine_app') == "0") or (settings.getSetting('force_android') == "true" and settings.getSetting('engine_app') == "0"):
-		if not xbmc.getCondVisibility('system.platform.Android'):
+	if (not eligible and xbmc.getCondVisibility('system.platform.linux') and settings.getSetting('ace_cmd') == "0") or (not eligible and xbmc.getCondVisibility('system.platform.windows')) or (not eligible and xbmc.getCondVisibility('system.platform.Android') and settings.getSetting('engine_app') == "0") or (settings.getSetting('force_android') == "true" and settings.getSetting('engine_app') == "0"):
+		if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android'):
 			default_acefolder = os.path.join(os.getenv("HOME"),'.ACEStream')
 			default_cachefolder = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
 			pickle_repo = 'http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/playerconf.pickle'
 			if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
 			else: acestream_cachefolder = settings.getSetting('acestream_cachefolder')
 			acestream_settings_file = os.path.join(os.getenv("HOME"),'.ACEStream','playerconf.pickle')
-		else:
+		elif xbmc.getCondVisibility('system.platform.Android'):
 			default_acefolder = os.path.join('/sdcard','.ACEStream')
 			default_cachefolder = os.path.join('/sdcard','.ACEStream','.acestream_cache')
 			pickle_repo = 'http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/playerconf.pickle'
 			if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder = os.path.join('/sdcard','.ACEStream','.acestream_cache')
 			else: acestream_cachefolder = settings.getSetting('acestream_cachefolder')
 			acestream_settings_file = os.path.join('/sdcard','.ACEStream','playerconf.pickle')
+		elif xbmc.getCondVisibility('system.platform.windows'):
+			default_acefolder = os.path.join(os.getenv("APPDATA"),".ACEStream")
+			pickle_repo = 'http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/playerconf.pickle'
+			default_cachefolder = os.path.join(os.getenv("SystemDrive"),'\_acestream_cache_')
+			acestream_cachefolder = default_cachefolder
+			acestream_settings_file = os.path.join(os.getenv("APPDATA"),".ACEStream","playerconf.pickle")
 		#workaround to keep settings file in place if they get deleted
 		if not xbmcvfs.exists(default_acefolder): xbmcvfs.mkdir(default_acefolder)
 		if not xbmcvfs.exists(default_cachefolder): xbmcvfs.mkdir(default_cachefolder)
@@ -145,8 +151,11 @@ def advanced_menu():
 			number_of_settings = re.compile('p(\d+)\n').findall(settings_content)
 			cachefoldersetting = re.compile("'download_dir'\np\d+\n.+?/(.+?)\n").findall(settings_content)
 			if not cachefoldersetting:
-				if not xbmc.getCondVisibility('system.platform.Android'):
+				if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android'):
 					cachefoldersetting = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
+					settings.setSetting('acestream_cachefolder',cachefoldersetting)
+				elif xbmc.getCondVisibility('system.platform.windows'):
+					cachefoldersetting = os.path.join(os.getenv("SystemDrive"),'_acestream_cache_')
 					settings.setSetting('acestream_cachefolder',cachefoldersetting)
 				else:
 					cachefoldersetting = os.path.join('/sdcard','.ACEStream','cache')
@@ -295,10 +304,12 @@ def clear_cache(url):
 	xbmc.executebuiltin("Container.Refresh")
 	
 def set_linux_engine_setting(url):
-	if not xbmc.getCondVisibility('system.platform.Android'):
+	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android'):
 		acestream_settings_file = os.path.join(os.getenv("HOME"),'.ACEStream','playerconf.pickle')
-	else:
+	elif xbmc.getCondVisibility('system.platform.Android'):
 		acestream_settings_file = os.path.join('/sdcard','.ACEStream','playerconf.pickle')
+	elif xbmc.getCondVisibility('system.platform.windows'):
+		acestream_settings_file = os.path.join(os.getenv("APPDATA"),".ACEStream","playerconf.pickle")
 	settings_content = readfile(acestream_settings_file)
 	keyb = xbmc.Keyboard('',translate(600024))
 	keyb.doModal()
@@ -326,7 +337,9 @@ def set_linux_engine_setting(url):
 			sys.exit(0)
 			
 def set_acestream_engine_cache_folder(url):
-	opcao= xbmcgui.Dialog().yesno(translate(40000), translate(70011))
+	if not xbmc.getCondVisibility('system.platform.windows'):
+		opcao= xbmcgui.Dialog().yesno(translate(40000), translate(70011))
+	else: opcao = ''
 	if opcao:
 		if not xbmc.getCondVisibility('system.platform.Android'):
 			acestream_settings_file = os.path.join(os.getenv("HOME"),'.ACEStream','playerconf.pickle')
@@ -355,10 +368,11 @@ def shutdown_hooks():
 			xml_specific_folder = str(res.attrib["folder"])
 			xml_video_osd = os.path.join(xbmc.translatePath("special://skin/"),xml_specific_folder,"VideoOSD.xml")
 			xml_content = readfile(xml_video_osd).replace('PlayerControl(Stop)','RunPlugin(plugin://plugin.video.p2p-streams/?mode=7)')
-			save(xml_video_osd,xml_content)
-			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(600026), 1,addonpath+"/icon.png"))
+			try:
+				save(xml_video_osd,xml_content)
+				xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(600026), 1,addonpath+"/icon.png"))
+			except: mensagemok(translate(40000),'No permissions.')
 			opcao= xbmcgui.Dialog().yesno(translate(40000), translate(70033) )
 			if opcao:
 				from utils.keymapeditor import *
-				run()			
-			
+				run()					
