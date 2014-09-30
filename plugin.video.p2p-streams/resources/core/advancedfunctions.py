@@ -132,6 +132,10 @@ def advanced_menu():
 		if not xbmcvfs.exists(acestream_settings_file):
 			local_file = os.path.join(default_acefolder,pickle_repo.split("/")[-1])
 			download_tools().Downloader(pickle_repo,local_file,'',translate(40000))
+			xbmc.sleep(200)
+			if xbmcvfs.exists(acestream_settings_file):
+				settings_text = readfile(acestream_settings_file)
+				save(acestream_settings_file,settings_text.replace('my_cache_folder',default_cachefolder))
 		if xbmcvfs.exists(acestream_settings_file) and xbmcvfs.exists(acestream_cachefolder):
 			addLink('[COLOR orange]Acestream engine settings:[/COLOR]','',addonpath + art + 'settings_menu.png')
 			xbmc.sleep(200)
