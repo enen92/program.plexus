@@ -20,11 +20,14 @@ from resources.core.livestreams import *
 from resources.core.parsers import parsers
 from resources.core.resolver import go_to_id
 from resources.core.acecore import stop_aceengine
+from resources.core.history import *
                                                                                                                                                                                                                                                                   
 def main_menu():
       addDir(translate(40114),MainURL,400,addonpath + art + 'web-parsers-menu.png',2,True)
       addDir(translate(40115),MainURL,100,addonpath + art + 'xml_lists.png',2,True)
       addDir(translate(40144),MainURL,200,addonpath + art + 'Favorites-menu.png',2,True)
+      if settings.getSetting('addon_history') == "true":
+      	addDir("-Addon History",MainURL,8,addonpath + art + 'history.png',2,True)
       if "confluence" in xbmc.getSkinDir(): addLink('','','p2p')
       if xbmc.getCondVisibility('system.platform.windows') or xbmc.getCondVisibility('system.platform.linux') or xbmc.getCondVisibility('System.Platform.OSX') or xbmc.getCondVisibility('System.Platform.Android'):
           addDir('[COLOR orange]AceStream: [/COLOR]' + translate(40004),MainURL,4,addonpath + art + 'acestream-menu-item.png',1,False)
@@ -109,6 +112,8 @@ elif mode==4: go_to_id('ace')
 elif mode==5: go_to_id('sop_url')
 elif mode==6: ace.load_local_torrent()
 elif mode==7: stop_aceengine()
+elif mode==8: list_history()
+elif mode==9: remove_history()
 #from 100-199 functions related to xml lists
 elif mode==100: xml_lists_menu()
 elif mode==101: list_type(url)

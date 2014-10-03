@@ -11,6 +11,7 @@
 import xbmc,xbmcgui,xbmcplugin,urllib2,os,sys,subprocess,xbmcvfs,socket,re 
 from utils.pluginxbmc import *
 from utils.utilities import handle_wait
+from history import add_to_history
 
 """ Sopcast Dependent variables are listed below"""   
     
@@ -51,6 +52,9 @@ def sopstreams(name,iconimage,sop):
 	else: pass
 	print("Starting Player Sop URL: " + str(sop))
 	labelname=name
+	if settings.getSetting('addon_history') == "true":
+	    try: add_to_history(labelname, str(sop),2, iconimage)
+	    except: pass
 	if not xbmc.getCondVisibility('system.platform.windows'):
 	    if xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
 	    	if  settings.getSetting('external-sopcast') == "0":

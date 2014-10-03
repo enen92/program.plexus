@@ -57,7 +57,7 @@ def add_to_addon_favourites(name,url,iconimage):
 	if "runplugin" in url:
 		match = re.compile("url=(.+?)&mode=(.+?)&").findall(url.replace(";",""))
 		for url,mode in match:
-			favourite_text = name + " (" + url + ")|" + str(mode) + "|" + url + '|' + iconimage
+			favourite_text = str(name) + " (" + str(url) + ")|" + str(mode) + "|" + str(url) + '|' + str(iconimage)
 			favouritetxt = os.path.join(pastaperfil,"Favourites",url.replace(":","").replace("/","") + ".txt")
 			if not xbmcvfs.exists(os.path.join(pastaperfil,"Favourites")): xbmcvfs.mkdir(os.path.join(pastaperfil,"Favourites"))
 			save(favouritetxt, favourite_text)
@@ -79,9 +79,9 @@ def add_to_addon_favourites(name,url,iconimage):
 			if len(url) < 30: tipo = "sopcast"
 			else: tipo = "acestream"
 		if tipo == "sopcast":
-			favourite_text = name + " (" + url + ")|" + str(2) + "|" + url + '|' + iconimage
+			favourite_text = str(name) + " (" + str(url) + ")|" + str(2) + "|" + str(url) + '|' + str(iconimage)
 		elif tipo == "acestream":
-			favourite_text = name + " (" + url + ")|" + str(1) + "|" + url + '|' + iconimage 
+			favourite_text = str(name) + " (" + str(url) + ")|" + str(1) + "|" + str(url) + '|' + str(iconimage) 
 		favouritetxt = os.path.join(pastaperfil,"Favourites",url.replace(":","").replace("/","") + ".txt")
 		if not xbmcvfs.exists(os.path.join(pastaperfil,"Favourites")): xbmcvfs.mkdir(os.path.join(pastaperfil,"Favourites"))
 		save(favouritetxt, favourite_text)

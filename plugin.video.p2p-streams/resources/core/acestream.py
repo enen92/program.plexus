@@ -15,6 +15,7 @@
     
 import xbmc,xbmcgui,xbmcplugin,urllib,xbmcvfs,os,subprocess
 from utils.pluginxbmc import *
+from history import *
 
 aceport=62062
 
@@ -22,15 +23,18 @@ def load_local_torrent():
 	torrent_file = xbmcgui.Dialog().browse(int(1), translate(600028), 'myprograms','.torrent')
 	if torrent_file:
 		if xbmc.getCondVisibility('system.platform.windows'):
-			acestreams("Local .torrent","",'file:\\' + torrent_file)
+			acestreams("Local .torrent ("+str("file:\\" + torrent_file) +")","",'file:\\' + torrent_file)
 		else:
-			acestreams("Local .torrent","",'file://' + torrent_file)
+			acestreams("Local .torrent ("+str("file://" + torrent_file) +")","",'file://' + torrent_file)
 	else: pass
 
 def acestreams(name,iconimage,chid):
+	if not iconimage: iconimage=os.path.join(addonpath,'resources','art','acelogofull.jpg')
+	else: iconimage = urllib.unquote(iconimage)
+	if settings.getSetting('addon_history') == "true":
+		try: add_to_history(name, str(chid),1, iconimage)
+		except: pass
 	if settings.getSetting('engine_app') != '2' and settings.getSetting('engine_app') != '3':
-		if not iconimage: iconimage=os.path.join(addonpath,'resources','art','acelogofull.jpg')
-		else: iconimage = urllib.unquote(iconimage)
 		if settings.getSetting('aceplay_type') == "2":
 			pDialog = xbmcgui.DialogProgress()
 			ret = pDialog.create(translate(40000), translate(40154),translate(40155),translate(40156))

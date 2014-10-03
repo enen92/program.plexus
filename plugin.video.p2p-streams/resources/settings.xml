@@ -10,7 +10,11 @@
 	    	<setting id="python_cmd" type="text" label="" default="python" visible="false" />
 	     <setting id="app_id" type="text" label="" default="" visible="false" />
 		<setting id="hide_porn" type="bool" label="40100" default="false"/>
-		<setting id="russian_translation" type="bool" label="1106" default="true"/>			
+		<setting id="russian_translation" type="bool" label="1106" default="true"/>
+	     <setting label="-Addon History" type="lsep" />
+	     <setting id="addon_history" type="bool" label="Enable addon history" default="true"/>
+	     <setting id="items_per_page" label="Items per page" type="slider" default="20" range="10,50" option="int" />
+		<setting type="action" label="Limpar histórico" action="XBMC.RunPlugin(plugin://plugin.video.p2p-streams/?mode=9&name=p2p&url=p2p)" />	
 	    	<setting id="openelecx86_64" type="bool" visible="false" default="false"/>
 	    	<setting id="openeleci386" type="bool" visible="false" default="false"/>
 	     <setting id="raspberrypi" type="bool" visible="false" default="false"/>

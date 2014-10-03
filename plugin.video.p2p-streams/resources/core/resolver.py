@@ -25,10 +25,10 @@ def go_to_id(p2p_type):
 			if search=='': sys.exit(0)
 			else:
 				channel_id = search
-				ace.acestreams(translate(40035),'',str(channel_id))
+				ace.acestreams(translate(40035) + ' ( ' + str(channel_id) + ')','',str(channel_id))
 	elif p2p_type=='sop_id':
 		channel_id = xbmcgui.Dialog().numeric(0, translate(40033))
-		sop.sopstreams(translate(40035),'',str(channel_id))
+		sop.sopstreams(translate(40035) + ' ( ' + str(channel_id) + ')','',str(channel_id))
 	elif p2p_type=='sop_url':
 		keyb = xbmc.Keyboard('sop://', translate(40034) + ' sop://')
 		keyb.doModal()
@@ -37,4 +37,4 @@ def go_to_id(p2p_type):
 			if search=='': sys.exit(0)
 			else:
 				channel_id = search
-				sop.sopstreams(translate(40036),'',str(channel_id))
+				sop.sopstreams(translate(40036) + ' ( ' + str(channel_id) + ')','',str(channel_id))
