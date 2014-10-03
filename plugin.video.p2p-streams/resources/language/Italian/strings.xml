@@ -48,10 +48,10 @@
      <string id="400006">Intervallo di sincronizzazione parsers</string>
      <string id="70009">Forza l'utilizzo di DVDPlayer per la riproduzione degli stream</string>
      <string id="70010">CMD alternativo</string>
-     <string id="70036">-Addon History</string>
-     <string id="70037">Enable addon history</string>
-     <string id="70038">Items to save</string>
-     <string id="70039">Clean addon history</string>
+     <string id="70036">Storico streams</string>
+     <string id="70037">Abilita storico streams</string>
+     <string id="70038">Numero di elementi da salvare</string>
+     <string id="70039">Cancella storico streams</string>
     
      <!-- Default.py -->
      <string id="40115">Elenchi xml</string>
