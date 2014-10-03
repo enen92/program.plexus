@@ -48,6 +48,10 @@
     <string id="400006">Synchroniseer interval voor parsers</string>
     <string id="70009">Force use DVD Player for ace and sop playback</string>
     <string id="70010">Alternative CMD</string>
+    <string id="70036">-Addon History</string>
+    <string id="70037">Enable addon history</string>
+    <string id="70038">Items to save</string>
+    <string id="70039">Clean addon history</string>
     
     <!-- Default.py -->
     <string id="40115">-Addon xml lijst</string>

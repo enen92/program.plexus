@@ -48,23 +48,10 @@
     <string id="400006">Intervalo na pesquisa de alterações</string>
     <string id="70009">Forçar utilização do DVD Player</string>
     <string id="70010">Comando alternativo</string>
-    <string id="70011">Deseja alterar a pasta de cache?</string>
-    <string id="70012">Escolha a nova pasta</string>
-    <string id="70013">Pasta cache da AceStream engine</string>
-	<string id="70025">P2P-Streams função de forçar stop:</string>
-  	<string id="70026">Aplicar função stop costumizada</string>
-  	<string id="70027">Deseja substituir o botão de stop do tema pela nossa função costumizada?</string>
-	<string id="70028">Tema actual: </string>
-	<string id="70029">Esta funcionalidade apenas se aplica ao tema actual</string>
-	<string id="70030">Se este for actualizado necessitará de repetir este procedimento</string>
-	<string id="70031">Se remover o addon precisará de reverter estas alterações. Caso contrário, a função de stop do xbmc não irá funcionar.</string>
-	<string id="70032">Tem a certeza que deseja continuar?</string>
-	<string id="70033">Deseja mapear um botão no seu telecomando para a função de stop?</string>
-	
-	<!-- utils/keymapeditor.py -->
-	<string id="70034">Pressione o botão que deseja atribuir</string>
-	<string id="70035">Timeout em %.0f segundos...</string>
-	
+    <string id="70036">-Histórico do addon</string>
+    <string id="70037">Activar histórico do addon</string>
+    <string id="70038">Items a guardar</string>
+    <string id="70039">Apagar histórico do addon</string>	
     
     <!-- Default.py -->
     <string id="40115">-Listas xml do addon</string>
@@ -219,6 +206,22 @@
  	<string id="600026">Definicao alterada com sucesso</string>
  	<string id="600025">Valor inválido. Apenas valores inteiros!</string>
  	<string id="40069">ts.lock removido com sucesso</string>
+     <string id="70011">Deseja alterar a pasta de cache?</string>
+     <string id="70012">Escolha a nova pasta</string>
+     <string id="70013">Pasta cache da AceStream engine</string>
+	<string id="70025">P2P-Streams função de forçar stop:</string>
+  	<string id="70026">Aplicar função stop costumizada</string>
+  	<string id="70027">Deseja substituir o botão de stop do tema pela nossa função costumizada?</string>
+	<string id="70028">Tema actual: </string>
+	<string id="70029">Esta funcionalidade apenas se aplica ao tema actual</string>
+	<string id="70030">Se este for actualizado necessitará de repetir este procedimento</string>
+	<string id="70031">Se remover o addon precisará de reverter estas alterações. Caso contrário, a função de stop do xbmc não irá funcionar.</string>
+	<string id="70032">Tem a certeza que deseja continuar?</string>
+	<string id="70033">Deseja mapear um botão no seu telecomando para a função de stop?</string>
+ 		
+	<!-- utils/keymapeditor.py -->
+	<string id="70034">Pressione o botão que deseja atribuir</string>
+	<string id="70035">Timeout em %.0f segundos...</string>
     
      <!-- livestreams.py -->
      <string id="40116">[B][COLOR orange]Lista sopcast.org[/COLOR][/B] (http://sopcast.org/chlist.xml)</string>

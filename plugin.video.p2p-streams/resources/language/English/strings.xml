@@ -48,6 +48,10 @@
     <string id="400006">Sync interval for parsers</string>
     <string id="70009">Force use DVD Player for ace and sop playback</string>
     <string id="70010">Alternative CMD</string>
+    <string id="70036">-Addon History</string>
+    <string id="70037">Enable addon history</string>
+    <string id="70038">Items to save</string>
+    <string id="70039">Clean addon history</string>
     
     <!-- Default.py -->
     <string id="40115">-Addon xml lists</string>
@@ -261,7 +265,7 @@
 	<!-- resolver.py -->
 	<string id="40033">Input an ID</string>
 	<string id="40034">Input a URL</string>
-	<string id="40035">Directo ID</string>
+	<string id="40035">Direct ID</string>
 	<string id="40036">Direct URL</string>
 	
 	<!-- parser.py -->	
