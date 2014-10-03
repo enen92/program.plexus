@@ -6,6 +6,10 @@
    
    Functions:
    
+   list_history() -> Function list addon history. It grabs the info from history.txt in the userdata
+   add_to_history(name,url,mode,iconimage) -> Add to addon history. It appends a new line to history.txt
+   remove_history() -> delete history.txt if the file exists
+   
     
 """
 import xbmcvfs,xbmc,os,sys
@@ -21,10 +25,11 @@ def list_history():
 		i=0
 		for line in lines:
 			info = line.split('|')
-			print info
-			try:
-				addDir(info[0],info[1],int(info[2]),info[3].replace('\n',''),1,False)	
-			except: pass
+			if i < int(settings.getSetting('items_per_page')):
+				try:
+					addDir(info[0],info[1],int(info[2]),info[3].replace('\n',''),1,False)	
+				except: pass
+			i+=1
 	else:
 		sys.exit(0)
 	
@@ -39,7 +44,7 @@ def add_to_history(name,url,mode,iconimage):
 				open(history_file, 'w').writelines(lines)
 		else:
 			lines = open(history_file).readlines()
-			newlines = lines[0:-2]
+			newlines = lines[0:-1*int(settings.getSetting('items_per_page'))-1]
 			newlines.insert(0,line)
 			open(history_file, 'w').writelines(newlines)
 	else:
