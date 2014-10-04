@@ -56,7 +56,7 @@
 		<setting id="pausable" type="bool" label="30010" default="false" />
 		<setting id="save" type="bool" label="30012" default="false" />
 		<setting id="folder" type="folder" label="30013"/>
-		<setting id="kill_type" type="enum" values="Force Kill|Normal" label="70002" default="1" visible="!eq(-8,1)"/>
+		<setting id="kill_type" type="enum" values="Force Kill|Normal" label="70002" default="1" visible="!eq(-8,1)+!System.Platform.windows"/>
 		<setting id="shutdown-engine" type="bool" label="30015" default="true"/>
 		<setting id="engine-status" type="bool" label="49999" default="true"/>
 		<setting id="ace-debug" type="bool" label="49998" default="false"/>
