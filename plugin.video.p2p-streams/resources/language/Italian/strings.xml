@@ -52,6 +52,7 @@
      <string id="70037">Abilita storico streams</string>
      <string id="70038">Numero di elementi da salvare</string>
      <string id="70039">Cancella storico streams</string>
+     <string id="70040">Entrare alla lista di parsers automaticamente</string>
     
      <!-- Default.py -->
      <string id="40115">Elenchi xml</string>

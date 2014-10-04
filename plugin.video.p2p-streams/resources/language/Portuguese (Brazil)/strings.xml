@@ -51,7 +51,8 @@
     <string id="70036">-Histórico do addon</string>
     <string id="70037">Activar histórico do addon</string>
     <string id="70038">Items a guardar</string>
-    <string id="70039">Apagar histórico do addon</string>	
+    <string id="70039">Apagar histórico do addon</string>
+    <string id="70040">Entrar na lista de parsers automaticamente</string>
     
     <!-- Default.py -->
     <string id="40115">-Listas xml do addon</string>

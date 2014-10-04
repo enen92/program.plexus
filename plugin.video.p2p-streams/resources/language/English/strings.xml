@@ -52,6 +52,7 @@
     <string id="70037">Enable addon history</string>
     <string id="70038">Items to save</string>
     <string id="70039">Clean addon history</string>
+    <string id="70040">Enter to parser list on boot</string>
     
     <!-- Default.py -->
     <string id="40115">-Addon xml lists</string>

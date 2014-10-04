@@ -104,7 +104,10 @@ if mode==None:
           if settings.getSetting('last_version_check') != versao:
               try:check_for_updates()
               except: pass
-      main_menu()
+      if settings.getSetting('enter_channel_list') == "false":
+      	main_menu()
+      else:
+      	parsers.addon_parsers_menu()
 elif mode==1: ace.acestreams(name,iconimage,url)
 elif mode==2: sop.sopstreams(name,iconimage,url)
 elif mode==3: go_to_id('sop_id')

@@ -69,6 +69,7 @@
 	 	<setting label="400001" type="lsep" />
 		<setting id="sopcast-oficial" type="bool" label="40134" default="true" />
 		<setting label="400002" type="lsep" />
+		<setting id="enter_channel_list" type="bool" label="70040" default="false" />
 		<setting type="action" label="400003" action="XBMC.RunPlugin(plugin://plugin.video.p2p-streams/?mode=404&name=p2p&url=p2p)" />
 		<setting type="action" label="400004" action="XBMC.RunPlugin(plugin://plugin.video.p2p-streams/?mode=406&name=p2p&url=p2p)" />
 		<setting type="action" label="70008" action="XBMC.RunPlugin(plugin://plugin.video.p2p-streams/?mode=408&name=p2p&url=p2p)" />
