@@ -1,4 +1,12 @@
 ===== Stable Versions ========
+[B]v1.1.2 (4/10/2014)[/B]
+-Fix manually add to favourites option not showing
+-Fix non-existent acestreamcachefolder on linux
+-Added addon history (can be disabed in the addon settings). Every ace or sop link you watch gets saved
+-It's now possible to change acestreamengine settings through the addon gui in windows
+-Added option to enter the list of parsers on addon startup
+-Updated italian translation (tks axlt2002)
+
 [B]v1.1.1 (29/9/2014)[/B]
 -Fix changing acestream settings from the addon for recent linux/android acestreamengine versions
 -Add possibility to call torrentstream controller proxy and use any media player (in android)
