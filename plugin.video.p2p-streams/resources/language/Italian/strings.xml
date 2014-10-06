@@ -9,7 +9,7 @@
      <string id="30016">[COLOR blue]Impostazioni generali[/COLOR]</string>
      <string id="30001">Scarica moduli all'avvio</string>
      <string id="40107">Forza rilevamento come Android</string>
-     <string id="40114">Parsers</string>
+     <string id="40114">Parser</string>
      <string id="600013">Fuso orario</string>
      <string id="40111">Piattaforma x86_64 OpenELEC</string>
      <string id="40100">Nascondi porno</string>
@@ -38,21 +38,21 @@
      <string id="49999">Mostra stato AceStream Engine a video</string>
      <string id="49998">Modalità debug</string>
      <string id="70002">Modalità chiusura AceStream</string>
-     <string id="400000">Elenchi/Parsers</string>
+     <string id="400000">Elenchi/Parser</string>
      <string id="400001">Elenchi</string>
      <string id="40134">Abilita elenchi ufficiali sopcast.org</string>
-     <string id="400002">Parsers</string>
+     <string id="400002">Parser</string>
      <string id="400003">Esegui script python</string>
-     <string id="400004">Sincronizza parsers</string>
-     <string id="400005">Abilita sincronizzazione automatica parsers</string>
-     <string id="400006">Intervallo di sincronizzazione parsers</string>
+     <string id="400004">Sincronizza parser</string>
+     <string id="400005">Abilita sincronizzazione automatica parser</string>
+     <string id="400006">Intervallo di sincronizzazione parser</string>
      <string id="70009">Forza l'utilizzo di DVDPlayer per la riproduzione degli stream</string>
      <string id="70010">CMD alternativo</string>
-     <string id="70036">Storico streams</string>
-     <string id="70037">Abilita storico streams</string>
+     <string id="70036">Storico stream</string>
+     <string id="70037">Abilita storico stream</string>
      <string id="70038">Numero di elementi da salvare</string>
-     <string id="70039">Cancella storico streams</string>
-     <string id="70040">Entrare alla lista di parsers automaticamente</string>
+     <string id="70039">Cancella storico stream</string>
+     <string id="70040">Accedi direttamente alla lista dei parsers</string>
     
      <!-- Default.py -->
      <string id="40115">Elenchi xml</string>
@@ -289,8 +289,8 @@
 <string id="70004">Ogni parser presente è fornito da terze parti.</string>
 <string id="70005">Non è stato sviluppato e non fa parte di questo addon.</string>
 <string id="70006">Non richiedere supporto per nessuno di essi.</string>
-<string id="70007">Tutte le tracce dei parser sono state cancellate</string>
-<string id="70008">Rimuovere tutte le tracce dei parser</string>
+<string id="70007">Tutti i parser sono stati eliminati</string>
+<string id="70008">Elimina tutti i parser</string>
 
 <!-- Misc -->
 <string id="40009">* Ora Live *</string>
