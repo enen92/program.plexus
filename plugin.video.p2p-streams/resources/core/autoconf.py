@@ -55,7 +55,7 @@ osx_i386_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/i3
 osx_x64_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/x86_64/sopcast_osx64.tar.gz"
 osx_x64_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/x86_64/acestream_osx64.tar.gz"
 #Windows Files
-acestream_windows = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/acewindows-aceengine2.3.0.tar.gz"
+acestream_windows = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/acewindows-aceengine3.0.2.tar.gz"
 srvany_executable = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/srvany.tar.gz"
 srvany_permissions = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/sopcastp2p-permissions.txt"
 
