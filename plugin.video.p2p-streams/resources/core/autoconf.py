@@ -40,7 +40,7 @@ openelecxi386_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/
 openeelcxi386_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/openelec/acestream_openeleci386.tar.gz"
 #gen linux
 acestream_linux_x64_generic = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/acestream-linux-x86_64_302.tar.gz"
-acestream_linux_i386_generic = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/acestream-linux-i386generic.tar.gz"
+acestream_linux_i386_generic = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/acestream-linux-i386_302.tar.gz"
 #Android
 sopcast_apk = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/SopCast.apk.tar.gz"
 acestreamengine_apk_arm = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AceStream-3.0.2-2in1.apk.tar.gz"
