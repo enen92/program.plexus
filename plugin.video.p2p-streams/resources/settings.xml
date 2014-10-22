@@ -70,9 +70,9 @@
 		<setting id="sopcast-oficial" type="bool" label="40134" default="true" />
 		<setting label="400002" type="lsep" />
 		<setting id="enter_channel_list" type="bool" label="70040" default="false" />
-		<setting type="action" label="400003" action="XBMC.RunPlugin(plugin://plugin.video.p2p-streams/?mode=404&name=p2p&url=p2p)" />
-		<setting type="action" label="400004" action="XBMC.RunPlugin(plugin://plugin.video.p2p-streams/?mode=406&name=p2p&url=p2p)" />
-		<setting type="action" label="70008" action="XBMC.RunPlugin(plugin://plugin.video.p2p-streams/?mode=408&name=p2p&url=p2p)" />
+		<setting id="run_a_python_script" type="action" label="400003" action="XBMC.RunPlugin(plugin://plugin.video.p2p-streams/?mode=404&name=p2p&url=p2p)" />
+		<setting id="sync_parsers_now" type="action" label="400004" action="XBMC.RunPlugin(plugin://plugin.video.p2p-streams/?mode=406&name=p2p&url=p2p)" />
+		<setting id="remove_parser_traces_" type="action" label="70008" action="XBMC.RunPlugin(plugin://plugin.video.p2p-streams/?mode=408&name=p2p&url=p2p)" />
 		<setting id="parser_sync" type="bool" label="400005" default="true"/>
 		<setting id="parser_sync_cron" type="enum" label="400006" values="10h|15h|20h|24h" default="3" enable="!eq(-1,false)"/>
 		<setting id="parsers_last_sync" type="text" default="1970-01-01 23:59:00.000000" visible="false"/>
