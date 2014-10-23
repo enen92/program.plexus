@@ -45,7 +45,7 @@ acestream_linux_i386_generic = "http://p2p-strm.googlecode.com/svn/trunk/Modules
 sopcast_apk = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/SopCast.apk.tar.gz"
 acestreamengine_apk_arm = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AceStream-3.0.2-2in1.apk.tar.gz"
 acestreamengine_apk_x86 = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AceStream-3.0.2-2in1.apk.tar.gz"
-android_aceengine_arm = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/org.acestream.engine_arm.tar.gz"
+android_aceengine_arm = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/org.acestream.engine_arm302.tar.gz"
 android_aceengine_x86 = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/org.acestream.engine_x86.tar.gz"
 android_aceplayer_arm = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AcePlayer-3.0.2-2in1.apk.tar.gz"
 android_aceplayer_x86 = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AcePlayer-3.0.2-2in1.apk.tar.gz"
@@ -716,6 +716,8 @@ def configure_acestream(latest_version):
             		st = os.stat(pythonbin)
             		import stat
             		os.chmod(pythonbin, st.st_mode | stat.S_IEXEC)
+            		try: xbmcvfs.mkdir(os.path.join('/sdcard','org.acestream.engine'))
+            		except: pass
 			opcao= xbmcgui.Dialog().yesno(translate(40000), translate(70015),translate(70016))
 			if not opcao:
 				settings.setSetting('engine_app','0')
