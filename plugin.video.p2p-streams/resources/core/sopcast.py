@@ -8,7 +8,8 @@
 
 """
      
-import xbmc,xbmcgui,xbmcplugin,urllib2,os,sys,subprocess,xbmcvfs,socket,re 
+import xbmc,xbmcgui,xbmcplugin,urllib2,os,sys,subprocess,xbmcvfs,socket,re,requests,shutil
+from thread import start_new_thread
 from utils.pluginxbmc import *
 from utils.utilities import handle_wait
 from history import add_to_history
@@ -23,6 +24,8 @@ BUFER_SIZE = int(settings.getSetting('buffer_size'))
 if(settings.getSetting('auto_ip')):
     LOCAL_IP=xbmc.getIPAddress()
 else: LOCAL_IP=settings.getSetting('localhost')
+VIDEO_STREAM = "http://"+LOCAL_IP+":"+str(VIDEO_PORT)+"/"
+
 
 """ 
 Addon functions related to sopcast
@@ -39,6 +42,7 @@ Sopcast Utils:
 sop_sleep(time , spsc_pid) -> sopcast_binary pid sleep function. For all supported OS's except Windows.
 handle_wait_socket(time_to_wait,title,text,segunda='') -> Timer to check if sopcast local server has started (attempt to connect on sopcast local server port). This function is Windows only.
 break_sopcast() -> intentionally break the sopcast player in windows to avoid double sound created by the running sopcastp2p service
+osx_sopcast_downloader() -> Sopcast downloader thread to avoid curl bugs in OSX
 
 
 """
@@ -213,7 +217,6 @@ def sopstreams_builtin(name,iconimage,sop):
 		listitem.setLabel(name)
 		listitem.setInfo('video', {'Title': name})
 		url = "http://"+LOCAL_IP+":"+str(VIDEO_PORT)+"/"
-		listitem.setPath(path=url)
 		xbmc.sleep(int(settings.getSetting('wait_time')))
 		res=False
 		counter=50
@@ -242,12 +245,25 @@ def sopstreams_builtin(name,iconimage,sop):
                     
 		if res:
 			mensagemprogresso.update(100)
-			xbmcplugin.setResolvedUrl(int(sys.argv[1]),True,listitem)
-			player = streamplayer(xbmc.PLAYER_CORE_AUTO , spsc_pid=spsc.pid , listitem=listitem)
-			if int(sys.argv[1]) < 0:
-				player.play(url, listitem)
-			while player._playbackLock:
-				xbmc.sleep(500)
+			if not xbmc.getCondVisibility('System.Platform.OSX'):
+				listitem.setPath(path=url)
+				xbmcplugin.setResolvedUrl(int(sys.argv[1]),True,listitem)
+				player = streamplayer(xbmc.PLAYER_CORE_AUTO , spsc_pid=spsc.pid , listitem=listitem)
+				if int(sys.argv[1]) < 0:
+					player.play(url, listitem)
+					while player._playbackLock:
+						xbmc.sleep(500)
+			else:
+				xbmc.sleep(200)
+				video_file = os.path.join(pastaperfil,'sopcast.avi')
+				start_new_thread(osx_sopcast_downloader,())
+				handle_wait(int(settings.getSetting('stream_time_osx')),translate(40000),translate(40184),segunda='')
+				listitem.setPath(path=video_file)
+				xbmcplugin.setResolvedUrl(int(sys.argv[1]),True,listitem)
+				player = streamplayer(xbmc.PLAYER_CORE_AUTO , spsc_pid=spsc.pid , listitem=listitem)
+				player.play(video_file, listitem)
+				while player._playbackLock:
+					xbmc.sleep(500)
 		else:
 		    xbmc.sleep(200)
 		    xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(40040), 1,os.path.join(addonpath,"icon.png")))
@@ -312,7 +328,7 @@ class streamplayer(xbmc.Player):
 
     def onPlayBackStarted(self):
         mensagemprogresso.close()
-        if xbmc.Player(xbmc.PLAYER_CORE_AUTO).getPlayingFile() != "http://"+LOCAL_IP+":"+str(VIDEO_PORT)+"/":
+        if xbmc.Player(xbmc.PLAYER_CORE_AUTO).getPlayingFile() != "http://"+LOCAL_IP+":"+str(VIDEO_PORT)+"/" and 'sopcast' not in xbmc.Player(xbmc.PLAYER_CORE_AUTO).getPlayingFile():
             try: os.kill(self.spsc_pid,9)
             except: pass
         else: pass
@@ -323,7 +339,11 @@ class streamplayer(xbmc.Player):
         if os.path.exists("/proc/"+str(self.spsc_pid)) and xbmc.getCondVisibility("Window.IsActive(epg.xml)") and settings.getSetting('safe_stop')=="true":
             if not xbmc.Player(xbmc.PLAYER_CORE_AUTO).isPlaying():
                 player = streamplayer(xbmc.PLAYER_CORE_AUTO , spsc_pid=self.spsc_pid , listitem=self.listitem)
-                player.play(url, self.listitem)     
+                player.play(url, self.listitem) 
+        try:
+        	xbmcvfs.delete(os.path.join(pastaperfil,'sopcast.avi'))
+        except:
+        	pass    
 
     def onPlayBackStopped(self):
         self._playbackLock = False
@@ -336,6 +356,10 @@ class streamplayer(xbmc.Player):
         else:
             try: os.kill(self.spsc_pid,9)
             except: pass
+        try:
+        	xbmcvfs.delete(os.path.join(pastaperfil,'sopcast.avi'))
+        except:
+        	pass
                          
 """ Sopcast Utils"""   
 
@@ -401,3 +425,12 @@ def break_sopcast():
 			if xbmcvfs.exists(codec_file): xbmcvfs.rename(codec_file,os.path.join(os.path.join(value.replace("SopCast.exe","")),'codec','sop.ocx'))
 		except:pass
 
+def osx_sopcast_downloader():
+	print VIDEO_STREAM
+	print "started osx downloader thread"
+	response = requests.get(VIDEO_STREAM, stream=True)
+	print response.headers
+	video_file = os.path.join(pastaperfil,'sopcast.avi')
+	with open(video_file, 'wb') as out_file:
+		shutil.copyfileobj(response.raw, out_file)
+	print "ended thread"
