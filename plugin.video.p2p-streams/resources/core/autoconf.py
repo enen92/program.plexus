@@ -656,9 +656,7 @@ def configure_acestream(latest_version):
 					zipa = subprocess.Popen(cmd,shell=True)
 					cmd = 'chmod -R 755 /Applications/Ace\ Stream.app'
 					print cmd
-					mount = subprocess.Popen(cmd,shell=True)
-					try: shutil.rmtree(os.path.join('/Applications','__MACOSX'))
-					except: pass
+					chmod = subprocess.Popen(cmd,shell=True)
 					try: os.remove(MAC_KIT)
 					except: pass
 			if latest_version: settings.setSetting('acestream_version',value=latest_version)
