@@ -19,8 +19,6 @@ import tarfile,os,re,sys,subprocess
 from utils.pluginxbmc import *
 from utils.webutils import download_tools,get_page_source
 from utils.utilities import *
-from utils import extract
-
 
 """ Platform dependent files downloaded during the addon configuration"""
 
