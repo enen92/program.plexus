@@ -19,6 +19,7 @@ import tarfile,os,re,sys,subprocess
 from utils.pluginxbmc import *
 from utils.webutils import download_tools,get_page_source
 from utils.utilities import *
+from utils import extract
 
 
 """ Platform dependent files downloaded during the addon configuration"""
@@ -51,9 +52,9 @@ android_aceplayer_arm = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Androi
 android_aceplayer_x86 = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AcePlayer-3.0.2-2in1.apk.tar.gz"
 #Mac OSX
 osx_i386_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/i386/sopcast_osxi386.tar.gz"
-osx_i386_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/i386/acestream_osxi386.tar.gz"
+osx_i386_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/AceStreamWineOSX.zip"
 osx_x64_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/x86_64/sopcast_osx64.tar.gz"
-osx_x64_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/x86_64/acestream_osx64.tar.gz"
+osx_x64_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/AceStreamWineOSX.zip"
 #Windows Files
 acestream_windows = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/acewindows-aceengine3.0.2.tar.gz"
 srvany_executable = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/srvany.tar.gz"
@@ -647,20 +648,21 @@ def configure_acestream(latest_version):
 			available = True
 		else:
 			available = False
-		if available == True:		
-			if not xbmcvfs.exists(pastaperfil):
-				xbmcvfs.mkdir(pastaperfil)		
-			MAC_KIT = os.path.join(addonpath,mac_package.split("/")[-1])
-			download_tools().Downloader(mac_package,MAC_KIT,translate(40026),translate(40000))
-			import tarfile
-			if tarfile.is_tarfile(MAC_KIT):
-				path_libraries = os.path.join(pastaperfil)
-				download_tools().extract(MAC_KIT,pastaperfil)
-				download_tools().remove(MAC_KIT)
-				sp_sc_auth = os.path.join(pastaperfil,"sopcast","sp-sc-auth")
-				st = os.stat(sp_sc_auth)
-				import stat
-				os.chmod(sp_sc_auth, st.st_mode | stat.S_IEXEC)
+		if available == True:			
+			MAC_KIT = os.path.join('/Applications',mac_package.split("/")[-1])
+			if not xbmcvfs.exists(os.path.join('/Applications','Ace Stream.app')):
+				download_tools().Downloader(mac_package,MAC_KIT,translate(40026),translate(40000))
+				if xbmcvfs.exists(MAC_KIT):
+					xbmc.sleep(1000)
+					cmd = 'unzip /Applications/AceStreamWineOSX.zip'
+					zipa = subprocess.Popen(cmd,shell=True)
+					cmd = 'chmod -R 755 /Applications/Ace\ Stream.app'
+					print cmd
+					mount = subprocess.Popen(cmd,shell=True)
+					try: shutil.rmtree(os.path.join('/Applications','__MACOSX'))
+					except: pass
+					try: os.remove(MAC_KIT)
+					except: pass
 			if latest_version: settings.setSetting('acestream_version',value=latest_version)
 			return
 		else:
