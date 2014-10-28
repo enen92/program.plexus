@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <settings>
 	<category label="30000">
 	    <setting label="30016" type="lsep" />
@@ -38,7 +38,8 @@
 		<setting id="local_port" type="number" label="30006" visible="!System.Platform.Windows" default="9000"/>
 		<setting id="video_port" type="number" label="30007" visible="!System.Platform.Windows" default="9001"/>
 		<setting id="buffer_size" type="number" label="30008" visible="!System.Platform.Windows" default="8192"/>
-		<setting id="wait_time" type="number" label="30005" visible="!System.Platform.Windows" default="1000"/>
+		<setting id="stream_time_osx" label="40199" type="number" visible="System.Platform.OSX" default="15"/>
+		<setting id="wait_time" type="number" label="30005" visible="!System.Platform.Windows+!System.Platform.OSX" default="1000"/>
 		<setting id="sop_debug_mode" type="bool" label="30009" visible="!System.Platform.Windows" default="false"/>
 		<setting id="socket_time" label="40198" type="number" visible="System.Platform.Windows" default="15"/>
 		<setting id="stream_time" label="40199" type="number" visible="System.Platform.Windows" default="6"/>
