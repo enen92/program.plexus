@@ -64,7 +64,7 @@ def advanced_menu():
 	if xbmc.getCondVisibility('system.platform.linux') and settings.getSetting('force_android') != "true":
 		if os.uname()[4] == "armv6l" or os.uname()[4] == "armv7l":
 			eligible = True
-	elif xbmc.getCondVisibility('system.platform.OSX'): eligible = True
+	elif xbmc.getCondVisibility('system.platform.OSX'): eligible = False
 	elif settings.getSetting('openeleci386') == "true": eligible = False
 	elif settings.getSetting('force_android') == "true": eligible = False
 	else: eligible = False
