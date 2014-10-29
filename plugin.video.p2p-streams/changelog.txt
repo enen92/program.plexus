@@ -1,4 +1,12 @@
 ===== Stable Versions ========
+[B]v1.1.4 (29/10/2014)[/B]
+-Acestreamengine bundle for Linux x86 was re-packaged (based on debian to avoid debian errors)
+-Fixed OSX curl errors with sopcast (file is downloaded locally by a thread and forwarded to the player)
+-New settings for sopcast in osx (timer used for example)
+-New configuration for acestreams under osx (using the windows wine emulated version of the acestreamengine 3.0.2 by july ighor)
+-New behaviour for Acestreams in OSX
+-Changes to the wiki
+
 [B]v1.1.3 (23/10/2014)[/B]
 -Updated windows acestream engine to version 3.0.2
 -Updated Linux x64 acestream engine to version 3.0.2
