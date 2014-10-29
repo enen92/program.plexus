@@ -28,6 +28,8 @@ if settings.getSetting('ace-debug')=='true': alog=True
 else: alog=False
 if (sys.platform == 'win32') or (sys.platform == 'win64'): pwin=True
 else: pwin=False
+if xbmc.getCondVisibility('System.Platform.OSX'): posx=True
+else: posx=False
 
 
 """ Function and class list """
@@ -181,9 +183,12 @@ class TSengine():
             if not aceport: 
                 res=self.startWin()
                 if not res: return False
-        elif xbmc.getCondVisibility('System.Platform.OSX'):
-            self.log.out("Trying to connect OSX engine")
+        elif posx:
             res=self.startosx()
+            aceport=self.getosxPort()
+            if not aceport: 
+                res=self.startosx()
+                if not res: return False
         else:
             self.log.out('try to connect to Linux engine')
             self.log.out('Connecting to %s:%s'%(servip,aceport))
@@ -194,35 +199,52 @@ class TSengine():
             except:
                 res=self.startLin()
                 if not res: return False
-        i=30
+        i=40
         while (i>1):
             self.progress.update(0,translate(40046),translate(40049) + str('%s'%i) + ' ' + translate(40050) )
             try:
                 if pwin: aceport=self.getWinPort()
+                elif posx: aceport=self.getosxPort()
                 self._sock.connect((servip, aceport))
                 self.log.out('Connected to %s:%s'%(servip,aceport))     
                 i=0
                 return True
             except:
-                self.log.out('Failed to connect to %s:%s'%(servip,aceport))   
+                self.log.out('Failed to connect to %s:%s'%(servip,aceport))
             if self.progress.iscanceled():
                 return False
                 break
             i=i-1
             xbmc.sleep(1000)
             if xbmc.getCondVisibility('system.platform.OSX'):
+                j = [33,30,27,24,21,18,15,12,9,6,3]
+                if i in j:
+                    print("another attempt to start osx engine..")
+                    self.startosx()
                 self._sock.close()
                 self._sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
         self.sm('Cant connect')
         return False
-            
 
+    def getosxPort(self):
+        try:
+            path=os.path.join('/Applications','Ace Stream.app','Contents','Resources','wineprefix','drive_c','users','IGHOR','Application Data','ACEStream','engine')
+            pfile= os.path.join( path,'acestream.port')
+            gf = open(pfile, 'r')
+            aceport=int(gf.read())
+        except: 
+            return False
+        self.log.out('get aceport - %s'%aceport)
+        return aceport
+            
     def startosx(self):
         self.log.out('try to start OSX engine')
         import subprocess
-        enviro = {'VERSIONER_PYTHON_PREFER_32_BIT': 'no', 'TERM_PROGRAM_VERSION': '326','PATH': '/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin', 'TERM_PROGRAM': 'Apple_Terminal', 'LANG': 'en_GB.UTF-8', 'TERM': 'xterm-256color', 'Apple_PubSub_Socket_Render': '/tmp/launch-clnRhS/Render', 'VERSIONER_PYTHON_VERSION': '2.7', 'SHLVL': '2', 'SECURITYSESSIONID': '186a4', 'TMPDIR': '/var/folders/gg/4_z3kg_j4lb5zqlqntr_wbv00000gn/T/', 'TERM_SESSION_ID': 'DE9554D2-3F7B-4D47-B90A-BABAAC003473', 'SSH_AUTH_SOCK': '/tmp/launch-CepH8L/Listeners', 'SHELL': '/bin/bash', '_': '/usr/bin/python', '__CF_USER_TEXT_ENCODING': '0x1F5:0:0','__CHECKFIX1436934': '1'}
+        comd = [os.path.join('/Applications','Ace Stream.app','Contents','Resources','Wine.bundle','Contents','Resources','bin','wine'),os.path.join('/Applications','Ace Stream.app','Contents','Resources','wineprefix','drive_c','users','IGHOR','Application Data','ACEStream','engine','ace_engine.exe')]
+        print comd
         try:
-            self.proc = subprocess.Popen(['python',xbmc.translatePath(os.path.join(pastaperfil,'acestream','ace','start.py'))],shell=False,env=enviro)
+            self.proc = subprocess.Popen(comd,shell=False)
         except:
             self.sm('Not Installed')
             self.log.out('Not Installed')
@@ -252,7 +274,7 @@ class TSengine():
                 self.log.out("Not installed")
                 self.progress.update(0,"Acestreamengine.apk not installed","")
         else:
-            print "Linux not android.."
+            print("Linux not android..")
             if os.uname()[4] == "armv6l" or os.uname()[4] == "armv7l":
                 try:
                     self.proc = subprocess.Popen([settings.getSetting('python_cmd'),os.path.join(pastaperfil,'acestream','ace','start.py')])
@@ -560,6 +582,11 @@ class TSengine():
             elif xbmc.getCondVisibility('system.platform.OSX'):
                 if settings.getSetting('shutdown-engine') == "true":
                     try:
+                        kill_cmd = [os.path.join('/Applications','Ace Stream.app','Contents','Resources','Wine.bundle','Contents','Resources','bin','wine'),os.path.join('/Applications','Ace Stream.app','Contents','Resources','wineprefix','drive_c','windows','system','taskkill.exe'),'/f','/im','ace_engine.exe']
+                        #print kill_cmd
+                        kill_proc = subprocess.Popen(kill_cmd,shell=False)
+                    except: pass
+                    try:
                         self.proc.kill()
                         self.proc.wait()
                     except: pass
@@ -606,13 +633,11 @@ class TSengine():
                     except: pass
                           
             elif xbmc.getCondVisibility('system.platform.OSX'):
-                os.system("kill $(ps aux | grep '[s]tart.py')")
-                if settings.getSetting('save') != "true":
-                    try:
-                        cache_file = self.lnk.split('/')[-2]
-                        acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache',cache_file)
-                        xbmcvfs.delete(acestream_cachefolder_file)
-                    except: pass
+                try:
+                    kill_cmd = [os.path.join('/Applications','Ace Stream.app','Contents','Resources','Wine.bundle','Contents','Resources','bin','wine'),os.path.join('/Applications','Ace Stream.app','Contents','Resources','wineprefix','drive_c','windows','system','taskkill.exe'),'/f','/im','ace_engine.exe']
+                    #print kill_cmd
+                    kill_proc = subprocess.Popen(kill_cmd,shell=False)
+                except: pass
                     
             elif xbmc.getCondVisibility('System.Platform.Android'):
                 try:
@@ -858,13 +883,10 @@ def stop_aceengine():
                     except: pass
                           
             elif xbmc.getCondVisibility('system.platform.OSX'):
-                os.system("kill $(ps aux | grep '[s]tart.py')")
-                if settings.getSetting('save') != "true":
-                    try:
-                        cache_file = self.lnk.split('/')[-2]
-                        acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache',cache_file)
-                        xbmcvfs.delete(acestream_cachefolder_file)
-                    except: pass
+                try:
+                    kill_cmd = [os.path.join('/Applications','Ace Stream.app','Contents','Resources','Wine.bundle','Contents','Resources','bin','wine'),os.path.join('/Applications','Ace Stream.app','Contents','Resources','wineprefix','drive_c','windows','system','taskkill.exe'),'/f','/im','ace_engine.exe']
+                    kill_proc = subprocess.Popen(kill_cmd,shell=False)
+                except: pass
                     
             elif xbmc.getCondVisibility('System.Platform.Android'):
                 try:
