@@ -251,8 +251,8 @@ def sopstreams_builtin(name,iconimage,sop):
 				player = streamplayer(xbmc.PLAYER_CORE_AUTO , spsc_pid=spsc.pid , listitem=listitem)
 				if int(sys.argv[1]) < 0:
 					player.play(url, listitem)
-					while player._playbackLock:
-						xbmc.sleep(500)
+				while player._playbackLock:
+					xbmc.sleep(500)
 			else:
 				xbmc.sleep(200)
 				video_file = os.path.join(pastaperfil,'sopcast.avi')
