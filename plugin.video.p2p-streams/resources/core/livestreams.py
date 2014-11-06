@@ -43,7 +43,7 @@ def xml_lists_menu():
     if settings.getSetting('sopcast-oficial') == "true":
         addDir(translate(40116),"http://sopcast.org/chlist.xml",101,addonpath + art + 'xml_list_sopcast.png',2,True)
     try:
-        if xbmcvfs.exists(os.path.join(pastaperfil,"Lists")):
+        if os.path.exists(os.path.join(pastaperfil,"Lists")):
             dirs, files = xbmcvfs.listdir(os.path.join(pastaperfil,"Lists"))
             for file in files:
                 f = open(os.path.join(pastaperfil,"Lists",file), "r")
