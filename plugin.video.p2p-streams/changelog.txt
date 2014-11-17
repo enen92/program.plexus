@@ -1,4 +1,8 @@
 ===== Stable Versions ========
+[B]v1.1.5 (17/11/2014)[/B]
+-Fix listings for Kodi Helix
+-Fix dropbox hosted lists
+
 [B]v1.1.4 (29/10/2014)[/B]
 -Acestreamengine bundle for Linux x86 was re-packaged (based on debian to avoid debian errors)
 -Fixed OSX curl errors with sopcast (file is downloaded locally by a thread and forwarded to the player)
