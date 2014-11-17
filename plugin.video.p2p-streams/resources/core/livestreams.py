@@ -83,8 +83,8 @@ def addlista():
         if (keyb.isConfirmed()):
             search = keyb.getText()
             if search=='': sys.exit(0)
-            encode=urllib.quote(search)
-            if encode.split(".")[-1] != "xml" and encode.split(".")[-1] != "m3u": mensagemok(translate(40000),translate(40128)); sys.exit(0)
+            if "dropbox" in search and not "?dl=1" in search: search = search + '?dl=1'
+            if "xml" not in search.split(".")[-1] and "m3u" not in search.split(".")[-1]: mensagemok(translate(40000),translate(40128)); sys.exit(0)
             else:
                 try:
                     code = get_page_source(search)
@@ -97,7 +97,7 @@ def addlista():
                 searchname = keybdois.getText()
                 if searchname=='': sys.exit(0)
                 encode=urllib.quote(searchname)
-                if xbmcvfs.exists(os.path.join(pastaperfil,"Lists")): pass
+                if os.path.exists(os.path.join(pastaperfil,"Lists")): pass
                 else: xbmcvfs.mkdir(os.path.join(pastaperfil,"Lists"))
                 txt_name = searchname + ".txt"
                 save(os.path.join(pastaperfil,"Lists",txt_name),search)
@@ -122,8 +122,8 @@ Parsing functions
 """
 def list_type(url):
     ltype = url.split('.')[-1]
-    if ltype == 'xml': get_groups(url)
-    elif ltype == 'm3u': parse_m3u(url)
+    if 'xml' in ltype: get_groups(url)
+    elif 'm3u' in ltype: parse_m3u(url)
     else: pass
 
 def parse_m3u(url):
