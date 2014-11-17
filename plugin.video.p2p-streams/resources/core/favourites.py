@@ -21,7 +21,7 @@ from utils.directoryhandle import addDir
 from random import randint
 
 def addon_favourites():
-	if os.path.exists((os.path.join(pastaperfil,"Favourites")):
+	if os.path.exists(os.path.join(pastaperfil,"Favourites")):
 		dirs, files = xbmcvfs.listdir(os.path.join(pastaperfil,"Favourites"))
 		if files:
 			for file in files:
