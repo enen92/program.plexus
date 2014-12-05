@@ -36,7 +36,7 @@ sopcast_linux_generico =  "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linu
 openelecx86_64_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/Openelec/sopcast_openelec64.tar.gz"
 openeelcx86_64_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/Openelec/acestream_openelec64_303.tar.gz"
 openelecxi386_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/openelec/sopcast_openeleci386.tar.gz"
-openeelcxi386_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/openelec/acestream_openeleci386_302.tar.gz"
+openeelcxi386_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/openelec/acestream_openeleci386_303.tar.gz"
 #gen linux
 acestream_linux_x64_generic = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/acestream-linux-x86_64_303.tar.gz"
 acestream_linux_i386_generic = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/acestream-linux-i386_303.tar.gz"
