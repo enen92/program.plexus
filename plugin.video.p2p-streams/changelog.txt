@@ -1,4 +1,11 @@
 ===== Stable Versions ========
+[B]v1.1.6 (5/12/2014)[/B]
+-Updated windows acestream engine to version 3.0.4
+-Updated general linux x86 acestream engine to version 3.0.3
+-Updated general linux x64 acestream engine to version 3.0.3
+-Updated Openelec x86 acestream engine to version 3.0.3
+-Updated Openelec x64 acestream engine to version 3.0.3
+
 [B]v1.1.5 (17/11/2014)[/B]
 -Fix listings for Kodi Helix
 -Fix dropbox hosted lists
