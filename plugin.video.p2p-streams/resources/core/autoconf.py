@@ -34,7 +34,7 @@ acestream_armv7_xbian = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/
 #Linux i386 and x86_64 (including openelec)
 sopcast_linux_generico =  "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Sopcastx86_64i386/sopcast_linux.tar.gz"
 openelecx86_64_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/Openelec/sopcast_openelec64.tar.gz"
-openeelcx86_64_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/Openelec/acestream_openelec64_302.tar.gz"
+openeelcx86_64_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/Openelec/acestream_openelec64_303.tar.gz"
 openelecxi386_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/openelec/sopcast_openeleci386.tar.gz"
 openeelcxi386_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/openelec/acestream_openeleci386_302.tar.gz"
 #gen linux
