@@ -42,12 +42,12 @@ acestream_linux_x64_generic = "http://p2p-strm.googlecode.com/svn/trunk/Modules/
 acestream_linux_i386_generic = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/acestream-linux-i386_303.tar.gz"
 #Android
 sopcast_apk = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/SopCast.apk.tar.gz"
-acestreamengine_apk_arm = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AceStream-3.0.2-2in1.apk.tar.gz"
-acestreamengine_apk_x86 = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AceStream-3.0.2-2in1.apk.tar.gz"
+acestreamengine_apk_arm = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AceStream-3.0.3-2in1.apk.tar.gz"
+acestreamengine_apk_x86 = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AceStream-3.0.3-2in1.apk.tar.gz"
 android_aceengine_arm = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/org.acestream.engine_arm302.tar.gz"
 android_aceengine_x86 = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/org.acestream.engine_x86.tar.gz"
-android_aceplayer_arm = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AcePlayer-3.0.2-2in1.apk.tar.gz"
-android_aceplayer_x86 = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AcePlayer-3.0.2-2in1.apk.tar.gz"
+android_aceplayer_arm = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AcePlayer-3.0.3-2in1.apk.tar.gz"
+android_aceplayer_x86 = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AcePlayer-3.0.3-2in1.apk.tar.gz"
 #Mac OSX
 osx_i386_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/i386/sopcast_osxi386.tar.gz"
 osx_i386_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/AceStreamWineOSX.zip"
