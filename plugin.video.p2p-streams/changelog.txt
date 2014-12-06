@@ -1,4 +1,8 @@
 ===== Stable Versions ========
+[B]v1.1.7 (6/12/2014)[/B]
+-Updated acestreamengine for general linux x64 distros to version 3.0.5
+-Updated acestreamengine for openelec x64 to version 3.0.5
+
 [B]v1.1.6 (5/12/2014)[/B]
 -Updated windows acestream engine to version 3.0.4
 -Updated general linux x86 acestream engine to version 3.0.3
