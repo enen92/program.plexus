@@ -1,4 +1,4 @@
-P2P-Streams XBMC Addon
+P2P-Streams addon for Kodi
 ================
 
 [![screenshot1](http://t.imgbox.com/DtEF1B3b)](http://i.imgbox.com/DtEF1B3b.png)
@@ -12,15 +12,15 @@ P2P-Streams XBMC Addon
 
 About the addon
 ----------
-p2p-streams is an XBMC addon for watching peer-to-peer streams in XBMC without the need for external players. Peer-to-peer (P2P) computing or networking is a distributed application architecture that partitions tasks or workloads between peers. Peers are equally privileged, equipotent participants in the application. They are said to form a peer-to-peer network of nodes.
+p2p-streams is a video Kodi addon for watching peer-to-peer streams without the need for external players. Peer-to-peer (P2P) computing or networking is a distributed application architecture that partitions tasks or workloads between peers. Peers are equally privileged, equipotent participants in the application. They are said to form a peer-to-peer network of nodes.
 
 The addon currently supports SopCast and AceStream and several platforms:
 * Windows
 * OSX
 * Android
 * Linux
-  * Armv6 (Raspberry PI including OpenELEC)
-  * Armv7 (OpenELEC,Xbian,MXLinux,Jynxbox Pure Linux)
+  * Armv6 (Raspberry PI including OpenELEC) - AceStream 2.0 protocol only
+  * Armv7 (OpenELEC,Xbian,MXLinux,Jynxbox Pure Linux) - AceStream 2.0 protocol only
   * i386 (including OpenELEC)
   * x86_64 (including OpenELEC)
   
@@ -28,7 +28,7 @@ Installation & configuration
 ----------
 ###Addon installation
 
-Please install the repository in XBMC (System → settings → addons → install from zip file)
+Please install the repository in Kodi (System → settings → addons → install from zip file)
 
 [Repository Download](http://p2p-strm.googlecode.com/svn/addons/repository.p2p-streams.xbmc/repository.p2p-streams.xbmc-1.0.3.zip)
 
@@ -76,9 +76,9 @@ The addon can accept general `acestream://` based url, `.torrent urls, local .to
 Addon aditional functionalities
 ----------
 The addon provides aditional functionalities you can use to create your own experience:
-* **Parser plugins** - Built-in plugin engine that lets you create simple pure python plugins for website scrapping. Installing, removing and syncing code with remote repositories for a given parser. More information on the plugin structure and how to create your parser can be found here: [Website-parser tutorial and reference guide](https://github.com/enen92/P2P-Streams-XBMC/wiki/Website-Parser-tutorial). _Any plugin you might find in this addon is third party, not hosted nor maintained by the plugin authors_!
+* **Parser plugins** - Built-in plugin engine that lets you create simple pure python plugins for website scrapping. Installing, removing and syncing code with remote repositories for a given parser. More information on the plugin structure and how to create your parser can be found here: [Website-parser tutorial and reference guide](https://github.com/enen92/P2P-Streams-Kodi/wiki/Website-Parser-tutorial). _Any plugin you might find in this addon is third party, not hosted nor maintained by the plugin authors_!
   
-* **Lists** - You can easily add and remove local or remote (internet) lists. The addon supports sopcast based lists, m3u livetv lists and xml livestreams addon type lists. Click [here](https://github.com/enen92/P2P-Streams-XBMC/wiki/Lists) to know more about the formats._The only list included is the sopcast.org. The authors are not responsible for any lists you may install_
+* **Lists** - You can easily add and remove local or remote (internet) lists. The addon supports sopcast based lists, m3u livetv lists and xml livestreams addon type lists. Click [here](https://github.com/enen92/P2P-Streams-Kodi/wiki/Lists) to know more about the formats._The only list included is the sopcast.org. The authors are not responsible for any lists you may install_
   
 * **Favourites** - Easily add channels from parsers or lists to the addon favourites.
   
@@ -90,38 +90,35 @@ FAQ
 No, we are not affiliated with any of them. We do this addon in our free time. Hence, we do not provide support for possible errors or issues in both technologies. 
 
 ####Why does the addon come with just one list and no parsers? There are plenty of sop and ace links out there...
-The plugin goal is to extend xbmc functionality and to make peer-to-peer streams playable in XBMC. Website parsers are difficult to maintain and can provide non-legal content. So, for obvious reasons we do not provide any support nor include any of them in the core addon. Also we want to keep updates at a minimum level.
+The plugin goal is to extend Kodi functionality and to make peer-to-peer streams playable in Kodi (as if they were part of the software core). Website parsers are difficult to maintain and can provide non-legal content. So, for obvious reasons we do not provide any support nor include any of them in the core addon. Also we want to keep updates at a minimum level.
 
 ####Am I allowed to discuss and share websites containg sopcast and acestream links?
 If the content is legal yes. If not, please don't. You're messages will be either deleted or ignored if that's the case. 
 
 ####Is it available for iOS or atv2? I get a “not available for your os message”
-Sopcast or Acestream are closed source applications that are not available for ios and atv (and might never be). You might want to consider [this option](https://github.com/enen92/P2P-Streams-XBMC/wiki/Using-an-acestream-engine-running-on-a-different-location)
+Sopcast or Acestream are closed source applications that are not available for ios and atv (and might never be). You might want to consider [this option](https://github.com/enen92/P2P-Streams-Kodi/wiki/Using-an-acestream-engine-running-on-a-different-location)
 
-####Why do I need to run xbmc as administrator in Windows when doing the initial configuration?
+####Why do I need to run Kodi as administrator in Windows when doing the initial configuration?
 Sopcast in windows is complete gui package. It doesn't have any CLI executable or any possible way of integration. For the addon to play sopcast links a windows service is created (using the srvany microsoft tool) that makes sopcast.exe to run headless in your system. To create and modify the service permissions you need administration previledges.
 
 ####If the executables the addon uses are available from the official sites of both technologies why do you host and ship those .exe or .apk's from your repo?
 To simplify the configuration, make it easier for the average user and to have better control of the files the addon needs. You're free to get those executables from the official channels and also compare the checksums with the ones downloaded from the addon (to confirm they are exactly the same). Also, you can check the addon code on github to understand what the addon is doing.
 
-####Sopcast in OSX only lasts 3 seconds...
-Unfortunately since xbmc gotham beta 3 this behaviour started to happen. Frodo and gotham versions till beta 3 seem to handle the streams fine. 
-
 ####Sometimes I get the message “Channel initialization failed” in Sopcast. Why?
 Either the sopcast executable failed to login, the channel is offline or has been removed by SopCast because of proprietary content. Either the reason, there's nothing we can do to avoid this. 
 
 ####I'm kicked out of AceStreams after 'x' time...
-There are several aditional configurations you might have to do to improve acestreams behaviour and... most of them fall out of the bounds of this addon.  Try to limit the cache in XBMC by importing one of the recommended advancedsettings.xml (advanced tools menu). Port forward port 8621 and change the acestream-engine settings. This site has some usefull information: [acestream buffer guide](http://acestreamguide.com/buffering/) . If these don't improve the behaviour your ISP is probably throttling your traffic.
+There are several aditional configurations you might have to do to improve acestreams behaviour and... most of them fall out of the bounds of this addon.  Try to limit the cache in Kodi by importing one of the recommended advancedsettings.xml (advanced tools menu). Port forward port 8621 and change the acestream-engine settings. This site has some usefull information: [acestream buffer guide](http://acestreamguide.com/buffering/) . If these don't improve the behaviour your ISP is probably throttling your traffic.
 Again, we are not affiliated with acestream.org and we can't do anything about it.
 
-####Some acestreams play fine in windows, linux and android but not on the Raspberry Pi,Linux Armv7 and Mac OSX (Torrent unavailable / Failed to load list of files).
-For the platforms mentioned we are using an old opensource version of the acestreamengine. Streams created with the newer versions (available only for windows, android and linux) are not supported in older versions of the engine. We can do much about this...
+####Some acestreams play fine in windows, linux, OSX and Android but not on the Raspberry Pi,Linux Armv7 (Torrent unavailable / Failed to load list of files).
+For the platforms mentioned we are using an old "open-source" version of the acestreamengine (protocol 2.0). Streams created with the newer versions (protocol 3.0 - available only for windows, android and linux) are not supported in older versions of the engine. We can't do much about this...
 
 ####Can I run the engine on a different computer?
-Yes. [Read this](https://github.com/enen92/P2P-Streams-XBMC/wiki/Using-an-acestream-engine-running-on-a-different-location)
+Yes. [Read this](https://github.com/enen92/P2P-Streams-Kodi/wiki/Using-an-acestream-engine-running-on-a-different-location)
 
 ####Can I stream normal torrents with this plugin? 
-The Acestream-Engine provided by acestream.org can stream normal .torrent files. Since this addon is nothing more than the implementation of its public API...it can play them in XBMC as well.
+The Acestream-Engine provided by acestream.org can stream normal .torrent files. Since this addon is nothing more than the implementation of its public API...it can play them in Kodi as well.
 However in our opinion there are better alternatives to do this. Check [XBMCTorrent](http://forum.xbmc.org/showthread.php?tid=174736) or [Pulsar](http://forum.xbmc.org/showthread.php?tid=200957).
 
 Authors
@@ -137,11 +134,12 @@ This addon would not be possible without the help and first work of some develop
 * **Divingmule** – Livestreams addon
 * **Takoi** - Keymap editor addon
 * **Marquerite** – Addon art
-* **Tarasian666** – Alternative version of the acestreamengine written in python (which was tweaked to work on linux arm and mac osx)
+* **Tarasian666** – Alternative version of the acestreamengine written in python (which was tweaked to work on linux arm)
+* **IGHOR** – Mac OSX acestream app
 
 Contribute
 ----------
-* [**Source code**](https://github.com/enen92/P2P-Streams-XBMC/tree/master/plugin.video.p2p-streams)
-* [**External modules**](https://github.com/enen92/P2P-Streams-XBMC--Modules-)
-* [**Translations**](https://github.com/enen92/P2P-Streams-XBMC/blob/master/plugin.video.p2p-streams/resources/language/English/strings.xml)
-* [**Issues or feature requests**](https://github.com/enen92/P2P-Streams-XBMC/issues)
+* [**Source code**](https://github.com/enen92/P2P-Streams-Kodi/tree/master/plugin.video.p2p-streams)
+* [**External modules**](https://github.com/enen92/P2P-Streams-Kodi--Modules-)
+* [**Translations**](https://github.com/enen92/P2P-Streams-Kodi/blob/master/plugin.video.p2p-streams/resources/language/English/strings.xml)
+* [**Issues or feature requests**](https://github.com/enen92/P2P-Streams-Kodi/issues)
