@@ -131,7 +131,7 @@
     	<string id="40027">(Linux) You need to install acestream-engine manually.</string>
     	<string id="40028">Tutorial: </string>
     	<string id="40029">Follow the tutorial and try again.</string>
-    	<string id="40158">XBMC has to be running as administrator.</string>
+    	<string id="40158">Kodi has to be running as administrator.</string>
     	<string id="40159">to configure SopCast in Windows.</string>
     	<string id="40160">Checking if SopCast is installed...</string>
     	<string id="40161">Done!</string>
@@ -154,7 +154,7 @@
     	<string id="40178">Running Regini (Regedit permissions)...</string>
     	<string id="40179">Sopcast: All done sucessfully!</string>
     	<string id="600014">Not available for your Mac's architecture</string>
-    	<string id="50011">By default Sopcast will use the XBMC player.</string>
+    	<string id="50011">By default Sopcast will use the Kodi player.</string>
     	<string id="50012">Do you want to use an external application?</string>
     	<string id="50014">All done for SopCast!</string>
     	<string id="50013">Click ok to download SopCast.apk</string>
@@ -200,10 +200,10 @@
     	<string id="600027">Please re-do the configuration to get the new modules</string>
     	<string id="40185">Select one of the advancedsettings.xml</string>
  	<string id="40059">Downloaded advancedsettings.xml</string>
- 	<string id="40060">Xml has been imported. Please restart XBMC!</string>
- 	<string id="40064">Backup sucessfull. Please restart XBMC!</string>
- 	<string id="40062">Backup recovered sucessfully. Restart XBMC!</string>
- 	<string id="40066">XML deleted. Please restart XBMC!</string>
+ 	<string id="40060">Xml has been imported. Please restart Kodi!</string>
+ 	<string id="40064">Backup sucessfull. Please restart Kodi!</string>
+ 	<string id="40062">Backup recovered sucessfully. Restart Kodi!</string>
+ 	<string id="40066">XML deleted. Please restart Kodi!</string>
  	<string id="600024">Insert an integer value</string>
  	<string id="600026">Setting changed successfully</string>
  	<string id="600025">Invalid value. Only integers allowed!</string>
@@ -217,7 +217,7 @@
 	<string id="70028">Current skin: </string>
 	<string id="70029">This will only apply to the current skin</string>
 	<string id="70030">If it gets updated you might need to repeat this procedure</string>
-	<string id="70031">If you uninstall this addon you need to revert those changes otherwise you will break the xbmc default stop function!</string>
+	<string id="70031">If you uninstall this addon you need to revert those changes otherwise you will break Kodi's default stop function!</string>
 	<string id="70032">Are you sure you want to continue?</string>
 	<string id="70033">Do you want to map a button on your remote to the stop function?</string>
 	

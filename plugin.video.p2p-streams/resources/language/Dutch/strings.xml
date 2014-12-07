@@ -131,7 +131,7 @@
     	<string id="40027">(Linux) Je moet de acestream-engine handmatig installeren.</string>
     	<string id="40028">Instructies: </string>
     	<string id="40029">Volg de instructies en probeer het nogmaals.</string>
-    	<string id="40158">XBMC moet draaien als administrator.</string>
+    	<string id="40158">Kodi moet draaien als administrator.</string>
     	<string id="40159">om SopCast te kunnen configureren in Windows.</string>
     	<string id="40160">Controleren of SopCast geïnstalleerd is...</string>
     	<string id="40161">Klaar!</string>
@@ -154,7 +154,7 @@
     	<string id="40178">Starten Regini (Regedit machtigingen)...</string>
     	<string id="40179">Sopcast: Alles succesvol voltooid!</string>
     	<string id="600014">Niet beschikbaar voor jou Mac's architectuur/string>
-    	<string id="50011">Standaard zal Sopcast de XBMC speler gebruiken.</string>
+    	<string id="50011">Standaard zal Sopcast de Kodi speler gebruiken.</string>
     	<string id="50012">Wil je een externe applicatie gebruiken?</string>
     	<string id="50014">Alles voltooid voor SopCast!</string>
     	<string id="50013">Klik ok om SopCast.apk te downloaden</string>
@@ -199,10 +199,10 @@
     	<string id="600027">Graag configuratie opnieuw down om de nieuwe modules te verkrijgen</string>
     	<string id="40185">Selecteer een van de advancedsettings.xml</string>
  	<string id="40059">Advancedsettings.xml gedownload</string>
- 	<string id="40060">Xml is geïmporteerd. Herstart XBMC aub!</string>
- 	<string id="40064">Reservekopie maken gelukt. Herstart XBMC aub!</string>
- 	<string id="40062">Herstellen reservekopie gelukt. Herstart XBMC aub!</string>
- 	<string id="40066">XML verwijderd. Herstart XBMC aub!</string>
+ 	<string id="40060">Xml is geïmporteerd. Herstart Kodi aub!</string>
+ 	<string id="40064">Reservekopie maken gelukt. Herstart Kodi aub!</string>
+ 	<string id="40062">Herstellen reservekopie gelukt. Herstart Kodi aub!</string>
+ 	<string id="40066">XML verwijderd. Herstart Kodi aub!</string>
  	<string id="600024">Vul een geheel getal in</string>
  	<string id="600026">Instelling is gewijzigd</string>
  	<string id="600025">Ongeldige waarde. Alleen gehele getallen toegestaan!</string>
@@ -216,7 +216,7 @@
 	<string id="70028">Current skin: </string>
 	<string id="70029">This will only apply to the current skin</string>
 	<string id="70030">If it gets updated you might need to repeat this procedure</string>
-	<string id="70031">If you uninstall this addon you need to revert those changes otherwise you will break the xbmc default stop function!</string>
+	<string id="70031">If you uninstall this addon you need to revert those changes otherwise you will break the Kodi default stop function!</string>
 	<string id="70032">Are you sure you want to continue?</string>
 	<string id="70033">Do you want to map a button on your remote to the stop function?</string>
 	

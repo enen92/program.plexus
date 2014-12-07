@@ -131,7 +131,7 @@
       <string id="40027">(Linux) Devi installare manualmente AceStream Engine.</string>
       <string id="40028">Tutorial: </string>
       <string id="40029">Segui il tutorial e riprova.</string>
-      <string id="40158">XBMC deve essere in esecuzione come Amministratore.</string>
+      <string id="40158">Kodi deve essere in esecuzione come Amministratore.</string>
       <string id="40159">Configurare SopCast in Windows.</string>
       <string id="40160">Verifica se è installato SopCast.</string>
       <string id="40161">Fatto!</string>
@@ -154,7 +154,7 @@
       <string id="40178">Esecuzione regini (permessi regedit) ...</string>
       <string id="40179">SopCast: tutto fatto!</string>
       <string id="600014">Non disponibile per l'architettura Mac</string>
-      <string id="50011">Come impostazione predefinita, SopCast utilizzerà il player XBMC.</string>
+      <string id="50011">Come impostazione predefinita, SopCast utilizzerà il player Kodi.</string>
       <string id="50012">Vuoi utilizzare un'applicazione esterna?</string>
       <string id="50014">Tutto fatto per SopCast!</string>
       <string id="50013">Fare clic su OK per scaricare SopCast.apk</string>
@@ -199,10 +199,10 @@
       <string id="600027">Effettuare nuovamente la configurazione per ottenere i nuovi moduli</string>
       <string id="40185">Seleziona uno degli advancedsettings.xml</string>
       <string id="40059">advancedsettings.xml scaricato</string>
-      <string id="40060">XML importato. Riavviare XBMC!</string>
-      <string id="40064">Backup riuscito. Riavviare XBMC!</string>
-      <string id="40062">Backup recuperato con successo. Riavviare XBMC!</string>
-      <string id="40066">XML cancellato. Riavviare XBMC!</string>
+      <string id="40060">XML importato. Riavviare Kodi!</string>
+      <string id="40064">Backup riuscito. Riavviare Kodi!</string>
+      <string id="40062">Backup recuperato con successo. Riavviare Kodi!</string>
+      <string id="40066">XML cancellato. Riavviare Kodi!</string>
       <string id="600024">Inserire un valore intero</string>
       <string id="600026">Impostazione cambiata con successo</string>
       <string id="600025">Valore non valido. Solo numeri interi ammessi!</string>
@@ -216,7 +216,7 @@
       <string id="70028">Skin corrente: </string>
       <string id="70029">La modifica verrà applicata solo alla skin corrente</string>
       <string id="70030">In caso di aggiornamento potrebbe essere necessario ripetere questa procedura</string>
-      <string id="70031">Se disinstalli questo addon è necessario annullare le modifiche effettuate altrimenti la funzione di stop di XBMC non funzionerà!</string>
+      <string id="70031">Se disinstalli questo addon è necessario annullare le modifiche effettuate altrimenti la funzione di stop di Kodi non funzionerà!</string>
       <string id="70032">Vuoi continuare?</string>
       <string id="70033">Vuoi configurare un pulsante del telecomando per eseguire la funzione di stop?</string>
 

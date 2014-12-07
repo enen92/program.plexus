@@ -131,7 +131,7 @@
     	<string id="40027">(Linux) Tem de instalar a acestream-engine manualmente.</string>
     	<string id="40028">Tutorial: </string>
     	<string id="40029">Siga o tutorial e tente de novo.</string>
-    	<string id="40158">Necessita de iniciar o XBMC como administrador.</string>
+    	<string id="40158">Necessita de iniciar o Kodi como administrador.</string>
     	<string id="40159">para configurar o sopcast no Windows.</string>
     	<string id="40160">Verificando se o SopCast está instalado...</string>
     	<string id="40161">Concluido!</string>
@@ -154,7 +154,7 @@
     	<string id="40178">A executar Regini (permissões Regedit)...</string>
     	<string id="40179">Sopcast: Tudo concluído com sucesso!</string>
     	<string id="600014">Não está disponível para a arquitectura do seu Mac</string>
-    	<string id="50011">Por defeito o Sopcast usa o player do XBMC.</string>
+    	<string id="50011">Por defeito o Sopcast usa o player do Kodi.</string>
     	<string id="50012">Deseja usar uma aplicação externa?</string>
     	<string id="50014">Tudo concluído para o SopCast!</string>
     	<string id="50013">Clique ok para transferir a SopCast.apk</string>
@@ -199,10 +199,10 @@
     	<string id="600027">Por favor repita a configuração para obter os novos módulos</string>
     	<string id="40185">Seleccione o advancedsettings.xml desejado</string>
  	<string id="40059">Transferindo advancedsettings.xml</string>
- 	<string id="40060">Xml importado. Por favor reinicie XBMC!</string>
- 	<string id="40064">Backup com sucesso. Por favor reinicie o XBMC!</string>
- 	<string id="40062">Backup recuperado com sucesso. Reinicie o XBMC!</string>
- 	<string id="40066">O XML foi apagado. Por favor reinicie o XBMC!</string>
+ 	<string id="40060">Xml importado. Por favor reinicie o Kodi!</string>
+ 	<string id="40064">Backup com sucesso. Por favor reinicie o Kodi!</string>
+ 	<string id="40062">Backup recuperado com sucesso. Reinicie o Kodi!</string>
+ 	<string id="40066">O XML foi apagado. Por favor reinicie o Kodi!</string>
  	<string id="600024">Introduza um valor inteiro</string>
  	<string id="600026">Definicao alterada com sucesso</string>
  	<string id="600025">Valor inválido. Apenas valores inteiros!</string>
