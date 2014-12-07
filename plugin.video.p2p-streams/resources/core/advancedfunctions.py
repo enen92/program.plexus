@@ -114,9 +114,9 @@ def advanced_menu():
 	if (not eligible and xbmc.getCondVisibility('system.platform.linux') and settings.getSetting('ace_cmd') == "0") or (not eligible and xbmc.getCondVisibility('system.platform.windows')) or (not eligible and xbmc.getCondVisibility('system.platform.Android') and settings.getSetting('engine_app') == "0") or (settings.getSetting('force_android') == "true" and settings.getSetting('engine_app') == "0"):
 		if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android'):
 			default_acefolder = os.path.join(os.getenv("HOME"),'.ACEStream')
-			default_cachefolder = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
+			default_cachefolder = os.path.join(os.getenv("HOME"),'.ACEStream','cache','.acestream_cache')
 			pickle_repo = 'http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/playerconf.pickle'
-			if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
+			if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder = os.path.join(os.getenv("HOME"),'.ACEStream','cache','.acestream_cache')
 			else: acestream_cachefolder = settings.getSetting('acestream_cachefolder')
 			acestream_settings_file = os.path.join(os.getenv("HOME"),'.ACEStream','playerconf.pickle')
 		elif xbmc.getCondVisibility('system.platform.Android'):
@@ -152,7 +152,7 @@ def advanced_menu():
 			cachefoldersetting = re.compile("'download_dir'\np\d+\n.+?/(.+?)\n").findall(settings_content)
 			if not cachefoldersetting:
 				if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android'):
-					cachefoldersetting = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
+					cachefoldersetting = os.path.join(os.getenv("HOME"),'.ACEStream','cache','.acestream_cache')
 					settings.setSetting('acestream_cachefolder',cachefoldersetting)
 				elif xbmc.getCondVisibility('system.platform.windows'):
 					cachefoldersetting = os.path.join(os.getenv("SystemDrive"),'_acestream_cache_')
@@ -161,7 +161,7 @@ def advanced_menu():
 					cachefoldersetting = os.path.join('/sdcard','.ACEStream','cache')
 					settings.setSetting('acestream_cachefolder',cachefoldersetting)
 			else: 
-				cachefoldersetting = '/' + cachefoldersetting[0].replace("'","")
+				cachefoldersetting = os.path.join('/',cachefoldersetting[0].replace("'",""),'.acestream_cache')
 				settings.setSetting('acestream_cachefolder',cachefoldersetting)
 			if cachefoldersetting: addDir(translate(70013)+"[COLOR orange][ " + cachefoldersetting + " ][/COLOR]",str(cachefoldersetting),309,'p2p',2,False)
 			else: addDir(translate(70013)+"[COLOR orange][" + cachefoldersetting + "][/COLOR]",cachefoldersetting,309,'p2p',2,False)
