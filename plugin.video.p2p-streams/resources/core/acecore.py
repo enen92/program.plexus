@@ -627,9 +627,12 @@ class TSengine():
                 if settings.getSetting('save') != "true":
                     try:
                         cache_file = self.lnk.split('/')[-2]
-                        if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache',cache_file)
-                        else: acestream_cachefolder_file = os.path.join(settings.getSetting('acestream_cachefolder'),cache_file)
-                        xbmcvfs.delete(acestream_cachefolder_file)
+                        if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache','.acestream_cache')
+                        else: acestream_cachefolder_file = os.path.join(settings.getSetting('acestream_cachefolder'),'.acestream_cache')
+                        folder,cachefiles = xbmcvfs.listdir(acestream_cachefolder_file)
+                        for cachefile in cachefiles:
+                            if cache_file in cachefile:
+                                xbmcvfs.delete(os.path.join(acestream_cachefolder_file,cachefile))
                     except: pass
                           
             elif xbmc.getCondVisibility('system.platform.OSX'):
@@ -876,10 +879,14 @@ def stop_aceengine():
                 os.system("kill $(ps aux | grep '[s]tart.py' | awk '{print $2}')")
                 if settings.getSetting('save') != "true":
                     try:
-                        cache_file = self.lnk.split('/')[-2]
-                        if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache',cache_file)
-                        else: acestream_cachefolder_file = os.path.join(settings.getSetting('acestream_cachefolder'),cache_file)
-                        xbmcvfs.delete(acestream_cachefolder_file)
+                        cache_file = xbmc.Player().getPlayingFile().split('/')[-2]
+                        if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache','.acestream_cache')
+                        else: acestream_cachefolder_file = os.path.join(settings.getSetting('acestream_cachefolder'),'.acestream_cache')
+                        folder,cachefiles = xbmcvfs.listdir(acestream_cachefolder_file)
+                        print cachefiles,cache_file
+                        for cachefile in cachefiles:
+                            if cache_file in cachefile:
+                                xbmcvfs.delete(os.path.join(acestream_cachefolder_file,cachefile))
                     except: pass
                           
             elif xbmc.getCondVisibility('system.platform.OSX'):
