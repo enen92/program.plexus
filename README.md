@@ -30,7 +30,7 @@ Installation & configuration
 
 Please install the repository in Kodi (System → settings → addons → install from zip file)
 
-[Repository Download](http://p2p-strm.googlecode.com/svn/addons/repository.p2p-streams.xbmc/repository.p2p-streams.xbmc-1.0.3.zip)
+[Repository Download](http://p2p-strm.googlecode.com/svn/addons/repository.p2p-streams.xbmc/repository.p2p-streams.xbmc-1.0.4.zip)
 
 After, get the addon from the installed repository:
 
