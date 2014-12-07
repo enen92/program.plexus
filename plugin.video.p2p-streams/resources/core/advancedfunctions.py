@@ -26,11 +26,11 @@
 """
     
 import xbmc,xbmcgui,xbmcplugin,xbmcvfs,sys,os,re
-from utils.pluginxbmc import *
-from utils.directoryhandle import addLink,addDir
-from utils.iofile import *
-from utils.webutils import download_tools
-from utils.utilities import getDirectorySize
+from peertopeerutils.pluginxbmc import *
+from peertopeerutils.directoryhandle import addLink,addDir
+from peertopeerutils.iofile import *
+from peertopeerutils.webutils import download_tools
+from peertopeerutils.utilities import getDirectorySize
 
 
 def advanced_menu():

@@ -14,7 +14,7 @@
 """
     
 import xbmc,xbmcgui,xbmcplugin,urllib,xbmcvfs,os,subprocess
-from utils.pluginxbmc import *
+from peertopeerutils.pluginxbmc import *
 from history import *
 
 aceport=62062

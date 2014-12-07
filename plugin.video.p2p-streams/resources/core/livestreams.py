@@ -28,10 +28,10 @@
 
 import urllib,urllib2,re,xbmcplugin,xbmcgui,xbmc,xbmcaddon,HTMLParser,time,datetime,os,xbmcvfs,sys
 from BeautifulSoup import BeautifulStoneSoup, BeautifulSoup, BeautifulSOAP
-from utils.pluginxbmc import *
-from utils.webutils import *
-from utils.directoryhandle import *
-from utils.iofile import *
+from peertopeerutils.pluginxbmc import *
+from peertopeerutils.webutils import *
+from peertopeerutils.directoryhandle import *
+from peertopeerutils.iofile import *
 
 """
 

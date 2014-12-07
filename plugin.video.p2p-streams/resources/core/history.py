@@ -13,9 +13,9 @@
     
 """
 import xbmcvfs,xbmc,os,sys
-from utils.pluginxbmc import *
-from utils.iofile import *
-from utils.directoryhandle import addDir
+from peertopeerutils.pluginxbmc import *
+from peertopeerutils.iofile import *
+from peertopeerutils.directoryhandle import addDir
 
 history_file = os.path.join(pastaperfil,'history.txt')
 

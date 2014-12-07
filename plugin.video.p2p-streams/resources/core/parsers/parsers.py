@@ -20,10 +20,10 @@ import os,sys,xbmc,xbmcgui,xbmcvfs,re,datetime,time,shutil
 base_dir =  os.path.dirname(os.path.realpath(__file__))
 core_dir =  os.path.dirname(os.path.realpath(__file__)).replace('parsers','')
 sys.path.append(core_dir)
-from utils.webutils import *
-from utils.directoryhandle import addDir,addLink
-from utils.pluginxbmc import *
-from utils.iofile import *
+from peertopeerutils.webutils import *
+from peertopeerutils.directoryhandle import addDir,addLink
+from peertopeerutils.pluginxbmc import *
+from peertopeerutils.iofile import *
 
 parser_folder = os.path.join(pastaperfil,'parser')
 parser_core_folder = os.path.join(addonpath,'resources','core','parsers')

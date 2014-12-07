@@ -10,8 +10,8 @@
      
 import xbmc,xbmcgui,xbmcplugin,urllib2,os,sys,subprocess,xbmcvfs,socket,re,requests,shutil
 from thread import start_new_thread
-from utils.pluginxbmc import *
-from utils.utilities import handle_wait
+from peertopeerutils.pluginxbmc import *
+from peertopeerutils.utilities import handle_wait
 from history import add_to_history
 
 """ Sopcast Dependent variables are listed below"""   

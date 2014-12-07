@@ -9,11 +9,11 @@
 """
 
 import xbmc,xbmcaddon,xbmcgui,xbmcplugin,urllib,urllib2,os,re,sys,datetime,time,subprocess,xbmcvfs,socket
-from resources.core.utils.pluginxbmc import *
+from resources.core.peertopeerutils.pluginxbmc import *
 from resources.core import acestream as ace
 from resources.core import sopcast as sop
 from resources.core.autoconf import *
-from resources.core.utils.directoryhandle import addLink,addDir
+from resources.core.peertopeerutils.directoryhandle import addLink,addDir
 from resources.core.favourites import *
 from resources.core.advancedfunctions import *
 from resources.core.livestreams import *

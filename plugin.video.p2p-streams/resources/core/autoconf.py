@@ -16,9 +16,9 @@
      
 import xbmc,xbmcgui,xbmcplugin,xbmcvfs
 import tarfile,os,re,sys,subprocess
-from utils.pluginxbmc import *
-from utils.webutils import download_tools,get_page_source
-from utils.utilities import *
+from peertopeerutils.pluginxbmc import *
+from peertopeerutils.webutils import download_tools,get_page_source
+from peertopeerutils.utilities import *
 
 """ Platform dependent files downloaded during the addon configuration"""
 

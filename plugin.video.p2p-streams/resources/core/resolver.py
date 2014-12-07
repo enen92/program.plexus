@@ -12,7 +12,7 @@
 """
     
 import xbmc,sys
-from utils.pluginxbmc import *
+from peertopeerutils.pluginxbmc import *
 import sopcast as sop
 import acestream as ace
     

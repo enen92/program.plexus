@@ -15,9 +15,9 @@
 """
     
 import xbmc,xbmcgui,xbmcplugin,xbmcvfs,sys,os
-from utils.pluginxbmc import *
-from utils.iofile import *
-from utils.directoryhandle import addDir
+from peertopeerutils.pluginxbmc import *
+from peertopeerutils.iofile import *
+from peertopeerutils.directoryhandle import addDir
 from random import randint
 
 def addon_favourites():

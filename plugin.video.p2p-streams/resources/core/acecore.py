@@ -16,7 +16,7 @@
 """
 
 import httplib,urllib,urllib2,re,sys,subprocess,os,socket,threading,time,random,json,xbmcplugin,xbmcgui,xbmc,xbmcaddon,xbmcvfs
-from utils.pluginxbmc import *
+from peertopeerutils.pluginxbmc import *
 
 """ Fixed variables """
 
