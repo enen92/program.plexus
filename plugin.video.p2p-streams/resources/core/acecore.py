@@ -629,10 +629,10 @@ class TSengine():
                         cache_file = self.lnk.split('/')[-2]
                         if 'arm' not in os.uname()[4]:
                             if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache','.acestream_cache')
-                            else: acestream_cachefolder_file = os.path.join(settings.getSetting('acestream_cachefolder'),'.acestream_cache')
+                            else: acestream_cachefolder_file = settings.getSetting('acestream_cachefolder')
                         else:
                             if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
-                            else: acestream_cachefolder_file = os.path.join(settings.getSetting('acestream_cachefolder'))
+                            else: acestream_cachefolder_file = settings.getSetting('acestream_cachefolder')
                         folder,cachefiles = xbmcvfs.listdir(acestream_cachefolder_file)
                         for cachefile in cachefiles:
                             if cache_file in cachefile:
@@ -886,10 +886,10 @@ def stop_aceengine():
                         cache_file = xbmc.Player().getPlayingFile().split('/')[-2]
                         if 'arm' not in os.uname()[4]:
                             if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache','.acestream_cache')
-                            else: acestream_cachefolder_file = os.path.join(settings.getSetting('acestream_cachefolder'),'.acestream_cache')
+                            else: acestream_cachefolder_file = settings.getSetting('acestream_cachefolder')
                         else:
                             if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
-                            else: acestream_cachefolder_file = os.path.join(settings.getSetting('acestream_cachefolder'))
+                            else: acestream_cachefolder_file = settings.getSetting('acestream_cachefolder')
                         folder,cachefiles = xbmcvfs.listdir(acestream_cachefolder_file)
                         for cachefile in cachefiles:
                             if cache_file in cachefile:
