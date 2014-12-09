@@ -31,9 +31,9 @@ parser_packages_folder = os.path.join(pastaperfil,'parser-packages')
 
 
 def addon_parsers_menu():
-	if settings.getSetting('parser_disclaimer_two') == "true":
+	if settings.getSetting('parser_disclaimer_three') == "true":
 		opcao= xbmcgui.Dialog().yesno(translate(40000),translate(70004),translate(70005),translate(70006))
-		if opcao: settings.setSetting('parser_disclaimer_two',"false") 
+		if opcao: settings.setSetting('parser_disclaimer_three',"false") 
 	dirs,files = xbmcvfs.listdir(base_dir)
 	if not dirs:
 		dirpackages,filespackages = xbmcvfs.listdir(parser_packages_folder)
