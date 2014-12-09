@@ -78,15 +78,15 @@ def addon_parsers_menu():
 				parser_dict[module_name] = [module,thumbnail,fanart]
 	total_parsers = len(parser_dict.keys())
 	if settings.getSetting('parser_sync') == "true":
-		try:t1 = datetime.datetime.strptime(settings.getSetting("parsers_last_sync"), "%Y-%m-%d %H:%M:%S.%f")
-		except:t1 = datetime.datetime.fromtimestamp(time.mktime(time.strptime(settings.getSetting("parsers_last_sync"), "%Y-%m-%d %H:%M:%S.%f")))
+		try:t1 = datetime.datetime.strptime(settings.getSetting("parsers_last_sync_two"), "%Y-%m-%d %H:%M:%S.%f")
+		except:t1 = datetime.datetime.fromtimestamp(time.mktime(time.strptime(settings.getSetting("parsers_last_sync_two"), "%Y-%m-%d %H:%M:%S.%f")))
 		t2 = datetime.datetime.now()
 		hoursList = [10, 15, 20, 24]
 		interval = int(settings.getSetting("parser_sync_cron"))
 		update = abs(t2 - t1) > datetime.timedelta(hours=hoursList[interval])
 		if update:
 			sync_parser()
-			settings.setSetting('parsers_last_sync',value=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f"))
+			settings.setSetting('parsers_last_sync_two',value=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f"))
 		
 	for key in sorted(parser_dict.keys()):
 		addDir(key,MainURL,401,parser_dict[key][1],total_parsers,True,parser=parser_dict[key][0],fan_art=parser_dict[key][2])
@@ -244,7 +244,7 @@ def sync_parser():
 		mensagemprogresso.update(100,"","")
 		mensagemprogresso.close()
 	except: pass
-	settings.setSetting('parsers_last_sync',value=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f"))
+	settings.setSetting('parsers_last_sync_two',value=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f"))
 	return
 	
 def sync_single_parser(parser):
