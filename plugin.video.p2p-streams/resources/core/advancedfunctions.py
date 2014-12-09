@@ -427,5 +427,5 @@ def shutdown_hooks():
 			except: mensagemok(translate(40000),'No permissions.')
 			opcao= xbmcgui.Dialog().yesno(translate(40000), translate(70033) )
 			if opcao:
-				from utils.keymapeditor import *
+				from peertopeerutils.keymapeditor import *
 				run()					
