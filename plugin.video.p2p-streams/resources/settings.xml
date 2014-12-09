@@ -61,6 +61,8 @@
 		<setting id="shutdown-engine" type="bool" label="30015" default="true"/>
 		<setting id="engine-status" type="bool" label="49999" default="true"/>
 		<setting id="ace-debug" type="bool" label="49998" default="false"/>
+		<!-- Android default port -->
+		<setting id="android_port" type="text" label="" visible="False" default="8621"/>
 		<!-- Linux settings to pass to the engine -->
 		<setting id="acestream_cachefolder" type="text" label="" visible="False" default=""/>
 		<setting id="total_max_download_rate" type="text" label="" visible="False" default="0"/>

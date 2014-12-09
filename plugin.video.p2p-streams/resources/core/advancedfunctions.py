@@ -21,6 +21,7 @@
    	set_linux_engine_setting(url) -> change acestreamengine settings from gui for linux/android
    	clear_cache(url) -> Clear the contents of the acestream cache folder
    	shutdown_hooks() -> Function to set a costum shutdown hook to the used skin and costum stop shortcuts
+   	set_android_port() -> Import sessionconfig.pickle for android
    	
 
 """
@@ -68,7 +69,7 @@ def advanced_menu():
 	elif settings.getSetting('openeleci386') == "true": eligible = False
 	elif settings.getSetting('force_android') == "true": eligible = False
 	else: eligible = False
-	if eligible and xbmcvfs.exists(os.path.join(pastaperfil,'acestream','ace','ACEStream','values')):
+	if eligible and os.path.exists(os.path.join(pastaperfil,'acestream','ace','ACEStream','values')):
 		addLink('[COLOR orange]Acestream engine settings:[/COLOR]','',addonpath + art + 'settings_menu.png')
 		acestream_cachefolder = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
 		acestream_cache_size = str(int(getDirectorySize(acestream_cachefolder))/(1024*1024))
@@ -107,7 +108,7 @@ def advanced_menu():
 			maxconnectionsstream = readfile(os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnectionsstream.txt"))
 		except: maxconnectionsstream = "N/A"
 		addDir(translate(600021)+"[COLOR orange][ " + str(int(maxconnectionsstream))+ " ][/COLOR]",os.path.join(pastaperfil,"acestream","ace","ACEStream","values","maxconnectionsstream.txt"),305,'',2,False)
-	elif eligible and not xbmcvfs.exists(os.path.join(pastaperfil,'acestream','ace','ACEStream','values')):
+	elif eligible and not os.path.exists(os.path.join(pastaperfil,'acestream','ace','ACEStream','values')):
 		addLink("[COLOR red][B]"+translate(600027)+"[/COLOR][/B]","",addonpath + art + 'processwarning.png')
 	else:
 		pass
@@ -133,18 +134,23 @@ def advanced_menu():
 			acestream_cachefolder = default_cachefolder
 			acestream_settings_file = os.path.join(os.getenv("APPDATA"),".ACEStream","playerconf.pickle")
 		#workaround to keep settings file in place if they get deleted
-		if not xbmcvfs.exists(default_acefolder): xbmcvfs.mkdir(default_acefolder)
-		if not xbmcvfs.exists(default_cachefolder): xbmcvfs.mkdir(default_cachefolder)
-		if not xbmcvfs.exists(acestream_settings_file):
+		if not os.path.exists(default_acefolder): xbmcvfs.mkdir(default_acefolder)
+		if not os.path.exists(default_cachefolder): xbmcvfs.mkdir(default_cachefolder)
+		if not os.path.exists(acestream_settings_file):
 			local_file = os.path.join(default_acefolder,pickle_repo.split("/")[-1])
 			download_tools().Downloader(pickle_repo,local_file,'',translate(40000))
 			xbmc.sleep(200)
 			if xbmcvfs.exists(acestream_settings_file):
 				settings_text = readfile(acestream_settings_file)
 				save(acestream_settings_file,settings_text.replace('my_cache_folder',default_cachefolder))
-		if xbmcvfs.exists(acestream_settings_file) and xbmcvfs.exists(acestream_cachefolder):
+		if xbmcvfs.exists(acestream_settings_file) and os.path.exists(acestream_cachefolder):
 			addLink('[COLOR orange]Acestream engine settings:[/COLOR]','',addonpath + art + 'settings_menu.png')
 			xbmc.sleep(200)
+			#Change default port for Android
+			if xbmc.getCondVisibility('system.platform.Android'):
+				android_port = settings.getSetting('android_port')
+				addDir(translate(600015) +"[COLOR orange] [ " + android_port + " ][/COLOR]",'p2p',311,'p2p',2,False)
+			#
 			acestream_cache_size = str(int(getDirectorySize(acestream_cachefolder))/(1024*1024))
 			addDir(translate(70003) + '[COLOR orange] [' + acestream_cache_size + ' MB][/COLOR]',acestream_cachefolder,307,'p2p',1,False)
 			settings_content = readfile(acestream_settings_file)
@@ -152,17 +158,25 @@ def advanced_menu():
 			cachefoldersetting = re.compile("'download_dir'\np\d+\n.+?/(.+?)\n").findall(settings_content)
 			if not cachefoldersetting:
 				if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android'):
-					cachefoldersetting = os.path.join(os.getenv("HOME"),'.ACEStream','cache','.acestream_cache')
-					settings.setSetting('acestream_cachefolder',cachefoldersetting)
+					if not 'arm' in os.uname()[4]:
+						cachefoldersetting = os.path.join(os.getenv("HOME"),'.ACEStream','cache','.acestream_cache')
+						settings.setSetting('acestream_cachefolder',cachefoldersetting)
+					else:
+						cachefoldersetting = os.path.join('/sdcard','.ACEStream','cache')
+						settings.setSetting('acestream_cachefolder',cachefoldersetting)
 				elif xbmc.getCondVisibility('system.platform.windows'):
 					cachefoldersetting = os.path.join(os.getenv("SystemDrive"),'_acestream_cache_')
 					settings.setSetting('acestream_cachefolder',cachefoldersetting)
 				else:
 					cachefoldersetting = os.path.join('/sdcard','.ACEStream','cache')
 					settings.setSetting('acestream_cachefolder',cachefoldersetting)
-			else: 
-				cachefoldersetting = os.path.join('/',cachefoldersetting[0].replace("'",""),'.acestream_cache')
-				settings.setSetting('acestream_cachefolder',cachefoldersetting)
+			else:
+				if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android'):
+					if not 'arm' in os.uname()[4]:
+						cachefoldersetting = os.path.join('/',cachefoldersetting[0].replace("'",""),'.acestream_cache')
+						settings.setSetting('acestream_cachefolder',cachefoldersetting)
+				else:
+					cachefoldersetting = cachefoldersetting[0]
 			if cachefoldersetting: addDir(translate(70013)+"[COLOR orange][ " + cachefoldersetting + " ][/COLOR]",str(cachefoldersetting),309,'p2p',2,False)
 			else: addDir(translate(70013)+"[COLOR orange][" + cachefoldersetting + "][/COLOR]",cachefoldersetting,309,'p2p',2,False)
 			livebuffervalue = re.compile("S'live_buffer_time'\np(\d+)\nI(\d+)").findall(settings_content)
@@ -336,6 +350,18 @@ def set_linux_engine_setting(url):
 			mensagemok(translate(40000),translate(600025))
 			sys.exit(0)
 			
+def set_android_port():
+	ports = ['8621','8622','8623']
+	ports_pickle = ['http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/sessconf/8621/sessconfig.pickle','http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/sessconf/8622/sessconfig.pickle','http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/sessconf/8623/sessconfig.pickle']
+	choose=xbmcgui.Dialog().select(translate(600015),ports)
+	if choose > -1:
+		escolha = ports_pickle[choose]
+		session_pickle_android = os.path.join('/sdcard','.ACEStream','session_pickle_android')
+		download_tools().Downloader(escolha,session_pickle_android,'',translate(40000))
+		settings.setSetting('android_port',ports[choose])
+		xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(600026), 1,addonpath+"/icon.png"))
+		xbmc.executebuiltin("Container.Refresh")
+				
 def set_acestream_engine_cache_folder(url):
 	if not xbmc.getCondVisibility('system.platform.windows'):
 		opcao= xbmcgui.Dialog().yesno(translate(40000), translate(70011))
