@@ -658,10 +658,16 @@ class TSengine():
                 except: pass
                 if settings.getSetting('save') != "true":
                     try:
-                        cache_file = self.lnk.split('/')[-2]
-                        if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join('/sdcard','.ACEStream','cache',cache_file)
-                        else: acestream_cachefolder_file = os.path.join(settings.getSetting('acestream_cachefolder'),cache_file)
-                        xbmcvfs.delete(acestream_cachefolder_file)
+                        if settings.getSetting('acestream_cachefolder') != '':
+                            dirs, cache_files = xbmcvfs.listdir(os.path.join(settings.getSetting('acestream_cachefolder'),'.acestream_cache'))
+                            print dirs,cache_files
+                            for cache_file in cache_files:
+                                xbmcvfs.delete(os.path.join(settings.getSetting('acestream_cachefolder'),'.acestream_cache',cache_file))
+                        else:
+                            acestream_cachefolder_file = os.path.join('/sdcard','.ACEStream','cache','.acestream_cache')
+                            dirs, cache_files = xbmcvfs.listdir(acestream_cachefolder_file)
+                            for cache_file in cache_files:
+                                xbmcvfs.delete(os.path.join(acestream_cachefolder_file,cache_file))
                     except: pass
 
             self.active=False
@@ -865,6 +871,7 @@ class TSServ(threading.Thread):
         
         
 def stop_aceengine():
+    print "coiso a fechar a aceengine"
     if xbmc.getCondVisibility('Player.HasMedia'):
         if re.findall('http://(\d+).(\d+).(\d+).(\d+):(\d+)/content/(.+?)/(\d+)\.(\d+)',xbmc.Player().getPlayingFile()):
             if xbmc.getCondVisibility('system.platform.windows'):
@@ -914,10 +921,16 @@ def stop_aceengine():
                 except: pass
                 if settings.getSetting('save') != "true":
                     try:
-                        cache_file = self.lnk.split('/')[-2]
-                        if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join('/sdcard','.ACEStream','cache',cache_file)
-                        else: acestream_cachefolder_file = os.path.join(settings.getSetting('acestream_cachefolder'),cache_file)
-                        xbmcvfs.delete(acestream_cachefolder_file)
+                        if settings.getSetting('acestream_cachefolder') != '':
+                            dirs, cache_files = xbmcvfs.listdir(os.path.join(settings.getSetting('acestream_cachefolder'),'.acestream_cache'))
+                            print dirs,cache_files
+                            for cache_file in cache_files:
+                                xbmcvfs.delete(os.path.join(settings.getSetting('acestream_cachefolder'),'.acestream_cache',cache_file))
+                        else:
+                            acestream_cachefolder_file = os.path.join('/sdcard','.ACEStream','cache','.acestream_cache')
+                            dirs, cache_files = xbmcvfs.listdir(acestream_cachefolder_file)
+                            for cache_file in cache_files:
+                                xbmcvfs.delete(os.path.join(acestream_cachefolder_file,cache_file))
                     except: pass
         xbmc.executebuiltin('PlayerControl(Stop)')       
         
