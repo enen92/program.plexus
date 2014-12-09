@@ -126,7 +126,9 @@ def advanced_menu():
 			default_cachefolder = os.path.join('/sdcard','.ACEStream','.acestream_cache')
 			pickle_repo = 'http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/playerconf.pickle'
 			if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder = os.path.join('/sdcard','.ACEStream','.acestream_cache')
-			else: acestream_cachefolder = settings.getSetting('acestream_cachefolder')
+			else:
+				acestream_cachefolder = os.path.join(settings.getSetting('acestream_cachefolder'),'.acestream_cache')
+				if not os.path.exists(acestream_cachefolder):xbmcvfs.mkdir(acestream_cachefolder)
 			acestream_settings_file = os.path.join('/sdcard','.ACEStream','playerconf.pickle')
 		elif xbmc.getCondVisibility('system.platform.windows'):
 			default_acefolder = os.path.join(os.getenv("APPDATA"),".ACEStream")
@@ -400,6 +402,7 @@ def set_acestream_engine_cache_folder(url):
 		if cachefolder:
 			settings_content = settings_content.replace(url,cachefolder)
 			save(acestream_settings_file, settings_content)
+			settings.setSetting('acestream_cachefolder',cachefolder)
 			xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(600026), 1,addonpath+"/icon.png"))
 			xbmc.executebuiltin("Container.Refresh")
 		
