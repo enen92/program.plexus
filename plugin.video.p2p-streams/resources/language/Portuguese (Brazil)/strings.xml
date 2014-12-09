@@ -219,6 +219,7 @@
 	<string id="70031">Se remover o addon precisará de reverter estas alterações. Caso contrário, a função de stop do xbmc não irá funcionar.</string>
 	<string id="70032">Tem a certeza que deseja continuar?</string>
 	<string id="70033">Deseja mapear um botão no seu telecomando para a função de stop?</string>
+	<string id="70041">Alocação de cache</string>
  		
 	<!-- utils/keymapeditor.py -->
 	<string id="70034">Pressione o botão que deseja atribuir</string>

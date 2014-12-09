@@ -219,6 +219,7 @@
 	<string id="70031">If you uninstall this addon you need to revert those changes otherwise you will break the Kodi default stop function!</string>
 	<string id="70032">Are you sure you want to continue?</string>
 	<string id="70033">Do you want to map a button on your remote to the stop function?</string>
+	<string id="70041">Cache allocation</string>
 	
 	<!-- utils/keymapeditor.py -->
 	<string id="70034">Press the key you want to assign now</string>

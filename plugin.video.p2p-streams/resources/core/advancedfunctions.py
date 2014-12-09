@@ -183,8 +183,8 @@ def advanced_menu():
 			buffer_type = re.compile("S'live_cache_type'\np(\d+)\nS(.*)").findall(settings_content)
 			if xbmc.getCondVisibility('system.platform.Android'):
 				if buffer_type: 
-					if 'memory' in buffer_type[0][1]: addDir('Disk type'+"[COLOR orange][ Memory ][/COLOR]",'p2p',312,'p2p',2,False)
-					elif 'disk' in buffer_type[0][1]: addDir('Disk type'+"[COLOR orange][ Disk ][/COLOR]",'p2p',312,'p2p',2,False)
+					if 'memory' in buffer_type[0][1]: addDir(translate(70041)+"[COLOR orange] [ Memory ][/COLOR]",'p2p',312,'p2p',2,False)
+					elif 'disk' in buffer_type[0][1]: addDir(translate(70041)+"[COLOR orange] [ Disk ][/COLOR]",'p2p',312,'p2p',2,False)
 				else: pass
 			livebuffervalue = re.compile("S'live_buffer_time'\np(\d+)\nI(\d+)").findall(settings_content)
 			if livebuffervalue:	addDir(translate(600017)+"[COLOR orange][ " + livebuffervalue[0][1] + " ][/COLOR]",'live_buffer_time|' + str(livebuffervalue)+'|'+str(len(number_of_settings)),308,'p2p',2,False)
@@ -373,7 +373,7 @@ def set_android_cache_aloc():
 	acestream_settings_file = os.path.join('/sdcard','.ACEStream','playerconf.pickle')
 	settings_content = readfile(acestream_settings_file)
 	types = ['Memory','Disk']
-	choose=xbmcgui.Dialog().select('Cache allocation',types)
+	choose=xbmcgui.Dialog().select(translate(70041),types)
 	if choose > -1:
 		escolha = types[choose]
 		if escolha == 'Memory':
