@@ -146,6 +146,7 @@ elif mode==308: set_linux_engine_setting(url)
 elif mode==309: set_acestream_engine_cache_folder(url)
 elif mode==310: shutdown_hooks()
 elif mode==311: set_android_port()
+elif mode==312: set_android_cache_aloc()
 #from 400-499 Site parsers
 elif mode==400: parsers.addon_parsers_menu()
 elif mode==401:

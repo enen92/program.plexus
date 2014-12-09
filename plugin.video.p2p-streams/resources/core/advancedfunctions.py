@@ -22,6 +22,7 @@
    	clear_cache(url) -> Clear the contents of the acestream cache folder
    	shutdown_hooks() -> Function to set a costum shutdown hook to the used skin and costum stop shortcuts
    	set_android_port() -> Import sessionconfig.pickle for android
+   	set_android_cache_aloc() -> Set android cache allocation for the internal engine
    	
 
 """
@@ -179,6 +180,12 @@ def advanced_menu():
 					cachefoldersetting = cachefoldersetting[0]
 			if cachefoldersetting: addDir(translate(70013)+"[COLOR orange][ " + cachefoldersetting + " ][/COLOR]",str(cachefoldersetting),309,'p2p',2,False)
 			else: addDir(translate(70013)+"[COLOR orange][" + cachefoldersetting + "][/COLOR]",cachefoldersetting,309,'p2p',2,False)
+			buffer_type = re.compile("S'live_cache_type'\np(\d+)\nS(.*)").findall(settings_content)
+			if xbmc.getCondVisibility('system.platform.Android'):
+				if buffer_type: 
+					if 'memory' in buffer_type[0][1]: addDir('Disk type'+"[COLOR orange][ Memory ][/COLOR]",'p2p',312,'p2p',2,False)
+					elif 'disk' in buffer_type[0][1]: addDir('Disk type'+"[COLOR orange][ Disk ][/COLOR]",'p2p',312,'p2p',2,False)
+				else: pass
 			livebuffervalue = re.compile("S'live_buffer_time'\np(\d+)\nI(\d+)").findall(settings_content)
 			if livebuffervalue:	addDir(translate(600017)+"[COLOR orange][ " + livebuffervalue[0][1] + " ][/COLOR]",'live_buffer_time|' + str(livebuffervalue)+'|'+str(len(number_of_settings)),308,'p2p',2,False)
 			else: addDir(translate(600017)+"[COLOR orange][3][/COLOR]",'live_buffer_time|'+str(len(number_of_settings)),308,'p2p',2,False)
@@ -356,11 +363,28 @@ def set_android_port():
 	choose=xbmcgui.Dialog().select(translate(600015),ports)
 	if choose > -1:
 		escolha = ports_pickle[choose]
-		session_pickle_android = os.path.join('/sdcard','.ACEStream','session_pickle_android')
+		session_pickle_android = os.path.join('/sdcard','.ACEStream','sessconfig.pickle')
 		download_tools().Downloader(escolha,session_pickle_android,'',translate(40000))
 		settings.setSetting('android_port',ports[choose])
 		xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(600026), 1,addonpath+"/icon.png"))
 		xbmc.executebuiltin("Container.Refresh")
+		
+def set_android_cache_aloc():
+	acestream_settings_file = os.path.join('/sdcard','.ACEStream','playerconf.pickle')
+	settings_content = readfile(acestream_settings_file)
+	types = ['Memory','Disk']
+	choose=xbmcgui.Dialog().select('Cache allocation',types)
+	if choose > -1:
+		escolha = types[choose]
+		if escolha == 'Memory':
+			settings_content = settings_content.replace("S'disk'","S'memory'")
+		elif escolha == 'Disk':
+			settings_content = settings_content.replace("S'memory'","S'disk'")
+		else:pass
+		save(acestream_settings_file, settings_content)		
+		xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(600026), 1,addonpath+"/icon.png"))
+		xbmc.executebuiltin("Container.Refresh")
+	
 				
 def set_acestream_engine_cache_folder(url):
 	if not xbmc.getCondVisibility('system.platform.windows'):
