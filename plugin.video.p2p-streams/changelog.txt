@@ -1,4 +1,15 @@
 ===== Stable Versions ========
+[B]v1.1.8 (10/12/2014)[/B]
+-Updated android acestreamengine to version 3.0.3
+-Added option to change port for the internal engine (8621,8622,8623 only) for android
+-Added cache allocation option for android (memory vs disk)
+-Fixed stop function in android
+-Fixed auto-conf in android
+-Renamed all utils entries to peertopeerutils to avoid script errors
+-Parser sync & disclaimer bump
+-Xbmc references 2 Kodi
+-Several other bug fixes
+
 [B]v1.1.7 (6/12/2014)[/B]
 -Updated acestreamengine for general linux x64 distros to version 3.0.5
 -Updated acestreamengine for openelec x64 to version 3.0.5

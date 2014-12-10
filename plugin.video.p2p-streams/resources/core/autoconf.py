@@ -731,10 +731,10 @@ def configure_acestream(latest_version):
             		import stat
             		os.chmod(pythonbin, st.st_mode | stat.S_IEXEC)
             		if os.path.exists(orgacestreamenginefolder):
-            			try:
-            				os.system("chmod -R 777 "+orgacestreamenginefolder+"/*")
+					try:
+						os.system("chmod -R 777 "+orgacestreamenginefolder+"/*")
 						os.system("rm -r '"+orgacestreamenginefolder+"'")
-            			except:
+					except: pass
             		try: xbmcvfs.mkdir(os.path.join('/sdcard','org.acestream.engine'))
             		except: pass
 			opcao= xbmcgui.Dialog().yesno(translate(40000), translate(70015),translate(70016))
@@ -788,4 +788,4 @@ def configure_acestream(latest_version):
 			return			
 		else:
 			mensagemok(translate(40000),translate(50017))
-			return	
+			return
