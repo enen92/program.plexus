@@ -438,7 +438,7 @@ def configure_sopcast(latest_version):
 		else:
 			available = False
 		if available == True:		
-			if not xbmcvfs.exists(pastaperfil):
+			if not os.path.exists(pastaperfil):
 				xbmcvfs.mkdir(pastaperfil)		
 			MAC_KIT = os.path.join(addonpath,mac_package.split("/")[-1])
 			download_tools().Downloader(mac_package,MAC_KIT,translate(40025),translate(40000))
@@ -506,7 +506,7 @@ def configure_sopcast(latest_version):
 					mensagemok(translate(40000),translate(50014))
 				else:
 					mensagemok(translate(40000),translate(50013))
-					if xbmcvfs.exists(os.path.join("sdcard","Download")):
+					if os.path.exists(os.path.join("sdcard","Download")):
 						pasta = os.path.join("sdcard","Download")
 						sopfile = os.path.join("sdcard","Download",sopcast_apk.split("/")[-1])
 					else:
@@ -618,14 +618,14 @@ def configure_acestream(latest_version):
 
 	elif xbmc.getCondVisibility('system.platform.windows'):
 		print("Detected OS: Windows")
-		if not xbmcvfs.exists(pastaperfil): xbmcvfs.mkdir(pastaperfil)
+		if not os.path.exists(pastaperfil): xbmcvfs.mkdir(pastaperfil)
           #Ace
 		SPSC_KIT = os.path.join(addonpath,acestream_windows.split("/")[-1])
 		download_tools().Downloader(acestream_windows,SPSC_KIT,translate(40026),translate(40000))
 		import shutil
-		if xbmcvfs.exists(os.path.join(pastaperfil,"acestream")):
+		if os.path.exists(os.path.join(pastaperfil,"acestream")):
 			shutil.rmtree(os.path.join(pastaperfil,"acestream"))
-		if xbmcvfs.exists(os.path.join(pastaperfil,"player")):
+		if os.path.exists(os.path.join(pastaperfil,"player")):
 			shutil.rmtree(os.path.join(pastaperfil,"player"))
 		import tarfile
 		if tarfile.is_tarfile(SPSC_KIT):
@@ -671,7 +671,7 @@ def configure_acestream(latest_version):
 		print("Detected OS: Android")
 		print("Starting Acestream Configuration")
 		#acestream config for android
-		if not xbmcvfs.exists(pastaperfil): xbmcvfs.mkdir(pastaperfil)
+		if not os.path.exists(pastaperfil): xbmcvfs.mkdir(pastaperfil)
 		#Hack to get xbmc app id
 		xbmcfolder=xbmc.translatePath(addonpath).split("/")
 		
@@ -708,12 +708,33 @@ def configure_acestream(latest_version):
 				if not os.path.exists(android_binary_dir): os.makedirs(android_binary_dir)
             		android_acestream_folder = os.path.join(android_binary_dir,"org.acestream.engine")
             		if not os.path.exists(android_acestream_folder): os.makedirs(android_acestream_folder)
+            		else:
+            			#clean install for android - delete old folder
+            			print android_acestream_folder
+            			try:
+            				os.system("chmod -R 777 "+android_acestream_folder+"/*")
+            				os.system("rm -r '"+android_acestream_folder+"'")
+            			except: pass
+            			try: os.makedirs(android_acestream_folder)
+            			except: pass
             		xbmc.sleep(200)
+            		#clean install in android - remove /sdcard/.ACEStream folder if it exists
+            		if os.path.exists(os.path.join('/sdcard','.ACEStream')):
+					try:
+						hidden_ace = os.path.join('/sdcard','.ACEStream')
+						os.system("chmod -R 777 "+hidden_ace+"/*")
+						os.system("rm -r '"+hidden_ace+"'")
+					except: pass
             		recursive_overwrite(orgacestreamenginefolder, android_acestream_folder, ignore=None)
             		pythonbin = os.path.join(android_acestream_folder,"files","python","bin","python")
             		st = os.stat(pythonbin)
             		import stat
             		os.chmod(pythonbin, st.st_mode | stat.S_IEXEC)
+            		if os.path.exists(orgacestreamenginefolder):
+            			try:
+            				os.system("chmod -R 777 "+orgacestreamenginefolder+"/*")
+						os.system("rm -r '"+orgacestreamenginefolder+"'")
+            			except:
             		try: xbmcvfs.mkdir(os.path.join('/sdcard','org.acestream.engine'))
             		except: pass
 			opcao= xbmcgui.Dialog().yesno(translate(40000), translate(70015),translate(70016))
@@ -721,7 +742,7 @@ def configure_acestream(latest_version):
 				settings.setSetting('engine_app','0')
 			else:
 				mensagemok(translate(40000),translate(50018),translate(50019),translate(50020))
-				if xbmcvfs.exists(os.path.join("sdcard","Download")):
+				if os.path.exists(os.path.join("sdcard","Download")):
 					pasta = os.path.join("sdcard","Download")
 					if "arm" in os.uname()[4]: acefile = os.path.join("sdcard","Download",acestreamengine_apk_arm.split("/")[-1])
 					else: acefile = os.path.join("sdcard","Download",acestreamengine_apk_x86.split("/")[-1])
@@ -742,7 +763,7 @@ def configure_acestream(latest_version):
 				settings.setSetting('engine_app','1')
 			opcao= xbmcgui.Dialog().yesno(translate(40000), translate(70017),translate(70018))
 			if opcao:
-				if xbmcvfs.exists(os.path.join("sdcard","Download")):
+				if os.path.exists(os.path.join("sdcard","Download")):
 					pasta = os.path.join("sdcard","Download")
 					if "arm" in os.uname()[4]: acefile = os.path.join("sdcard","Download",android_aceplayer_arm.split("/")[-1])
 					else: os.path.join("sdcard","Download",android_aceplayer_x86.split("/")[-1])
