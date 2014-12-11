@@ -31,7 +31,7 @@
 	</category>
 	<category label="Sopcast">
 		<setting label="30017" type="lsep" />
-		<setting id="external-sopcast" type="enum" values="External Player| XBMC " label="40101" visible="System.Platform.Android" default="1"/>
+		<setting id="external-sopcast" type="enum" values="External Player| Kodi " label="40101" visible="System.Platform.Android" default="1"/>
 		<setting id="android_sopclient" type="text" label="40071" visible="False" default=""/>
 		<setting id="auto_ip" type="bool" label="30003" default="true"/>
 		<setting id="localhost" type="ipaddress" label="30004" enable="eq(-1,false)" visible="!System.Platform.Windows" default="127.0.0.1"/>
@@ -49,7 +49,7 @@
 		<setting id="aceplay_type" type="enum" values="Local|Server remote engine|ValdikSS proxy" label="40152" default="0" enable="True"/>
 		<setting id="ace_cmd" type="enum" values="Default|acestreamengine --client-console|Use my own" label="Acestream CMD" default="0" visible="System.Platform.Linux+!System.Platform.Android" enable="eq(-1,0)"/>
 		<setting id="ace_cmd_alternative" type="text" label="70010" default="" visible="System.Platform.Linux+!System.Platform.Android" enable="eq(-1,2)"/>
-		<setting id="engine_app" type="enum" values="All Addon|External App+XBMCPlayer|Official Ace Player|Torrent Controler Proxy" label="50000" default="0" visible="System.Platform.Android"/>
+		<setting id="engine_app" type="enum" values="All Addon|External App+Kodi Player|Official Ace Player|Torrent Controler Proxy" label="50000" default="0" visible="System.Platform.Android"/>
 		<setting id="ip_addr" type="text" label="30004" default="127.0.0.1" />
 		<setting id="aceporta" type="text" label="40108" default="62062" />
 		<setting id="playerport" type="text" label="40153" default="6878" visible="eq(-6,1)" />
