@@ -21,7 +21,7 @@ SPSC_BINARY = "sp-sc-auth"
 LOCAL_PORT = settings.getSetting('local_port')
 VIDEO_PORT = settings.getSetting('video_port')
 BUFER_SIZE = int(settings.getSetting('buffer_size'))
-if(settings.getSetting('auto_ip')):
+if(settings.getSetting('auto_ip')=='true'):
     LOCAL_IP=xbmc.getIPAddress()
 else: LOCAL_IP=settings.getSetting('localhost')
 VIDEO_STREAM = "http://"+LOCAL_IP+":"+str(VIDEO_PORT)+"/"
