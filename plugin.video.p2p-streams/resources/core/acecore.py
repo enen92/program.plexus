@@ -283,7 +283,7 @@ class TSengine():
                     self.log.out("Not installed")
                     self.progress.update(0,"Acestream engine not installed")
 
-            elif settings.getSetting('openeleci386') == "true":
+            elif settings.getSetting('openeleci386') == "true" or settings.getSetting('openelecx86_64') == "true":
                 try:
                     command = ["sh",os.path.join(pastaperfil,'acestream','start.sh')]
                     if settings.getSetting('total_max_download_rate') != "0":
