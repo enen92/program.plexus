@@ -52,7 +52,7 @@ def xml_lists_menu():
                 else: addDir("[B][COLOR orange]" + file.replace(".txt","") + "[/B][/COLOR]",string,101,addonpath + art + 'xml_lists.png',2,True)
     except: pass
     addDir(translate(40121),MainURL,107,addonpath + art + 'plus-menu.png',2,False)
-    xbmc.executebuiltin("Container.SetViewMode(51)")
+    #xbmc.executebuiltin("Container.SetViewMode(51)")
 
 """
 
@@ -174,7 +174,7 @@ def get_groups(url):
             try:
                 addDir_livestreams_common(group_name,url,102,addonpath + art + 'xml_list_sopcast.png',True)
             except: pass
-        xbmc.executebuiltin("Container.SetViewMode(51)")
+        #xbmc.executebuiltin("Container.SetViewMode(51)")
     except:
         print("Other type of xml list")
         getData(url,"")
