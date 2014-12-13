@@ -1,4 +1,12 @@
 ===== Stable Versions ========
+[B]v1.1.9 (13/12/2014)[/B]
+-Updated Android internal acestreamengine (and external apps) to v3.0.6 (Android L compatible)
+-Updated Linux x64 ace engine to v.3.0.5.1
+-Fixed Openelec x86 ace package to be compatible with OE RC/Kodi
+-Updated Openelec x64 ace package to v.3.0.5.1 and compatibility with OE RC/kodi
+-Removed fixed views in xml lists
+-Fixed a minor bug in one of the sopcast settings (thanks alesnav)
+
 [B]v1.1.8 (10/12/2014)[/B]
 -Updated android acestreamengine to version 3.0.3
 -Added option to change port for the internal engine (8621,8622,8623 only) for android
