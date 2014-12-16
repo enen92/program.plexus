@@ -219,7 +219,7 @@
       <string id="70031">Se disinstalli questo addon è necessario annullare le modifiche effettuate altrimenti la funzione di stop di Kodi non funzionerà!</string>
       <string id="70032">Vuoi continuare?</string>
       <string id="70033">Vuoi configurare un pulsante del telecomando per eseguire la funzione di stop?</string>
-	 <string id="70041">Cache allocation</string>
+      <string id="70041">Allocazione cache</string>
 
       <!-- utils/keymapeditor.py -->
       <string id="70034">Premi ora il pulsante che vuoi configurare</string>
