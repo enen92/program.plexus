@@ -1,4 +1,7 @@
 ===== Stable Versions ========
+[B]v1.2.0 (20/12/2014)[/B]
+-Fixed sopcast-type lists (added a few exceptions)
+
 [B]v1.1.9 (13/12/2014)[/B]
 -Updated Android internal acestreamengine (and external apps) to v3.0.6 (Android L compatible)
 -Updated Linux x64 ace engine to v.3.0.5.1

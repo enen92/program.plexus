@@ -194,8 +194,15 @@ def get_channels(name,url):
             channels = group.findall('.//channel')
             for channel in channels:
                 try:
-                    title = channel.find('.//name').attrib['en'].encode('utf-8')
-                    if not title: title = channel.find('.//name').attrib['cn'].encode('utf-8')
+                    try:
+                        title = channel.find('.//name').attrib['en'].encode('utf-8')
+                    except: title = ''
+                    if not title: 
+                        try: title = channel.find('.//name').attrib['cn'].encode('utf-8')
+                        except: title = ''
+                    if not title:
+                        try: title = channel.find('.//name').text
+                        except: title = ''
                     tipo = channel.find('.//stream_type').text
                     sop_address = channel.find('.//item').text
                     if not tipo: tipo = "N/A"
