@@ -21,12 +21,13 @@
     getRegexParsed(regexs, url) -> parse the regex expression
     list_type(url) -> Checks if the list is xml or m3u
     parse_m3u(url) -> Parses a m3u type list
-
+    parse_json(url) -> Parse a json type list
+    json_get_channels(name,url) -> Parse channels from json group list
 
 
 """
 
-import urllib,urllib2,re,xbmcplugin,xbmcgui,xbmc,xbmcaddon,HTMLParser,time,datetime,os,xbmcvfs,sys
+import urllib,urllib2,re,xbmcplugin,xbmcgui,xbmc,xbmcaddon,HTMLParser,time,datetime,os,xbmcvfs,sys,json
 from BeautifulSoup import BeautifulStoneSoup, BeautifulSoup, BeautifulSOAP
 from peertopeerutils.pluginxbmc import *
 from peertopeerutils.webutils import *
@@ -84,7 +85,7 @@ def addlista():
             search = keyb.getText()
             if search=='': sys.exit(0)
             if "dropbox" in search and not "?dl=1" in search: search = search + '?dl=1'
-            if "xml" not in search.split(".")[-1] and "m3u" not in search.split(".")[-1]: mensagemok(translate(40000),translate(40128)); sys.exit(0)
+            if "xml" not in search.split(".")[-1] and "m3u" not in search.split(".")[-1] and "json" not in search.split(".")[-1]: mensagemok(translate(40000),translate(40128)); sys.exit(0)
             else:
                 try:
                     code = get_page_source(search)
@@ -124,7 +125,41 @@ def list_type(url):
     ltype = url.split('.')[-1]
     if 'xml' in ltype: get_groups(url)
     elif 'm3u' in ltype: parse_m3u(url)
+    elif 'json' in ltype: parse_json_groups(url)
     else: pass
+    
+def parse_json_groups(url):
+    if "http" in url: content = get_page_source(url)
+    else: content = readfile(url)
+    content = json.loads(content)
+    if content:
+        if 'groups' in content.keys():
+            for group in content['groups']:
+                if 'name' in group.keys():
+                    addDir(group['name'],url,110,addonpath + art + 'xml_lists.png',1,True)
+                    
+def json_get_channels(name,url):
+    if "http" in url: content = get_page_source(url)
+    else: content = readfile(url)
+    content = json.loads(content)
+    if content:
+        if 'groups' in content.keys():
+            for group in content['groups']:
+                if 'name' in group.keys():
+                    if group['name'] == name:
+                        if 'channels' in group.keys():
+                            for channel in group['channels']:
+                                stream_name = ''
+                                stream_channel = ''
+                                stream_thumb = ''
+                                if 'name' in channel.keys(): stream_name = channel['name']
+                                if 'address' in channel.keys(): stream_channel = channel['address']
+                                if 'thumbnail' in channel.keys(): stream_thumb = channel['thumbnail']
+                                #check for stream type
+                                if stream_name and stream_channel:
+                                    if 'sop://' in stream_channel: addDir(stream_name,stream_channel,2,stream_thumb,1,False)
+                                    elif 'acestream://' in stream_channel: addDir(stream_name,stream_channel,1,stream_thumb,1,False)
+                                    else: addLink(stream_name,stream_channel,stream_thumb)
 
 def parse_m3u(url):
     if "http" in url: content = get_page_source(url)

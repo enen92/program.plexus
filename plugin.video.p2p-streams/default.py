@@ -128,6 +128,7 @@ elif mode==106: xbmc.executebuiltin(url.replace(';',''))
 elif mode==107: addlista()
 elif mode==108: remove_list(name)
 elif mode==109: get_groups(url)
+elif mode==110: json_get_channels(name,url)
 #from 200-299 Favourites
 elif mode==200: addon_favourites()
 elif mode==201: add_to_addon_favourites(name,url,iconimage)
