@@ -8,7 +8,7 @@
 
 """
 
-import xbmc,xbmcgui,xbmcplugin,urllib2,os,sys,subprocess,xbmcvfs,socket,re,requests,shutil
+import xbmc,xbmcgui,xbmcplugin,urllib2,os,sys,subprocess,xbmcvfs,socket,re,requests,shutil,urllib
 from thread import start_new_thread
 from peertopeerutils.pluginxbmc import *
 from peertopeerutils.utilities import handle_wait
@@ -53,8 +53,10 @@ stop_any_sop_traces(pid) -> Function to make use of all kill sopcast functions t
 
 def sopstreams(name,iconimage,sop,pvr=False):
     if not iconimage: iconimage = os.path.join(addonpath,'resources','art','sopcast_logo.jpg')
-    if "sop://" not in sop: sop = "sop://broker.sopcast.com:3912/" + sop
-    else: pass
+    if 'sop%3A%2F%2F' in sop: sop = urllib.unquote(sop)
+    else:
+        if "sop://" not in sop: sop = "sop://broker.sopcast.com:3912/" + sop
+        else: pass
     print("Starting Player Sop URL: " + str(sop))
     labelname=name
     if settings.getSetting('addon_history') == "true":
@@ -114,6 +116,7 @@ def sopstreams(name,iconimage,sop,pvr=False):
 
             if res == True:
                 print("Server created - waiting x seconds for confirmation")
+                settings.setSetting('last_played_sop',sop)
                 try: sock.close()
                 except: pass
                 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -190,7 +193,13 @@ def sopstreams_builtin(name,iconimage,sop,pvr=False):
             existing_instance = True
         except: existing_instance = False
         if existing_instance == True:
-            option = xbmcgui.Dialog().yesno(translate(40000), translate(70000),translate(70001))
+            if not pvr: option = xbmcgui.Dialog().yesno(translate(40000), translate(70000),translate(70001))
+            else:
+                if settings.getSetting('last_played_sop') == sop: option = True
+                else:
+                    if settings.getSetting('zapping_sopcast') == 'true': option = False
+                    else: option = xbmcgui.Dialog().yesno(translate(40000), translate(70000),translate(70001))          
+
             if not option:
                 if xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
                     xbmc_user = os.getlogin()
@@ -212,7 +221,7 @@ def sopstreams_builtin(name,iconimage,sop,pvr=False):
                     os.system("kill $(ps aux | grep '[s]p-sc-auth')")
             else: pass
         else: pass
-
+        settings.setSetting('last_played_sop',sop)
         #opening the subprocess
         if settings.getSetting('sop_debug_mode') == "false":
             spsc = subprocess.Popen(cmd, shell=False, bufsize=BUFER_SIZE,stdin=None, stdout=None, stderr=None)
@@ -448,6 +457,8 @@ def osx_sopcast_downloader():
         shutil.copyfileobj(response.raw, out_file)
     print("Ended OSX Downloader thread")
     
+    
+#need to improve this    
 def stop_any_sop_traces(pid=None):
     if not xbmc.getCondVisibility('system.platform.windows'):
         try: os.kill(pid,9)

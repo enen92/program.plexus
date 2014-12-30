@@ -80,7 +80,18 @@
 		<setting id="parser_sync_cron" type="enum" label="400006" values="10h|15h|20h|24h" default="3" enable="!eq(-1,false)"/>
 		<setting id="parsers_last_sync_two" type="text" default="1970-01-01 23:59:00.000000" visible="false"/>
 		<setting id="parser_disclaimer_three" type="bool" default="true" visible="False"/>
-
+	</category>
+	<category label="PVR">
+		<setting id="enable_pvr" type="bool" label="Activar serviço" default="false"/>
+		<setting id="proxyport" type="number" label="Porta local do server/proxy" default="9595" enable="!eq(-1,false)"/>
+		<setting id="debug_mode" type="bool" label="Modo de debug" default="false" enable="!eq(-2,false)"/>
+		<setting label="SopCast" type="lsep" />
+     	<setting id="ask_sopcast" type="bool" label="Pedir permissao para matar processo sopcast" default="true" enable="!eq(-4,false)"/>
+     	<setting id="zapping_sopcast" type="bool" label="Matar automaticamente o sopcast ao fazer zapping entre sops" default="true" enable="!eq(-5,false)"/>
+     	<setting id="last_played_sop" type="text" default="" visible="false"/>
+     	<setting label="AceStream" type="lsep" />
+     	<setting id="ace_pvr_type" label="Comportamento on click" type="enum" values="Fullscreen(Player.Open)|Windowed+Fullscreen(Player.Open+Input.Select)" default="0" enable="!eq(-8,false)"/>
+     	
 	</category>
 
 </settings>

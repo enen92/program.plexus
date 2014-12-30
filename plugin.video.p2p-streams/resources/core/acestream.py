@@ -28,7 +28,7 @@ def load_local_torrent():
 			acestreams("Local .torrent ("+str("file://" + torrent_file) +")","",'file://' + torrent_file)
 	else: pass
 
-def acestreams(name,iconimage,chid):
+def acestreams(name,iconimage,chid,pvr=False):
 	if not iconimage: iconimage=os.path.join(addonpath,'resources','art','acelogofull.jpg')
 	else: iconimage = urllib.unquote(iconimage)
 	if settings.getSetting('addon_history') == "true":
@@ -62,7 +62,7 @@ def acestreams(name,iconimage,chid):
 		elif settings.getSetting('engine_app') == '3':
 			xbmc.executebuiltin('XBMC.StartAndroidActivity("ru.vidsoftware.acestreamcontroller.free","android.intent.action.VIEW","","'+chid+'")')
 
-def acestreams_builtin(name,iconimage,chid):
+def acestreams_builtin(name,iconimage,chid,pvr=False):
     if xbmc.getCondVisibility('system.platform.windows'):
         try:
             import _winreg
@@ -81,14 +81,17 @@ def acestreams_builtin(name,iconimage,chid):
     except:
         mensagemok(translate(40000),translate(40037))
         return
-    xbmc.executebuiltin('Action(Stop)')
+    if not pvr: xbmc.executebuiltin('Action(Stop)')
     lock_file = xbmc.translatePath('special://temp/'+ 'ts.lock')
     if xbmcvfs.exists(lock_file):
     	xbmcvfs.delete(lock_file)
     if chid != '':
         chid=chid.replace('acestream://','').replace('ts://','').replace('st://','')
         print("Starting Player Ace hash: " + chid)
-        TSPlayer = tsengine()
+        if name == 'acepvrservice': TSPlayer = tsengine(True)
+        else:
+            if not pvr: TSPlayer = tsengine()
+            else: TSPlayer = tsengine(True)
         out = None
         if chid.find('http://') == -1 and chid.find('.torrent') == -1:
             out = TSPlayer.load_torrent(chid,'PID',port=aceport)
