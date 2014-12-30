@@ -53,7 +53,6 @@ def xml_lists_menu():
                 else: addDir("[B][COLOR orange]" + file.replace(".txt","") + "[/B][/COLOR]",string,101,addonpath + art + 'xml_lists.png',2,True)
     except: pass
     addDir(translate(40121),MainURL,107,addonpath + art + 'plus-menu.png',2,False)
-    #xbmc.executebuiltin("Container.SetViewMode(51)")
 
 """
 
@@ -85,7 +84,7 @@ def addlista():
             search = keyb.getText()
             if search=='': sys.exit(0)
             if "dropbox" in search and not "?dl=1" in search: search = search + '?dl=1'
-            if "xml" not in search.split(".")[-1] and "m3u" not in search.split(".")[-1] and "json" not in search.split(".")[-1]: mensagemok(translate(40000),translate(40128)); sys.exit(0)
+            if "xml" not in search.split(".")[-1] and "m3u" not in search.split(".")[-1] and "json" not in search.split(".")[-1] and 'http://pastebin.com/raw.php' not in search: mensagemok(translate(40000),translate(40128)); sys.exit(0)
             else:
                 try:
                     code = get_page_source(search)
@@ -122,11 +121,20 @@ Parsing functions
 
 """
 def list_type(url):
-    ltype = url.split('.')[-1]
-    if 'xml' in ltype: get_groups(url)
-    elif 'm3u' in ltype: parse_m3u(url)
-    elif 'json' in ltype: parse_json_groups(url)
-    else: pass
+    if not 'pastebin.com/raw.php' in url:
+        ltype = url.split('.')[-1]
+        if 'xml' in ltype: get_groups(url)
+        elif 'm3u' in ltype: parse_m3u(url)
+        elif 'json' in ltype: parse_json_groups(url)
+        else: pass
+    else:
+        if "http" in url: content = get_page_source(url)
+        else: content = readfile(url)
+        if '#EXTM3U' in content: parse_m3u(url)
+        elif '</channel>' in content or '<items>' in content: get_groups(url)
+        elif '"channels":' in content: parse_json_groups(url)
+        else: pass
+         
     
 def parse_json_groups(url):
     if "http" in url: content = get_page_source(url)
