@@ -712,6 +712,19 @@ class TSengine():
             if self.progress:self.progress.close()
             
 
+        if settings.getSetting("kill_type") == "2":
+            os.system(settings.getSetting('custom_kill_ace'))
+            self.active=False
+            self.log.out("Force Killing")
+            try: self._sock.shutdown(socket.SHUT_WR)
+            except: pass
+            if self.tsserv: self.tsserv.active=False
+            if self.tsserv: self.tsserv.join()
+            self.log.out("end thread")
+            self._sock.close()
+            self.log.out("socket closed")
+            if self.progress:self.progress.close()         
+
         
     def __del__(self):
         settings.setSetting('active','0')
@@ -924,63 +937,65 @@ def stop_aceengine():
     if xbmcvfs.exists(clicker_control): xbmcvfs.delete(clicker_control)
     if xbmc.getCondVisibility('Player.HasMedia'):
         if re.findall('http://(\d+).(\d+).(\d+).(\d+):(\d+)/content/(.+?)/(\d+)\.(\d+)',xbmc.Player().getPlayingFile()) or re.findall('pvr:',xbmc.Player().getPlayingFile()):
-            if xbmc.getCondVisibility('system.platform.windows'):
-                subprocess.Popen('taskkill /F /IM ace_engine.exe /T',shell=True)
-                #Need to finish this...
-                #if settings.getSetting('save') != "true": 
-                #    try:
-                #        cache_file = self.lnk.split('/')[-2]
-                #        acestream_cachefolder_file = os.path.join(os.getenv("SystemDrive"),'\_acestream_cache_',cache_file)
-                #        xbmcvfs.delete(acestream_cachefolder_file)
-                #    except: pass
+            if settings.getSetting('kill_type') != '2':
+                if xbmc.getCondVisibility('system.platform.windows'):
+                    subprocess.Popen('taskkill /F /IM ace_engine.exe /T',shell=True)
+                    #Need to finish this...
+                    #if settings.getSetting('save') != "true": 
+                    #    try:
+                    #        cache_file = self.lnk.split('/')[-2]
+                    #        acestream_cachefolder_file = os.path.join(os.getenv("SystemDrive"),'\_acestream_cache_',cache_file)
+                    #        xbmcvfs.delete(acestream_cachefolder_file)
+                    #    except: pass
  
-            if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('System.Platform.Android'):
-                os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $1}')")
-                os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $2}')")
-                os.system("kill $(ps aux | grep '[s]tart.py' | awk '{print $2}')")
-                if settings.getSetting('save') != "true":
-                    try:
-                        cache_file = xbmc.Player().getPlayingFile().split('/')[-2]
-                        if 'arm' not in os.uname()[4]:
-                            if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache','.acestream_cache')
-                            else: acestream_cachefolder_file = settings.getSetting('acestream_cachefolder')
-                        else:
-                            if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
-                            else: acestream_cachefolder_file = settings.getSetting('acestream_cachefolder')
-                        folder,cachefiles = xbmcvfs.listdir(acestream_cachefolder_file)
-                        for cachefile in cachefiles:
-                            if cache_file in cachefile:
-                                xbmcvfs.delete(os.path.join(acestream_cachefolder_file,cachefile))
-                    except: pass
+                if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('System.Platform.Android'):
+                    os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $1}')")
+                    os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $2}')")
+                    os.system("kill $(ps aux | grep '[s]tart.py' | awk '{print $2}')")
+                    if settings.getSetting('save') != "true":
+                        try:
+                            cache_file = xbmc.Player().getPlayingFile().split('/')[-2]
+                            if 'arm' not in os.uname()[4]:
+                                if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache','.acestream_cache')
+                                else: acestream_cachefolder_file = settings.getSetting('acestream_cachefolder')
+                            else:
+                                if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
+                                else: acestream_cachefolder_file = settings.getSetting('acestream_cachefolder')
+                            folder,cachefiles = xbmcvfs.listdir(acestream_cachefolder_file)
+                            for cachefile in cachefiles:
+                                if cache_file in cachefile:
+                                    xbmcvfs.delete(os.path.join(acestream_cachefolder_file,cachefile))
+                        except: pass
                           
-            elif xbmc.getCondVisibility('system.platform.OSX'):
-                try:
-                    kill_cmd = [os.path.join('/Applications','Ace Stream.app','Contents','Resources','Wine.bundle','Contents','Resources','bin','wine'),os.path.join('/Applications','Ace Stream.app','Contents','Resources','wineprefix','drive_c','windows','system','taskkill.exe'),'/f','/im','ace_engine.exe']
-                    kill_proc = subprocess.Popen(kill_cmd,shell=False)
-                except: pass
-                    
-            elif xbmc.getCondVisibility('System.Platform.Android'):
-                try:
-                    procshut_ace = subprocess.Popen(['ps','|','grep','python'],shell=False,stdout=subprocess.PIPE)
-                    for line in procshut_ace.stdout:
-                        match = re.findall(r'\S+', line.rstrip())
-                        if match:
-                            if 'acestream' in match[-1] and len(match)>2:
-                                os.system("kill " + match[1])
-                                xbmc.sleep(200)
-                except: pass
-                if settings.getSetting('save') != "true":
+                elif xbmc.getCondVisibility('system.platform.OSX'):
                     try:
-                        if settings.getSetting('acestream_cachefolder') != '':
-                            dirs, cache_files = xbmcvfs.listdir(os.path.join(settings.getSetting('acestream_cachefolder'),'.acestream_cache'))
-                            for cache_file in cache_files:
-                                xbmcvfs.delete(os.path.join(settings.getSetting('acestream_cachefolder'),'.acestream_cache',cache_file))
-                        else:
-                            acestream_cachefolder_file = os.path.join('/sdcard','.ACEStream','cache','.acestream_cache')
-                            dirs, cache_files = xbmcvfs.listdir(acestream_cachefolder_file)
-                            for cache_file in cache_files:
-                                xbmcvfs.delete(os.path.join(acestream_cachefolder_file,cache_file))
+                        kill_cmd = [os.path.join('/Applications','Ace Stream.app','Contents','Resources','Wine.bundle','Contents','Resources','bin','wine'),os.path.join('/Applications','Ace Stream.app','Contents','Resources','wineprefix','drive_c','windows','system','taskkill.exe'),'/f','/im','ace_engine.exe']
+                        kill_proc = subprocess.Popen(kill_cmd,shell=False)
                     except: pass
+                    
+                elif xbmc.getCondVisibility('System.Platform.Android'):
+                    try:
+                        procshut_ace = subprocess.Popen(['ps','|','grep','python'],shell=False,stdout=subprocess.PIPE)
+                        for line in procshut_ace.stdout:
+                            match = re.findall(r'\S+', line.rstrip())
+                            if match:
+                                if 'acestream' in match[-1] and len(match)>2:
+                                    os.system("kill " + match[1])
+                                    xbmc.sleep(200)
+                    except: pass
+                    if settings.getSetting('save') != "true":
+                        try:
+                            if settings.getSetting('acestream_cachefolder') != '':
+                                dirs, cache_files = xbmcvfs.listdir(os.path.join(settings.getSetting('acestream_cachefolder'),'.acestream_cache'))
+                                for cache_file in cache_files:
+                                    xbmcvfs.delete(os.path.join(settings.getSetting('acestream_cachefolder'),'.acestream_cache',cache_file))
+                            else:
+                                acestream_cachefolder_file = os.path.join('/sdcard','.ACEStream','cache','.acestream_cache')
+                                dirs, cache_files = xbmcvfs.listdir(acestream_cachefolder_file)
+                                for cache_file in cache_files:
+                                    xbmcvfs.delete(os.path.join(acestream_cachefolder_file,cache_file))
+                        except: pass
+            else: os.system(settings.getSetting('custom_kill_ace'))
         xbmc.executebuiltin('PlayerControl(Stop)')       
         
         
