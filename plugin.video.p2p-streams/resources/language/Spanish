@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<strings>
+
+	<string id="40000">P2P-STREAMS</string>
+	
+	<!-- Settings.xml -->
+	
+	<string id="30000">General</string>
+	<string id="30016">[COLOR blue]Configuración general[/COLOR]</string>
+	<string id="30001">Descargar módulos en el arranque</string>
+	<string id="40107">Forzar la detección como sistema Android</string>
+	<string id="40114">- Website-Parsers</string>
+	<string id="600013">Zona horaria</string>
+	<string id="40111">Detectar como plataforma OpenELEC x86_64</string>
+	<string id="40100">Ocultar canales para adultos</string>
+	<string id="1106">Activar la traducción de las categorías en ruso</string>
+	<string id="30017">[COLOR blue]Configuración de SopCast[/COLOR]</string>
+	<string id="40101">Tipo de reproductor</string>
+	<string id="40071">(Android) Ruta del archivo sopclient</string>
+	<string id="30003">Buscar automáticamente la dirección IP</string>
+	<string id="30004">IP de la conexión</string>
+	<string id="30006">Puerto local</string>
+	<string id="30007">Puerto de vídeo</string>
+	<string id="30008">Tamaño de búfer</string>
+	<string id="30005">Retraso del reproductor</string>
+	<string id="30009">Activar la depuración de errores</string>
+	<string id="40198">Máx. tiempo de espera para la creación del servidor</string>
+	<string id="40199">Máx. tiempo de espera para la reproducción del canal</string>
+	<string id="30018">[COLOR blue]Configuración de AceStream[/COLOR]</string>
+	<string id="40152">Tipo de reproductor</string>
+	<string id="40108">Puerto de conexión (motor)</string>
+	<string id="40153">Puerto de conexión (reproductor)</string>
+	<string id="30010">Activar la pausa automática</string>
+	<string id="30011">Ruta/comando aternativo para el motor de AceStream</string>
+	<string id="30012">Guardar los archivos descargados en el disco</string>
+	<string id="30013">Ruta para la descarga...</string>
+	<string id="30015">Terminar el motor de AceStream si el reproductor para</string>
+	<string id="49999">Mostrar el estado del motor de AceStream en pantalla</string>
+	<string id="49998">Activar la depuración de errores</string>
+	<string id="70002">Modo de parada</string>
+	<string id="400000">Listas/Parsers</string>
+	<string id="400001">Listas</string>
+	<string id="40134">Activar la lista oficial de sopcast.org</string>
+	<string id="400002">Parsers</string>
+	<string id="400003">Ejecutar un script en phyton...</string>
+	<string id="400004">Sincronizar parsers</string>
+	<string id="400005">Activar la sincronización automática de parsers</string>
+	<string id="400006">Buscar modificaciones en los parsers cada</string>
+	<string id="70009">Forzar el uso de DVD Player como reproductor en AceStream y SopCast</string>
+	<string id="70010">Comando alternativo</string>
+	<string id="70036">- Historial</string>
+	<string id="70037">Activar el Historial</string>
+	<string id="70038">Número de elementos a guardar</string>
+	<string id="70039">Borrar el historial</string>
+	<string id="70040">Ir a la lista de parsers en el arranque</string>
+	
+	<!-- Default.py -->
+	<string id="40115">- Listas XML</string>
+	<string id="40144">- Favoritos</string>
+	<string id="40004">Cargar hash de AceStream / URL de torrent...</string>
+	<string id="600029">Cargar archivo .torrent local...</string>
+	<string id="40005">Cargar ID de Sopcast...</string>
+	<string id="40006">Cargar URL de SopCast...</string>
+	<string id="40056">¡Sistema operativo incompatible!</string>
+	<string id="40057">[COLOR orange]Menú de opciones avanzadas[/COLOR]</string>
+	<string id="400029">Se ha producido un error</string>
+	    
+	<!-- sopcast.py -->
+	<string id="40196">¡Solo se pueden utilizar reproductores externos en versiones</string>
+	<string id="40197">de XBMC posteriores a la 13.0 (Gotham)!</string>
+	<string id="40180">(Windows) ¡SopCast no se ha configurado!</string>
+	<string id="40181">Activar "Descargar módulos en el arranque" en la configuración del add-on</string>
+	<string id="40182">y reinícielo (¡como administrador!)</string>
+	<string id="40183">SopCast - Comprobando si se ha creado el servidor. Espere...</string>
+	<string id="40184">El servidor se ha creado. Intentanto reproducir...</string>
+	<string id="40040">Falló la iniciación del canal</string>
+	<string id="40039">Cargando canal. Espere hasta 20 segundos.</string>
+	<string id="40187">Esperando hasta que se agote el tiempo...</string>
+	<string id="70000">Una instancia de SopCast sigue ejecutándose en segundo plano</string>
+	<string id="70001">¿Desea volver a ella?</string>
+	
+	<!-- acecore.py -->
+	<string id="40052">Iniciando...</string>
+	<string id="1104">Esperando respuesta</string>
+	<string id="1001">Conectando</string>
+	<string id="40046">Iniciando el motor de AceStream.</string>
+	<string id="40049">Espera inicial:</string>
+	<string id="40050">segundos</string>
+	<string id="1005">Cargando</string>
+	<string id="1004">Enlace establecido</string>
+	<string id="400006">Guardando archivo</string>
+	<string id="1102">Descargando</string>
+	<string id="40043">Cargando...</string>
+	<string id="40051">Cargando hash.</string>
+	<string id="1105">El motor de AceStream está esperando</string>
+	<string id="40055">Cargando torrent.</string>
+	<string id="1011">No se ha obtenido respuesta</string>
+	<string id="1103">Comprobando datos</string>
+	<string id="1100">Previo al almacenamiento en búfer</string>
+	<string id="50010">Descargando flujo</string>
+	<string id="50008">Almacenando en búfer</string>
+	
+	<!-- Overlaytext -->
+	<string id="50000">Motor de AceStream</string>
+	<string id="50005">Estadísticas</string>
+	<string id="50001">Acción:</string>
+	<string id="50002">Descarga:</string>
+	<string id="50003">Subida:</string>
+	<string id="50004">Semillas:</string>
+	<string id="50006">Descargado:</string>
+	<string id="50007">Subido:</string>
+	
+	<!-- acestream.py -->
+	<string id="600028">Seleccione el archivo torrent local.</string>
+	<string id="40154">Iniciando AceStream (modo proxy de ValdikSS)</string>
+	<string id="40155">¡Si falla la reproducción pruebe a aumentar el tiempo</string>
+	<string id="40156">máximo de espera del reproductor!</string>
+	<string id="40037">El módulo AceStream no está instalado.</string>
+	<string id="40038">El archivo torrent no está disponible o no es válido.</string>
+	
+	<!-- autoconf.py -->
+	<string id="400007">No se ha podido detectar su sistema operativo</string>
+	<string id="400008">Selecciónelo de la lista</string>
+	<string id="40025">Descargando los módulos de SopCast.</string>
+	<string id="40026">Descargando los módulos de AceStream.</string>
+	<string id="40109">El add-on para Linux armv7 es experimental.</string>
+	<string id="40110">Seleccione el sistema operativo de la lista siguiente.</string>
+	<string id="40112">Descargando los módulos de SopCast y AceStream.</string>
+	<string id="40113">¿Está utilizando OpenELEC x86_x64?</string>
+	<string id="600023">¿Está utilizando OpenELEC i386?</string>
+	<string id="40027">(Linux) Debe instalar el motor de AceStream manualmente.</string>
+	<string id="40028">Tutorial:</string>
+	<string id="40029">Siga el tutorial y pruebe de nuevo.</string>
+	<string id="40158">Kodi se tiene que ejecutar en sistemas Windows</string>
+	<string id="40159">como administrador para configurar SopCast.</string>
+	<string id="40160">Comprobando si se encuentra instalado SopCast...</string>
+	<string id="40161">¡Terminado!</string>
+	<string id="40162">¡Sopcast no está instalado!</string>
+	<string id="40163">¡Descárguelo de SopCast.org e instálelo!</string>
+	<string id="40164">Obteniendo las ID de los usuarios de Windows...</string>
+	<string id="40165">No ha sido posible obtener la lista de usuarios</string>
+	<string id="40166">Iniciando la descarga de SRVany...</string>
+	<string id="40167">Descargando SRVany...</string>
+	<string id="40168">Creando el servicio "sopcastp2p"...</string>
+	<string id="40169">¡No se ha podido crear el servicio!</string>
+	<string id="40170">Modificando regedit...</string>
+	<string id="40171">Error: no se ha podido modificar regedit.</string>
+	<string id="40172">Tratando de establecer los permisos del servicio...</string>
+	<string id="40173">Error: no se pueden cambiar los permisos.</string>
+	<string id="40174">Intentando establecer los permisos del servicio...</string>
+	<string id="40175">Error: no se han podido cambiar los permisos del servicio.</string>
+	<string id="40176">Iniciando la descarga del archivo de permisos...</string>
+	<string id="40177">Descargando el archivo de permisos (Regini)...</string>
+	<string id="40178">Ejecutando Regini (permisos de regedit)...</string>
+	<string id="40179">Sopcast, ¡todo terminado con éxito!</string>
+	<string id="600014">No se encuentra disponible para la arquitectura Mac</string>
+	<string id="50011">SopCast utiliza por defecto el reproductor de Kodi.</string>
+	<string id="50012">¿Desea utilizar una aplicación externa?</string>
+	<string id="50014">¡Todo terminado para SopCast!</string>
+	<string id="50013">Haga click en OK para descargar SopCast.apk</string>
+	<string id="40190">Seleccione la carpeta en la que descargar los archivos apk</string>
+	<string id="40073">Descargando el archivo Sopcast.apk</string>
+	<string id="50015">El archivo SopCast.apk se ha descargado en la carpeta:</string>
+	<string id="50016">¡Instálelo!</string>
+	<string id="50017">No se ha detectado la appID</string>
+	<string id="50018">Es necesario tener instalado acestreamengine.apk</string>
+	<string id="50019">para que funcione AceStream.</string>
+	<string id="50020">¡Se descargará ahora!</string>
+	<string id="40072">Descargando el archivo AcestreamEngine.apk</string>
+	<string id="50021">El archivo AcestreamEngine.apk se ha descargado en la carpeta:</string>
+	<string id="50022">¡Todo terminado para AceStream!</string>
+	<string id="50023">!No se olvide de que la aplicación AcestreamEngine</string>
+	<string id="50024">debe estar en ejecución antes de iniciar</string>
+	<string id="50025">cualquier carga de Acestream!</string>
+	<string id="70014">Descargando la versión para Android del motor de AceStream</string>
+	<string id="70015">P2P-Streams utilizará por defecto su propio motor de AceStream</string>
+	<string id="70016">¿Desea descargar y utilizar en su lugar la aplicación externa oficial?</string>
+	<string id="70017">¿Desea descargar Ace Player?</string>
+	<string id="70018">De esta forma podrá utilizar la opción reproductor externo.</string>
+	<string id="70019">Descargando Ace Player</string>
+	<string id="70020">El archivo AcePlayer.apk se ha descargado en la carpeta:</string>
+	<string id="70021">¿Desea utilizar el reproductor externo como reproductor por defecto?</string>
+	
+	
+	<!-- advancedfunctions.py -->
+	<string id="40068">Borrar el archivo ts.lock</string>
+	<string id="40058">Importar el archivo advancedsettings.xml recomendado</string>
+	<string id="40063">Hacer copia de seguridad del archivo advancedsettings.xml</string>
+	<string id="40065">Borrar el archivo advancedsettings.xml</string>
+	<string id="40061">Restaurar la copia de seguridad del archivo advancedsettings.xml</string>
+	<string id="40067">Valor actual de "cachemembuffersize"      [</string>
+	<string id="600015">Puerto</string>
+	<string id="600016">Duración del almacenamiento para vídeo bajo demanda ([I]VOD buffer[/I]) (s)</string>
+	<string id="600017">Duración del almacenamiento para vídeo en vivo ([I]Live buffer[/I]) (s)</string>
+	<string id="600018">Máxima velocidad de descarga (Kb/s) (0=sin límite)</string>
+	<string id="600019">Máxima Velocidad de subida (Kb/s) (0=sin límite)</string>
+	<string id="600020">Número máximo de conexiones (0=sin límite)</string>
+	<string id="600021">Número máximo de conexiones por canal (0=sin límites)</string>
+	<string id="70003">Borrar la caché del motor</string>
+	<string id="600027">Vuelva a configurar para obtener los nuevos módulos</string>
+	<string id="40185">Seleccione uno de los ajustes</string>
+	<string id="40059">Se ha descargado el archivo advancedsettings.xml</string>
+	<string id="40060">Se ha importado el archivo xml. ¡Reinicie kodi!</string>
+	<string id="40064">La copia de seguridad se ha realizado correctamente. ¡Reinicie kodi!</string>
+	<string id="40062">La copia de seguridad se ha restaurado correctamente. ¡Reinicie kodi!</string>
+	<string id="40066">Se ha borrado la lista XML. ¡Reinicie kodi!</string>
+	<string id="600024">Introduzca un número entero</string>
+	<string id="600026">El ajuste se ha cambiado correctamente</string>
+	<string id="600025">El valor no es válido. !Solo se permiten números enteros!</string>
+	<string id="40069">ts.lock se ha borrado correctamente</string>
+	<string id="70011">¿Desea cambiar la carpeta de la caché de AceStream?</string>
+	<string id="70012">Seleccione una nueva carpeta para la caché de AceStream</string>
+	<string id="70013">Ruta de la carpeta de la caché</string>
+	<string id="70025">Función para forzar la parada de P2P-Streams:</string>
+	<string id="70026">Aplicar la función de parada personalizada</string>
+	<string id="70027">¿Desea sustituir el boton de parada del skin por la función de parada personalizada?</string>
+	<string id="70028">Skin actual:</string>
+	<string id="70029">Esto se aplicará solamente a la skin actual</string>
+	<string id="70030">Si se actualiza quizá necesite repetir este procedimiento</string>
+	<string id="70031">¡Si desinstala el add-on precisará revertir estos cambios, en caso contrario la funcion de parada de Kodi no funcionará!</string>
+	<string id="70032">¿Está seguro de querer continuar?</string>
+	<string id="70033">¿Desea asignar a un botón de su mando a distancia la función de parada?</string>
+	<string id="70041">Asignación de la caché</string>
+	
+	<!-- utils/keymapeditor.py -->
+	<string id="70034">Pulse el botón al que desea asignar</string>
+	<string id="70035">Se termina el tiempo en %.0f segundos...</string>
+	
+	
+	<!-- livestreams.py -->
+	<string id="40116">[B][COLOR orange]Lista de Sopcast.org[/COLOR][/B] (http://sopcast.org/chlist.xml)</string>
+	<string id="40121">[B]+ Añadir otra lista[/B]</string>
+	<string id="40123">Seleccione un tipo de lista:</string>
+	<string id="40124">Remota</string>
+	<string id="40125">Local</string>
+	<string id="40186">Seleccione su lista XML:</string>
+	<string id="40130">Ponga nombre a la lista.</string>
+	<string id="40129">La lista se ha añadido correctamente</string>
+	<string id="40127">Introduzca la URL de la lista</string>
+	<string id="40128">La URL no es válida</string>
+	<string id="40150">¡La lista se ha borrado correctamente!</string>
+	
+	<!-- favourites.py -->
+	<string id="40145">¡No tiene canales favoritos!</string>
+	<string id="40148">Se ha añadido a Favoritos correctamente</string>
+	<string id="40147">Se ha borrado de Favoritos correctamente</string>
+	<string id="70022">Añadir manualmente a Favoritos</string>
+	<string id="70023">Introduzca una URL de AceStream o SopCast</string>
+	<string id="70024">Introduzca un nombre para el canal</string>
+	
+	<!-- directoryhandle.py -->
+	<string id="40143">Añadir a Favoritos</string>
+	<string id="40146">Borrar de Favoritos</string>
+	<string id="40149">Borrar lista</string>
+	<string id="400009">Borrar parser</string>
+	<string id="400010">Sincronizar parser</string>
+	
+	<!-- utilities.py -->
+	<string id="40188">Quedan:</string>
+	<string id="40189">segundos</string>
+	
+	<!-- webutils.py -->	
+	<string id="40044">Extrayendo el contenido de los módulos. Espere.</string>
+	<string id="40045">Borrando archivos.</string>
+	<string id="40122">No fue posible obtener el archivo .xml</string>
+	
+	<!-- resolver.py -->
+	<string id="40033">Introduzca una ID</string>
+	<string id="40034">Introduzca una URL</string>
+	<string id="40035">Direct ID</string>
+	<string id="40036">Direct URL</string>
+	
+	<!-- parser.py -->	
+	<string id="400011">[B]Añadir un plugin de Website-Parser[/B]</string>
+	<string id="400012">¿Ruta del plugin?</string>
+	<string id="400013">Seleccione el paquete (.tar.gz)</string>
+	<string id="400014">El parser se ha instalado correctamente</string>
+	<string id="400015">Se ha producido un error durante la instalación del parser</string>
+	<string id="400016">Introduzca la URL del plugin</string>
+	<string id="400017">No es válido. Es necesaria la extensión .tar.gz</string>
+	<string id="400018">Descargando parser</string>
+	<string id="400019">El parser se ha borrado correctamente</string>
+	<string id="400020">Sincronizando parsers</string>
+	<string id="400021">Comprobando...</string>
+	<string id="400022">¡Actualizado!</string>
+	<string id="400023">Ya estaba actualizado.</string>
+	<string id="400024">Error: la URL del repositorio del parser no es válida</string>
+	<string id="400025">Actualizando...</string>
+	<string id="400026">¡El parser se ha actualizado correctamente!</string>
+	<string id="400027">Descargando el script...</string>
+	<string id="400028">El script se ha ejecutado correctamente</string>
+	<string id="70004">Cualquiera de los plugins que se puedan encontrar aquí son de terceros.</string>
+	<string id="70005">Ni forman parte de este add-on ni son mantenidos por sus desarrolladores.</string>
+	<string id="70006">No pida ni espere ningún tipo de ayuda acerca de ellos.</string>
+	<string id="70007">Se han borrado todos los rastros de parsers.</string>
+	<string id="70008">Borrar todos los rastros de parsers</string>
+	
+	
+	<!-- Misc -->	
+	<string id="40009">*En vivo*</string>
+	<string id="40010">Fútbol americano</string>
+	<string id="40011">Fútbol</string>
+	<string id="40012">Baloncesto</string>
+	<string id="40013">Hockey sobre hielo</string>
+	<string id="40014">Béisbol</string>
+	<string id="40015">Tenis</string>
+	<string id="40016">Deportes de motor</string>
+	<string id="40017">Rugby</string>
+	<string id="40018">Golf</string>
+	<string id="40019">Cricket</string>
+	<string id="40020">Ciclismo</string>
+	<string id="40021">Otros</string>
+	<string id="40022">No se han encontrado los enlaces Acestream o Sopcast.</string>
+	<string id="40023">Lista de canales</string>
+	<string id="40024">No se ha encontrado.</string>
+	<string id="40077">Inglés</string>
+	<string id="40078">Deportes</string>
+	<string id="40079">Informativos</string>
+	<string id="40080">Bodas</string>
+	<string id="40081">Genéricos</string>
+	<string id="40082">Educativos</string>
+	<string id="40083">CIS</string>
+	<string id="40084">Hombres</string>
+	<string id="40085">Televenta</string>
+	<string id="40086">Reservado</string>
+	<string id="40087">Donetsk</string>
+	<string id="40088">Regionales</string>
+	<string id="40089">Adultos</string>
+	<string id="40090">Sec.21 TV</string>
+	<string id="40091">Canales ucranianos</string>
+	<string id="40092">Infantiles</string>
+	<string id="40093">Películas</string>
+	<string id="40094">Nocturnos</string>
+	<string id="40095">Europa</string>
+	<string id="40096">Ukr</string>
+	<string id="40097">Musicales</string>
+	<string id="40098">Religión</string>
+	<string id="40099">Fiesta</string>
+	<string id="40151">Ucrania</string>
+	<string id="60000">Enero</string>
+	<string id="60001">Febrero</string>
+	<string id="60002">Marzo</string>
+	<string id="60003">Abril</string>
+	<string id="60004">Mayo</string>
+	<string id="60005">Junio</string>
+	<string id="60006">Julio</string>
+	<string id="60007">Agosto</string>
+	<string id="60008">Septiembre</string>
+	<string id="60009">Octubre</string>
+	<string id="600010">Noviembre</string>
+	<string id="600011">Diciembre</string>
+	<string id="600012">Fecha:</string>
+	
+</strings>
