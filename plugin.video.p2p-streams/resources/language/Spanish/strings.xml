@@ -31,7 +31,7 @@
 	<string id="40108">Puerto de conexión (motor)</string>
 	<string id="40153">Puerto de conexión (reproductor)</string>
 	<string id="30010">Activar la pausa automática</string>
-	<string id="30011">Ruta/comando aternativo para el motor de AceStream</string>
+	<string id="30011">Ruta/comando alternativo para el motor de AceStream</string>
 	<string id="30012">Guardar los archivos descargados en el disco</string>
 	<string id="30013">Ruta para la descarga...</string>
 	<string id="30015">Terminar el motor de AceStream si para el reproductor</string>
@@ -59,7 +59,7 @@
 	<string id="40144">- Favoritos</string>
 	<string id="40004">Cargar hash de AceStream / URL de torrent...</string>
 	<string id="600029">Cargar archivo torrent local...</string>
-	<string id="40005">Cargar ID de Sopcast...</string>
+	<string id="40005">Cargar ID de SopCast...</string>
 	<string id="40006">Cargar URL de SopCast...</string>
 	<string id="40056">¡Sistema operativo incompatible!</string>
 	<string id="40057">[COLOR orange]Menú de opciones avanzadas[/COLOR]</string>
@@ -70,9 +70,9 @@
 	<string id="40197">de XBMC posteriores a la 13.0 (Gotham)!</string>
 	<string id="40180">(Windows) ¡SopCast no se ha configurado!</string>
 	<string id="40181">Activar "Descargar módulos en el arranque" en la configuración del add-on</string>
-	<string id="40182">y reinícielo (¡como administrador!)</string>
+	<string id="40182">y reinícielo (¡cómo administrador!)</string>
 	<string id="40183">SopCast - Comprobando si se ha creado el servidor. Espere...</string>
-	<string id="40184">El servidor se ha creado. Intentanto reproducir...</string>
+	<string id="40184">El servidor se ha creado. Intentando reproducir...</string>
 	<string id="40040">Falló la iniciación del canal</string>
 	<string id="40039">Cargando canal. Espere hasta 20 segundos.</string>
 	<string id="40187">Esperando hasta que se agote el tiempo...</string>
@@ -135,7 +135,7 @@
 	<string id="40159">como administrador para configurar SopCast</string>
 	<string id="40160">Comprobando si se encuentra instalado SopCast...</string>
 	<string id="40161">¡Listo!</string>
-	<string id="40162">¡Sopcast no está instalado!</string>
+	<string id="40162">¡SopCast no está instalado!</string>
 	<string id="40163">¡Descárguelo de SopCast.org e instálelo!</string>
 	<string id="40164">Obteniendo las ID de los usuarios de Windows...</string>
 	<string id="40165">No ha sido posible obtener la lista de usuarios</string>
@@ -157,7 +157,7 @@
 	<string id="50011">SopCast utiliza por defecto el reproductor de Kodi.</string>
 	<string id="50012">¿Desea utilizar una aplicación externa?</string>
 	<string id="50014">¡Todo listo para SopCast!</string>
-	<string id="50013">Haga click en OK para descargar SopCast.apk</string>
+	<string id="50013">Haga clic en OK para descargar SopCast.apk</string>
 	<string id="40190">Seleccione la carpeta en la que desea descargar los archivos apk</string>
 	<string id="40073">Descargando el archivo SopCast.apk</string>
 	<string id="50015">El archivo SopCast.apk se ha descargado en la carpeta:</string>
@@ -213,7 +213,7 @@
 	<string id="70013">Ruta de la carpeta de la caché</string>
 	<string id="70025">Función para forzar la parada de P2P-Streams:</string>
 	<string id="70026">Aplicar la función de parada personalizada</string>
-	<string id="70027">¿Desea sustituir el boton de parada del skin por la función de parada personalizada?</string>
+	<string id="70027">¿Desea sustituir el botón de parada del skin por la función de parada personalizada?</string>
 	<string id="70028">Skin actual:</string>
 	<string id="70029">Esto se aplicará solamente a la skin actual</string>
 	<string id="70030">Si se actualiza quizá necesite repetir este procedimiento</string>
