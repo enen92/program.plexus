@@ -42,7 +42,7 @@
 	<string id="400001">Listas</string>
 	<string id="40134">Activar la lista oficial de sopcast.org</string>
 	<string id="400002">Parsers</string>
-	<string id="400003">Ejecutar un script en phyton...</string>
+	<string id="400003">Ejecutar script en phyton...</string>
 	<string id="400004">Sincronizar parsers</string>
 	<string id="400005">Activar la sincronización automática de parsers</string>
 	<string id="400006">Buscar modificaciones en los parsers cada</string>
@@ -271,7 +271,7 @@
 	<string id="40036">Direct URL</string>
 	
 	<!-- parser.py -->	
-	<string id="400011">[B]Añadir un plugin de Website-Parser[/B]</string>
+	<string id="400011">[B]Añadir plugin de Website-Parser[/B]</string>
 	<string id="400012">¿Ruta del plugin?</string>
 	<string id="400013">Seleccione el paquete (.tar.gz)</string>
 	<string id="400014">El parser se ha instalado correctamente</string>
