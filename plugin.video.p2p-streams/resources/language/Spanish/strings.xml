@@ -113,7 +113,7 @@
 	<!-- acestream.py -->
 	<string id="600028">Seleccione el archivo torrent local</string>
 	<string id="40154">Iniciando AceStream (modo proxy de ValdikSS)</string>
-	<string id="40155">¡Si falla la reproducción pruebe a aumentar el tiempo</string>
+	<string id="40155">¡Si falla la reproducción, pruebe a aumentar el tiempo</string>
 	<string id="40156">máximo de espera del reproductor!</string>
 	<string id="40037">El módulo AceStream no está instalado</string>
 	<string id="40038">El archivo torrent no está disponible o no es válido</string>
@@ -159,7 +159,7 @@
 	<string id="50014">¡Todo listo para SopCast!</string>
 	<string id="50013">Haga click en OK para descargar SopCast.apk</string>
 	<string id="40190">Seleccione la carpeta en la que descargar los archivos apk</string>
-	<string id="40073">Descargando el archivo Sopcast.apk</string>
+	<string id="40073">Descargando el archivo SopCast.apk</string>
 	<string id="50015">El archivo SopCast.apk se ha descargado en la carpeta:</string>
 	<string id="50016">¡Instálelo!</string>
 	<string id="50017">No se ha detectado la appID</string>
@@ -228,7 +228,7 @@
 	
 	
 	<!-- livestreams.py -->
-	<string id="40116">[B][COLOR orange]Lista de Sopcast.org[/COLOR][/B] (http://sopcast.org/chlist.xml)</string>
+	<string id="40116">[B][COLOR orange]Lista de SopCast.org[/COLOR][/B] (http://sopcast.org/chlist.xml)</string>
 	<string id="40121">[B]+ Añadir otra lista[/B]</string>
 	<string id="40123">Seleccione un tipo de lista:</string>
 	<string id="40124">Remota</string>
