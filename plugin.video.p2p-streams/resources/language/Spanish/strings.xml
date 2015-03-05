@@ -34,7 +34,7 @@
 	<string id="30011">Ruta/comando aternativo para el motor de AceStream</string>
 	<string id="30012">Guardar los archivos descargados en el disco</string>
 	<string id="30013">Ruta para la descarga...</string>
-	<string id="30015">Terminar el motor de AceStream si el reproductor para</string>
+	<string id="30015">Terminar el motor de AceStream si para el reproductor</string>
 	<string id="49999">Mostrar el estado del motor de AceStream en pantalla</string>
 	<string id="49998">Activar la depuración de errores</string>
 	<string id="70002">Modo de parada</string>
@@ -45,7 +45,7 @@
 	<string id="400003">Ejecutar script en phyton...</string>
 	<string id="400004">Sincronizar parsers</string>
 	<string id="400005">Activar la sincronización automática de parsers</string>
-	<string id="400006">Buscar modificaciones en los parsers cada</string>
+	<string id="400006">Intervalo entre sincronizaciones automáticas</string>
 	<string id="70009">Forzar el uso de DVD Player como reproductor en AceStream y SopCast</string>
 	<string id="70010">Comando alternativo</string>
 	<string id="70036">- Historial</string>
@@ -134,7 +134,7 @@
 	<string id="40158">Kodi se tiene que ejecutar en sistemas Windows</string>
 	<string id="40159">como administrador para configurar SopCast</string>
 	<string id="40160">Comprobando si se encuentra instalado SopCast...</string>
-	<string id="40161">¡Terminado!</string>
+	<string id="40161">¡Listo!</string>
 	<string id="40162">¡Sopcast no está instalado!</string>
 	<string id="40163">¡Descárguelo de SopCast.org e instálelo!</string>
 	<string id="40164">Obteniendo las ID de los usuarios de Windows...</string>
@@ -152,11 +152,11 @@
 	<string id="40176">Iniciando la descarga del archivo de permisos...</string>
 	<string id="40177">Descargando el archivo de permisos (Regini)...</string>
 	<string id="40178">Ejecutando Regini (permisos de regedit)...</string>
-	<string id="40179">Sopcast, ¡todo terminado con éxito!</string>
+	<string id="40179">Sopcast, ¡todo completado con éxito!</string>
 	<string id="600014">No se encuentra disponible para la arquitectura Mac</string>
 	<string id="50011">SopCast utiliza por defecto el reproductor de Kodi.</string>
 	<string id="50012">¿Desea utilizar una aplicación externa?</string>
-	<string id="50014">¡Todo terminado para SopCast!</string>
+	<string id="50014">¡Todo listo para SopCast!</string>
 	<string id="50013">Haga click en OK para descargar SopCast.apk</string>
 	<string id="40190">Seleccione la carpeta en la que descargar los archivos apk</string>
 	<string id="40073">Descargando el archivo Sopcast.apk</string>
@@ -168,7 +168,7 @@
 	<string id="50020">¡Se descargará ahora!</string>
 	<string id="40072">Descargando el archivo AcestreamEngine.apk</string>
 	<string id="50021">El archivo AcestreamEngine.apk se ha descargado en la carpeta:</string>
-	<string id="50022">¡Todo terminado para AceStream!</string>
+	<string id="50022">¡Todo listo para AceStream!</string>
 	<string id="50023">!No se olvide de que la aplicación AcestreamEngine</string>
 	<string id="50024">debe estar en ejecución antes de iniciar</string>
 	<string id="50025">cualquier carga de Acestream!</string>
