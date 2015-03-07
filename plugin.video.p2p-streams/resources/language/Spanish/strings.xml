@@ -34,13 +34,13 @@
 	<string id="30011">Ruta/comando alternativo para el motor de AceStream</string>
 	<string id="30012">Guardar los archivos descargados en el disco</string>
 	<string id="30013">Ruta para la descarga...</string>
-	<string id="30015">Terminar el motor de AceStream si para el reproductor</string>
+	<string id="30015">Cerrar el motor de AceStream si cesa el flujo</string>
 	<string id="49999">Mostrar el estado del motor de AceStream en pantalla</string>
 	<string id="49998">Activar la depuración de errores</string>
 	<string id="70002">Modo de parada</string>
 	<string id="400000">Listas/Parsers</string>
 	<string id="400001">Listas</string>
-	<string id="40134">Activar la lista oficial de sopcast.org</string>
+	<string id="40134">Activar la lista oficial de SopCast.org</string>
 	<string id="400002">Parsers</string>
 	<string id="400003">Ejecutar script en phyton...</string>
 	<string id="400004">Sincronizar parsers</string>
@@ -61,7 +61,7 @@
 	<string id="600029">Cargar archivo torrent local...</string>
 	<string id="40005">Cargar ID de SopCast...</string>
 	<string id="40006">Cargar URL de SopCast...</string>
-	<string id="40056">¡Sistema operativo incompatible!</string>
+	<string id="40056">¡No disponible para su sistema operativo!</string>
 	<string id="40057">[COLOR orange]Menú de opciones avanzadas[/COLOR]</string>
 	<string id="400029">Se ha producido un error</string>
 	    
@@ -72,12 +72,12 @@
 	<string id="40181">Activar "Descargar módulos en el arranque" en la configuración del add-on</string>
 	<string id="40182">y reinícielo (¡cómo administrador!)</string>
 	<string id="40183">SopCast - Comprobando si se ha creado el servidor. Espere...</string>
-	<string id="40184">El servidor se ha creado. Intentando reproducir...</string>
+	<string id="40184">El servidor se ha creado. Intentando cargar...</string>
 	<string id="40040">Falló la iniciación del canal</string>
 	<string id="40039">Cargando canal. Espere hasta 20 segundos.</string>
 	<string id="40187">Esperando hasta que se agote el tiempo...</string>
 	<string id="70000">Una instancia de SopCast sigue ejecutándose en segundo plano</string>
-	<string id="70001">¿Desea volver a ella?</string>
+	<string id="70001">¿Desea que siga?</string>
 	
 	<!-- acecore.py -->
 	<string id="40052">Iniciando...</string>
@@ -96,7 +96,7 @@
 	<string id="40055">Cargando torrent</string>
 	<string id="1011">No se ha obtenido respuesta</string>
 	<string id="1103">Comprobando datos</string>
-	<string id="1100">Previo al almacenamiento en búfer</string>
+	<string id="1100">Prealmacenamiento en búfer</string>
 	<string id="50010">Descargando flujo</string>
 	<string id="50008">Almacenando en búfer</string>
 	
@@ -128,12 +128,12 @@
 	<string id="40112">Descargando los módulos de SopCast y AceStream</string>
 	<string id="40113">¿Está utilizando OpenELEC x86_x64?</string>
 	<string id="600023">¿Está utilizando OpenELEC i386?</string>
-	<string id="40027">(Linux) Debe instalar el motor de AceStream manualmente</string>
+	<string id="40027">(Linux) Necesita instalar el motor de AceStream manualmente</string>
 	<string id="40028">Tutorial:</string>
 	<string id="40029">Siga el tutorial y pruebe de nuevo</string>
 	<string id="40158">Kodi se tiene que ejecutar en sistemas Windows</string>
 	<string id="40159">como administrador para configurar SopCast</string>
-	<string id="40160">Comprobando si se encuentra instalado SopCast...</string>
+	<string id="40160">Comprobando si SopCast se encuentra instalado...</string>
 	<string id="40161">¡Listo!</string>
 	<string id="40162">¡SopCast no está instalado!</string>
 	<string id="40163">¡Descárguelo de SopCast.org e instálelo!</string>
@@ -146,13 +146,13 @@
 	<string id="40170">Modificando regedit...</string>
 	<string id="40171">Error: no se ha podido modificar regedit</string>
 	<string id="40172">Tratando de establecer los permisos del servicio...</string>
-	<string id="40173">Error: no se pueden cambiar los permisos</string>
+	<string id="40173">Error: no se han podido cambiar los permisos</string>
 	<string id="40174">Intentando establecer los permisos del servicio...</string>
 	<string id="40175">Error: no se han podido cambiar los permisos del servicio</string>
 	<string id="40176">Iniciando la descarga del archivo de permisos...</string>
 	<string id="40177">Descargando el archivo de permisos (Regini)...</string>
 	<string id="40178">Ejecutando Regini (permisos de regedit)...</string>
-	<string id="40179">Sopcast, ¡todo completado correctamente!</string>
+	<string id="40179">SopCast, ¡todo se realizó correctamente!</string>
 	<string id="600014">No se encuentra disponible para la arquitectura Mac</string>
 	<string id="50011">SopCast utiliza por defecto el reproductor de Kodi.</string>
 	<string id="50012">¿Desea utilizar una aplicación externa?</string>
@@ -168,10 +168,10 @@
 	<string id="50020">¡Se descargará ahora!</string>
 	<string id="40072">Descargando el archivo AceStreamEngine.apk</string>
 	<string id="50021">El archivo AceStreamEngine.apk se ha descargado en la carpeta:</string>
-	<string id="50022">¡Todo listo para AceStream!</string>
-	<string id="50023">!No se olvide de que la aplicación AceStreamEngine</string>
+	<string id="50022">AceStream, ¡listo!</string>
+	<string id="50023">!No olvide que la aplicación AceStreamEngine</string>
 	<string id="50024">debe estar en ejecución antes de iniciar</string>
-	<string id="50025">cualquier carga de Acestream!</string>
+	<string id="50025">cualquier carga de AceStream!</string>
 	<string id="70014">Descargando la versión para Android del motor de AceStream</string>
 	<string id="70015">P2P-Streams utilizará por defecto su propio motor de AceStream</string>
 	<string id="70016">¿Desea descargar y utilizar en su lugar la aplicación externa oficial?</string>
@@ -193,7 +193,7 @@
 	<string id="600016">Duración del almacenamiento para vídeo bajo demanda ([I]VOD buffer[/I]) (s)</string>
 	<string id="600017">Duración del almacenamiento para vídeo en vivo ([I]Live buffer[/I]) (s)</string>
 	<string id="600018">Máxima velocidad de descarga (Kb/s) (0=sin límite)</string>
-	<string id="600019">Máxima Velocidad de subida (Kb/s) (0=sin límite)</string>
+	<string id="600019">Máxima velocidad de subida (Kb/s) (0=sin límite)</string>
 	<string id="600020">Número máximo de conexiones (0=sin límite)</string>
 	<string id="600021">Número máximo de conexiones por canal (0=sin límites)</string>
 	<string id="70003">Borrar la caché del motor</string>
@@ -203,7 +203,7 @@
 	<string id="40060">Se ha importado el archivo xml. ¡Reinicie kodi!</string>
 	<string id="40064">La copia de seguridad se ha realizado correctamente. ¡Reinicie kodi!</string>
 	<string id="40062">La copia de seguridad se ha restaurado correctamente. ¡Reinicie kodi!</string>
-	<string id="40066">Se ha borrado la lista XML. ¡Reinicie kodi!</string>
+	<string id="40066">La lista XML se ha borrado. ¡Reinicie kodi!</string>
 	<string id="600024">Introduzca un número entero</string>
 	<string id="600026">El ajuste se ha cambiado correctamente</string>
 	<string id="600025">El valor no es válido. !Solo se permiten números enteros!</string>
@@ -217,14 +217,14 @@
 	<string id="70028">Skin actual:</string>
 	<string id="70029">Esto se aplicará solamente a la skin actual</string>
 	<string id="70030">Si se actualiza quizá necesite repetir este procedimiento</string>
-	<string id="70031">¡Si desinstala el add-on precisará revertir estos cambios, en caso contrario la funcion de parada de Kodi no funcionará!</string>
+	<string id="70031">¡Si desinstala el add-on, necesitará revertir estos cambios; en caso contrario, la funcion de parada de Kodi no funcionará!</string>
 	<string id="70032">¿Está seguro de querer continuar?</string>
-	<string id="70033">¿Desea asignar a un botón de su mando a distancia la función de parada?</string>
+	<string id="70033">¿Desea asignar la función de parada a una tecla de su mando a distancia?</string>
 	<string id="70041">Asignación de la caché</string>
 	
 	<!-- utils/keymapeditor.py -->
-	<string id="70034">Pulse el botón al que desea asignar</string>
-	<string id="70035">Se termina el tiempo en %.0f segundos...</string>
+	<string id="70034">Pulse la tecla a la que desea asignar</string>
+	<string id="70035">El tiempo se termina en %.0f segundos...</string>
 	
 	
 	<!-- livestreams.py -->
@@ -287,7 +287,7 @@
 	<string id="400024">Error: la URL del repositorio del parser no es válida</string>
 	<string id="400025">Actualizando...</string>
 	<string id="400026">¡El parser se ha actualizado correctamente!</string>
-	<string id="400027">Descargando el script...</string>
+	<string id="400027">Descargando script...</string>
 	<string id="400028">El script se ha ejecutado correctamente</string>
 	<string id="70004">Cualquiera de los plugins que se puedan encontrar aquí son de terceros</string>
 	<string id="70005">Ni forman parte de este add-on ni son mantenidos por sus desarrolladores</string>
