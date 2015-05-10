@@ -18,8 +18,9 @@
    	
 """
     
-import xbmc,xbmcplugin,xbmcgui,xbmcaddon,urllib,urllib2,tarfile,os,sys,re
+import xbmc,xbmcplugin,xbmcgui,xbmcaddon,urllib,urllib2,tarfile,os,sys,re,gzip
 from pluginxbmc import *
+from StringIO import StringIO
 
 user_agent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1468.0 Safari/537.36'
 
@@ -57,12 +58,17 @@ class download_tools():
 		dp.close()
 
 def get_page_source(url):
-      req = urllib2.Request(url)
-      req.add_header('User-Agent', user_agent)
-      response = urllib2.urlopen(req)
-      link=response.read()
-      response.close()
-      return link
+	req = urllib2.Request(url)
+	req.add_header('User-Agent', user_agent)
+	response = urllib2.urlopen(req)
+	if response.info().get('Content-Encoding') == 'gzip':
+		buf = StringIO(response.read())
+		f = gzip.GzipFile(fileobj=buf)
+		link = f.read()
+	else:
+		link = response.read()
+	response.close()
+	return link
 
 def mechanize_browser(url):
 	import mechanize
