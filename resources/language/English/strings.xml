@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <strings>
 
-	<string id="40000">P2P-STREAMS</string>
+	<string id="40000">Plexus</string>
     
     <!-- Settings.xml -->
     
@@ -9,10 +9,8 @@
     <string id="30016">[COLOR blue]General configurations[/COLOR]</string>
     <string id="30001">Download modules on boot</string>
     <string id="40107">Force detect as android</string>
-    <string id="40114">-Addon Website-parsers</string>
     <string id="600013">Select your timezone</string>
     <string id="40111">Openelec x86_64 platform</string>
-    <string id="40100">Hide porn</string>
     <string id="1106">Enable russian string translation</string>
     <string id="30017">[COLOR blue]SopCast configurations[/COLOR]</string>
     <string id="40101">Player type</string>
@@ -48,21 +46,19 @@
     <string id="400006">Sync interval for parsers</string>
     <string id="70009">Force use DVD Player for ace and sop playback</string>
     <string id="70010">Alternative CMD</string>
-    <string id="70036">-Addon History</string>
+    <string id="70036">Played History</string>
     <string id="70037">Enable addon history</string>
     <string id="70038">Items to save</string>
     <string id="70039">Clean addon history</string>
     <string id="70040">Enter to parser list on boot</string>
     
     <!-- Default.py -->
-    <string id="40115">-Addon xml lists</string>
-    <string id="40144">-Addon Favourites</string>
     <string id="40004">Play Acestream hash / Torrent URL</string>
     <string id="600029">Load local .torrent file</string>
     <string id="40005">Play SopCast ID</string>
     <string id="40006">Play SopCast URL</string>
     <string id="40056">Not available for your OS!</string>
-    <string id="40057">[COLOR orange]Advanced tools menu[/COLOR]</string>
+    <string id="40057">Configuration</string>
     <string id="400029">An error has occured</string>
     
     <!-- sopcast.py -->
@@ -226,28 +222,6 @@
 	<string id="70034">Press the key you want to assign now</string>
 	<string id="70035">Timeout in %.0f seconds...</string>
 	
-    
-     <!-- livestreams.py -->
-     <string id="40116">[B][COLOR orange]Sopcast.org list[/COLOR][/B] (http://sopcast.org/chlist.xml)</string>
-    	<string id="40121">[B]+ Add another list[/B] </string>
-    	<string id="40123">Select one list type:</string>
-	<string id="40124">Remote</string>
-	<string id="40125">Local</string>
-	<string id="40186">Select your xml list:</string>
-	<string id="40130">Give a name to the list.</string>
-	<string id="40129">List added successfully</string>
-	<string id="40127">Input the list url</string>
-	<string id="40128">Not a valid url</string>
-	<string id="40150">List removed successfully!</string>
-	
-	<!-- favourites.py -->
-	<string id="40145">You don't have favourites!</string>
-	<string id="40148">Sucessfully added to favourites</string>
-	<string id="40147">Sucessfully removed from favourites</string>
-	<string id="70022">Manually add a favourite</string>
-	<string id="70023">Insert ace or sop url</string>
-	<string id="70024">Insert a name for your channel</string>
-	
 	<!-- directoryhandle.py -->
 	<string id="40143">Add to addon favourites</string>
 	<string id="40146">Remove from addon favourites</string>
@@ -270,85 +244,5 @@
 	<string id="40035">Direct ID</string>
 	<string id="40036">Direct URL</string>
 	
-	<!-- parser.py -->	
-	<string id="400011">[B]Add a Website-Parser plugin [/B]</string>
-	<string id="400012">Plugin location?</string>
-	<string id="400013">Select the tarball (.tar.gz)</string>
-	<string id="400014">Parser successfully installed</string>
-	<string id="400015">An error has ocurred installing the parser</string>
-	<string id="400016">Input the plugin url</string>
-	<string id="400017">Not valid. tar.gz extension is required.</string>
-	<string id="400018">Downloading parser</string>
-	<string id="400019">Parser removed sucessfully</string>
-	<string id="400020">Syncing parsers</string>
-	<string id="400021">Checking...</string>
-	<string id="400022">Updated!</string>
-	<string id="400023">Already up to date.</string>
-	<string id="400024">Error: not a valid url for the parser repo</string>
-	<string id="400025">Updating...</string>
-	<string id="400026">Parser sucessfully updated!</string>
-	<string id="400027">Downloading script...</string>
-	<string id="400028">Script sucessfully executed</string>
-	<string id="70004">Any plugins you may find here are 3rd party.</string>
-	<string id="70005">They are not developed nor part of the core addon.</string>
-	<string id="70006">Do not ask for support regarding any of them.</string>
-	<string id="70007">All parser traces deleted</string>
-	<string id="70008">Remove all parser traces</string>
-	
-	
-	<!-- Misc -->	
-	<string id="40009">*Now Live*</string>
-	<string id="40010">American Football</string>
-	<string id="40011">Football</string>
-	<string id="40012">Basketball</string>
-	<string id="40013">Ice Hockey</string>
-	<string id="40014">Baseball</string>
-	<string id="40015">Tennis</string>
-	<string id="40016">Motor Sports</string>
-	<string id="40017">Rugby</string>
-	<string id="40018">Golf</string>
-	<string id="40019">Cricket</string>
-	<string id="40020">Cycling</string>
-	<string id="40021">Other</string>
-	<string id="40022">Acestream or Sopcast links not found.</string>
-	<string id="40023">Stream list</string>
-	<string id="40024">Not found.</string>
-	<string id="40077">English</string>
-	<string id="40078">Sport</string>
-	<string id="40079">News</string>
-	<string id="40080">Wedding</string>
-	<string id="40081">Generic</string>
-	<string id="40082">Educational</string>
-	<string id="40083">CIS</string>
-	<string id="40084">Male Channels</string>
-	<string id="40085">Shopping</string>
-	<string id="40086">Reserved</string>
-	<string id="40087">Donetsk</string>
-	<string id="40088">Regional</string>
-	<string id="40089">Porn</string>
-	<string id="40090">Sec.21 TV</string>
-	<string id="40091">Ukrainian channels</string>
-	<string id="40092">Kids</string>
-	<string id="40093">Movies</string>
-	<string id="40094">Night related</string>
-	<string id="40095">Europe</string>
-	<string id="40096">Ukr</string>
-	<string id="40097">Music</string>
-	<string id="40098">Religion</string>
-	<string id="40099">Party</string>
-	<string id="40151">Ukraine</string>
-	<string id="60000">January</string>
-	<string id="60001">February</string>
-	<string id="60002">March</string>
-	<string id="60003">April</string>
-	<string id="60004">May</string>
-	<string id="60005">June</string>
-	<string id="60006">July</string>
-	<string id="60007">August</string>
-	<string id="60008">September</string>
-	<string id="60009">October</string>
-	<string id="600010">November</string>
-	<string id="600011">December</string>
-	<string id="600012">Day:</string>
-																					
+																				
 </strings>
