@@ -1,6 +1,12 @@
 This addon is not being supported. Another project (Plexus) is under development.
 ================
 
+The code in the master branch is for Plexus addon not p2p-streams. Use the releases tab or the repository (below) to install p2p-streams.
+
+
+
+
+
 
 P2P-Streams addon for Kodi
 ================
