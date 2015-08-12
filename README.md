@@ -1,3 +1,7 @@
+This addon is not being supported. Another project (Plexus) is under development.
+================
+
+
 P2P-Streams addon for Kodi
 ================
 
