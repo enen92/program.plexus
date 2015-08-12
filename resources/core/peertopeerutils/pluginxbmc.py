@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" p2p-streams  (c)  2014 enen92 fightnight
+""" Plexus  (c)  2015 enen92
 
     This file contains the common variables used by the addon
     
@@ -10,16 +10,19 @@
    	
 """
     
-import xbmc,xbmcplugin,xbmcgui,xbmcaddon
+import xbmc
+import xbmcplugin
+import xbmcgui
+import xbmcaddon
+import os
 
 linkwiki="http://bit.ly/1r5uGQT"
-addon_id = 'plugin.video.p2p-streams'
-art = '/resources/art/'
+addon_id = 'program.plexus'
+art = os.path.join('resources','art')
 settings = xbmcaddon.Addon(id=addon_id)
 addonpath = settings.getAddonInfo('path').decode('utf-8')
 versao = settings.getAddonInfo('version')
 pastaperfil = xbmc.translatePath(settings.getAddonInfo('profile')).decode('utf-8')
-iconpequeno=addonpath + art + 'iconpq.jpg'
 mensagemok = xbmcgui.Dialog().ok
 mensagemprogresso = xbmcgui.DialogProgress()
 pastaperfil = xbmc.translatePath(settings.getAddonInfo('profile')).decode('utf-8')
