@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" p2p-streams  (c)  2014 enen92 fightnight
+""" Plexus  (c)  2015 enen92
 
     This file contains functions to link acestream or sopcast depending on the given argument (id or url). 
     It is used for the items in the main menu
@@ -12,7 +12,7 @@
 """
     
 import xbmc,sys
-from peertopeerutils.pluginxbmc import *
+from plexusutils.pluginxbmc import *
 import sopcast as sop
 import acestream as ace
     

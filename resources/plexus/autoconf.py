@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" p2p-streams  (c)  2014 enen92 fightnight
+""" Plexus  (c)  2015 enen92
 
     This file contains a single function. It's a function that will run on the addon first boot to download and configure the system for acestream/sopcast. The platform will be automatically detected and the necessary files downloaded and extracted to the userdata. 
     This function will run if and only the setting "Download modules" on boot is enabled.
@@ -16,9 +16,9 @@
      
 import xbmc,xbmcgui,xbmcplugin,xbmcvfs
 import tarfile,os,re,sys,subprocess
-from peertopeerutils.pluginxbmc import *
-from peertopeerutils.webutils import download_tools,get_page_source
-from peertopeerutils.utilities import *
+from plexusutils.pluginxbmc import *
+from plexusutils.webutils import download_tools,get_page_source
+from plexusutils.utilities import *
 
 """ Platform dependent files downloaded during the addon configuration"""
 

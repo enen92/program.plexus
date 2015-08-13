@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" p2p-streams  (c)  2014 enen92 fightnight
+""" Plexus  (c)  2015 enen92
 
     This file contains the functions for xbmc addon directory handle
     

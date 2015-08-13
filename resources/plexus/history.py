@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" p2p-streams (c) 2014 enen92 fightnight
+""" Plexus (c) 2015 enen92
    
    This file manages the history of recent played p2p addon items
    
@@ -13,9 +13,9 @@
     
 """
 import xbmcvfs,xbmc,os,sys
-from peertopeerutils.pluginxbmc import *
-from peertopeerutils.iofile import *
-from peertopeerutils.directoryhandle import addDir
+from plexusutils.pluginxbmc import *
+from plexusutils.iofile import *
+from plexusutils.directoryhandle import addDir
 
 history_file = os.path.join(pastaperfil,'history.txt')
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" p2p-streams  (c)  2014 enen92 fightnight
+""" Plexus  (c)  2015 enen92
 
     This file contains the acestream console of the addon. Initial versions were coded by Nouismons and so, this file is based on his work.
     
@@ -16,7 +16,7 @@
 """
 
 import httplib,urllib,urllib2,re,sys,subprocess,os,socket,threading,time,random,json,xbmcplugin,xbmcgui,xbmc,xbmcaddon,xbmcvfs
-from peertopeerutils.pluginxbmc import *
+from plexusutils.pluginxbmc import *
 
 """ Fixed variables """
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" p2p-streams  (c)  2014 enen92 fightnight
+""" p2p-streams  (c)  2015 enen92
 
     This file contains all the function the addon uses in the section "Advanced tools".
     
@@ -28,15 +28,15 @@
 """
     
 import xbmc,xbmcgui,xbmcplugin,xbmcvfs,sys,os,re
-from peertopeerutils.pluginxbmc import *
-from peertopeerutils.directoryhandle import addLink,addDir
-from peertopeerutils.iofile import *
-from peertopeerutils.webutils import download_tools
-from peertopeerutils.utilities import getDirectorySize
+from plexusutils.pluginxbmc import *
+from plexusutils.directoryhandle import addLink,addDir
+from plexusutils.iofile import *
+from plexusutils.webutils import download_tools
+from plexusutils.utilities import getDirectorySize
 
 
 def advanced_menu():
-	addLink('[COLOR orange]XBMC Advancedsettings.xml:[/COLOR]','',addonpath + art + 'settings_menu.png')
+	addLink('[COLOR orange]Advancedsettings.xml:[/COLOR]','',addonpath + art + 'settings_menu.png')
 	lock_file = xbmc.translatePath('special://temp/'+ 'ts.lock')
 	if xbmcvfs.exists(lock_file):
 		addDir(translate(40068),MainURL,306,'',2,False)

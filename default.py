@@ -1,24 +1,22 @@
 # -*- coding: utf-8 -*-
 
-""" p2p-streams (c) 2014 enen92 fightnight
+""" Plexus (c) 2015 enen92
    
    This file contains the main menu and the addon directory tree.
-   All the necessary modules are present in ~/resources/core directory
-   Parsers are in ~/resources/core/parsers
+   All the necessary modules are present in ~/resources/plexus directory
     
 """
 
 import xbmc,xbmcaddon,xbmcgui,xbmcplugin,urllib,urllib2,os,re,sys,datetime,time,subprocess,xbmcvfs,socket
-from resources.core.peertopeerutils.pluginxbmc import *
-from resources.core import acestream as ace
-from resources.core import sopcast as sop
-from resources.core.autoconf import *
-from resources.core.peertopeerutils.directoryhandle import addLink,addDir
-from resources.core.favourites import *
-from resources.core.advancedfunctions import *
-from resources.core.resolver import go_to_id
-from resources.core.acecore import stop_aceengine
-from resources.core.history import *
+from resources.plexus.plexusutils.pluginxbmc import *
+from resources.plexus import acestream as ace
+from resources.plexus import sopcast as sop
+from resources.plexus.autoconf import *
+from resources.plexus.plexusutils.directoryhandle import addLink,addDir
+from resources.plexus.advancedfunctions import *
+from resources.plexus.resolver import go_to_id
+from resources.plexus.acecore import stop_aceengine
+from resources.plexus.history import *
                                                                                                                                                                                                                                                                   
 def main_menu():
       if settings.getSetting('addon_history') == "true":
@@ -98,10 +96,7 @@ if mode==None:
           if settings.getSetting('last_version_check') != versao:
               try:check_for_updates()
               except: pass
-      if settings.getSetting('enter_channel_list') == "false":
-      	main_menu()
-      else:
-      	parsers.addon_parsers_menu()
+      main_menu()
 elif mode==1: ace.acestreams(name,iconimage,url)
 elif mode==2: sop.sopstreams(name,iconimage,url)
 elif mode==3: go_to_id('sop_id')

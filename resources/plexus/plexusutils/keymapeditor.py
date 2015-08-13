@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-""" p2p-streams (c) 2014 enen92 fightnight
+""" Plexus (c) 2015 enen92
    
    This file contains functions from the keymap editor addon by takoi
     
 """
-from peertopeerutils.pluginxbmc import *
+from plexusutils.pluginxbmc import *
 import xbmc,os,shutil
 from xbmcgui import Dialog, WindowXMLDialog
 from threading import Timer
@@ -32,7 +32,7 @@ def run():
 			pass
 	newkey = KeyListener.record_key()
 	if newkey:
-		new = ('global', u'RunPlugin(plugin://plugin.video.p2p-streams/?mode=7)', newkey)
+		new = ('global', u'RunPlugin(plugin://program.plexus/?mode=7)', newkey)
 		userkeymap.append(new)
 		if os.path.exists(gen_file):
 			shutil.copyfile(gen_file, gen_file + ".old")
