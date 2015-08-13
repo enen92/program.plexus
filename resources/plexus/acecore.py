@@ -24,7 +24,7 @@ aceport=int(settings.getSetting('aceporta'))
 server_ip=settings.getSetting('ip_addr')
 if settings.getSetting('save')=='true': save=False
 else: save=False
-if settings.getSetting('ace-debug')=='true': alog=True
+if settings.getSetting('debug_mode')=='true': alog=True
 else: alog=False
 if (sys.platform == 'win32') or (sys.platform == 'win64'): pwin=True
 else: pwin=False
@@ -796,7 +796,7 @@ class TSServ(threading.Thread):
         comm=self.last_received.split(' ')[0]
         params=self.last_received.split(' ')[1::]
         self.msg=line
-        if settings.getSetting('ace-debug') == "true":
+        if settings.getSetting('debug_mode') == "true":
             print('Sent command: ' + str(comm))
         if comm=='HELLOTS':
             try: self.version=params[0].split('=')[1]
@@ -856,24 +856,24 @@ class TSServ(threading.Thread):
 
         if st=='idle':
             self.label=translate(1105)
-            if settings.getSetting('ace-debug') == "true":
+            if settings.getSetting('debug_mode') == "true":
                 print('Received command Engine idle' )
 
         elif st=='starting':
             self.label=translate(40055)
-            if settings.getSetting('ace-debug') == "true":
+            if settings.getSetting('debug_mode') == "true":
                 print('Received command starting TS' )
 
         elif st=='err':
             self.label=translate(1011)
             self.err="dl"
-            if settings.getSetting('ace-debug') == "true":
+            if settings.getSetting('debug_mode') == "true":
                 print('Received command ERROR!' )
 
         elif st=='check': 
             self.label=translate(1103)
             self.proc=int(params.split(';')[1])
-            if settings.getSetting('ace-debug') == "true":
+            if settings.getSetting('debug_mode') == "true":
                 print('Received command check' )
 
         elif st=='prebuf':   
@@ -881,12 +881,12 @@ class TSServ(threading.Thread):
             self.label=translate(1100)
             self.line='Seeds:%s Download:%sKb/s'%(params.split(';')[8],params.split(';')[5])  
             engine_data = { "action": str(translate(1100)), "percent": str(params.split(';')[1])+ "%","download":str(params.split(';')[5]) + " Kb/s", "upload":str(params.split(';')[7]) + " Kb/s","seeds":str(params.split(';')[8]),"total_download":str(int(params.split(';')[10])/(1024*1024))+'Mb',"total_upload":str(int(params.split(';')[12])/(1024*1024))+'Mb' }
-            if settings.getSetting('ace-debug') == "true":
+            if settings.getSetting('debug_mode') == "true":
                 print('Received command: ' + str(engine_data) )
 
         elif st=='loading':
             self.label=translate(40043)
-            if settings.getSetting('ace-debug') == "true":
+            if settings.getSetting('debug_mode') == "true":
                 print('Received command loading' )
 
         elif st=='dl':
@@ -895,7 +895,7 @@ class TSServ(threading.Thread):
                 try:
                         lat123.set_information(engine_data)
                 except: pass
-            if settings.getSetting('ace-debug') == "true":
+            if settings.getSetting('debug_mode') == "true":
                 print('Received command: ' + str(engine_data) )
 
         elif st=='buf':
@@ -904,7 +904,7 @@ class TSServ(threading.Thread):
                 try:
                         lat123.set_information(engine_data)
                 except: pass
-            if settings.getSetting('ace-debug') == "true":
+            if settings.getSetting('debug_mode') == "true":
                 print('Received command: ' + str(engine_data) )
 
     def end(self):

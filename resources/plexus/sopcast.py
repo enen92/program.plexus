@@ -209,7 +209,7 @@ def sopstreams_builtin(name,iconimage,sop):
 		else: pass
 		
 		#opening the subprocess
-		if settings.getSetting('sop_debug_mode') == "false":
+		if settings.getSetting('debug_mode') == "false":
 			spsc = subprocess.Popen(cmd, shell=False, bufsize=BUFER_SIZE,stdin=None, stdout=None, stderr=None)
 		else:
 			spsc = subprocess.Popen(cmd, shell=False, bufsize=BUFER_SIZE,stdin=None, stdout=subprocess.PIPE, stderr=subprocess.PIPE)    
@@ -267,7 +267,7 @@ def sopstreams_builtin(name,iconimage,sop):
 		    xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(40040), 1,os.path.join(addonpath,"icon.png")))
 
 	except: pass
-	if settings.getSetting('sop_debug_mode') == "true":
+	if settings.getSetting('debug_mode') == "true":
 		try:	
 			stdout, stderr = spsc.communicate()
 			print(stdout,stderr)
