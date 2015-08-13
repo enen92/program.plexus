@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 """ Plexus  (c)  2015 enen92
-
     This file contains the acestream console of the addon. Initial versions were coded by Nouismons and so, this file is based on his work.
     
     Classes:
@@ -12,7 +11,6 @@
     TSServ(threading.Thread) ->  Acestreamengine service class
     OverlayText(object) -> Overlaytext displayed on player
         
-
 """
 
 import httplib,urllib,urllib2,re,sys,subprocess,os,socket,threading,time,random,json,xbmcplugin,xbmcgui,xbmc,xbmcaddon,xbmcvfs
@@ -24,16 +22,13 @@ aceport=int(settings.getSetting('aceporta'))
 server_ip=settings.getSetting('ip_addr')
 if settings.getSetting('save')=='true': save=False
 else: save=False
-if settings.getSetting('debug_mode')=='true': alog=True
+if settings.getSetting('ace-debug')=='true': alog=True
 else: alog=False
 if (sys.platform == 'win32') or (sys.platform == 'win64'): pwin=True
 else: pwin=False
 if xbmc.getCondVisibility('System.Platform.OSX'): posx=True
 else: posx=False
-#pvr variables
-local_ace_stream = os.path.join(pastaperfil,'pvr','localace.txt')
-thread_control = os.path.join(pastaperfil,'pvr','threadex.txt')
-clicker_control = os.path.join(pastaperfil,'pvr','clicker.txt')
+
 
 """ Function and class list """
 
@@ -72,7 +67,7 @@ class _TSPlayer(xbmc.Player):
         self.log.out('paused')
         
     def onPlayBackStarted( self ):
-        #xbmc.executebuiltin('XBMC.ActivateWindow("fullscreenvideo")')
+        xbmc.executebuiltin('XBMC.ActivateWindow("fullscreenvideo")')
         self.started=True
         self.log.out('started')
         if self.vod:
@@ -109,10 +104,8 @@ class _TSPlayer(xbmc.Player):
 
 class TSengine():
 
-    def __init__(self,pvr=False):
-        self.pvr = pvr
-        if not self.pvr: pass#xbmc.Player().stop()
-        else: ace_pvr_control_service().started_dialog()
+    def __init__(self):
+        xbmc.Player().stop()
         self.log=Logger("TSEngine")
         self.push=Logger('OUT')
         self.alive=True
@@ -138,7 +131,6 @@ class TSengine():
                 self.log.out("XBMC asked to abort request")
                 return False
             if self.progress.iscanceled():
-                if self.pvr: ace_pvr_control_service().remove_dialog()
                 return False
             xbmc.sleep(300)
         
@@ -156,7 +148,6 @@ class TSengine():
                 self.log.out("XBMC asked to abort request")
                 return False
             if self.progress.iscanceled():
-                if self.pvr: ace_pvr_control_service().remove_dialog()
                 return False
             time.sleep(1)
         ready='READY'
@@ -171,7 +162,6 @@ class TSengine():
             ready='READY key=%s'% key
         if self.progress.iscanceled():
             self.err=1
-            if self.pvr: ace_pvr_control_service().remove_dialog() 
             return False        
         self.TSpush(ready)
         return True
@@ -220,7 +210,6 @@ class TSengine():
             except:
                 self.log.out('Failed to connect to %s:%s'%(servip,aceport))
             if self.progress.iscanceled():
-                if self.pvr: ace_pvr_control_service().remove_dialog() 
                 return False
                 break
             i=i-1
@@ -401,7 +390,7 @@ class TSengine():
         self.progress.update(100,translate(1005),'')
         if settings.getSetting('save')=='true': save=True
         else: save=False
-        if self.pvr: ace_pvr_control_service().remove_dialog()
+
         if self.tsserv.event and save:
             self.progress.update(0,translate(400006)," ")
             comm='SAVE %s path=%s'%(self.tsserv.event[0]+' '+self.tsserv.event[1],urllib.quote(self.filename))
@@ -410,7 +399,7 @@ class TSengine():
             succ=True
 
             while not os.path.exists(self.filename.decode('utf-8')) and not self.progress.iscanceled():
-                if xbmc.abortRequested or self.progress.iscanceled(): 
+                if xbmc.abortRequested or self.progress.iscanceled():
                     self.log.out("XBMC asked to abort request")
                     succ=False
                     break
@@ -447,46 +436,25 @@ class TSengine():
                 xbmc.Player().play(self.lnk,item)
         else:
             xbmc.sleep(50)
-            if not self.pvr:
-                if int(sys.argv[1]) < 0:
-                    self.player.play(self.lnk,item)
-                show_window = False
-                while self.player.active and not self.local:
-                    if settings.getSetting('engine-status') == "true":
-                            if show_window == False and xbmc.getCondVisibility('Window.IsActive(videoosd)'):
-                                    lat123.show()
-                                    show_window = True
-                            elif not xbmc.getCondVisibility('Window.IsActive(videoosd)'):
-                                    try:
-                                            lat123.hide()
-                                    except: pass
-                                    show_window = False
-                    self.loop()
-                    xbmc.sleep(300)
-                    if xbmc.abortRequested:
-                        self.log.out("XBMC asked to abort request")
-                        break
-                self.log.out('ended play')
-            else:
-                f = open(local_ace_stream,'w')
-                f.write(self.lnk)
-                f.close()
-                show_window = False
-                while xbmcvfs.exists(local_ace_stream):
-                    if settings.getSetting('engine-status') == "true":
+            if int(sys.argv[1]) < 0:
+                self.player.play(self.lnk,item)
+            show_window = False
+            while self.player.active and not self.local:
+                if settings.getSetting('engine-status') == "true":
                         if show_window == False and xbmc.getCondVisibility('Window.IsActive(videoosd)'):
-                            lat123.show()
-                            show_window = True
+                                lat123.show()
+                                show_window = True
                         elif not xbmc.getCondVisibility('Window.IsActive(videoosd)'):
-                            try:
-                                lat123.hide()
-                            except: pass
-                            show_window = False
-                    self.loop()
-                    xbmc.sleep(200)
-                    if xbmc.abortRequested:
-                        break
-                    
+                                try:
+                                        lat123.hide()
+                                except: pass
+                                show_window = False
+                self.loop()
+                xbmc.sleep(300)
+                if xbmc.abortRequested:
+                    self.log.out("XBMC asked to abort request")
+                    break
+            self.log.out('ended play')
       
     def loop(self):
         pos=self.pos
@@ -556,8 +524,7 @@ class TSengine():
                 self.log.out("Failed to load files")
                 break
             xbmc.sleep(200)
-        if self.progress.iscanceled():
-            if self.pvr: ace_pvr_control_service().remove_dialog() 
+        if self.progress.iscanceled(): 
             return False
         if not self.tsserv.files: 
             self.sm('Failed to load list files')
@@ -691,6 +658,7 @@ class TSengine():
                     try:
                         if settings.getSetting('acestream_cachefolder') != '':
                             dirs, cache_files = xbmcvfs.listdir(os.path.join(settings.getSetting('acestream_cachefolder'),'.acestream_cache'))
+                            print dirs,cache_files
                             for cache_file in cache_files:
                                 xbmcvfs.delete(os.path.join(settings.getSetting('acestream_cachefolder'),'.acestream_cache',cache_file))
                         else:
@@ -711,19 +679,6 @@ class TSengine():
             self.log.out("socket closed")
             if self.progress:self.progress.close()
             
-
-        if settings.getSetting("kill_type") == "2":
-            os.system(settings.getSetting('custom_kill_ace'))
-            self.active=False
-            self.log.out("Force Killing")
-            try: self._sock.shutdown(socket.SHUT_WR)
-            except: pass
-            if self.tsserv: self.tsserv.active=False
-            if self.tsserv: self.tsserv.join()
-            self.log.out("end thread")
-            self._sock.close()
-            self.log.out("socket closed")
-            if self.progress:self.progress.close()         
 
         
     def __del__(self):
@@ -796,7 +751,7 @@ class TSServ(threading.Thread):
         comm=self.last_received.split(' ')[0]
         params=self.last_received.split(' ')[1::]
         self.msg=line
-        if settings.getSetting('debug_mode') == "true":
+        if settings.getSetting('ace-debug') == "true":
             print('Sent command: ' + str(comm))
         if comm=='HELLOTS':
             try: self.version=params[0].split('=')[1]
@@ -856,24 +811,24 @@ class TSServ(threading.Thread):
 
         if st=='idle':
             self.label=translate(1105)
-            if settings.getSetting('debug_mode') == "true":
+            if settings.getSetting('ace-debug') == "true":
                 print('Received command Engine idle' )
 
         elif st=='starting':
             self.label=translate(40055)
-            if settings.getSetting('debug_mode') == "true":
+            if settings.getSetting('ace-debug') == "true":
                 print('Received command starting TS' )
 
         elif st=='err':
             self.label=translate(1011)
             self.err="dl"
-            if settings.getSetting('debug_mode') == "true":
+            if settings.getSetting('ace-debug') == "true":
                 print('Received command ERROR!' )
 
         elif st=='check': 
             self.label=translate(1103)
             self.proc=int(params.split(';')[1])
-            if settings.getSetting('debug_mode') == "true":
+            if settings.getSetting('ace-debug') == "true":
                 print('Received command check' )
 
         elif st=='prebuf':   
@@ -881,12 +836,12 @@ class TSServ(threading.Thread):
             self.label=translate(1100)
             self.line='Seeds:%s Download:%sKb/s'%(params.split(';')[8],params.split(';')[5])  
             engine_data = { "action": str(translate(1100)), "percent": str(params.split(';')[1])+ "%","download":str(params.split(';')[5]) + " Kb/s", "upload":str(params.split(';')[7]) + " Kb/s","seeds":str(params.split(';')[8]),"total_download":str(int(params.split(';')[10])/(1024*1024))+'Mb',"total_upload":str(int(params.split(';')[12])/(1024*1024))+'Mb' }
-            if settings.getSetting('debug_mode') == "true":
+            if settings.getSetting('ace-debug') == "true":
                 print('Received command: ' + str(engine_data) )
 
         elif st=='loading':
             self.label=translate(40043)
-            if settings.getSetting('debug_mode') == "true":
+            if settings.getSetting('ace-debug') == "true":
                 print('Received command loading' )
 
         elif st=='dl':
@@ -895,7 +850,7 @@ class TSServ(threading.Thread):
                 try:
                         lat123.set_information(engine_data)
                 except: pass
-            if settings.getSetting('debug_mode') == "true":
+            if settings.getSetting('ace-debug') == "true":
                 print('Received command: ' + str(engine_data) )
 
         elif st=='buf':
@@ -904,7 +859,7 @@ class TSServ(threading.Thread):
                 try:
                         lat123.set_information(engine_data)
                 except: pass
-            if settings.getSetting('debug_mode') == "true":
+            if settings.getSetting('ace-debug') == "true":
                 print('Received command: ' + str(engine_data) )
 
     def end(self):
@@ -912,90 +867,69 @@ class TSServ(threading.Thread):
         self.daemon = False
         self.log.out('Daemon Fully Dead')
         
-     
-class ace_pvr_control_service:
-    def __init__(self):
-        if not os.path.exists(os.path.join(pastaperfil,'pvr')): xbmcvfs.mkdir(os.path.join(pastaperfil,'pvr'))
-        self.pvrdialog = initial_txt_dialog = os.path.join(pastaperfil,'pvr','dialogactive.txt')
-        return
-		
-    def started_dialog(self):
-        f = open(self.pvrdialog,'w')
-        f.write('up')
-        f.close()
-        return
         
-    def remove_dialog(self):
-        if xbmcvfs.exists(self.pvrdialog): xbmcvfs.delete(self.pvrdialog)
-        if xbmcvfs.exists(thread_control): xbmcvfs.delete(thread_control)
-        return
-	
-      
 def stop_aceengine():
-    if xbmcvfs.exists(local_ace_stream): xbmcvfs.delete(local_ace_stream)
-    if xbmcvfs.exists(thread_control): xbmcvfs.delete(thread_control)
-    if xbmcvfs.exists(clicker_control): xbmcvfs.delete(clicker_control)
+    print "coiso a fechar a aceengine"
     if xbmc.getCondVisibility('Player.HasMedia'):
-        if re.findall('http://(\d+).(\d+).(\d+).(\d+):(\d+)/content/(.+?)/(\d+)\.(\d+)',xbmc.Player().getPlayingFile()) or re.findall('pvr:',xbmc.Player().getPlayingFile()):
-            if settings.getSetting('kill_type') != '2':
-                if xbmc.getCondVisibility('system.platform.windows'):
-                    subprocess.Popen('taskkill /F /IM ace_engine.exe /T',shell=True)
-                    #Need to finish this...
-                    #if settings.getSetting('save') != "true": 
-                    #    try:
-                    #        cache_file = self.lnk.split('/')[-2]
-                    #        acestream_cachefolder_file = os.path.join(os.getenv("SystemDrive"),'\_acestream_cache_',cache_file)
-                    #        xbmcvfs.delete(acestream_cachefolder_file)
-                    #    except: pass
+        if re.findall('http://(\d+).(\d+).(\d+).(\d+):(\d+)/content/(.+?)/(\d+)\.(\d+)',xbmc.Player().getPlayingFile()):
+            if xbmc.getCondVisibility('system.platform.windows'):
+                subprocess.Popen('taskkill /F /IM ace_engine.exe /T',shell=True)
+                #Need to finish this...
+                #if settings.getSetting('save') != "true": 
+                #    try:
+                #        cache_file = self.lnk.split('/')[-2]
+                #        acestream_cachefolder_file = os.path.join(os.getenv("SystemDrive"),'\_acestream_cache_',cache_file)
+                #        xbmcvfs.delete(acestream_cachefolder_file)
+                #    except: pass
  
-                if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('System.Platform.Android'):
-                    os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $1}')")
-                    os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $2}')")
-                    os.system("kill $(ps aux | grep '[s]tart.py' | awk '{print $2}')")
-                    if settings.getSetting('save') != "true":
-                        try:
-                            cache_file = xbmc.Player().getPlayingFile().split('/')[-2]
-                            if 'arm' not in os.uname()[4]:
-                                if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache','.acestream_cache')
-                                else: acestream_cachefolder_file = settings.getSetting('acestream_cachefolder')
-                            else:
-                                if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
-                                else: acestream_cachefolder_file = settings.getSetting('acestream_cachefolder')
-                            folder,cachefiles = xbmcvfs.listdir(acestream_cachefolder_file)
-                            for cachefile in cachefiles:
-                                if cache_file in cachefile:
-                                    xbmcvfs.delete(os.path.join(acestream_cachefolder_file,cachefile))
-                        except: pass
+            if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('System.Platform.Android'):
+                os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $1}')")
+                os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $2}')")
+                os.system("kill $(ps aux | grep '[s]tart.py' | awk '{print $2}')")
+                if settings.getSetting('save') != "true":
+                    try:
+                        cache_file = xbmc.Player().getPlayingFile().split('/')[-2]
+                        if 'arm' not in os.uname()[4]:
+                            if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache','.acestream_cache')
+                            else: acestream_cachefolder_file = settings.getSetting('acestream_cachefolder')
+                        else:
+                            if settings.getSetting('acestream_cachefolder') == '': acestream_cachefolder_file = os.path.join(os.getenv("HOME"),'.ACEStream','cache')
+                            else: acestream_cachefolder_file = settings.getSetting('acestream_cachefolder')
+                        folder,cachefiles = xbmcvfs.listdir(acestream_cachefolder_file)
+                        for cachefile in cachefiles:
+                            if cache_file in cachefile:
+                                xbmcvfs.delete(os.path.join(acestream_cachefolder_file,cachefile))
+                    except: pass
                           
-                elif xbmc.getCondVisibility('system.platform.OSX'):
-                    try:
-                        kill_cmd = [os.path.join('/Applications','Ace Stream.app','Contents','Resources','Wine.bundle','Contents','Resources','bin','wine'),os.path.join('/Applications','Ace Stream.app','Contents','Resources','wineprefix','drive_c','windows','system','taskkill.exe'),'/f','/im','ace_engine.exe']
-                        kill_proc = subprocess.Popen(kill_cmd,shell=False)
-                    except: pass
+            elif xbmc.getCondVisibility('system.platform.OSX'):
+                try:
+                    kill_cmd = [os.path.join('/Applications','Ace Stream.app','Contents','Resources','Wine.bundle','Contents','Resources','bin','wine'),os.path.join('/Applications','Ace Stream.app','Contents','Resources','wineprefix','drive_c','windows','system','taskkill.exe'),'/f','/im','ace_engine.exe']
+                    kill_proc = subprocess.Popen(kill_cmd,shell=False)
+                except: pass
                     
-                elif xbmc.getCondVisibility('System.Platform.Android'):
+            elif xbmc.getCondVisibility('System.Platform.Android'):
+                try:
+                    procshut_ace = subprocess.Popen(['ps','|','grep','python'],shell=False,stdout=subprocess.PIPE)
+                    for line in procshut_ace.stdout:
+                        match = re.findall(r'\S+', line.rstrip())
+                        if match:
+                            if 'acestream' in match[-1] and len(match)>2:
+                                os.system("kill " + match[1])
+                                xbmc.sleep(200)
+                except: pass
+                if settings.getSetting('save') != "true":
                     try:
-                        procshut_ace = subprocess.Popen(['ps','|','grep','python'],shell=False,stdout=subprocess.PIPE)
-                        for line in procshut_ace.stdout:
-                            match = re.findall(r'\S+', line.rstrip())
-                            if match:
-                                if 'acestream' in match[-1] and len(match)>2:
-                                    os.system("kill " + match[1])
-                                    xbmc.sleep(200)
+                        if settings.getSetting('acestream_cachefolder') != '':
+                            dirs, cache_files = xbmcvfs.listdir(os.path.join(settings.getSetting('acestream_cachefolder'),'.acestream_cache'))
+                            print dirs,cache_files
+                            for cache_file in cache_files:
+                                xbmcvfs.delete(os.path.join(settings.getSetting('acestream_cachefolder'),'.acestream_cache',cache_file))
+                        else:
+                            acestream_cachefolder_file = os.path.join('/sdcard','.ACEStream','cache','.acestream_cache')
+                            dirs, cache_files = xbmcvfs.listdir(acestream_cachefolder_file)
+                            for cache_file in cache_files:
+                                xbmcvfs.delete(os.path.join(acestream_cachefolder_file,cache_file))
                     except: pass
-                    if settings.getSetting('save') != "true":
-                        try:
-                            if settings.getSetting('acestream_cachefolder') != '':
-                                dirs, cache_files = xbmcvfs.listdir(os.path.join(settings.getSetting('acestream_cachefolder'),'.acestream_cache'))
-                                for cache_file in cache_files:
-                                    xbmcvfs.delete(os.path.join(settings.getSetting('acestream_cachefolder'),'.acestream_cache',cache_file))
-                            else:
-                                acestream_cachefolder_file = os.path.join('/sdcard','.ACEStream','cache','.acestream_cache')
-                                dirs, cache_files = xbmcvfs.listdir(acestream_cachefolder_file)
-                                for cache_file in cache_files:
-                                    xbmcvfs.delete(os.path.join(acestream_cachefolder_file,cache_file))
-                        except: pass
-            else: os.system(settings.getSetting('custom_kill_ace'))
         xbmc.executebuiltin('PlayerControl(Stop)')       
         
         

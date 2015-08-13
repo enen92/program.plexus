@@ -57,7 +57,6 @@
 		<setting id="custom_kill_ace" type="text" label="Custom kill engine cmd" default="" visible="eq(-1,2)"/>
 		<setting id="shutdown-engine" type="bool" label="30015" default="true"/>
 		<setting id="engine-status" type="bool" label="49999" default="true"/>
-		<setting id="ace-debug" type="bool" label="49998" default="false"/>
 		<!-- Android default port -->
 		<setting id="android_port" type="text" label="" visible="False" default="8621"/>
 		<!-- Linux settings to pass to the engine -->

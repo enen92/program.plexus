@@ -17,21 +17,23 @@ from resources.plexus.advancedfunctions import *
 from resources.plexus.resolver import go_to_id
 from resources.plexus.acecore import stop_aceengine
 from resources.plexus.history import *
+from resources.plexus.mystreams import *
                                                                                                                                                                                                                                                                   
 def main_menu():
+      addDir('[B]My Streams[/B]',MainURL,10,os.path.join(addonpath,art,'mystreams.png'),2,True)
       if settings.getSetting('addon_history') == "true":
       	addDir('[B]'+translate(70036)+'[/B]',MainURL,8,os.path.join(addonpath,art,'history.png'),2,True)
       	if "confluence" in xbmc.getSkinDir(): addLink('','','plexus')
       if xbmc.getCondVisibility('system.platform.windows') or xbmc.getCondVisibility('system.platform.linux') or xbmc.getCondVisibility('System.Platform.OSX') or xbmc.getCondVisibility('System.Platform.Android'):
-          addDir('[B][COLOR red]AceStream: [/COLOR][/B]' + translate(40004),MainURL,4,os.path.join(addonpath,art,'acestream-menu-item.png'),1,False)
-          addDir('[B][COLOR red]AceStream: [/COLOR][/B]' + translate(600029),MainURL,6,os.path.join(addonpath,art,'acestream-menu-item.png'),1,False)
+          addDir('[B][COLOR maroon]AceStream: [/COLOR][/B]' + translate(40004),MainURL,4,os.path.join(addonpath,art,'acestream-menu-item.png'),1,False)
+          addDir('[B][COLOR maroon]AceStream: [/COLOR][/B]' + translate(600029),MainURL,6,os.path.join(addonpath,art,'acestream-menu-item.png'),1,False)
       if xbmc.getCondVisibility('system.platform.windows') or xbmc.getCondVisibility('system.platform.linux') or xbmc.getCondVisibility('System.Platform.OSX') or xbmc.getCondVisibility('System.Platform.Android'):
-          addDir('[B][COLOR red]SopCast: [/COLOR][/B]' + translate(40005),MainURL,3,os.path.join(addonpath,art,'sopcast-menu-item.png'),1,False)
-          addDir('[B][COLOR red]SopCast: [/COLOR][/B]' + translate(40006),MainURL,5,os.path.join(addonpath,art,'sopcast-menu-item.png'),1,False)
+          addDir('[B][COLOR maroon]SopCast: [/COLOR][/B]' + translate(40005),MainURL,3,os.path.join(addonpath,art,'sopcast-menu-item.png'),1,False)
+          addDir('[B][COLOR maroon]SopCast: [/COLOR][/B]' + translate(40006),MainURL,5,os.path.join(addonpath,art,'sopcast-menu-item.png'),1,False)
       if xbmc.getCondVisibility('System.Platform.IOS') or xbmc.getCondVisibility('System.Platform.ATV2'):
           addLink(translate(40056),'',os.path.join(addonpath,art,'processwarning.png'))
       if "confluence" in xbmc.getSkinDir(): addLink('','','plexus')
-      addDir('[B][COLOR red]' + translate(40057) + '[/COLOR][/B]',MainURL,300,os.path.join(addonpath,art,'settings.png'),2,True)       
+      addDir('[B][COLOR maroon]' + translate(40057) + '[/COLOR][/B]',MainURL,300,os.path.join(addonpath,art,'settings.png'),2,True)       
       #break_sopcast is a function used in windows to intentionally break the sopcast.exe setup by renaming one of its codec files. It's ran here to rename the file again in case it failed when played before
       sop.break_sopcast()
       
@@ -106,6 +108,8 @@ elif mode==6: ace.load_local_torrent()
 elif mode==7: stop_aceengine()
 elif mode==8: list_history()
 elif mode==9: remove_history()
+elif mode==10: my_streams_menu()
+elif mode==11: add_stream()
 #from 300-399 Advanced functions
 elif mode==300: advanced_menu()
 elif mode==301: import_advancedxml()

@@ -60,12 +60,9 @@ def sopstreams(name,iconimage,sop):
 	    try: add_to_history(labelname, str(sop),2, iconimage)
 	    except: pass
 	if not xbmc.getCondVisibility('system.platform.windows'):
-	    if xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
+	    if xbmc.getCondVisibility('System.Platform.Android'):
 	    	if  settings.getSetting('external-sopcast') == "0":
-			versionNumber = int(xbmc.getInfoLabel("System.BuildVersion" )[0:2])
-			if versionNumber >= 13:
-				xbmc.executebuiltin('XBMC.StartAndroidActivity("org.sopcast.android","android.intent.action.VIEW","",'+sop+')')
-			else:	mensagemok(translate(40000),translate(40196),translate(40197))    
+			xbmc.executebuiltin('XBMC.StartAndroidActivity("org.sopcast.android","android.intent.action.VIEW","",'+sop+')')    
 		else: sopstreams_builtin(name,iconimage,sop)
             else: sopstreams_builtin(name,iconimage,sop)
         else:
