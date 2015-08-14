@@ -28,7 +28,7 @@
 	</category>
 	<category label="Sopcast">
 		<setting label="30017" type="lsep" />
-		<setting id="external-sopcast" type="enum" values="External Player| Kodi " label="40101" visible="System.Platform.Android" default="1"/>
+		<setting id="external-sopcast" type="enum" values="Kodi player|External player" label="40101" visible="System.Platform.Android" default="0"/>
 		<setting id="android_sopclient" type="text" label="40071" visible="False" default=""/>
 		<setting id="auto_ip" type="bool" label="30003" default="true"/>
 		<setting id="localhost" type="ipaddress" label="30004" enable="eq(-1,false)" visible="!System.Platform.Windows+eq(-1,false)" default="127.0.0.1"/>

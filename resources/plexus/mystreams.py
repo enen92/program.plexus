@@ -9,6 +9,7 @@
 
 import xbmc
 import xbmcgui
+import xbmcplugin
 import xbmcvfs
 import os
 import hashlib
@@ -30,7 +31,7 @@ def my_streams_menu():
 					addDir(content[0],content[1],2,content[2],1,False) 
 				else:
 					pass
-	addDir('[B][COLOR maroon]Add stream[/COLOR][/B]',MainURL,11,os.path.join(addonpath,art,'plus-menu.png'),1,False) 
+	addDir('[B][COLOR maroon]Add stream[/COLOR][/B]',MainURL,11,os.path.join(addonpath,art,'plus-menu.png'),1,False)
 
 def add_stream(name='',url='',iconimage=''):
 	if not name or not url:

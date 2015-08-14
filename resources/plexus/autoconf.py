@@ -21,46 +21,47 @@ from plexusutils.webutils import download_tools,get_page_source
 from plexusutils.utilities import *
 
 """ Platform dependent files downloaded during the addon configuration"""
+trunkfolder = "http://p2p-strm.googlecode.com/svn/trunk"
 
 #Linux Armv6 (Raspberry PI)
-sopcast_raspberry = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/sopcast-raspberry.tar.gz"
-acestream_generic_raspberry = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/raspberry-acestream.tar.gz"
-acestream_openelec_raspberry = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/RaspberryPi/openelec-acestream.tar.gz"
+sopcast_raspberry = trunkfolder + "/Modules/Linux/RaspberryPi/sopcast-raspberry.tar.gz"
+acestream_generic_raspberry = trunkfolder + "/Modules/Linux/RaspberryPi/raspberry-acestream.tar.gz"
+acestream_openelec_raspberry = trunkfolder + "/Modules/Linux/RaspberryPi/openelec-acestream.tar.gz"
 #Linux Armv7 packages
-sopcast_jynxbox = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Armv7/sopcast-jynxbox_purelinux.tar.gz"
-acestream_mxlinux = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Armv7/mxlinux/mxlinux_armv7_acestream.tar.gz"
-acestream_armv7_openelec = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Armv7/openelec/openelec-acestream.tar.gz"
-acestream_armv7_xbian = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Armv7/xbian/xbian_acestream.tar.gz"
+sopcast_jynxbox = trunkfolder + "/Modules/Linux/Armv7/sopcast-jynxbox_purelinux.tar.gz"
+acestream_mxlinux = trunkfolder + "/Modules/Linux/Armv7/mxlinux/mxlinux_armv7_acestream.tar.gz"
+acestream_armv7_openelec = trunkfolder + "/Modules/Linux/Armv7/openelec/openelec-acestream.tar.gz"
+acestream_armv7_xbian = trunkfolder + "/Modules/Linux/Armv7/xbian/xbian_acestream.tar.gz"
 #Linux i386 and x86_64 (including openelec)
-sopcast_linux_generico =  "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/Sopcastx86_64i386/sopcast_linux.tar.gz"
-openelecx86_64_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/Openelec/sopcast_openelec64.tar.gz"
-openeelcx86_64_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/Openelec/acestream_openelec64_3051fix.tar.gz"
-openelecxi386_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/openelec/sopcast_openeleci386.tar.gz"
-openeelcxi386_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/openelec/acestream_openeleci386_303fix2.tar.gz"
+sopcast_linux_generico =  trunkfolder + "/Modules/Linux/Sopcastx86_64i386/sopcast_linux.tar.gz"
+openelecx86_64_sopcast = trunkfolder + "/Modules/Linux/x86_64/Openelec/sopcast_openelec64.tar.gz"
+openeelcx86_64_acestream = trunkfolder + "/Modules/Linux/x86_64/Openelec/acestream_openelec64_3051.tar.gz"
+openelecxi386_sopcast = trunkfolder + "/Modules/Linux/i386/openelec/sopcast_openeleci386.tar.gz"
+openeelcxi386_acestream = trunkfolder + "/Modules/Linux/i386/openelec/acestream_openeleci386_303fix.tar.gz"
 #gen linux
-acestream_linux_x64_generic = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/x86_64/acestream-linux-x86_64_3051.tar.gz"
-acestream_linux_i386_generic = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Linux/i386/acestream-linux-i386_303.tar.gz"
+acestream_linux_x64_generic = trunkfolder + "/Modules/Linux/x86_64/acestream-linux-x86_64_3051.tar.gz"
+acestream_linux_i386_generic = trunkfolder + "/Modules/Linux/i386/acestream-linux-i386_303.tar.gz"
 #Android
-sopcast_apk = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/SopCast.apk.tar.gz"
-acestreamengine_apk_arm = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AceStream-3.0.6-2in1.apk.tar.gz"
-acestreamengine_apk_x86 = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AceStream-3.0.6-2in1.apk.tar.gz"
-android_aceengine_arm = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/org.acestream.engine-arm-3.0.6.tar.gz"
-android_aceengine_x86 = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/org.acestream.engine_x86.tar.gz"
-android_aceplayer_arm = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AcePlayer-3.0.6-2in1.apk.tar.gz"
-android_aceplayer_x86 = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Android/AcePlayer-3.0.6-2in1.apk.tar.gz"
+sopcast_apk = trunkfolder + "/Modules/Android/SopCast.apk.tar.gz"
+acestreamengine_apk_arm = trunkfolder + "/Modules/Android/AceStream-3.0.6-2in1.apk.tar.gz"
+acestreamengine_apk_x86 = trunkfolder + "/Modules/Android/AceStream-3.0.6-2in1.apk.tar.gz"
+android_aceengine_arm = trunkfolder + "/Modules/Android/org.acestream.engine-arm-3.0.6.tar.gz"
+android_aceengine_x86 = trunkfolder + "/Modules/Android/org.acestream.engine_x86.tar.gz"
+android_aceplayer_arm = trunkfolder + "/Modules/Android/AcePlayer-3.0.6-2in1.apk.tar.gz"
+android_aceplayer_x86 = trunkfolder + "/Modules/Android/AcePlayer-3.0.6-2in1.apk.tar.gz"
 #Mac OSX
-osx_i386_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/i386/sopcast_osxi386.tar.gz"
-osx_i386_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/AceStreamWineOSX.zip"
-osx_x64_sopcast = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/x86_64/sopcast_osx64.tar.gz"
-osx_x64_acestream = "http://p2p-strm.googlecode.com/svn/trunk/Modules/MacOsx/AceStreamWineOSX.zip"
+osx_i386_sopcast = trunkfolder + "/Modules/MacOsx/i386/sopcast_osxi386.tar.gz"
+osx_i386_acestream = trunkfolder + "/Modules/MacOsx/AceStreamWineOSX.zip"
+osx_x64_sopcast = trunkfolder + "/Modules/MacOsx/x86_64/sopcast_osx64.tar.gz"
+osx_x64_acestream = trunkfolder + "/Modules/MacOsx/AceStreamWineOSX.zip"
 #Windows Files
-acestream_windows = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/acewindows-aceengine3.0.4.tar.gz"
-srvany_executable = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/srvany.tar.gz"
-srvany_permissions = "http://p2p-strm.googlecode.com/svn/trunk/Modules/Windows/sopcastp2p-permissions.txt"
+acestream_windows = trunkfolder + "/Modules/Windows/acewindows-aceengine3.0.4.tar.gz"
+srvany_executable = trunkfolder + "/Modules/Windows/srvany.tar.gz"
+srvany_permissions = trunkfolder + "/Modules/Windows/sopcastp2p-permissions.txt"
 
 def check_for_updates():
 	try:
-		version_source = get_page_source("http://p2p-strm.googlecode.com/svn/trunk/ModuleVersions/versions.info")
+		version_source = get_page_source(trunkfolder + "/ModuleVersions/versions.info")
 	except: version_source = ""
 	if version_source:
 		version_source = eval(version_source)
@@ -111,7 +112,7 @@ def first_conf():
 				settings.setSetting('raspberrypi',value='true')
 				settings.setSetting('python_cmd',value='python2')
 			else:
-				mensagemok(translate(40000),translate(400007),translate(400008))
+				mensagemok(translate(30000),translate(30103),translate(30104))
 				OS_list = ["OpenELEC","Raspbmc","Xbian","Pipplware","Arch Linux Arm"]
 				OS_Rpi_choose = xbmcgui.Dialog().select
 				choose=OS_Rpi_choose('Select your OS',OS_list)
@@ -126,7 +127,7 @@ def first_conf():
 			elif os.path.isfile("/etc/xbian_version"):
 				settings.setSetting('xbianarm7',value='true')
 			else:
-                		mensagemok(translate(40000),translate(40109),translate(40110))
+                		mensagemok(translate(30000),translate(30107),translate(30108))
                 		OS_list = ["MXLinux","OpenELEC","Xbian","Jynxbox Pure Linux"]
                 		choose=xbmcgui.Dialog().select('Select your OS',OS_list)
                 		if choose > -1:
@@ -142,14 +143,14 @@ def first_conf():
 				if re.search(os.uname()[1],"openelec",re.IGNORECASE):
 					settings.setSetting('openelecx86_64',value='true')
 				else:
-					opcao= xbmcgui.Dialog().yesno(translate(40000), translate(40113))
+					opcao= xbmcgui.Dialog().yesno(translate(30000), translate(30110))
 					if opcao: 
 						settings.setSetting('openelecx86_64',value='true')
 			elif os.uname()[4] == "i386" or os.uname()[4] == "i686":
 				if re.search(os.uname()[1],"openelec",re.IGNORECASE):	
 					settings.setSetting('openeleci386',value='true')
 				else:
-					opcao= xbmcgui.Dialog().yesno(translate(40000), translate(600023))
+					opcao= xbmcgui.Dialog().yesno(translate(30000), translate(30111))
 					if opcao: 
 						settings.setSetting('openeleci386',value='true')
 			check_for_updates()
@@ -176,7 +177,7 @@ def configure_sopcast(latest_version):
 			print("Detected linux armv6 - possible Raspberry PI")
 			#Sop
 			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
-			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(40025),translate(40000))
+			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(30105),translate(30000))
 			import tarfile            
 			if tarfile.is_tarfile(SPSC_KIT):
 				path_libraries = os.path.join(pastaperfil,"sopcast")
@@ -189,7 +190,7 @@ def configure_sopcast(latest_version):
 		elif os.uname()[4] == "armv7l":
 			if settings.getSetting('jynxbox_arm7') == "true":
 				SPSC_KIT = os.path.join(addonpath,sopcast_jynxbox.split("/")[-1])
-				download_tools().Downloader(sopcast_jynxbox,SPSC_KIT,translate(40025),translate(40000))
+				download_tools().Downloader(sopcast_jynxbox,SPSC_KIT,translate(30105),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(SPSC_KIT):
 					path_libraries = os.path.join(pastaperfil)
@@ -200,7 +201,7 @@ def configure_sopcast(latest_version):
 				return
 			else:
 				SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
-				download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(40025),translate(40000))
+				download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(30105),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(SPSC_KIT):
 					path_libraries = os.path.join(pastaperfil,"sopcast")
@@ -215,7 +216,7 @@ def configure_sopcast(latest_version):
 			if settings.getSetting('openelecx86_64') == "true":
 				print("Detected OpenELEC x86_64")
 				SPSC_KIT = os.path.join(addonpath,openelecx86_64_sopcast.split("/")[-1])
-				download_tools().Downloader(openelecx86_64_sopcast,SPSC_KIT,translate(40025),translate(40000))
+				download_tools().Downloader(openelecx86_64_sopcast,SPSC_KIT,translate(30105),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(SPSC_KIT):
 					download_tools().extract(SPSC_KIT,pastaperfil)
@@ -228,7 +229,7 @@ def configure_sopcast(latest_version):
 			generic = False
 			if settings.getSetting('openeleci386') == "true":
 				SPSC_KIT = os.path.join(addonpath,openelecxi386_sopcast.split("/")[-1])
-				download_tools().Downloader(openelecxi386_sopcast,SPSC_KIT,translate(40025),translate(40000))
+				download_tools().Downloader(openelecxi386_sopcast,SPSC_KIT,translate(30105),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(SPSC_KIT):
 					download_tools().extract(SPSC_KIT,pastaperfil)
@@ -239,7 +240,7 @@ def configure_sopcast(latest_version):
 			else: generic = True
 		if generic == True:
 			SPSC_KIT = os.path.join(addonpath,sopcast_linux_generico.split("/")[-1])
-			download_tools().Downloader(sopcast_linux_generico,SPSC_KIT,translate(40025),translate(40000))
+			download_tools().Downloader(sopcast_linux_generico,SPSC_KIT,translate(30105),translate(30000))
 			import tarfile
 			if tarfile.is_tarfile(SPSC_KIT):
 				path_libraries = os.path.join(pastaperfil,"sopcast")
@@ -272,7 +273,7 @@ def configure_sopcast(latest_version):
 		import ctypes
                 is_admin=ctypes.windll.shell32.IsUserAnAdmin() != 0
                 if is_admin == False:
-                    mensagemok(translate(40000),translate(40158),translate(40159))
+                    mensagemok(translate(30000),translate(30115),translate(30116))
                 else:
 		    import subprocess
                     cmd = ['sc','delete','sopcastp2p']
@@ -280,8 +281,8 @@ def configure_sopcast(latest_version):
                     for line in proc.stdout:
                         print("cmd out: " + line.rstrip())
                     xbmc.sleep(1000)
-                    ret = mensagemprogresso.create(translate(40000),translate(40000))
-                    mensagemprogresso.update(0,translate(40160),"  ")
+                    ret = mensagemprogresso.create(translate(30000),translate(30000))
+                    mensagemprogresso.update(0,translate(30117),"  ")
                     xbmc.sleep(1000)
                     import _winreg
                     aReg = _winreg.ConnectRegistry(None,_winreg.HKEY_LOCAL_MACHINE)
@@ -291,14 +292,14 @@ def configure_sopcast(latest_version):
                         sopcast_executable = value
                         print("Installation executable of sopcast was found: " + sopcast_executable)
                         _winreg.CloseKey(aKey)
-                        mensagemprogresso.update(10,translate(40160),translate(40161))
+                        mensagemprogresso.update(10,translate(30117),translate(30118))
                     except:
                         sopcast_executable = ""
-                        mensagemok(translate(40000),translate(40162),translate(40163))
+                        mensagemok(translate(30000),translate(30119),translate(30120))
                     if not sopcast_executable: pass
                     else:
                         xbmc.sleep(1000)
-                        mensagemprogresso.update(20,translate(40164),"  ")
+                        mensagemprogresso.update(20,translate(30121),"  ")
                         xbmc.sleep(1000)
                         print ("Getting windows users IDS")
                         aReg = _winreg.ConnectRegistry(None,_winreg.HKEY_LOCAL_MACHINE)
@@ -321,17 +322,17 @@ def configure_sopcast(latest_version):
                             except:
                                 pass
                         if not users:
-                            mensagemok(translate(40000),translate(40165))
+                            mensagemok(translate(30000),translate(30122))
                         else:
-                            mensagemprogresso.update(30,translate(40164),translate(40161))
+                            mensagemprogresso.update(30,translate(30121),translate(30118))
                             xbmc.sleep(200)
-                            mensagemprogresso.update(30,translate(40166),"   ")
+                            mensagemprogresso.update(30,translate(30123),"   ")
                             xbmc.sleep(1000)
                             print("System Users", users)
                             srvany_final_location = os.path.join(sopcast_executable.replace("SopCast.exe",""),"srvany.exe")
                             srvany_download_location = os.path.join(addonpath,"srvany.exe")
                             srvanytgz_download_location = os.path.join(addonpath,"srvany.tar.gz")                            
-                            download_tools().Downloader(srvany_executable,srvanytgz_download_location,translate(40167),translate(40000)) 
+                            download_tools().Downloader(srvany_executable,srvanytgz_download_location,translate(30124),translate(30000)) 
                             xbmc.sleep(1000)
                             import tarfile
                             if tarfile.is_tarfile(srvanytgz_download_location):
@@ -341,9 +342,9 @@ def configure_sopcast(latest_version):
                                 download_tools().remove(srvanytgz_download_location)
                                 download_tools().remove(srvany_download_location)
                             xbmc.sleep(1000)
-                            ret = mensagemprogresso.create(translate(40000),translate(40000))
+                            ret = mensagemprogresso.create(translate(30000),translate(30000))
                             xbmc.sleep(200)
-                            mensagemprogresso.update(35,translate(40168),"  ")
+                            mensagemprogresso.update(35,translate(30125),"  ")
                             xbmc.sleep(1000)
                             import subprocess
                             cmd = ['sc','create','sopcastp2p','binpath=',os.path.join(os.path.join(sopcast_executable.replace("SopCast.exe","")),'srvany.exe')]
@@ -353,11 +354,11 @@ def configure_sopcast(latest_version):
                                 print ("cmd out: " + line.rstrip())
                                 servicecreator = True
                             if servicecreator == False:
-                                mensagemok(translate(40000),translate(40169))
+                                mensagemok(translate(30000),translate(30126))
                             else:
-                                mensagemprogresso.update(40,translate(40168),translate(40161))
+                                mensagemprogresso.update(40,translate(30125),translate(30118))
                                 xbmc.sleep(1000)
-                                mensagemprogresso.update(45,translate(40170),"  ")
+                                mensagemprogresso.update(45,translate(30127),"  ")
                                 xbmc.sleep(1000)
                                 print("Trying to modify regedit....")
                                 try:
@@ -366,15 +367,15 @@ def configure_sopcast(latest_version):
                                     _winreg.SetValueEx(key, 'AppDirectory', 0, _winreg.REG_SZ, os.path.join(sopcast_executable.replace("SopCast.exe","")))
                                     _winreg.SetValueEx(key, 'Application', 0, _winreg.REG_SZ, os.path.join(os.path.join(sopcast_executable.replace("SopCast.exe","")),"SopCast.exe"))
                                     _winreg.SetValueEx(key, 'AppParameters', 0, _winreg.REG_SZ, "sop://")
-                                    mensagemprogresso.update(50,translate(40170), translate(40161))
+                                    mensagemprogresso.update(50,translate(30127), translate(30118))
                                     regedit = True
                                 except:
-                                    mensagemok(translate(40000),translate(40171))
+                                    mensagemok(translate(30000),translate(30128))
                                     regedit = False
                                 if regedit == False: pass
                                 else:
                                     xbmc.sleep(1000)
-                                    mensagemprogresso.update(50,translate(40172), "   ")
+                                    mensagemprogresso.update(50,translate(30129), "   ")
                                     cmd = ['sc','sdshow','sopcastp2p']
                                     proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
                                     lines = []
@@ -382,7 +383,7 @@ def configure_sopcast(latest_version):
 					print(line.rstrip())
                                         if line.rstrip() != "" and "(" in line.rstrip(): lines.append(line.rstrip())
                                         else: pass
-                                    if len(lines) != 1: mensagemok(translate(40000),translate(40173))
+                                    if len(lines) != 1: mensagemok(translate(30000),translate(30130))
                                     else:
                                         linha_arr = []
                                         for user in users:
@@ -395,32 +396,32 @@ def configure_sopcast(latest_version):
                                         print("Final line: " + linha_final)
                                         permissions = False
                                         xbmc.sleep(500)
-                                        mensagemprogresso.update(60,translate(40172), translate(40161))
+                                        mensagemprogresso.update(60,translate(30129), translate(30118))
                                         xbmc.sleep(500)
-                                        mensagemprogresso.update(60,translate(40174), "   ")
+                                        mensagemprogresso.update(60,translate(30131), "   ")
                                         cmd = ['sc','sdset','sopcastp2p',linha_final]
                                         proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
                                         for line in proc.stdout:
                                             print(line.rstrip())
                                             permissions = True
-                                        if permissions == False: mensagemok(translate(40000),translate(40175))
+                                        if permissions == False: mensagemok(translate(30000),translate(30132))
                                         else:
-                                            mensagemprogresso.update(70,translate(40174), translate(40161))
+                                            mensagemprogresso.update(70,translate(30131), translate(30118))
                                             xbmc.sleep(1000)
-                                            mensagemprogresso.update(70,translate(40176), "   ")
+                                            mensagemprogresso.update(70,translate(30133), "   ")
                                             print("Trying to set sopcastp2p service regedit permissions...")
-                                            download_tools().Downloader(srvany_permissions,os.path.join(pastaperfil,"sopcastp2p-permissions.txt"),translate(40177),translate(40000))
+                                            download_tools().Downloader(srvany_permissions,os.path.join(pastaperfil,"sopcastp2p-permissions.txt"),translate(30134),translate(30000))
                                             xbmc.sleep(500)
-                                            ret = mensagemprogresso.create(translate(40000),translate(40000))
+                                            ret = mensagemprogresso.create(translate(30000),translate(30000))
                                             xbmc.sleep(500)
-                                            mensagemprogresso.update(80,translate(40178), "   ")
+                                            mensagemprogresso.update(80,translate(30135), "   ")
                                             xbmc.sleep(1000)
                                             cmd = ['regini',os.path.join(pastaperfil,"sopcastp2p-permissions.txt")]
                                             proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
                                             for line in proc.stdout:
                                                 print(line.rstrip())
-                                            mensagemprogresso.update(90,translate(40178), translate(40178))
-                                            mensagemprogresso.update(100,translate(40179), "   ")
+                                            mensagemprogresso.update(90,translate(30135), translate(30135))
+                                            mensagemprogresso.update(100,translate(30136), "   ")
                                             xbmc.sleep(2000)
                                             mensagemprogresso.close()
                                             if latest_version: settings.setSetting('sopcast_version',value=latest_version)
@@ -441,7 +442,7 @@ def configure_sopcast(latest_version):
 			if not os.path.exists(pastaperfil):
 				xbmcvfs.mkdir(pastaperfil)		
 			MAC_KIT = os.path.join(addonpath,mac_package.split("/")[-1])
-			download_tools().Downloader(mac_package,MAC_KIT,translate(40025),translate(40000))
+			download_tools().Downloader(mac_package,MAC_KIT,translate(30105),translate(30000))
 			import tarfile
 			if tarfile.is_tarfile(MAC_KIT):
 				path_libraries = os.path.join(pastaperfil)
@@ -454,7 +455,7 @@ def configure_sopcast(latest_version):
 			if latest_version: settings.setSetting('sopcast_version',value=latest_version)
 			return
 		else:
-			mensagemok(translate(40000),translate(600014))
+			mensagemok(translate(30000),translate(30137))
 			return
 				
 	elif xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
@@ -486,7 +487,7 @@ def configure_sopcast(latest_version):
 			app_id = xbmcfolder[i]
 			xbmc_data_path = os.path.join("/data", "data", app_id)
 			if os.path.exists(xbmc_data_path) and uid == os.stat(xbmc_data_path).st_uid:
-				android_binary_dir = os.path.join(xbmc_data_path, "files", "plugin.video.p2p-streams")
+				android_binary_dir = os.path.join(xbmc_data_path, "files", "plugin.video.plexus")
 				if not os.path.exists(android_binary_dir):
             				os.makedirs(android_binary_dir)
 				android_binary_path = os.path.join(android_binary_dir, "sopclient")
@@ -498,35 +499,35 @@ def configure_sopcast(latest_version):
 				import stat
 				os.chmod(binary_path, st.st_mode | stat.S_IEXEC)
 				settings.setSetting('android_sopclient',value=binary_path)
-				opcao= xbmcgui.Dialog().yesno(translate(40000), translate(50011),translate(50012))
+				opcao= xbmcgui.Dialog().yesno(translate(30000), translate(30138),translate(30139))
 				if not opcao:
 					settings.setSetting('external-sopcast',value='1')
 					settings.setSetting('force_android',value='true')
 					sopcast_installed = True
-					mensagemok(translate(40000),translate(50014))
+					mensagemok(translate(30000),translate(30140))
 				else:
-					mensagemok(translate(40000),translate(50013))
+					mensagemok(translate(30000),translate(30141))
 					if os.path.exists(os.path.join("sdcard","Download")):
 						pasta = os.path.join("sdcard","Download")
 						sopfile = os.path.join("sdcard","Download",sopcast_apk.split("/")[-1])
 					else:
 						dialog = xbmcgui.Dialog()
-						pasta = dialog.browse(int(0), translate(40190), 'myprograms')
+						pasta = dialog.browse(int(0), translate(30142), 'myprograms')
 						sopfile = os.path.join(pasta,sopcast_apk.split("/")[-1])
-					download_tools().Downloader(sopcast_apk,sopfile,translate(40073),translate(40000))
+					download_tools().Downloader(sopcast_apk,sopfile,translate(30143),translate(30000))
 					import tarfile
 					if tarfile.is_tarfile(sopfile):
 						download_tools().extract(sopfile,pasta)
 						download_tools().remove(sopfile)
-					mensagemok(translate(40000),translate(50015),pasta,translate(50016))
+					mensagemok(translate(30000),translate(30144),pasta,translate(30145))
 					sopcast_installed = True
 					settings.setSetting('external-sopcast',value='0')
-					mensagemok(translate(40000),translate(50014))
+					mensagemok(translate(30000),translate(30140))
 				if latest_version: settings.setSetting('sopcast_version',value=latest_version)
 				return
 
 		else:
-			mensagemok(translate(40000),translate(50017))
+			mensagemok(translate(30000),translate(30146))
 			return
 			
 			
@@ -541,7 +542,7 @@ def configure_acestream(latest_version):
 			if settings.getSetting('openelecarm6') == "true": acestream_rpi = acestream_openelec_raspberry
 			else: acestream_rpi = acestream_generic_raspberry
 			ACE_KIT = os.path.join(addonpath,acestream_rpi.split("/")[-1])
-			download_tools().Downloader(acestream_rpi,ACE_KIT,translate(40026),translate(40000))
+			download_tools().Downloader(acestream_rpi,ACE_KIT,translate(30106),translate(30000))
 			import tarfile            
 			if tarfile.is_tarfile(ACE_KIT):
 				path_libraries = os.path.join(pastaperfil,"acestream")
@@ -557,7 +558,7 @@ def configure_acestream(latest_version):
 			elif settings.getSetting('mxlinuxarm7') == "true" or settings.getSetting('jynxbox_arm7') == "true": acestream_package = acestream_mxlinux
 		
 			ACE_KIT = os.path.join(addonpath,acestream_package.split("/")[-1])
-			download_tools().Downloader(acestream_package,ACE_KIT,translate(40026),translate(40000))
+			download_tools().Downloader(acestream_package,ACE_KIT,translate(30106),translate(30000))
 			import tarfile
 			if tarfile.is_tarfile(ACE_KIT):
 				path_libraries = os.path.join(pastaperfil,"acestream")
@@ -571,7 +572,7 @@ def configure_acestream(latest_version):
 			if settings.getSetting('openelecx86_64') == "true":
 				print("OpenELEC x86_64 Acestream configuration")
 				ACE_KIT = os.path.join(addonpath,openeelcx86_64_acestream.split("/")[-1])
-				download_tools().Downloader(openeelcx86_64_acestream ,ACE_KIT,translate(40026),translate(40000))
+				download_tools().Downloader(openeelcx86_64_acestream ,ACE_KIT,translate(30106),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(ACE_KIT):
 					download_tools().extract(ACE_KIT,pastaperfil)
@@ -583,7 +584,7 @@ def configure_acestream(latest_version):
 			else:
 				print("64 bit Linux Disto Acestream Configuration")
 				ACE_KIT = os.path.join(addonpath,acestream_linux_x64_generic.split("/")[-1])
-				download_tools().Downloader(acestream_linux_x64_generic,ACE_KIT,translate(40026),translate(40000))
+				download_tools().Downloader(acestream_linux_x64_generic,ACE_KIT,translate(30106),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(ACE_KIT):
 					download_tools().extract(ACE_KIT,pastaperfil)
@@ -596,7 +597,7 @@ def configure_acestream(latest_version):
 			if settings.getSetting('openeleci386') == "true":
 				print("32 bit Openelec Acestream Configuration")
 				ACE_KIT = os.path.join(addonpath,openeelcxi386_acestream.split("/")[-1])
-				download_tools().Downloader(openeelcxi386_acestream,ACE_KIT,translate(40026),translate(40000))
+				download_tools().Downloader(openeelcxi386_acestream,ACE_KIT,translate(30106),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(ACE_KIT):
 					download_tools().extract(ACE_KIT,pastaperfil)
@@ -607,7 +608,7 @@ def configure_acestream(latest_version):
 			else:
 				print("32 bit Linux general distro Acestream Configuration")
 				ACE_KIT = os.path.join(addonpath,acestream_linux_i386_generic.split("/")[-1])
-				download_tools().Downloader(acestream_linux_i386_generic,ACE_KIT,translate(40026),translate(40000))
+				download_tools().Downloader(acestream_linux_i386_generic,ACE_KIT,translate(30106),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(ACE_KIT):
 					download_tools().extract(ACE_KIT,pastaperfil)
@@ -621,7 +622,7 @@ def configure_acestream(latest_version):
 		if not os.path.exists(pastaperfil): xbmcvfs.mkdir(pastaperfil)
           #Ace
 		SPSC_KIT = os.path.join(addonpath,acestream_windows.split("/")[-1])
-		download_tools().Downloader(acestream_windows,SPSC_KIT,translate(40026),translate(40000))
+		download_tools().Downloader(acestream_windows,SPSC_KIT,translate(30106),translate(30000))
 		import shutil
 		if os.path.exists(os.path.join(pastaperfil,"acestream")):
 			shutil.rmtree(os.path.join(pastaperfil,"acestream"))
@@ -649,7 +650,7 @@ def configure_acestream(latest_version):
 		if available == True:			
 			MAC_KIT = os.path.join('/Applications',mac_package.split("/")[-1])
 			if not xbmcvfs.exists(os.path.join('/Applications','Ace Stream.app')):
-				download_tools().Downloader(mac_package,MAC_KIT,translate(40026),translate(40000))
+				download_tools().Downloader(mac_package,MAC_KIT,translate(30106),translate(30000))
 				if xbmcvfs.exists(MAC_KIT):
 					xbmc.sleep(1000)
 					cmd = 'unzip /Applications/AceStreamWineOSX.zip'
@@ -662,7 +663,7 @@ def configure_acestream(latest_version):
 			if latest_version: settings.setSetting('acestream_version',value=latest_version)
 			return
 		else:
-			mensagemok(translate(40000),translate(600014))
+			mensagemok(translate(30000),translate(30137))
 			return
 			
 				
@@ -693,10 +694,10 @@ def configure_acestream(latest_version):
 			#Acestreamconfiguration for android starts here
 			if "arm" in os.uname()[4]:
 				acebundle = os.path.join(pastaperfil,android_aceengine_arm.split("/")[-1])
-				download_tools().Downloader(android_aceengine_arm,acebundle,translate(70014),translate(40000))
+				download_tools().Downloader(android_aceengine_arm,acebundle,translate(30156),translate(30000))
 			else:
 				acebundle = os.path.join(pastaperfil,android_aceengine_x86.split("/")[-1])
-				download_tools().Downloader(android_aceengine_x86,acebundle,translate(70014),translate(40000))
+				download_tools().Downloader(android_aceengine_x86,acebundle,translate(30156),translate(30000))
 			import tarfile
 			if tarfile.is_tarfile(acebundle):
 				download_tools().extract(acebundle,pastaperfil)
@@ -704,7 +705,7 @@ def configure_acestream(latest_version):
 			orgacestreamenginefolder = os.path.join(pastaperfil,"org.acestream.engine")
 			xbmc_data_path = os.path.join("/data", "data", app_id)
 			if os.path.exists(xbmc_data_path) and uid == os.stat(xbmc_data_path).st_uid:
-				android_binary_dir = os.path.join(xbmc_data_path, "files", "plugin.video.p2p-streams")
+				android_binary_dir = os.path.join(xbmc_data_path, "files", "plugin.video.plexus")
 				if not os.path.exists(android_binary_dir): os.makedirs(android_binary_dir)
             		android_acestream_folder = os.path.join(android_binary_dir,"org.acestream.engine")
             		if not os.path.exists(android_acestream_folder): os.makedirs(android_acestream_folder)
@@ -737,31 +738,31 @@ def configure_acestream(latest_version):
 					except: pass
             		try: xbmcvfs.mkdir(os.path.join('/sdcard','org.acestream.engine'))
             		except: pass
-			opcao= xbmcgui.Dialog().yesno(translate(40000), translate(70015),translate(70016))
+			opcao= xbmcgui.Dialog().yesno(translate(30000), translate(30157),translate(30158))
 			if not opcao:
 				settings.setSetting('engine_app','0')
 			else:
-				mensagemok(translate(40000),translate(50018),translate(50019),translate(50020))
+				mensagemok(translate(30000),translate(30147),translate(30148),translate(30149))
 				if os.path.exists(os.path.join("sdcard","Download")):
 					pasta = os.path.join("sdcard","Download")
 					if "arm" in os.uname()[4]: acefile = os.path.join("sdcard","Download",acestreamengine_apk_arm.split("/")[-1])
 					else: acefile = os.path.join("sdcard","Download",acestreamengine_apk_x86.split("/")[-1])
 				else:
 					dialog = xbmcgui.Dialog()
-					pasta = dialog.browse(int(0), translate(40190), 'myprograms')
+					pasta = dialog.browse(int(0), translate(30142), 'myprograms')
 					if "arm" in os.uname()[4]: acefile = os.path.join(pasta,acestreamengine_apk_arm.split("/")[-1])
 					else: acefile = os.path.join(pasta,acestreamengine_apk_x86.split("/")[-1])
-				if "arm" in os.uname()[4]: download_tools().Downloader(acestreamengine_apk_arm,acefile,translate(40072),translate(40000))
-				else: download_tools().Downloader(acestreamengine_apk_x86,acefile,translate(40072),translate(40000))
+				if "arm" in os.uname()[4]: download_tools().Downloader(acestreamengine_apk_arm,acefile,translate(30150),translate(30000))
+				else: download_tools().Downloader(acestreamengine_apk_x86,acefile,translate(30150),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(acefile):
 					download_tools().extract(acefile,pasta)
 					download_tools().remove(acefile)
 				xbmc.sleep(2000)
-				mensagemok(translate(40000),translate(50021),pasta,translate(50016))
-				mensagemok(translate(40000),translate(50023),translate(50024),translate(50025))
+				mensagemok(translate(30000),translate(30151),pasta,translate(30145))
+				mensagemok(translate(30000),translate(30153),translate(30154),translate(30155))
 				settings.setSetting('engine_app','1')
-			opcao= xbmcgui.Dialog().yesno(translate(40000), translate(70017),translate(70018))
+			opcao= xbmcgui.Dialog().yesno(translate(30000), translate(30159),translate(30160))
 			if opcao:
 				if os.path.exists(os.path.join("sdcard","Download")):
 					pasta = os.path.join("sdcard","Download")
@@ -769,23 +770,23 @@ def configure_acestream(latest_version):
 					else: os.path.join("sdcard","Download",android_aceplayer_x86.split("/")[-1])
 				else:
 					dialog = xbmcgui.Dialog()
-					pasta = dialog.browse(int(0), translate(40190), 'myprograms')
+					pasta = dialog.browse(int(0), translate(30142), 'myprograms')
 					if "arm" in os.uname()[4]: acefile = os.path.join(pasta,acestreamengine_apk_arm.split("/")[-1])
 					else: acefile = os.path.join(pasta,acestreamengine_apk_x86.split("/")[-1])
-				if "arm" in os.uname()[4]: download_tools().Downloader(android_aceplayer_arm,acefile,translate(70019),translate(40000))
-				else: download_tools().Downloader(android_aceplayer_x86,acefile,translate(70019),translate(40000))
+				if "arm" in os.uname()[4]: download_tools().Downloader(android_aceplayer_arm,acefile,translate(30161),translate(30000))
+				else: download_tools().Downloader(android_aceplayer_x86,acefile,translate(30161),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(acefile):
 					download_tools().extract(acefile,pasta)
 					download_tools().remove(acefile)
 				xbmc.sleep(2000)
-				mensagemok(translate(40000),translate(70020),pasta,translate(50016))
-				opcao= xbmcgui.Dialog().yesno(translate(40000), translate(70021))
+				mensagemok(translate(30000),translate(30162),pasta,translate(30145))
+				opcao= xbmcgui.Dialog().yesno(translate(30000), translate(30163))
 				if opcao:
 					settings.setSetting('engine_app','2')							
 			if latest_version: settings.setSetting('acestream_version',value=latest_version)
-			mensagemok(translate(40000),translate(50022))
+			mensagemok(translate(30000),translate(30152))
 			return			
 		else:
-			mensagemok(translate(40000),translate(50017))
+			mensagemok(translate(30000),translate(30146))
 			return

@@ -61,7 +61,7 @@ def sopstreams(name,iconimage,sop):
 	    except: pass
 	if not xbmc.getCondVisibility('system.platform.windows'):
 	    if xbmc.getCondVisibility('System.Platform.Android'):
-	    	if  settings.getSetting('external-sopcast') == "0":
+	    	if  settings.getSetting('external-sopcast') == "1":
 			xbmc.executebuiltin('XBMC.StartAndroidActivity("org.sopcast.android","android.intent.action.VIEW","",'+sop+')')    
 		else: sopstreams_builtin(name,iconimage,sop)
             else: sopstreams_builtin(name,iconimage,sop)
