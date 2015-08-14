@@ -15,111 +15,152 @@ msgstr ""
 
 msgctxt "#30000"
 msgid "Plexus"
-""
+msgstr ""
 
 msgctxt "#30001"
 msgid "My Streams"
-""
+msgstr ""
 
 msgctxt "#30002"
 msgid "Played history"
-""
+msgstr ""
 
 msgctxt "#30003"
 msgid "AceStream: "
-""
+msgstr ""
 
 msgctxt "#30004"
 msgid "SopCast: "
-""
+msgstr ""
 
 msgctxt "#30005"
 msgid "Play Acestream hash / Torrent URI"
-""
+msgstr ""
 
 msgctxt "#30006"
 msgid "Load local .torrent file"
-""
+msgstr ""
 
 msgctxt "#30007"
 msgid "Play SopCast ID"
-""
+msgstr ""
 
 msgctxt "#30008"
 msgid "Play SopCast URI"
-""
+msgstr ""
 
 msgctxt "#30009"
 msgid "Add stream"
-""
+msgstr ""
 
 msgctxt "#30010"
 msgid "Stream url"
-""
+msgstr ""
 
 msgctxt "#30011"
 msgid "Url is not valid"
-""
+msgstr ""
 
 msgctxt "#30012"
 msgid "Do you want to set an icon for the stream?"
-""
+msgstr ""
 
 msgctxt "#30013"
 msgid "Choose the icon"
-""
+msgstr ""
 
 msgctxt "#30014"
 msgid "Stream name"
-""
+msgstr ""
 
 msgctxt "#30015"
 msgid "Successfully added!"
-""
+msgstr ""
 
 msgctxt "#30016"
 msgid "Successfully removed!"
-""
+msgstr ""
 
 msgctxt "#30017"
 msgid "Setting changed successfully!"
-""
+msgstr ""
 
 msgctxt "#30018"
 msgid "ID"
-""
+msgstr ""
 
 msgctxt "#30019"
 msgid "URI"
-""
+msgstr ""
 
 msgctxt "#30020"
 msgid "User ID"
-""
+msgstr ""
 
 msgctxt "#30021"
 msgid "User URI"
-""
+msgstr ""
 
 msgctxt "#30022"
 msgid "Acestream hash"
-""
+msgstr ""
 
 msgctxt "#30023"
 msgid "Extracting module contents. Please wait."
-""
+msgstr ""
 
 msgctxt "#30024"
 msgid "Removing files."
-""
+msgstr ""
 
 msgctxt "#30025"
 msgid "Remove from my streams"
-""
+msgstr ""
 
 msgctxt "#30026"
 msgid "Add to my streams"
-""
+msgstr ""
+
+msgctxt "#30027"
+msgid "(Windows) SopCast configuration incomplete!"
+msgstr ""
+
+msgctxt "#30028"
+msgid "Enable 'Configuration on next run' in the addon settings"
+msgstr ""
+
+msgctxt "#30029"
+msgid "and re-enter the addon (as administrator)"
+msgstr ""
+
+msgctxt "#30030"
+msgid "SopCast - Checking service. Please wait..."
+msgstr ""
+
+msgctxt "#30031"
+msgid "Service created. Attempting to play..."
+msgstr ""
+
+msgctxt "#30032"
+msgid "Channel initialization failed"
+msgstr ""
+
+msgctxt "#30033"
+msgid "Another instance of SopCast is still running on the background"
+msgstr ""
+
+msgctxt "#30034"
+msgid "Do you want to play it?"
+msgstr ""
+
+msgctxt "#30035"
+msgid "Loading stream. Please wait %s seconds."
+msgstr ""
+
+msgctxt "#30036"
+msgid "Waiting till timeout..."
+msgstr ""
+
 
 
 

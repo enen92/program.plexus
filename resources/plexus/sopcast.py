@@ -74,7 +74,7 @@ def sopstreams(name,iconimage,sop):
                     if " 1060:" in line.rstrip():
                         config = False
                         print("Sopcast configuration is not done!")
-            if config == False: mensagemok(translate(40000),translate(40180),translate(40181), translate(40182))
+            if config == False: mensagemok(translate(30000),translate(30027),translate(30028), translate(30029))
             else:
                 import _winreg
                 aReg = _winreg.ConnectRegistry(None,_winreg.HKEY_LOCAL_MACHINE)
@@ -98,14 +98,14 @@ def sopstreams(name,iconimage,sop):
                 servicecreator = False
                 for line in proc.stdout:
                         print("result line: " + line.rstrip())
-                res = handle_wait_socket(int(settings.getSetting('socket_time')),translate(40000),translate(40183))
+                res = handle_wait_socket(int(settings.getSetting('socket_time')),translate(30000),translate(30030))
 
                 if res == True:
                         print("Server created - waiting x seconds for confirmation")
                         try: sock.close()
                         except: pass
                         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                        handle_wait(int(settings.getSetting('stream_time')),translate(40000),translate(40184),segunda='')
+                        handle_wait(int(settings.getSetting('stream_time')),translate(30000),translate(30031),segunda='')
                         try:
                                 result = sock.connect(('127.0.0.1',8902))
                                 connected = True
@@ -127,8 +127,8 @@ def sopstreams(name,iconimage,sop):
                                 	player.play(playlist)
                                 while player._playbackLock:
                                     xbmc.sleep(5000)
-                        else: xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(40040), 1,os.path.join(addonpath,"icon.png")))
-                else: xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(40040), 1,os.path.join(addonpath,"icon.png")))
+                        else: xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(30000), translate(30032), 1,os.path.join(addonpath,"icon.png")))
+                else: xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(30000), translate(30032), 1,os.path.join(addonpath,"icon.png")))
                 print("Player reached the end")
                 cmd = ['sc','stop','sopcastp2p']
                 import subprocess
@@ -182,7 +182,7 @@ def sopstreams_builtin(name,iconimage,sop):
 			existing_instance = True
 		except: existing_instance = False
 		if existing_instance == True:
-			option = xbmcgui.Dialog().yesno(translate(40000), translate(70000),translate(70001))
+			option = xbmcgui.Dialog().yesno(translate(30000), translate(30033),translate(30034))
 			if not option:
 				if xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
 					xbmc_user = os.getlogin()
@@ -216,8 +216,9 @@ def sopstreams_builtin(name,iconimage,sop):
 		url = "http://"+LOCAL_IP+":"+str(VIDEO_PORT)+"/"
 		xbmc.sleep(int(settings.getSetting('wait_time')))
 		res=False
-		counter=50
-		ret = mensagemprogresso.create(translate(40000),"SopCast",translate(40039))
+		#counter=50
+		counter = int(int(settings.getSetting("loading_time"))*2+10)
+		ret = mensagemprogresso.create(translate(30000),"SopCast",translate(30035) % (str(20)))
 		mensagemprogresso.update(0)
 		warning = 0
 		while counter > 0 and spsc.pid:
@@ -226,7 +227,7 @@ def sopstreams_builtin(name,iconimage,sop):
 				break
 			xbmc.sleep(400)
 			counter -= 1
-			mensagemprogresso.update(int((1-(counter/50.0))*100))
+			mensagemprogresso.update(int((1-(counter/50.0))*100),"SopCast",translate(30035) % str(int(int(settings.getSetting("loading_time")) * (1-((1-(counter/50.0)))))))
 			try:
 				urllib2.urlopen(url)
 				counter=0
@@ -252,7 +253,7 @@ def sopstreams_builtin(name,iconimage,sop):
 				xbmc.sleep(200)
 				video_file = os.path.join(pastaperfil,'sopcast.avi')
 				start_new_thread(osx_sopcast_downloader,())
-				handle_wait(int(settings.getSetting('stream_time_osx')),translate(40000),translate(40184),segunda='')
+				handle_wait(int(settings.getSetting('stream_time_osx')),translate(30000),translate(30031),segunda='')
 				listitem.setPath(path=video_file)
 				xbmcplugin.setResolvedUrl(int(sys.argv[1]),True,listitem)
 				player = streamplayer(xbmc.PLAYER_CORE_AUTO , spsc_pid=spsc.pid , listitem=listitem)
@@ -261,7 +262,7 @@ def sopstreams_builtin(name,iconimage,sop):
 					xbmc.sleep(500)
 		else:
 		    xbmc.sleep(200)
-		    xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(40040), 1,os.path.join(addonpath,"icon.png")))
+		    xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(30000), translate(30032), 1,os.path.join(addonpath,"icon.png")))
 
 	except: pass
 	if settings.getSetting('debug_mode') == "true":
@@ -378,7 +379,7 @@ def handle_wait_socket(time_to_wait,title,text,segunda=''):
                 secs = secs + 1
                 percent = increment*secs
                 secs_left = str((time_to_wait - secs))
-                if segunda=='': remaining_display = translate(40187) + " " + str(percent) + " %"
+                if segunda=='': remaining_display = translate(30036) + " " + str(percent) + " %"
                 else: remaining_display=segunda
                 mensagemprogresso.update(percent,text,remaining_display)
                 xbmc.sleep(1000)
