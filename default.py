@@ -110,6 +110,7 @@ elif mode==8: list_history()
 elif mode==9: remove_history()
 elif mode==10: my_streams_menu()
 elif mode==11: add_stream()
+elif mode==12: remove_stream(name,url)
 #from 300-399 Advanced functions
 elif mode==300: advanced_menu()
 elif mode==301: import_advancedxml()
