@@ -81,11 +81,45 @@ msgctxt "#30016"
 msgid "Successfully removed!"
 ""
 
+msgctxt "#30017"
+msgid "Setting changed successfully!"
+""
 
+msgctxt "#30018"
+msgid "ID"
+""
 
+msgctxt "#30019"
+msgid "URI"
+""
 
+msgctxt "#30020"
+msgid "User ID"
+""
 
+msgctxt "#30021"
+msgid "User URI"
+""
 
+msgctxt "#30022"
+msgid "Acestream hash"
+""
+
+msgctxt "#30023"
+msgid "Extracting module contents. Please wait."
+""
+
+msgctxt "#30024"
+msgid "Removing files."
+""
+
+msgctxt "#30025"
+msgid "Remove from my streams"
+""
+
+msgctxt "#30026"
+msgid "Add to my streams"
+""
 
 
 

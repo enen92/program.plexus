@@ -54,5 +54,5 @@ def add_to_history(name,url,mode,iconimage):
 def remove_history():
 	if xbmcvfs.exists(history_file):
 		xbmcvfs.delete(history_file)
-		xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), translate(600026), 1,addonpath+"/icon.png"))
+		xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(30000), translate(30017), 1,os.path.join(addonpath,"icon.png")))
 		

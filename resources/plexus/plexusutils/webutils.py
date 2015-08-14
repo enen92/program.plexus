@@ -43,7 +43,7 @@ class download_tools():
 	
 	def extract(self,file_tar,destination):
 		dp = xbmcgui.DialogProgress()
-		dp.create(translate(40000),translate(40044))
+		dp.create(translate(30000),translate(30023))
 		tar = tarfile.open(file_tar)
 		tar.extractall(destination)
 		dp.update(100)
@@ -52,7 +52,7 @@ class download_tools():
 		
 	def remove(self,file_):
 		dp = xbmcgui.DialogProgress()
-		dp.create(translate(40000),translate(40045))
+		dp.create(translate(30000),translate(30024))
 		os.remove(file_)
 		dp.update(100)
 		dp.close()
@@ -93,7 +93,6 @@ def makeRequest(url, headers=None):
 		response.close()
 		return data
 	except:
-		mensagemok(translate(40000),translate(40122))
 		sys.exit(0)
 		
 def url_isup(url, headers=None):
