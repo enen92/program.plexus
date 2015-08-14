@@ -161,6 +161,140 @@ msgctxt "#30036"
 msgid "Waiting till timeout..."
 msgstr ""
 
+msgctxt "#30037"
+msgid "Choose the local torrent file."
+msgstr ""
+
+msgctxt "#30038"
+msgid "Starting AceStream (ValdikSS proxy mode)"
+msgstr ""
+
+msgctxt "#30039"
+msgid "If the playback fails try to increase the player"
+msgstr ""
+
+msgctxt "#30040"
+msgid "timeout!"
+msgstr ""
+
+msgctxt "#30041"
+msgid "Acestream module not installed."
+msgstr ""
+
+msgctxt "#30042"
+msgid "Torrent not available or invalid."
+msgstr ""
+
+msgctxt "#30043"
+msgid "Starting..."
+msgstr ""
+
+msgctxt "#30044"
+msgid "Awaiting response"
+msgstr ""
+
+msgctxt "#30045"
+msgid "Connecting"
+msgstr ""
+
+msgctxt "#30046"
+msgid "Starting AceStream Engine."
+msgstr ""
+
+msgctxt "#30047"
+msgid "Inital wait:"
+msgstr ""
+
+msgctxt "#30048"
+msgid "seconds"
+msgstr ""
+
+msgctxt "#30049"
+msgid "Playing"
+msgstr ""
+
+msgctxt "#30050"
+msgid "Link received"
+msgstr ""
+
+msgctxt "#30051"
+msgid "Saving file"
+msgstr ""
+
+msgctxt "#30052"
+msgid "Downloading"
+msgstr ""
+
+msgctxt "#30053"
+msgid "Loading..."
+msgstr ""
+
+msgctxt "#30054"
+msgid "Loading acestream"
+msgstr ""
+
+msgctxt "#30055"
+msgid "AceStream engine waiting"
+msgstr ""
+
+msgctxt "#30056"
+msgid "Playing torrent."
+msgstr ""
+
+msgctxt "#30057"
+msgid "No response"
+msgstr ""
+
+msgctxt "#30058"
+msgid "Verifying data"
+msgstr ""
+
+msgctxt "#30059"
+msgid "Pre-buffering"
+msgstr ""
+
+msgctxt "#30060"
+msgid "Downloading"
+msgstr ""
+
+msgctxt "#30061"
+msgid "Buffering"
+msgstr ""
+
+msgctxt "#30062"
+msgid "Acestream Engine"
+msgstr ""
+
+msgctxt "#30063"
+msgid "Stats"
+msgstr ""
+
+msgctxt "#30064"
+msgid "Action:"
+msgstr ""
+
+msgctxt "#30065"
+msgid "Download:"
+msgstr ""
+
+msgctxt "#30066"
+msgid "Upload:"
+msgstr ""
+
+msgctxt "#30067"
+msgid "Seeds:"
+msgstr ""
+
+msgctxt "#30068"
+msgid "Downloaded:"
+msgstr ""
+
+msgctxt "#30069"
+msgid "Uploaded:"
+msgstr ""
+
+
+
 
 
 

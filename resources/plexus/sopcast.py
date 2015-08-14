@@ -2,9 +2,7 @@
 
 """ Plexus (c) 2015 enen92
 
-    The code present on this file had as
-    initial input the X-Sopcast plugin code
-    by Cristi-Atlanta
+    The code present on this file had as initial input the X-Sopcast plugin code by Cristi-Atlanta
 
 """
      

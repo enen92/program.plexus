@@ -130,7 +130,7 @@ class TSengine():
         self.files={}
         self._sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._sock.settimeout(3)
-        self.progress.create(translate(40000),translate(40052))
+        self.progress.create(translate(30000),translate(30043))
         self.tsserv =None
         self.conn=False
         self.title=None
@@ -158,7 +158,7 @@ class TSengine():
         self.tsserv.start()
         comm="HELLOBG"
         self.TSpush(comm)
-        self.progress.update(0,translate(1104)," ")
+        self.progress.update(0,translate(30044)," ")
         while not self.tsserv.version:
             if xbmc.abortRequested:
                 self.log.out("XBMC asked to abort request")
@@ -190,7 +190,7 @@ class TSengine():
         servip=settings.getSetting('ip_addr')
         aceport=int(settings.getSetting('aceporta'))
         self.log.out('Trying to connect')
-        self.progress.update(0,translate(1001),' ')
+        self.progress.update(0,translate(30045),' ')
         if pwin:
             res=self.startWin()
             aceport=self.getWinPort()
@@ -215,7 +215,7 @@ class TSengine():
                 if not res: return False
         i=40
         while (i>1):
-            self.progress.update(0,translate(40046),translate(40049) + str('%s'%i) + ' ' + translate(40050) )
+            self.progress.update(0,translate(30046),translate(30047) + str('%s'%i) + ' ' + translate(30048) )
             try:
                 if pwin: aceport=self.getWinPort()
                 elif posx: aceport=self.getosxPort()
@@ -373,7 +373,7 @@ class TSengine():
         self.title=title
         self.log.out("play")
         self.tsserv.ind=index
-        self.progress.update(89,translate(1005),'')
+        self.progress.update(89,translate(30049),'')
         for k,v in self.files.iteritems():
             if v==index: self.filename=urllib.unquote(k).replace('/','_').replace('\\','_')
         try:    
@@ -395,7 +395,7 @@ class TSengine():
         if self.mode!='PID': spons=' 0 0 0'
         comm='START '+self.mode+ ' ' + self.url + ' '+ str(index) + spons
         self.TSpush(comm)
-        self.progress.update(89,translate(1004),'')
+        self.progress.update(89,translate(30050),'')
         while not self.tsserv.got_url and not self.progress.iscanceled() and not self.tsserv.err:
             self.progress.update(int(self.tsserv.proc),self.tsserv.label,self.tsserv.line)
             xbmc.sleep(200)
@@ -403,12 +403,12 @@ class TSengine():
                 self.log.out("XBMC is shutting down")
                 break
         if self.tsserv.err: self.sm('Failed to load file')
-        self.progress.update(100,translate(1005),'')
+        self.progress.update(100,translate(30049),'')
         if settings.getSetting('save')=='true': save=True
         else: save=False
 
         if self.tsserv.event and save:
-            self.progress.update(0,translate(400006)," ")
+            self.progress.update(0,translate(30051)," ")
             comm='SAVE %s path=%s'%(self.tsserv.event[0]+' '+self.tsserv.event[1],urllib.quote(self.filename))
             self.TSpush(comm)
             self.tsserv.event=None
@@ -525,7 +525,7 @@ class TSengine():
             self.sm('Initialization Failed')
             return False
         self.conn=True
-        self.progress.update(0,translate(1102),"")
+        self.progress.update(0,translate(30052),"")
         
         if mode!='PID': spons=' 0 0 0'
         else: spons=''
@@ -548,7 +548,7 @@ class TSengine():
         self.filelist=self.tsserv.files
         self.file_count = self.tsserv.count
         self.files={}
-        self.progress.update(89,translate(40043),'')
+        self.progress.update(89,translate(30053),'')
         if self.file_count>1:
             flist=json.loads(self.filelist)
             for list in flist['files']:
@@ -558,7 +558,7 @@ class TSengine():
             list=flist['files'][0]
             self.files[urllib.unquote_plus(urllib.quote(list[0]))]=list[1]
 
-        self.progress.update(100,translate(40051),'')
+        self.progress.update(100,translate(30054),'')
         
         return "Ok"
 
@@ -826,42 +826,42 @@ class TSServ(threading.Thread):
         self.line=" "
 
         if st=='idle':
-            self.label=translate(1105)
+            self.label=translate(30055)
             if settings.getSetting('ace-debug') == "true":
                 print('Received command Engine idle' )
 
         elif st=='starting':
-            self.label=translate(40055)
+            self.label=translate(30056)
             if settings.getSetting('ace-debug') == "true":
                 print('Received command starting TS' )
 
         elif st=='err':
-            self.label=translate(1011)
+            self.label=translate(30057)
             self.err="dl"
             if settings.getSetting('ace-debug') == "true":
                 print('Received command ERROR!' )
 
         elif st=='check': 
-            self.label=translate(1103)
+            self.label=translate(30058)
             self.proc=int(params.split(';')[1])
             if settings.getSetting('ace-debug') == "true":
                 print('Received command check' )
 
         elif st=='prebuf':   
             self.proc=int( params.split(';')[1] )+0.1
-            self.label=translate(1100)
+            self.label=translate(30059)
             self.line='Seeds:%s Download:%sKb/s'%(params.split(';')[8],params.split(';')[5])  
-            engine_data = { "action": str(translate(1100)), "percent": str(params.split(';')[1])+ "%","download":str(params.split(';')[5]) + " Kb/s", "upload":str(params.split(';')[7]) + " Kb/s","seeds":str(params.split(';')[8]),"total_download":str(int(params.split(';')[10])/(1024*1024))+'Mb',"total_upload":str(int(params.split(';')[12])/(1024*1024))+'Mb' }
+            engine_data = { "action": str(translate(30059)), "percent": str(params.split(';')[1])+ "%","download":str(params.split(';')[5]) + " Kb/s", "upload":str(params.split(';')[7]) + " Kb/s","seeds":str(params.split(';')[8]),"total_download":str(int(params.split(';')[10])/(1024*1024))+'Mb',"total_upload":str(int(params.split(';')[12])/(1024*1024))+'Mb' }
             if settings.getSetting('ace-debug') == "true":
                 print('Received command: ' + str(engine_data) )
 
         elif st=='loading':
-            self.label=translate(40043)
+            self.label=translate(30053)
             if settings.getSetting('ace-debug') == "true":
                 print('Received command loading' )
 
         elif st=='dl':
-            engine_data = { "action": str(translate(50010)), "percent": str(params.split(';')[1])+ "%","download":str(params.split(';')[3]) + " Kb/s", "upload":str(params.split(';')[5]) + " Kb/s","seeds":str(params.split(';')[6]),"total_download":str(int(params.split(';')[8])/(1024*1024))+'Mb',"total_upload":str(int(params.split(';')[10])/(1024*1024))+'Mb' }
+            engine_data = { "action": str(translate(30060)), "percent": str(params.split(';')[1])+ "%","download":str(params.split(';')[3]) + " Kb/s", "upload":str(params.split(';')[5]) + " Kb/s","seeds":str(params.split(';')[6]),"total_download":str(int(params.split(';')[8])/(1024*1024))+'Mb',"total_upload":str(int(params.split(';')[10])/(1024*1024))+'Mb' }
             if settings.getSetting('engine-status') == "true":
                 try:
                         lat123.set_information(engine_data)
@@ -870,7 +870,7 @@ class TSServ(threading.Thread):
                 print('Received command: ' + str(engine_data) )
 
         elif st=='buf':
-            engine_data = { "action": str(translate(50008)), "percent": str(params.split(';')[1])+ "%","download":str(params.split(';')[5]) + " Kb/s", "upload":str(params.split(';')[7]) + " Kb/s","seeds":str(params.split(';')[8]),"total_download":str(int(params.split(';')[10])/(1024*1024))+"Mb","total_upload":str(int(params.split(';')[12])/(1024*1024))+"Mb" }
+            engine_data = { "action": str(translate(30061)), "percent": str(params.split(';')[1])+ "%","download":str(params.split(';')[5]) + " Kb/s", "upload":str(params.split(';')[7]) + " Kb/s","seeds":str(params.split(';')[8]),"total_download":str(int(params.split(';')[10])/(1024*1024))+"Mb","total_upload":str(int(params.split(';')[12])/(1024*1024))+"Mb" }
             if settings.getSetting('engine-status') == "true":
                 try:
                         lat123.set_information(engine_data)
@@ -885,7 +885,6 @@ class TSServ(threading.Thread):
         
         
 def stop_aceengine():
-    print "coiso a fechar a aceengine"
     if xbmc.getCondVisibility('Player.HasMedia'):
         if re.findall('http://(\d+).(\d+).(\d+).(\d+):(\d+)/content/(.+?)/(\d+)\.(\d+)',xbmc.Player().getPlayingFile()):
             if xbmc.getCondVisibility('system.platform.windows'):
@@ -946,7 +945,6 @@ def stop_aceengine():
                             for cache_file in cache_files:
                                 xbmcvfs.delete(os.path.join(acestream_cachefolder_file,cache_file))
                     except: pass
-        xbmc.executebuiltin('PlayerControl(Stop)')       
         
         
         
@@ -975,15 +973,15 @@ class OverlayText(object):
         self._acestreamlogo = xbmcgui.ControlImage(origin_x + int(float(window_w)/11.3), origin_y + int(float(window_h)/14), acelogo_w, acelogo_h, os.path.join(addonpath,"resources","art","acestreamlogo.png"))
         self._supseparator = xbmcgui.ControlImage(origin_x, origin_y + int(float(viewport_h)/12.176), window_w-10, 1, os.path.join(addonpath,"resources","art","separator.png"))
         self._botseparator = xbmcgui.ControlImage(origin_x, origin_y + window_h - 30, window_w-10, 1, os.path.join(addonpath,"resources","art","separator.png"))
-        self._title = xbmcgui.ControlLabel(origin_x+int(float(window_w)/3.4), origin_y + text_h, window_w - 140, text_h, str(translate(50000)), font=font_max, textColor='0xFFEB9E17')
-        self._total_stats_label = xbmcgui.ControlLabel(origin_x+int(float(window_h)/1.72), origin_y + int(float(window_h)/1.6), int(float(window_w)/1.7), 20, str(translate(50005)), font=font_min, textColor='0xFFEB9E17')
+        self._title = xbmcgui.ControlLabel(origin_x+int(float(window_w)/3.4), origin_y + text_h, window_w - 140, text_h, str(translate(30062)), font=font_max, textColor='0xFFEB9E17')
+        self._total_stats_label = xbmcgui.ControlLabel(origin_x+int(float(window_h)/1.72), origin_y + int(float(window_h)/1.6), int(float(window_w)/1.7), 20, str(translate(30063)), font=font_min, textColor='0xFFEB9E17')
         #labels
-        self._action = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting, int(float(text_w)*1.6), text_h, str(translate(50001)) + '  N/A', font=font_min)
-        self._download = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting + text_h, int(float(text_w)*1.6), text_h, str(translate(50002)) + '  N/A', font=font_min)
-        self._upload = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting + 2*text_h, text_w, text_h, str(translate(50003)) + '  N/A', font=font_min)
-        self._seeds = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting + 3*text_h, text_w, text_h, str(translate(50004)) + '  N/A', font=font_min)
-        self._total_download = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_stat_setting, text_w, text_h, str(translate(50006)) + '  N/A', font=font_min)
-        self._total_upload = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_stat_setting + text_h, text_w, text_h, str(translate(50007)) + '  N/A', font=font_min)
+        self._action = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting, int(float(text_w)*1.6), text_h, str(translate(30064)) + '  N/A', font=font_min)
+        self._download = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting + text_h, int(float(text_w)*1.6), text_h, str(translate(30065)) + '  N/A', font=font_min)
+        self._upload = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting + 2*text_h, text_w, text_h, str(translate(30066)) + '  N/A', font=font_min)
+        self._seeds = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_setting + 3*text_h, text_w, text_h, str(translate(30067)) + '  N/A', font=font_min)
+        self._total_download = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_stat_setting, text_w, text_h, str(translate(30068)) + '  N/A', font=font_min)
+        self._total_upload = xbmcgui.ControlLabel(origin_x + text_lat, origin_y + fst_stat_setting + text_h, text_w, text_h, str(translate(30069)) + '  N/A', font=font_min)
         self._percent_value = xbmcgui.ControlLabel(origin_x+int(float(window_h)/1.05), origin_y + fst_setting, text_w, text_h,'N/A', font=font_min)
 
     def show(self):
@@ -1021,13 +1019,13 @@ class OverlayText(object):
 
     def set_information(self,engine_data):
         if self.showing == True:
-            self._action.setLabel(str(translate(50001)) + '  ' + engine_data["action"])
+            self._action.setLabel(str(translate(30064)) + '  ' + engine_data["action"])
             self._percent_value.setLabel(engine_data["percent"])
-            self._download.setLabel(str(translate(50002))+ '  ' + engine_data["download"])
-            self._upload.setLabel(str(translate(50003)) + '  ' + engine_data["upload"])
-            self._seeds.setLabel(str(translate(50004)) + '  ' + engine_data["seeds"])
-            self._total_download.setLabel(str(translate(50006)) + '  ' + engine_data["total_download"])
-            self._total_upload.setLabel(str(translate(50007)) + '  ' + engine_data["total_upload"])
+            self._download.setLabel(str(translate(30065))+ '  ' + engine_data["download"])
+            self._upload.setLabel(str(translate(30066)) + '  ' + engine_data["upload"])
+            self._seeds.setLabel(str(translate(30067)) + '  ' + engine_data["seeds"])
+            self._total_download.setLabel(str(translate(30068)) + '  ' + engine_data["total_download"])
+            self._total_upload.setLabel(str(translate(30069)) + '  ' + engine_data["total_upload"])
         else: pass
 
     def _close(self):

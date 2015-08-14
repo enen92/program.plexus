@@ -20,7 +20,7 @@ from history import *
 aceport=62062
 
 def load_local_torrent():
-	torrent_file = xbmcgui.Dialog().browse(1, translate(600028),'video', '.torrent')
+	torrent_file = xbmcgui.Dialog().browse(1, translate(30037),'video', '.torrent')
 	if torrent_file:
 		if xbmc.getCondVisibility('system.platform.windows'):
 			acestreams("Local .torrent ("+str("file:\\" + torrent_file) +")","",'file:\\' + torrent_file)
@@ -37,7 +37,7 @@ def acestreams(name,iconimage,chid):
 	if settings.getSetting('engine_app') != '2' and settings.getSetting('engine_app') != '3':
 		if settings.getSetting('aceplay_type') == "2":
 			pDialog = xbmcgui.DialogProgress()
-			ret = pDialog.create(translate(40000), translate(40154),translate(40155),translate(40156))
+			ret = pDialog.create(translate(30000), translate(30038),translate(30039),translate(30040))
 			pDialog.update(0)
 			xbmc.sleep(3000)
 			pDialog.update(100)
@@ -79,14 +79,14 @@ def acestreams_builtin(name,iconimage,chid):
             os.system("kill $(ps aux | grep '[s]tart.py')")
     try:from acecore import TSengine as tsengine
     except:
-        mensagemok(translate(40000),translate(40037))
+        mensagemok(translate(30000),translate(30041))
         return
     xbmc.executebuiltin('Action(Stop)')
     lock_file = xbmc.translatePath('special://temp/'+ 'ts.lock')
     if xbmcvfs.exists(lock_file):
     	xbmcvfs.delete(lock_file)
     if chid != '':
-        chid=chid.replace('acestream://','').replace('ts://','').replace('st://','')
+        chid=chid.replace('acestream://','').replace('ts://','')
         print("Starting Player Ace hash: " + chid)
         TSPlayer = tsengine()
         out = None
@@ -101,7 +101,7 @@ def acestreams_builtin(name,iconimage,chid):
             TSPlayer.end()
             return
         else:    
-            mensagemok(translate(40000),translate(40038))
+            mensagemok(translate(30000),translate(30042))
             TSPlayer.end()
             return
     else:
