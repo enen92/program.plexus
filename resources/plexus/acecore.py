@@ -13,7 +13,23 @@
         
 """
 
-import httplib,urllib,urllib2,re,sys,subprocess,os,socket,threading,time,random,json,xbmcplugin,xbmcgui,xbmc,xbmcaddon,xbmcvfs
+import xbmcplugin
+import xbmcgui
+import xbmc
+import xbmcaddon
+import xbmcvfs
+import httplib
+import urllib
+import urllib2
+import re
+import sys
+import subprocess
+import os
+import socket
+import threading
+import time
+import random
+import json
 from plexusutils.pluginxbmc import *
 
 """ Fixed variables """

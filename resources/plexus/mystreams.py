@@ -31,24 +31,24 @@ def my_streams_menu():
 					addDir(content[0],content[1],2,content[2],1,False) 
 				else:
 					pass
-	addDir('[B][COLOR maroon]Add stream[/COLOR][/B]',MainURL,11,os.path.join(addonpath,art,'plus-menu.png'),1,False)
+	addDir('[B][COLOR maroon]'+translate(30009)+'[/COLOR][/B]',MainURL,11,os.path.join(addonpath,art,'plus-menu.png'),1,False)
 
 def add_stream(name='',url='',iconimage=''):
 	if not name or not url:
-		keyb = xbmc.Keyboard('', 'Stream url')
+		keyb = xbmc.Keyboard('', translate(30010))
 		keyb.doModal()
 		if (keyb.isConfirmed()):
 			stream = keyb.getText()
 			if stream == '' : sys.exit(0)
 			else:
 				if 'acestream://' not in stream and '.acelive' not in stream and 'sop://' not in stream:
-					mensagemok(translate(40000),'Url is not valid')
+					mensagemok(translate(40000),translate(30011))
 					sys.exit(0)
 				else:
 					#icon
-					yes = xbmcgui.Dialog().yesno(translate(40000), 'Do you want to set an icon for the stream?')
+					yes = xbmcgui.Dialog().yesno(translate(30000), translate(30012))
 					if yes:
-						iconimage = xbmcgui.Dialog().browse(1, translate(600028),'video','.png|.jpg|.jpeg|.gif',True)
+						iconimage = xbmcgui.Dialog().browse(1, translate(30013),'video','.png|.jpg|.jpeg|.gif',True)
 					else:
 						if 'acestream://' in stream or '.acelive' in stream or '.torrent' in stream:
 							iconimage = os.path.join(addonpath,'resources','art','acestream-menu-item.png')
@@ -57,7 +57,7 @@ def add_stream(name='',url='',iconimage=''):
 						else:
 							iconimage = ''
 					#name
-					keyb = xbmc.Keyboard('', 'Stream name')
+					keyb = xbmc.Keyboard('', translate(30014))
 					keyb.doModal()
 					if (keyb.isConfirmed()):
 						name = keyb.getText()
@@ -67,13 +67,13 @@ def add_stream(name='',url='',iconimage=''):
 							content = name + '|' + stream + '|' + iconimage
 							filename = hashlib.md5(name + '|' + stream).hexdigest() + '.txt'
 							save(os.path.join(mystrm_folder,filename),content)
-							xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), "Adicionado com sucesso", 1,os.path.join(addonpath,"icon.png")))
+							xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(30000), translate(30015), 1,os.path.join(addonpath,"icon.png")))
 							xbmc.executebuiltin("Container.Refresh")
 	else:
 		content = name + '|' + url + '|' + iconimage
 		filename = hashlib.md5(name + '|' + url).hexdigest() + '.txt'
 		save(os.path.join(mystrm_folder,filename),content)
-		xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), "Adicionado com sucesso", 1,os.path.join(addonpath,"icon.png")))
+		xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(30000), translate(30015), 1,os.path.join(addonpath,"icon.png")))
 		xbmc.executebuiltin("Container.Refresh")
 						
 def remove_stream(name,url):
@@ -81,7 +81,7 @@ def remove_stream(name,url):
 	ficheiro = os.path.join(mystrm_folder,filename)
 	try:
 		os.remove(ficheiro)
-		xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(40000), "Removido stream", 1,os.path.join(addonpath,"icon.png")))
+		xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % (translate(30000), translate(30016), 1,os.path.join(addonpath,"icon.png")))
 		xbmc.executebuiltin("Container.Refresh")
 	except: pass
 				

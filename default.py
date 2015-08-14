@@ -20,16 +20,16 @@ from resources.plexus.history import *
 from resources.plexus.mystreams import *
                                                                                                                                                                                                                                                                   
 def main_menu():
-      addDir('[B]My Streams[/B]',MainURL,10,os.path.join(addonpath,art,'mystreams.png'),2,True)
+      addDir('[B]'+translate(30001)+'[/B]',MainURL,10,os.path.join(addonpath,art,'mystreams.png'),2,True)
       if settings.getSetting('addon_history') == "true":
-      	addDir('[B]'+translate(70036)+'[/B]',MainURL,8,os.path.join(addonpath,art,'history.png'),2,True)
+      	addDir('[B]'+translate(30002)+'[/B]',MainURL,8,os.path.join(addonpath,art,'history.png'),2,True)
       	if "confluence" in xbmc.getSkinDir(): addLink('','','plexus')
       if xbmc.getCondVisibility('system.platform.windows') or xbmc.getCondVisibility('system.platform.linux') or xbmc.getCondVisibility('System.Platform.OSX') or xbmc.getCondVisibility('System.Platform.Android'):
-          addDir('[B][COLOR maroon]AceStream: [/COLOR][/B]' + translate(40004),MainURL,4,os.path.join(addonpath,art,'acestream-menu-item.png'),1,False)
-          addDir('[B][COLOR maroon]AceStream: [/COLOR][/B]' + translate(600029),MainURL,6,os.path.join(addonpath,art,'acestream-menu-item.png'),1,False)
+          addDir('[B][COLOR maroon]'+translate(30003)+'[/COLOR][/B]' + translate(30005),MainURL,4,os.path.join(addonpath,art,'acestream-menu-item.png'),1,False)
+          addDir('[B][COLOR maroon]'+translate(30003)+'[/COLOR][/B]' + translate(30006),MainURL,6,os.path.join(addonpath,art,'acestream-menu-item.png'),1,False)
       if xbmc.getCondVisibility('system.platform.windows') or xbmc.getCondVisibility('system.platform.linux') or xbmc.getCondVisibility('System.Platform.OSX') or xbmc.getCondVisibility('System.Platform.Android'):
-          addDir('[B][COLOR maroon]SopCast: [/COLOR][/B]' + translate(40005),MainURL,3,os.path.join(addonpath,art,'sopcast-menu-item.png'),1,False)
-          addDir('[B][COLOR maroon]SopCast: [/COLOR][/B]' + translate(40006),MainURL,5,os.path.join(addonpath,art,'sopcast-menu-item.png'),1,False)
+          addDir('[B][COLOR maroon]'+translate(30004)+'[/COLOR][/B]' + translate(30007),MainURL,3,os.path.join(addonpath,art,'sopcast-menu-item.png'),1,False)
+          addDir('[B][COLOR maroon]'+translate(30004)+'[/COLOR][/B]' + translate(30008),MainURL,5,os.path.join(addonpath,art,'sopcast-menu-item.png'),1,False)
       if xbmc.getCondVisibility('System.Platform.IOS') or xbmc.getCondVisibility('System.Platform.ATV2'):
           addLink(translate(40056),'',os.path.join(addonpath,art,'processwarning.png'))
       if "confluence" in xbmc.getSkinDir(): addLink('','','plexus')
