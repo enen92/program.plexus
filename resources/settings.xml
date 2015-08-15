@@ -40,6 +40,8 @@
 		<setting id="wait_time" type="number" label="30005" visible="!System.Platform.Windows+!System.Platform.OSX" default="1000"/>
 		<setting id="socket_time" label="40198" type="number" visible="System.Platform.Windows" default="15"/>
 		<setting id="stream_time" label="40199" type="number" visible="System.Platform.Windows" default="6"/>
+		<setting id="auto_appid" type="bool" label="Auto-detect AppID" visible="System.Platform.Android" default="true"/>
+		<setting id="custom_appid" type="text" label="Custom AppID" default="" visible="eq(-1,false)"/>
 	</category>
 	<category label="Acestream">
 		<setting label="30018" type="lsep" />

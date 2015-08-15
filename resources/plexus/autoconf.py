@@ -677,20 +677,26 @@ def configure_acestream(latest_version):
 		#Hack to get xbmc app id
 		xbmcfolder=xbmc.translatePath(addonpath).split("/")
 		
-		i = 0
 		found = False
-		sopcast_installed = False
-		
-		for folder in xbmcfolder:
-			if folder.count('.') >= 2 and folder != addon_id :
+		if settings.getSetting('auto_appid') == 'true':
+			i = 0
+			sopcast_installed = False
+			for folder in xbmcfolder:
+				if folder.count('.') >= 2 and folder != addon_id :
+					found = True
+					break
+				else:
+					i+=1
+			if found == True:
+				uid = os.getuid()
+				app_id = xbmcfolder[i]
+		else:
+			if settings.getSetting('custom_appid') != '':
+				uid = os.getuid()
+				app_id = settings.getSetting('custom_appid')
 				found = True
-				break
-			else:
-				i+=1
 
 		if found == True:
-			uid = os.getuid()
-			app_id = xbmcfolder[i]
 			settings.setSetting('app_id',app_id)
 			#Acestreamconfiguration for android starts here
 			if "arm" in os.uname()[4]:
