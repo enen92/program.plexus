@@ -389,6 +389,72 @@ msgctxt "#30093"
 msgid "Error: Unable to change permissions."
 msgstr ""
 
+msgctxt "#30094"
+msgid "Trying to set service permissions..."
+msgstr ""
+
+msgctxt "#30095"
+msgid "Error: Unable to change service permissons."
+msgstr ""
+
+msgctxt "#30096"
+msgid "Starting regini download..."
+msgstr ""
+
+msgctxt "#30097"
+msgid "Downloading regini..."
+msgstr ""
+
+msgctxt "#30098"
+msgid "Running regini..."
+msgstr ""
+
+msgctxt "#30099"
+msgid "Sopcast: All done sucessfully!"
+msgstr ""
+
+msgctxt "#30100"
+msgid "Not available for the architecture of your Mac."
+msgstr ""
+
+msgctxt "#30101"
+msgid "By default Sopcast will use the Kodi player."
+msgstr ""
+
+msgctxt "#30102"
+msgid "By default Sopcast will use the Kodi player."
+msgstr ""
+
+msgctxt "#30103"
+msgid "Do you want to use an external application/player?"
+msgstr ""
+
+msgctxt "#30104"
+msgid "Click ok to download SopCast.apk"
+msgstr ""
+
+msgctxt "#30105"
+msgid "Select the folder to save the apks"
+msgstr ""
+
+msgctxt "#30106"
+msgid "Downloading SopCast.apk"
+msgstr ""
+
+msgctxt "#30107"
+msgid "SopCast.apk downloaded to folder:"
+msgstr ""
+
+msgctxt "#30108"
+msgid "Please install it!"
+msgstr ""
+
+msgctxt "#30109"
+msgid "AppID not detected"
+msgstr ""
+
+
+
 
 
 

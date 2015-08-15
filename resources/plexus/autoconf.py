@@ -396,32 +396,31 @@ def configure_sopcast(latest_version):
                                         permissions = False
                                         xbmc.sleep(500)
                                         mensagemprogresso.update(60,translate(30092), translate(30080))
-#TODO - Translations below
                                         xbmc.sleep(500)
-                                        mensagemprogresso.update(60,translate(30131), "   ")
+                                        mensagemprogresso.update(60,translate(30094), "   ")
                                         cmd = ['sc','sdset','sopcastp2p',linha_final]
                                         proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
                                         for line in proc.stdout:
                                             print(line.rstrip())
                                             permissions = True
-                                        if permissions == False: mensagemok(translate(30000),translate(30132))
+                                        if permissions == False: mensagemok(translate(30000),translate(30095))
                                         else:
-                                            mensagemprogresso.update(70,translate(30131), translate(30118))
+                                            mensagemprogresso.update(70,translate(30094), translate(30080))
                                             xbmc.sleep(1000)
-                                            mensagemprogresso.update(70,translate(30133), "   ")
+                                            mensagemprogresso.update(70,translate(30096), "   ")
                                             print("Trying to set sopcastp2p service regedit permissions...")
-                                            download_tools().Downloader(srvany_permissions,os.path.join(pastaperfil,"sopcastp2p-permissions.txt"),translate(30134),translate(30000))
+                                            download_tools().Downloader(srvany_permissions,os.path.join(pastaperfil,"sopcastp2p-permissions.txt"),translate(30097),translate(30000))
                                             xbmc.sleep(500)
                                             ret = mensagemprogresso.create(translate(30000),translate(30000))
                                             xbmc.sleep(500)
-                                            mensagemprogresso.update(80,translate(30135), "   ")
+                                            mensagemprogresso.update(80,translate(30098), "   ")
                                             xbmc.sleep(1000)
                                             cmd = ['regini',os.path.join(pastaperfil,"sopcastp2p-permissions.txt")]
                                             proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
                                             for line in proc.stdout:
                                                 print(line.rstrip())
-                                            mensagemprogresso.update(90,translate(30135), translate(30135))
-                                            mensagemprogresso.update(100,translate(30136), "   ")
+                                            mensagemprogresso.update(90,translate(30098), translate(30098))
+                                            mensagemprogresso.update(100,translate(30099), "   ")
                                             xbmc.sleep(2000)
                                             mensagemprogresso.close()
                                             if latest_version: settings.setSetting('sopcast_version',value=latest_version)
@@ -442,7 +441,7 @@ def configure_sopcast(latest_version):
 			if not os.path.exists(pastaperfil):
 				xbmcvfs.mkdir(pastaperfil)		
 			MAC_KIT = os.path.join(addonpath,mac_package.split("/")[-1])
-			download_tools().Downloader(mac_package,MAC_KIT,translate(30105),translate(30000))
+			download_tools().Downloader(mac_package,MAC_KIT,translate(30076),translate(30000))
 			import tarfile
 			if tarfile.is_tarfile(MAC_KIT):
 				path_libraries = os.path.join(pastaperfil)
@@ -455,10 +454,10 @@ def configure_sopcast(latest_version):
 			if latest_version: settings.setSetting('sopcast_version',value=latest_version)
 			return
 		else:
-			mensagemok(translate(30000),translate(30137))
+			mensagemok(translate(30000),translate(30100))
 			return
 				
-	elif xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
+	elif xbmc.getCondVisibility('System.Platform.Android'):
 
 		print("Detected OS: Android")
 		#Sopcast configuration
@@ -486,6 +485,8 @@ def configure_sopcast(latest_version):
 			uid = os.getuid()
 			app_id = xbmcfolder[i]
 			xbmc_data_path = os.path.join("/data", "data", app_id)
+			
+			
 			if os.path.exists(xbmc_data_path) and uid == os.stat(xbmc_data_path).st_uid:
 				android_binary_dir = os.path.join(xbmc_data_path, "files", "program.plexus")
 				if not os.path.exists(android_binary_dir):
@@ -499,39 +500,39 @@ def configure_sopcast(latest_version):
 				import stat
 				os.chmod(binary_path, st.st_mode | stat.S_IEXEC)
 				settings.setSetting('android_sopclient',value=binary_path)
-				opcao= xbmcgui.Dialog().yesno(translate(30000), translate(30138),translate(30139))
+				opcao= xbmcgui.Dialog().yesno(translate(30000), translate(30101),translate(30103))
 				if not opcao:
 					settings.setSetting('external-sopcast',value='1')
 					settings.setSetting('force_android',value='true')
 					sopcast_installed = True
-					mensagemok(translate(30000),translate(30140))
+					mensagemok(translate(30000),translate(30099))
 				else:
-					mensagemok(translate(30000),translate(30141))
+					mensagemok(translate(30000),translate(30104))
 					if os.path.exists(os.path.join("sdcard","Download")):
 						pasta = os.path.join("sdcard","Download")
 						sopfile = os.path.join("sdcard","Download",sopcast_apk.split("/")[-1])
 					else:
 						dialog = xbmcgui.Dialog()
-						pasta = dialog.browse(int(0), translate(30142), 'myprograms')
+						pasta = dialog.browse(int(0), translate(30105), 'videos')
 						sopfile = os.path.join(pasta,sopcast_apk.split("/")[-1])
-					download_tools().Downloader(sopcast_apk,sopfile,translate(30143),translate(30000))
+					download_tools().Downloader(sopcast_apk,sopfile,translate(30106),translate(30000))
 					import tarfile
 					if tarfile.is_tarfile(sopfile):
 						download_tools().extract(sopfile,pasta)
 						download_tools().remove(sopfile)
-					mensagemok(translate(30000),translate(30144),pasta,translate(30145))
+					mensagemok(translate(30000),translate(30107),pasta,translate(30108))
 					sopcast_installed = True
 					settings.setSetting('external-sopcast',value='0')
-					mensagemok(translate(30000),translate(30140))
+					mensagemok(translate(30000),translate(30099))
 				if latest_version: settings.setSetting('sopcast_version',value=latest_version)
 				return
 
 		else:
-			mensagemok(translate(30000),translate(30146))
+			mensagemok(translate(30000),translate(30109))
 			return
 			
 			
-			
+#TODO - Translations below			
 def configure_acestream(latest_version):
 	#Configuration for LINUX 
 	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":
