@@ -275,7 +275,7 @@ class TSengine():
             try:
                 if settings.getSetting('engine_app') == "1": xbmc.executebuiltin('XBMC.StartAndroidActivity("org.acestream.engine")')
                 else:
-                    command = ["sh","/data/data/"+settings.getSetting('app_id')+"/files/plugin.video.p2p-streams/org.acestream.engine/files/droidace.sh",settings.getSetting('app_id')]
+                    command = ["sh","/data/data/"+settings.getSetting('app_id')+"/files/program.plexus/org.acestream.engine/files/droidace.sh",settings.getSetting('app_id')]
                     if settings.getSetting('total_max_download_rate') != "0":
                         command.append('--download-limit')
                         command.append(settings.getSetting('total_max_download_rate'))

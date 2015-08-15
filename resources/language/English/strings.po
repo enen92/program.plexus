@@ -301,8 +301,33 @@ msgctxt "#30071"
 msgid "seconds"
 msgstr ""
 
+msgctxt "#30072"
+msgid "Unable to detect your operating system"
+msgstr ""
 
+msgctxt "#30073"
+msgid "Select it from the list"
+msgstr ""
 
+msgctxt "#30074"
+msgid "Are you using OpenELEC x86_x64?"
+msgstr ""
+
+msgctxt "#30075"
+msgid "Are you usng OpenELEC i386?"
+msgstr ""
+
+msgctxt "#30076"
+msgid "Downloading SopCast modules."
+msgstr ""
+
+msgctxt "#30077"
+msgid "Kodi has to be running as administrator."
+msgstr ""
+
+msgctxt "#30078"
+msgid "to configure SopCast in Windows."
+msgstr ""
 
 
 

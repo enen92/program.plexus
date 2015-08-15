@@ -112,7 +112,7 @@ def first_conf():
 				settings.setSetting('raspberrypi',value='true')
 				settings.setSetting('python_cmd',value='python2')
 			else:
-				mensagemok(translate(30000),translate(30103),translate(30104))
+				mensagemok(translate(30000),translate(30072),translate(30073))
 				OS_list = ["OpenELEC","Raspbmc","Xbian","Pipplware","Arch Linux Arm"]
 				OS_Rpi_choose = xbmcgui.Dialog().select
 				choose=OS_Rpi_choose('Select your OS',OS_list)
@@ -127,7 +127,7 @@ def first_conf():
 			elif os.path.isfile("/etc/xbian_version"):
 				settings.setSetting('xbianarm7',value='true')
 			else:
-                		mensagemok(translate(30000),translate(30107),translate(30108))
+                		mensagemok(translate(30000),translate(30107),translate(30108))#TODO
                 		OS_list = ["MXLinux","OpenELEC","Xbian","Jynxbox Pure Linux"]
                 		choose=xbmcgui.Dialog().select('Select your OS',OS_list)
                 		if choose > -1:
@@ -143,14 +143,14 @@ def first_conf():
 				if re.search(os.uname()[1],"openelec",re.IGNORECASE):
 					settings.setSetting('openelecx86_64',value='true')
 				else:
-					opcao= xbmcgui.Dialog().yesno(translate(30000), translate(30110))
+					opcao= xbmcgui.Dialog().yesno(translate(30000), translate(30074))
 					if opcao: 
 						settings.setSetting('openelecx86_64',value='true')
 			elif os.uname()[4] == "i386" or os.uname()[4] == "i686":
 				if re.search(os.uname()[1],"openelec",re.IGNORECASE):	
 					settings.setSetting('openeleci386',value='true')
 				else:
-					opcao= xbmcgui.Dialog().yesno(translate(30000), translate(30111))
+					opcao= xbmcgui.Dialog().yesno(translate(30000), translate(30075))
 					if opcao: 
 						settings.setSetting('openeleci386',value='true')
 			check_for_updates()
@@ -177,7 +177,7 @@ def configure_sopcast(latest_version):
 			print("Detected linux armv6 - possible Raspberry PI")
 			#Sop
 			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
-			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(30105),translate(30000))
+			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(30076),translate(30000))
 			import tarfile            
 			if tarfile.is_tarfile(SPSC_KIT):
 				path_libraries = os.path.join(pastaperfil,"sopcast")
@@ -190,7 +190,7 @@ def configure_sopcast(latest_version):
 		elif os.uname()[4] == "armv7l":
 			if settings.getSetting('jynxbox_arm7') == "true":
 				SPSC_KIT = os.path.join(addonpath,sopcast_jynxbox.split("/")[-1])
-				download_tools().Downloader(sopcast_jynxbox,SPSC_KIT,translate(30105),translate(30000))
+				download_tools().Downloader(sopcast_jynxbox,SPSC_KIT,translate(30076),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(SPSC_KIT):
 					path_libraries = os.path.join(pastaperfil)
@@ -201,7 +201,7 @@ def configure_sopcast(latest_version):
 				return
 			else:
 				SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
-				download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(30105),translate(30000))
+				download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(30076),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(SPSC_KIT):
 					path_libraries = os.path.join(pastaperfil,"sopcast")
@@ -216,7 +216,7 @@ def configure_sopcast(latest_version):
 			if settings.getSetting('openelecx86_64') == "true":
 				print("Detected OpenELEC x86_64")
 				SPSC_KIT = os.path.join(addonpath,openelecx86_64_sopcast.split("/")[-1])
-				download_tools().Downloader(openelecx86_64_sopcast,SPSC_KIT,translate(30105),translate(30000))
+				download_tools().Downloader(openelecx86_64_sopcast,SPSC_KIT,translate(30076),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(SPSC_KIT):
 					download_tools().extract(SPSC_KIT,pastaperfil)
@@ -229,7 +229,7 @@ def configure_sopcast(latest_version):
 			generic = False
 			if settings.getSetting('openeleci386') == "true":
 				SPSC_KIT = os.path.join(addonpath,openelecxi386_sopcast.split("/")[-1])
-				download_tools().Downloader(openelecxi386_sopcast,SPSC_KIT,translate(30105),translate(30000))
+				download_tools().Downloader(openelecxi386_sopcast,SPSC_KIT,translate(30076),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(SPSC_KIT):
 					download_tools().extract(SPSC_KIT,pastaperfil)
@@ -240,7 +240,7 @@ def configure_sopcast(latest_version):
 			else: generic = True
 		if generic == True:
 			SPSC_KIT = os.path.join(addonpath,sopcast_linux_generico.split("/")[-1])
-			download_tools().Downloader(sopcast_linux_generico,SPSC_KIT,translate(30105),translate(30000))
+			download_tools().Downloader(sopcast_linux_generico,SPSC_KIT,translate(30076),translate(30000))
 			import tarfile
 			if tarfile.is_tarfile(SPSC_KIT):
 				path_libraries = os.path.join(pastaperfil,"sopcast")
@@ -265,7 +265,7 @@ def configure_sopcast(latest_version):
 			if latest_version: settings.setSetting('sopcast_version',value=latest_version)
 			return
 
-
+	#TODO - Translations below
 	elif xbmc.getCondVisibility('system.platform.windows'):
 		print("Detected OS: Windows")
 		if not xbmcvfs.exists(pastaperfil): xbmcvfs.mkdir(pastaperfil)
@@ -273,7 +273,7 @@ def configure_sopcast(latest_version):
 		import ctypes
                 is_admin=ctypes.windll.shell32.IsUserAnAdmin() != 0
                 if is_admin == False:
-                    mensagemok(translate(30000),translate(30115),translate(30116))
+                    mensagemok(translate(30000),translate(30077),translate(30078))
                 else:
 		    import subprocess
                     cmd = ['sc','delete','sopcastp2p']
@@ -487,7 +487,7 @@ def configure_sopcast(latest_version):
 			app_id = xbmcfolder[i]
 			xbmc_data_path = os.path.join("/data", "data", app_id)
 			if os.path.exists(xbmc_data_path) and uid == os.stat(xbmc_data_path).st_uid:
-				android_binary_dir = os.path.join(xbmc_data_path, "files", "plugin.video.plexus")
+				android_binary_dir = os.path.join(xbmc_data_path, "files", "program.plexus")
 				if not os.path.exists(android_binary_dir):
             				os.makedirs(android_binary_dir)
 				android_binary_path = os.path.join(android_binary_dir, "sopclient")
@@ -705,7 +705,7 @@ def configure_acestream(latest_version):
 			orgacestreamenginefolder = os.path.join(pastaperfil,"org.acestream.engine")
 			xbmc_data_path = os.path.join("/data", "data", app_id)
 			if os.path.exists(xbmc_data_path) and uid == os.stat(xbmc_data_path).st_uid:
-				android_binary_dir = os.path.join(xbmc_data_path, "files", "plugin.video.plexus")
+				android_binary_dir = os.path.join(xbmc_data_path, "files", "program.plexus")
 				if not os.path.exists(android_binary_dir): os.makedirs(android_binary_dir)
             		android_acestream_folder = os.path.join(android_binary_dir,"org.acestream.engine")
             		if not os.path.exists(android_acestream_folder): os.makedirs(android_acestream_folder)
