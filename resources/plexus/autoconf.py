@@ -531,7 +531,7 @@ def configure_sopcast(latest_version):
 			mensagemok(translate(30000),translate(30109))
 			return
 			
-			
+
 def configure_acestream(latest_version):
 	#Configuration for LINUX 
 	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":

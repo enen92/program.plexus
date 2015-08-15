@@ -421,10 +421,6 @@ msgctxt "#30101"
 msgid "By default Sopcast will use the Kodi player."
 msgstr ""
 
-msgctxt "#30102"
-msgid "By default Sopcast will use the Kodi player."
-msgstr ""
-
 msgctxt "#30103"
 msgid "Do you want to use an external application/player?"
 msgstr ""
