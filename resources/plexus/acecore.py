@@ -770,7 +770,7 @@ class TSServ(threading.Thread):
         
 #thread to run the kill command right after the user hits stop        
 def ace_control_thread():
-	while xbmc.getCondVisibility('Player.Playing'):
+	while json.loads(xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Player.GetActivePlayers","params":{},"id":3}'))["result"]:
 		xbmc.sleep(500)
 	stop_aceengine()
 
