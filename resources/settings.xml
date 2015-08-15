@@ -50,14 +50,15 @@
 		<setting id="ip_addr" type="text" label="30004" default="127.0.0.1" />
 		<setting id="aceporta" type="text" label="40108" default="62062" />
 		<setting id="playerport" type="text" label="40153" default="6878" visible="eq(-6,1)" />
+		<setting id="engine-status" type="bool" label="49999" default="true"/>
 		<setting label="" type="lsep" />
 		<setting id="pausable" type="bool" label="30010" default="false" />
 		<setting id="save" type="bool" label="30012" default="false" />
 		<setting id="folder" type="folder" label="30013"/>
-		<setting id="kill_type" type="enum" values="Force Kill|Normal|Custom" label="70002" default="1" visible="!eq(-8,1)+!System.Platform.windows"/>
-		<setting id="custom_kill_ace" type="text" label="Custom kill engine cmd" default="" visible="eq(-1,2)"/>
+		<setting label="" type="lsep" />
 		<setting id="shutdown-engine" type="bool" label="30015" default="true"/>
-		<setting id="engine-status" type="bool" label="49999" default="true"/>
+		<setting id="kill_type" type="enum" values="Normal|Custom" label="70002" default="0" visible="!eq(-8,1)"/>
+		<setting id="custom_kill_ace" type="text" label="Custom kill engine cmd" default="" visible="eq(-2,true)+eq(-1,1)"/>
 		<!-- Android default port -->
 		<setting id="android_port" type="text" label="" visible="False" default="8621"/>
 		<!-- Linux settings to pass to the engine -->

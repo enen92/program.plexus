@@ -182,7 +182,7 @@ def sopstreams_builtin(name,iconimage,sop):
 		if existing_instance == True:
 			option = xbmcgui.Dialog().yesno(translate(30000), translate(30033),translate(30034))
 			if not option:
-				if xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
+				if xbmc.getCondVisibility('System.Platform.Android') == "true":
 					xbmc_user = os.getlogin()
 					procshut = subprocess.Popen(['ps','|','grep','sopclient'],shell=False,stdout=subprocess.PIPE)
 					for line in procshut.stdout:
