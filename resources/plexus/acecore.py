@@ -839,7 +839,7 @@ def stop_aceengine():
                 except: pass
     else:
         if settings.getSetting('shutdown-engine') == 'true' and settings.getSetting('kill_type') == '1': 
-        os.system(settings.getSetting(custom_kill_ace))
+            os.system(settings.getSetting(custom_kill_ace))
     return
         
         
