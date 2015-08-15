@@ -329,5 +329,75 @@ msgctxt "#30078"
 msgid "to configure SopCast in Windows."
 msgstr ""
 
+msgctxt "#30079"
+msgid "Checking if SopCast is installed..."
+msgstr ""
+
+msgctxt "#30080"
+msgid "Finished."
+msgstr ""
+
+msgctxt "#30081"
+msgid "SopCast.exe is not installed!"
+msgstr ""
+
+msgctxt "#30082"
+msgid "Download it from SopCast.org and install it!"
+msgstr ""
+
+msgctxt "#30083"
+msgid "Getting Windows user ID's..."
+msgstr ""
+
+msgctxt "#30084"
+msgid "Unable to get users list"
+msgstr ""
+
+msgctxt "#30085"
+msgid "Getting Windows user ID's..."
+msgstr ""
+
+msgctxt "#30086"
+msgid "Starting SRVany download..."
+msgstr ""
+
+msgctxt "#30087"
+msgid "Downloading SRVany..."
+msgstr ""
+
+msgctxt "#30088"
+msgid "Creating 'sopcastp2p' service..."
+msgstr ""
+
+msgctxt "#30089"
+msgid "Unable to create service!"
+msgstr ""
+
+msgctxt "#30090"
+msgid "Modifying regedit..."
+msgstr ""
+
+msgctxt "#30091"
+msgid "Error: Unable to modify regedit."
+msgstr ""
+
+msgctxt "#30092"
+msgid "Trying to get service permissions..."
+msgstr ""
+
+msgctxt "#30093"
+msgid "Error: Unable to change permissions."
+msgstr ""
+
+
+
+
+
+
+
+
+
+
+
 
 

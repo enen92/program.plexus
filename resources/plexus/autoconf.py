@@ -265,7 +265,6 @@ def configure_sopcast(latest_version):
 			if latest_version: settings.setSetting('sopcast_version',value=latest_version)
 			return
 
-	#TODO - Translations below
 	elif xbmc.getCondVisibility('system.platform.windows'):
 		print("Detected OS: Windows")
 		if not xbmcvfs.exists(pastaperfil): xbmcvfs.mkdir(pastaperfil)
@@ -292,14 +291,14 @@ def configure_sopcast(latest_version):
                         sopcast_executable = value
                         print("Installation executable of sopcast was found: " + sopcast_executable)
                         _winreg.CloseKey(aKey)
-                        mensagemprogresso.update(10,translate(30117),translate(30118))
+                        mensagemprogresso.update(10,translate(30079),translate(30080))
                     except:
                         sopcast_executable = ""
-                        mensagemok(translate(30000),translate(30119),translate(30120))
+                        mensagemok(translate(30000),translate(30081),translate(30082))
                     if not sopcast_executable: pass
                     else:
                         xbmc.sleep(1000)
-                        mensagemprogresso.update(20,translate(30121),"  ")
+                        mensagemprogresso.update(20,translate(30083),"  ")
                         xbmc.sleep(1000)
                         print ("Getting windows users IDS")
                         aReg = _winreg.ConnectRegistry(None,_winreg.HKEY_LOCAL_MACHINE)
@@ -322,17 +321,17 @@ def configure_sopcast(latest_version):
                             except:
                                 pass
                         if not users:
-                            mensagemok(translate(30000),translate(30122))
+                            mensagemok(translate(30000),translate(30084))
                         else:
-                            mensagemprogresso.update(30,translate(30121),translate(30118))
+                            mensagemprogresso.update(30,translate(30085),translate(30080))
                             xbmc.sleep(200)
-                            mensagemprogresso.update(30,translate(30123),"   ")
+                            mensagemprogresso.update(30,translate(30086),"   ")
                             xbmc.sleep(1000)
                             print("System Users", users)
                             srvany_final_location = os.path.join(sopcast_executable.replace("SopCast.exe",""),"srvany.exe")
                             srvany_download_location = os.path.join(addonpath,"srvany.exe")
                             srvanytgz_download_location = os.path.join(addonpath,"srvany.tar.gz")                            
-                            download_tools().Downloader(srvany_executable,srvanytgz_download_location,translate(30124),translate(30000)) 
+                            download_tools().Downloader(srvany_executable,srvanytgz_download_location,translate(30087),translate(30000)) 
                             xbmc.sleep(1000)
                             import tarfile
                             if tarfile.is_tarfile(srvanytgz_download_location):
@@ -344,7 +343,7 @@ def configure_sopcast(latest_version):
                             xbmc.sleep(1000)
                             ret = mensagemprogresso.create(translate(30000),translate(30000))
                             xbmc.sleep(200)
-                            mensagemprogresso.update(35,translate(30125),"  ")
+                            mensagemprogresso.update(35,translate(30088),"  ")
                             xbmc.sleep(1000)
                             import subprocess
                             cmd = ['sc','create','sopcastp2p','binpath=',os.path.join(os.path.join(sopcast_executable.replace("SopCast.exe","")),'srvany.exe')]
@@ -354,11 +353,11 @@ def configure_sopcast(latest_version):
                                 print ("cmd out: " + line.rstrip())
                                 servicecreator = True
                             if servicecreator == False:
-                                mensagemok(translate(30000),translate(30126))
+                                mensagemok(translate(30000),translate(30089))
                             else:
-                                mensagemprogresso.update(40,translate(30125),translate(30118))
+                                mensagemprogresso.update(40,translate(30088),translate(30080))
                                 xbmc.sleep(1000)
-                                mensagemprogresso.update(45,translate(30127),"  ")
+                                mensagemprogresso.update(45,translate(30090),"  ")
                                 xbmc.sleep(1000)
                                 print("Trying to modify regedit....")
                                 try:
@@ -367,15 +366,15 @@ def configure_sopcast(latest_version):
                                     _winreg.SetValueEx(key, 'AppDirectory', 0, _winreg.REG_SZ, os.path.join(sopcast_executable.replace("SopCast.exe","")))
                                     _winreg.SetValueEx(key, 'Application', 0, _winreg.REG_SZ, os.path.join(os.path.join(sopcast_executable.replace("SopCast.exe","")),"SopCast.exe"))
                                     _winreg.SetValueEx(key, 'AppParameters', 0, _winreg.REG_SZ, "sop://")
-                                    mensagemprogresso.update(50,translate(30127), translate(30118))
+                                    mensagemprogresso.update(50,translate(30090), translate(30080))
                                     regedit = True
                                 except:
-                                    mensagemok(translate(30000),translate(30128))
+                                    mensagemok(translate(30000),translate(30091))
                                     regedit = False
                                 if regedit == False: pass
                                 else:
                                     xbmc.sleep(1000)
-                                    mensagemprogresso.update(50,translate(30129), "   ")
+                                    mensagemprogresso.update(50,translate(30092), "   ")
                                     cmd = ['sc','sdshow','sopcastp2p']
                                     proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
                                     lines = []
@@ -383,7 +382,7 @@ def configure_sopcast(latest_version):
 					print(line.rstrip())
                                         if line.rstrip() != "" and "(" in line.rstrip(): lines.append(line.rstrip())
                                         else: pass
-                                    if len(lines) != 1: mensagemok(translate(30000),translate(30130))
+                                    if len(lines) != 1: mensagemok(translate(30000),translate(30093))
                                     else:
                                         linha_arr = []
                                         for user in users:
@@ -391,12 +390,13 @@ def configure_sopcast(latest_version):
                                         linha_add = ''
                                         for linha in linha_arr:
                                             linha_add += linha
-                                        print("line peace to add: " + linha_add)
+                                        print("line piece to add: " + linha_add)
                                         linha_final = lines[0].replace("S:(",linha_add + "S:(")
                                         print("Final line: " + linha_final)
                                         permissions = False
                                         xbmc.sleep(500)
-                                        mensagemprogresso.update(60,translate(30129), translate(30118))
+                                        mensagemprogresso.update(60,translate(30092), translate(30080))
+#TODO - Translations below
                                         xbmc.sleep(500)
                                         mensagemprogresso.update(60,translate(30131), "   ")
                                         cmd = ['sc','sdset','sopcastp2p',linha_final]
