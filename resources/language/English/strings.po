@@ -453,9 +453,77 @@ msgctxt "#30109"
 msgid "AppID not detected"
 msgstr ""
 
+msgctxt "#30110"
+msgid "Downloading AceStream modules."
+msgstr ""
 
+msgctxt "#30111"
+msgid "Downloading AcestreamEngine bundle for Android"
+msgstr ""
 
+msgctxt "#30112"
+msgid "By default Plexus will use its included Acestream Engine"
+msgstr ""
 
+msgctxt "#30113"
+msgid "Do you want to download and use the app instead?"
+msgstr ""
+
+msgctxt "#30114"
+msgid "It is necessary to have acestreamengine.apk"
+msgstr ""
+
+msgctxt "#30115"
+msgid "installed to run Acestreams."
+msgstr ""
+
+msgctxt "#30116"
+msgid "It will be downloaded now!"
+msgstr ""
+
+msgctxt "#30117"
+msgid "Downloading AcestreamEngine.apk"
+msgstr ""
+
+msgctxt "#30118"
+msgid "Acestream.apk downloaded to folder:"
+msgstr ""
+
+msgctxt "#30119"
+msgid "Don't forget AcestreamEngine app"
+msgstr ""
+
+msgctxt "#30120"
+msgid "should be running before starting"
+msgstr ""
+
+msgctxt "#30121"
+msgid "any Acestream!"
+msgstr ""
+
+msgctxt "#30122"
+msgid "Do you want to download Ace Player?"
+msgstr ""
+
+msgctxt "#30123"
+msgid "This will enable you the ability to use the external player option."
+msgstr ""
+
+msgctxt "#30124"
+msgid "Downloading Ace Player"
+msgstr ""
+
+msgctxt "#30125"
+msgid "Aceplayer.apk downladed to folder:"
+msgstr ""
+
+msgctxt "#30126"
+msgid "Do you want to use the external player as default?"
+msgstr ""
+
+msgctxt "#30127"
+msgid "AceStream: All done!"
+msgstr ""
 
 
 

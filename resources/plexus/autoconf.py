@@ -532,7 +532,6 @@ def configure_sopcast(latest_version):
 			return
 			
 			
-#TODO - Translations below			
 def configure_acestream(latest_version):
 	#Configuration for LINUX 
 	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":
@@ -543,7 +542,7 @@ def configure_acestream(latest_version):
 			if settings.getSetting('openelecarm6') == "true": acestream_rpi = acestream_openelec_raspberry
 			else: acestream_rpi = acestream_generic_raspberry
 			ACE_KIT = os.path.join(addonpath,acestream_rpi.split("/")[-1])
-			download_tools().Downloader(acestream_rpi,ACE_KIT,translate(30106),translate(30000))
+			download_tools().Downloader(acestream_rpi,ACE_KIT,translate(30110),translate(30000))
 			import tarfile            
 			if tarfile.is_tarfile(ACE_KIT):
 				path_libraries = os.path.join(pastaperfil,"acestream")
@@ -559,7 +558,7 @@ def configure_acestream(latest_version):
 			elif settings.getSetting('mxlinuxarm7') == "true" or settings.getSetting('jynxbox_arm7') == "true": acestream_package = acestream_mxlinux
 		
 			ACE_KIT = os.path.join(addonpath,acestream_package.split("/")[-1])
-			download_tools().Downloader(acestream_package,ACE_KIT,translate(30106),translate(30000))
+			download_tools().Downloader(acestream_package,ACE_KIT,translate(30110),translate(30000))
 			import tarfile
 			if tarfile.is_tarfile(ACE_KIT):
 				path_libraries = os.path.join(pastaperfil,"acestream")
@@ -573,7 +572,7 @@ def configure_acestream(latest_version):
 			if settings.getSetting('openelecx86_64') == "true":
 				print("OpenELEC x86_64 Acestream configuration")
 				ACE_KIT = os.path.join(addonpath,openeelcx86_64_acestream.split("/")[-1])
-				download_tools().Downloader(openeelcx86_64_acestream ,ACE_KIT,translate(30106),translate(30000))
+				download_tools().Downloader(openeelcx86_64_acestream ,ACE_KIT,translate(30110),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(ACE_KIT):
 					download_tools().extract(ACE_KIT,pastaperfil)
@@ -585,7 +584,7 @@ def configure_acestream(latest_version):
 			else:
 				print("64 bit Linux Disto Acestream Configuration")
 				ACE_KIT = os.path.join(addonpath,acestream_linux_x64_generic.split("/")[-1])
-				download_tools().Downloader(acestream_linux_x64_generic,ACE_KIT,translate(30106),translate(30000))
+				download_tools().Downloader(acestream_linux_x64_generic,ACE_KIT,translate(30110),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(ACE_KIT):
 					download_tools().extract(ACE_KIT,pastaperfil)
@@ -598,7 +597,7 @@ def configure_acestream(latest_version):
 			if settings.getSetting('openeleci386') == "true":
 				print("32 bit Openelec Acestream Configuration")
 				ACE_KIT = os.path.join(addonpath,openeelcxi386_acestream.split("/")[-1])
-				download_tools().Downloader(openeelcxi386_acestream,ACE_KIT,translate(30106),translate(30000))
+				download_tools().Downloader(openeelcxi386_acestream,ACE_KIT,translate(30110),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(ACE_KIT):
 					download_tools().extract(ACE_KIT,pastaperfil)
@@ -609,7 +608,7 @@ def configure_acestream(latest_version):
 			else:
 				print("32 bit Linux general distro Acestream Configuration")
 				ACE_KIT = os.path.join(addonpath,acestream_linux_i386_generic.split("/")[-1])
-				download_tools().Downloader(acestream_linux_i386_generic,ACE_KIT,translate(30106),translate(30000))
+				download_tools().Downloader(acestream_linux_i386_generic,ACE_KIT,translate(30110),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(ACE_KIT):
 					download_tools().extract(ACE_KIT,pastaperfil)
@@ -623,7 +622,7 @@ def configure_acestream(latest_version):
 		if not os.path.exists(pastaperfil): xbmcvfs.mkdir(pastaperfil)
           #Ace
 		SPSC_KIT = os.path.join(addonpath,acestream_windows.split("/")[-1])
-		download_tools().Downloader(acestream_windows,SPSC_KIT,translate(30106),translate(30000))
+		download_tools().Downloader(acestream_windows,SPSC_KIT,translate(30110),translate(30000))
 		import shutil
 		if os.path.exists(os.path.join(pastaperfil,"acestream")):
 			shutil.rmtree(os.path.join(pastaperfil,"acestream"))
@@ -651,7 +650,7 @@ def configure_acestream(latest_version):
 		if available == True:			
 			MAC_KIT = os.path.join('/Applications',mac_package.split("/")[-1])
 			if not xbmcvfs.exists(os.path.join('/Applications','Ace Stream.app')):
-				download_tools().Downloader(mac_package,MAC_KIT,translate(30106),translate(30000))
+				download_tools().Downloader(mac_package,MAC_KIT,translate(30110),translate(30000))
 				if xbmcvfs.exists(MAC_KIT):
 					xbmc.sleep(1000)
 					cmd = 'unzip /Applications/AceStreamWineOSX.zip'
@@ -664,11 +663,11 @@ def configure_acestream(latest_version):
 			if latest_version: settings.setSetting('acestream_version',value=latest_version)
 			return
 		else:
-			mensagemok(translate(30000),translate(30137))
+			mensagemok(translate(30000),translate(30100))
 			return
 			
 				
-	elif xbmc.getCondVisibility('System.Platform.Android') or settings.getSetting('force_android') == "true":
+	elif xbmc.getCondVisibility('System.Platform.Android'):
 
 		print("Detected OS: Android")
 		print("Starting Acestream Configuration")
@@ -676,7 +675,7 @@ def configure_acestream(latest_version):
 		if not os.path.exists(pastaperfil): xbmcvfs.mkdir(pastaperfil)
 		#Hack to get xbmc app id
 		xbmcfolder=xbmc.translatePath(addonpath).split("/")
-		
+		#TODO
 		found = False
 		if settings.getSetting('auto_appid') == 'true':
 			i = 0
@@ -701,10 +700,10 @@ def configure_acestream(latest_version):
 			#Acestreamconfiguration for android starts here
 			if "arm" in os.uname()[4]:
 				acebundle = os.path.join(pastaperfil,android_aceengine_arm.split("/")[-1])
-				download_tools().Downloader(android_aceengine_arm,acebundle,translate(30156),translate(30000))
+				download_tools().Downloader(android_aceengine_arm,acebundle,translate(30111),translate(30000))
 			else:
 				acebundle = os.path.join(pastaperfil,android_aceengine_x86.split("/")[-1])
-				download_tools().Downloader(android_aceengine_x86,acebundle,translate(30156),translate(30000))
+				download_tools().Downloader(android_aceengine_x86,acebundle,translate(30111),translate(30000))
 			import tarfile
 			if tarfile.is_tarfile(acebundle):
 				download_tools().extract(acebundle,pastaperfil)
@@ -745,31 +744,31 @@ def configure_acestream(latest_version):
 					except: pass
             		try: xbmcvfs.mkdir(os.path.join('/sdcard','org.acestream.engine'))
             		except: pass
-			opcao= xbmcgui.Dialog().yesno(translate(30000), translate(30157),translate(30158))
+			opcao= xbmcgui.Dialog().yesno(translate(30000), translate(30112),translate(30113))
 			if not opcao:
 				settings.setSetting('engine_app','0')
 			else:
-				mensagemok(translate(30000),translate(30147),translate(30148),translate(30149))
+				mensagemok(translate(30000),translate(30114),translate(30115),translate(30116))
 				if os.path.exists(os.path.join("sdcard","Download")):
 					pasta = os.path.join("sdcard","Download")
 					if "arm" in os.uname()[4]: acefile = os.path.join("sdcard","Download",acestreamengine_apk_arm.split("/")[-1])
 					else: acefile = os.path.join("sdcard","Download",acestreamengine_apk_x86.split("/")[-1])
 				else:
 					dialog = xbmcgui.Dialog()
-					pasta = dialog.browse(int(0), translate(30142), 'myprograms')
+					pasta = dialog.browse(int(0), translate(30105), 'myprograms')
 					if "arm" in os.uname()[4]: acefile = os.path.join(pasta,acestreamengine_apk_arm.split("/")[-1])
 					else: acefile = os.path.join(pasta,acestreamengine_apk_x86.split("/")[-1])
-				if "arm" in os.uname()[4]: download_tools().Downloader(acestreamengine_apk_arm,acefile,translate(30150),translate(30000))
-				else: download_tools().Downloader(acestreamengine_apk_x86,acefile,translate(30150),translate(30000))
+				if "arm" in os.uname()[4]: download_tools().Downloader(acestreamengine_apk_arm,acefile,translate(30117),translate(30000))
+				else: download_tools().Downloader(acestreamengine_apk_x86,acefile,translate(30117),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(acefile):
 					download_tools().extract(acefile,pasta)
 					download_tools().remove(acefile)
 				xbmc.sleep(2000)
-				mensagemok(translate(30000),translate(30151),pasta,translate(30145))
-				mensagemok(translate(30000),translate(30153),translate(30154),translate(30155))
+				mensagemok(translate(30000),translate(30118),pasta,translate(30108))
+				mensagemok(translate(30000),translate(30119),translate(30120),translate(30121))
 				settings.setSetting('engine_app','1')
-			opcao= xbmcgui.Dialog().yesno(translate(30000), translate(30159),translate(30160))
+			opcao= xbmcgui.Dialog().yesno(translate(30000), translate(30122),translate(30123))
 			if opcao:
 				if os.path.exists(os.path.join("sdcard","Download")):
 					pasta = os.path.join("sdcard","Download")
@@ -777,23 +776,23 @@ def configure_acestream(latest_version):
 					else: os.path.join("sdcard","Download",android_aceplayer_x86.split("/")[-1])
 				else:
 					dialog = xbmcgui.Dialog()
-					pasta = dialog.browse(int(0), translate(30142), 'myprograms')
+					pasta = dialog.browse(int(0), translate(30105), 'myprograms')
 					if "arm" in os.uname()[4]: acefile = os.path.join(pasta,acestreamengine_apk_arm.split("/")[-1])
 					else: acefile = os.path.join(pasta,acestreamengine_apk_x86.split("/")[-1])
-				if "arm" in os.uname()[4]: download_tools().Downloader(android_aceplayer_arm,acefile,translate(30161),translate(30000))
-				else: download_tools().Downloader(android_aceplayer_x86,acefile,translate(30161),translate(30000))
+				if "arm" in os.uname()[4]: download_tools().Downloader(android_aceplayer_arm,acefile,translate(30124),translate(30000))
+				else: download_tools().Downloader(android_aceplayer_x86,acefile,translate(30124),translate(30000))
 				import tarfile
 				if tarfile.is_tarfile(acefile):
 					download_tools().extract(acefile,pasta)
 					download_tools().remove(acefile)
 				xbmc.sleep(2000)
-				mensagemok(translate(30000),translate(30162),pasta,translate(30145))
-				opcao= xbmcgui.Dialog().yesno(translate(30000), translate(30163))
+				mensagemok(translate(30000),translate(30125),pasta,translate(30108))
+				opcao= xbmcgui.Dialog().yesno(translate(30000), translate(30126))
 				if opcao:
 					settings.setSetting('engine_app','2')							
 			if latest_version: settings.setSetting('acestream_version',value=latest_version)
-			mensagemok(translate(30000),translate(30152))
+			mensagemok(translate(30000),translate(30127))
 			return			
 		else:
-			mensagemok(translate(30000),translate(30146))
+			mensagemok(translate(30000),translate(30109))
 			return
