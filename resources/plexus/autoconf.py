@@ -21,9 +21,10 @@ from plexusutils.webutils import download_tools,get_page_source
 from plexusutils.utilities import *
 
 """ Platform dependent files downloaded during the addon configuration"""
-trunkfolder = "http://p2p-strm.googlecode.com/svn/trunk"
+trunkfolder = "https://plexus.svn.codeplex.com/svn/trunk"
+version_control = trunkfolder + "/Control/versions.info"
 
-#Linux Armv6 (Raspberry PI)
+#Linux Armv6 (Raspberry PI)#TODO
 sopcast_raspberry = trunkfolder + "/Modules/Linux/RaspberryPi/sopcast-raspberry.tar.gz"
 acestream_generic_raspberry = trunkfolder + "/Modules/Linux/RaspberryPi/raspberry-acestream.tar.gz"
 acestream_openelec_raspberry = trunkfolder + "/Modules/Linux/RaspberryPi/openelec-acestream.tar.gz"
@@ -32,6 +33,7 @@ sopcast_jynxbox = trunkfolder + "/Modules/Linux/Armv7/sopcast-jynxbox_purelinux.
 acestream_mxlinux = trunkfolder + "/Modules/Linux/Armv7/mxlinux/mxlinux_armv7_acestream.tar.gz"
 acestream_armv7_openelec = trunkfolder + "/Modules/Linux/Armv7/openelec/openelec-acestream.tar.gz"
 acestream_armv7_xbian = trunkfolder + "/Modules/Linux/Armv7/xbian/xbian_acestream.tar.gz"
+#TODO end
 #Linux i386 and x86_64 (including openelec)
 sopcast_linux_generico =  trunkfolder + "/Modules/Linux/Sopcastx86_64i386/sopcast_linux.tar.gz"
 openelecx86_64_sopcast = trunkfolder + "/Modules/Linux/x86_64/Openelec/sopcast_openelec64.tar.gz"
@@ -49,7 +51,7 @@ android_aceengine_arm = trunkfolder + "/Modules/Android/org.acestream.engine-arm
 android_aceengine_x86 = trunkfolder + "/Modules/Android/org.acestream.engine_x86.tar.gz"
 android_aceplayer_arm = trunkfolder + "/Modules/Android/AcePlayer-3.0.6-2in1.apk.tar.gz"
 android_aceplayer_x86 = trunkfolder + "/Modules/Android/AcePlayer-3.0.6-2in1.apk.tar.gz"
-#Mac OSX
+#Mac OSX #TODO
 osx_i386_sopcast = trunkfolder + "/Modules/MacOsx/i386/sopcast_osxi386.tar.gz"
 osx_i386_acestream = trunkfolder + "/Modules/MacOsx/AceStreamWineOSX.zip"
 osx_x64_sopcast = trunkfolder + "/Modules/MacOsx/x86_64/sopcast_osx64.tar.gz"
@@ -61,7 +63,7 @@ srvany_permissions = trunkfolder + "/Modules/Windows/sopcastp2p-permissions.txt"
 
 def check_for_updates():
 	try:
-		version_source = get_page_source(trunkfolder + "/ModuleVersions/versions.info")
+		version_source = get_page_source(version_control)
 	except: version_source = ""
 	if version_source:
 		version_source = eval(version_source)

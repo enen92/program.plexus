@@ -25,7 +25,7 @@ def load_local_torrent():
 		if xbmc.getCondVisibility('system.platform.windows'):
 			acestreams("Local .torrent ("+str("file:\\" + torrent_file) +")","",'file:\\' + torrent_file)
 		else:
-			acestreams("Local .torrent ("+str("file://" + torrent_file) +")","",'file://' + torrent_file)
+			acestreams("Local .torrent ("+str("file://" + torrent_file) +")","",'file://' + urllib.quote(torrent_file))
 	else: pass
 
 def acestreams(name,iconimage,chid):
