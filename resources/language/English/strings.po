@@ -521,6 +521,18 @@ msgctxt "#30127"
 msgid "AceStream: All done!"
 msgstr ""
 
+msgctxt "#30128"
+msgid "Plexus is only available for certain linux arm platforms."
+msgstr ""
+
+msgctxt "#30129"
+msgid "Please select yours from the following list."
+msgstr ""
+
+msgctxt "#30130"
+msgid "Select your operating system"
+msgstr ""
+
 
 
 

@@ -24,16 +24,9 @@ from plexusutils.utilities import *
 trunkfolder = "https://plexus.svn.codeplex.com/svn/trunk"
 version_control = trunkfolder + "/Control/versions.info"
 
-#Linux Armv6 (Raspberry PI)#TODO
+#Linux Arm #TODO
 sopcast_raspberry = trunkfolder + "/Modules/Linux/RaspberryPi/sopcast-raspberry.tar.gz"
-acestream_generic_raspberry = trunkfolder + "/Modules/Linux/RaspberryPi/raspberry-acestream.tar.gz"
-acestream_openelec_raspberry = trunkfolder + "/Modules/Linux/RaspberryPi/openelec-acestream.tar.gz"
-#Linux Armv7 packages
-sopcast_jynxbox = trunkfolder + "/Modules/Linux/Armv7/sopcast-jynxbox_purelinux.tar.gz"
-acestream_mxlinux = trunkfolder + "/Modules/Linux/Armv7/mxlinux/mxlinux_armv7_acestream.tar.gz"
-acestream_armv7_openelec = trunkfolder + "/Modules/Linux/Armv7/openelec/openelec-acestream.tar.gz"
-acestream_armv7_xbian = trunkfolder + "/Modules/Linux/Armv7/xbian/xbian_acestream.tar.gz"
-#TODO end
+
 #Linux i386 and x86_64 (including openelec)
 sopcast_linux_generico =  trunkfolder + "/Modules/Linux/Sopcastx86_64i386/sopcast_linux.tar.gz"
 openelecx86_64_sopcast = trunkfolder + "/Modules/Linux/x86_64/Openelec/sopcast_openelec64.tar.gz"
@@ -67,15 +60,9 @@ def check_for_updates():
 	except: version_source = ""
 	if version_source:
 		version_source = eval(version_source)
-		if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":
-			if os.uname()[4] == "armv6l":
-				if settings.getSetting('openelecarm6') == "true": platf = "openelec_arm6"
-				else: platf = "raspberrypi"
-			elif os.uname()[4] == "armv7l":
-				if settings.getSetting('openelecarm7') == "true": platf = "openelec_armv7"
-				elif settings.getSetting('mxlinuxarm7') == "true": platf = "mxlinux_armv7"
-				elif settings.getSetting('xbianarm7') == "true": platf = "xbian_armv7"
-				elif settings.getSetting('jynxbox_arm7') == "true": platf = "jynxbox_armv7"
+		if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android'):
+			if "arm" in os.uname()[4]:
+				if settings.getSetting('platform_rpi2') == "true": platf = "rpi2"		
 			elif os.uname()[4] == "i386" or os.uname()[4] == "i686":
 				if settings.getSetting('openeleci386') == "true": platf = "openeleci386"
 				else: platf = "linuxi386"
@@ -83,7 +70,7 @@ def check_for_updates():
 				if settings.getSetting('openelecx86_64') == "true": platf = "openelecx64"
 				else: platf = "linux_x86_64"
 		elif xbmc.getCondVisibility('system.platform.windows'): platf = "windows"
-		elif xbmc.getCondVisibility('system.platform.Android') or settings.getSetting('force_android') == "true": platf = "android"
+		elif xbmc.getCondVisibility('system.platform.Android'): platf = "android"
 		elif xbmc.getCondVisibility('System.Platform.OSX'):
 			if os.uname()[4] == "i386" or os.uname()[4] == "i686": platf = "osx32"
 			elif os.uname()[4] == "x86_64": platf = "osx64"
@@ -105,40 +92,15 @@ def first_conf():
 	settings.setSetting('last_version_check',value='')
 	settings.setSetting('sopcast_version',value='')
 	settings.setSetting('acestream_version',value='')
-	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":
-		if os.uname()[4] == "armv6l":
-			if re.search(os.uname()[1],"openelec",re.IGNORECASE): settings.setSetting('openelecarm6',value='true')
-			elif re.search(os.uname()[1],"raspbmc",re.IGNORECASE): settings.setSetting('raspberrypi',value='true')
-			elif os.path.isfile("/etc/xbian_version"): acestream_rpi = settings.setSetting('raspberrypi',value='true')
-			elif "ARCH" in os.uname()[2]:
-				settings.setSetting('raspberrypi',value='true')
-				settings.setSetting('python_cmd',value='python2')
-			else:
-				mensagemok(translate(30000),translate(30072),translate(30073))
-				OS_list = ["OpenELEC","Raspbmc","Xbian","Pipplware","Arch Linux Arm"]
-				OS_Rpi_choose = xbmcgui.Dialog().select
-				choose=OS_Rpi_choose('Select your OS',OS_list)
-				if choose > -1:
-					if OS_list[choose] == "OpenELEC": settings.setSetting('openelecarm6',value='true')
-					elif OS_list[choose] == "Arch Linux Arm": settings.setSetting('raspberrypi',value='true');settings.setSetting('python_cmd',value='python2')
-					else: settings.setSetting('raspberrypi',value='true')
-			check_for_updates()
-		elif os.uname()[4] == "armv7l":
-			if re.search(os.uname()[1],"openelec",re.IGNORECASE):
-				settings.setSetting('openelecarm7',value='true')
-			elif os.path.isfile("/etc/xbian_version"):
-				settings.setSetting('xbianarm7',value='true')
-			else:
-                		mensagemok(translate(30000),translate(30107),translate(30108))#TODO
-                		OS_list = ["MXLinux","OpenELEC","Xbian","Jynxbox Pure Linux"]
-                		choose=xbmcgui.Dialog().select('Select your OS',OS_list)
-                		if choose > -1:
-                			OS_Choose= OS_list[choose]
-                			if OS_Choose == "OpenELEC": settings.setSetting('openelecarm7',value='true')
-                			elif OS_Choose == "Xbian": settings.setSetting('xbianarm7',value='true')
-                			elif OS_Choose == "MXLinux": settings.setSetting('mxlinuxarm7',value='true')
-                			elif OS_Choose == "Jynxbox Pure Linux": settings.setSetting('jynxbox_arm7',value='true')
-			check_for_updates()
+	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android'):
+		if "arm" in os.uname()[4]:
+			mensagemok(translate(30000),translate(30128),translate(30129))
+			OS_list = ["Raspberry PI 2"]
+			choose=xbmcgui.Dialog().select(translate(30130),OS_list)
+			if choose > -1:
+				OS_Choose= OS_list[choose]
+                	if OS_Choose.lower() == "raspberry pi 2": settings.setSetting('rpi2',value='true')
+                	check_for_updates()
 		else:
 			#32bit and 64bit
 			if os.uname()[4] == "x86_64":
@@ -174,37 +136,14 @@ def configure_sopcast(latest_version):
 	#Configuration for LINUX 
 	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":
 		print("Detected OS: Linux")
-		#Linux Armv6
-		if os.uname()[4] == "armv6l":
-			print("Detected linux armv6 - possible Raspberry PI")
-			#Sop
-			SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
-			download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(30076),translate(30000))
-			import tarfile            
-			if tarfile.is_tarfile(SPSC_KIT):
-				path_libraries = os.path.join(pastaperfil,"sopcast")
-				download_tools().extract(SPSC_KIT,path_libraries)
-				xbmc.sleep(500)
-				download_tools().remove(SPSC_KIT)
-			if latest_version: settings.setSetting('sopcast_version',value=latest_version)
-			return
-
-		elif os.uname()[4] == "armv7l":
-			if settings.getSetting('jynxbox_arm7') == "true":
-				SPSC_KIT = os.path.join(addonpath,sopcast_jynxbox.split("/")[-1])
-				download_tools().Downloader(sopcast_jynxbox,SPSC_KIT,translate(30076),translate(30000))
-				import tarfile
-				if tarfile.is_tarfile(SPSC_KIT):
-					path_libraries = os.path.join(pastaperfil)
-					download_tools().extract(SPSC_KIT,path_libraries)
-					xbmc.sleep(500)
-					download_tools().remove(SPSC_KIT)
-				if latest_version: settings.setSetting('sopcast_version',value=latest_version)
-				return
-			else:
+		#Linux Armv
+		if "arm" in os.uname()[4]:
+			print("Sopcast Configuration - LINUX ARM")
+			if settings.getSetting('rpi2') == "true":
+				print("Raspberry PI 2")
 				SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
 				download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(30076),translate(30000))
-				import tarfile
+				import tarfile            
 				if tarfile.is_tarfile(SPSC_KIT):
 					path_libraries = os.path.join(pastaperfil,"sopcast")
 					download_tools().extract(SPSC_KIT,path_libraries)
@@ -472,20 +411,26 @@ def configure_sopcast(latest_version):
 		#Hack to get current xbmc app id
 		xbmcfolder=xbmc.translatePath(addonpath).split("/")
 
-		i = 0
 		found = False
-		sopcast_installed = False
-		
-		for folder in xbmcfolder:
-			if folder.count('.') >= 2 and folder != addon_id :
+		if settings.getSetting('auto_appid') == 'true':
+			i = 0
+			sopcast_installed = False
+			for folder in xbmcfolder:
+				if folder.count('.') >= 2 and folder != addon_id :
+					found = True
+					break
+				else:
+					i+=1
+			if found == True:
+				uid = os.getuid()
+				app_id = xbmcfolder[i]
+		else:
+			if settings.getSetting('custom_appid') != '':
+				uid = os.getuid()
+				app_id = settings.getSetting('custom_appid')
 				found = True
-				break
-			else:
-				i+=1
 
 		if found == True:
-			uid = os.getuid()
-			app_id = xbmcfolder[i]
 			xbmc_data_path = os.path.join("/data", "data", app_id)
 			
 			
@@ -538,37 +483,22 @@ def configure_acestream(latest_version):
 	#Configuration for LINUX 
 	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":
 		print("Detected OS: Linux")
-		#Linux Armv6
-		if os.uname()[4] == "armv6l":
-			print("Detected linux armv6 - possible Raspberry PI")
-			if settings.getSetting('openelecarm6') == "true": acestream_rpi = acestream_openelec_raspberry
-			else: acestream_rpi = acestream_generic_raspberry
-			ACE_KIT = os.path.join(addonpath,acestream_rpi.split("/")[-1])
-			download_tools().Downloader(acestream_rpi,ACE_KIT,translate(30110),translate(30000))
-			import tarfile            
-			if tarfile.is_tarfile(ACE_KIT):
-				path_libraries = os.path.join(pastaperfil,"acestream")
-				download_tools().extract(ACE_KIT,path_libraries)
-				xbmc.sleep(500)
-				download_tools().remove(ACE_KIT)
-			if latest_version: settings.setSetting('acestream_version',value=latest_version)
-			return
-		#Linux Armv7
-		elif os.uname()[4] == "armv7l":
-			if settings.getSetting('openelecarm7') == "true": acestream_package = acestream_armv7_openelec
-			elif settings.getSetting('xbianarm7') == "true": acestream_package = acestream_armv7_xbian
-			elif settings.getSetting('mxlinuxarm7') == "true" or settings.getSetting('jynxbox_arm7') == "true": acestream_package = acestream_mxlinux
-		
-			ACE_KIT = os.path.join(addonpath,acestream_package.split("/")[-1])
-			download_tools().Downloader(acestream_package,ACE_KIT,translate(30110),translate(30000))
-			import tarfile
-			if tarfile.is_tarfile(ACE_KIT):
-				path_libraries = os.path.join(pastaperfil,"acestream")
-				download_tools().extract(ACE_KIT,path_libraries)
-				xbmc.sleep(500)
-				download_tools().remove(ACE_KIT)
-			if latest_version: settings.setSetting('acestream_version',value=latest_version)
-			return
+		if "arm" in os.uname()[4]:
+			print("Linux Arm")
+			if settings.getSetting('rpi2') == "true":
+				#TODO
+				#acestream_rpi = acestream_openelec_raspberry
+				#else: acestream_rpi = acestream_generic_raspberry
+				#ACE_KIT = os.path.join(addonpath,acestream_rpi.split("/")[-1])
+				#download_tools().Downloader(acestream_rpi,ACE_KIT,translate(30110),translate(30000))
+				#import tarfile            
+				#if tarfile.is_tarfile(ACE_KIT):
+				#	path_libraries = os.path.join(pastaperfil,"acestream")
+				#	download_tools().extract(ACE_KIT,path_libraries)
+				#	xbmc.sleep(500)
+				#	download_tools().remove(ACE_KIT)
+				#if latest_version: settings.setSetting('acestream_version',value=latest_version)
+				return
 
 		elif os.uname()[4] == "x86_64":
 			if settings.getSetting('openelecx86_64') == "true":
@@ -677,7 +607,6 @@ def configure_acestream(latest_version):
 		if not os.path.exists(pastaperfil): xbmcvfs.mkdir(pastaperfil)
 		#Hack to get xbmc app id
 		xbmcfolder=xbmc.translatePath(addonpath).split("/")
-		#TODO
 		found = False
 		if settings.getSetting('auto_appid') == 'true':
 			i = 0
