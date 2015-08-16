@@ -14,8 +14,16 @@
 
 """
      
-import xbmc,xbmcgui,xbmcplugin,xbmcvfs
-import tarfile,os,re,sys,subprocess
+import xbmc
+import xbmcgui
+import xbmcplugin
+import xbmcvfs
+import tarfile
+import os
+import re
+import sys
+import subprocess
+import shutil
 from plexusutils.pluginxbmc import *
 from plexusutils.webutils import download_tools,get_page_source
 from plexusutils.utilities import *
@@ -134,7 +142,7 @@ def first_conf():
 	
 def configure_sopcast(latest_version):
 	#Configuration for LINUX 
-	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":
+	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android'):
 		print("Detected OS: Linux")
 		#Linux Armv
 		if "arm" in os.uname()[4]:
@@ -143,7 +151,6 @@ def configure_sopcast(latest_version):
 				print("Raspberry PI 2")
 				SPSC_KIT = os.path.join(addonpath,sopcast_raspberry.split("/")[-1])
 				download_tools().Downloader(sopcast_raspberry,SPSC_KIT,translate(30076),translate(30000))
-				import tarfile            
 				if tarfile.is_tarfile(SPSC_KIT):
 					path_libraries = os.path.join(pastaperfil,"sopcast")
 					download_tools().extract(SPSC_KIT,path_libraries)
@@ -158,7 +165,6 @@ def configure_sopcast(latest_version):
 				print("Detected OpenELEC x86_64")
 				SPSC_KIT = os.path.join(addonpath,openelecx86_64_sopcast.split("/")[-1])
 				download_tools().Downloader(openelecx86_64_sopcast,SPSC_KIT,translate(30076),translate(30000))
-				import tarfile
 				if tarfile.is_tarfile(SPSC_KIT):
 					download_tools().extract(SPSC_KIT,pastaperfil)
 					xbmc.sleep(500)
@@ -171,7 +177,6 @@ def configure_sopcast(latest_version):
 			if settings.getSetting('openeleci386') == "true":
 				SPSC_KIT = os.path.join(addonpath,openelecxi386_sopcast.split("/")[-1])
 				download_tools().Downloader(openelecxi386_sopcast,SPSC_KIT,translate(30076),translate(30000))
-				import tarfile
 				if tarfile.is_tarfile(SPSC_KIT):
 					download_tools().extract(SPSC_KIT,pastaperfil)
 					xbmc.sleep(500)
@@ -182,7 +187,6 @@ def configure_sopcast(latest_version):
 		if generic == True:
 			SPSC_KIT = os.path.join(addonpath,sopcast_linux_generico.split("/")[-1])
 			download_tools().Downloader(sopcast_linux_generico,SPSC_KIT,translate(30076),translate(30000))
-			import tarfile
 			if tarfile.is_tarfile(SPSC_KIT):
 				path_libraries = os.path.join(pastaperfil,"sopcast")
 				download_tools().extract(SPSC_KIT,path_libraries)
@@ -215,7 +219,6 @@ def configure_sopcast(latest_version):
                 if is_admin == False:
                     mensagemok(translate(30000),translate(30077),translate(30078))
                 else:
-		    import subprocess
                     cmd = ['sc','delete','sopcastp2p']
                     proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
                     for line in proc.stdout:
@@ -274,7 +277,6 @@ def configure_sopcast(latest_version):
                             srvanytgz_download_location = os.path.join(addonpath,"srvany.tar.gz")                            
                             download_tools().Downloader(srvany_executable,srvanytgz_download_location,translate(30087),translate(30000)) 
                             xbmc.sleep(1000)
-                            import tarfile
                             if tarfile.is_tarfile(srvanytgz_download_location):
                                 path_libraries = addonpath
                                 download_tools().extract(srvanytgz_download_location,path_libraries)
@@ -286,7 +288,6 @@ def configure_sopcast(latest_version):
                             xbmc.sleep(200)
                             mensagemprogresso.update(35,translate(30088),"  ")
                             xbmc.sleep(1000)
-                            import subprocess
                             cmd = ['sc','create','sopcastp2p','binpath=',os.path.join(os.path.join(sopcast_executable.replace("SopCast.exe","")),'srvany.exe')]
                             proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
                             servicecreator = False
@@ -383,7 +384,6 @@ def configure_sopcast(latest_version):
 				xbmcvfs.mkdir(pastaperfil)		
 			MAC_KIT = os.path.join(addonpath,mac_package.split("/")[-1])
 			download_tools().Downloader(mac_package,MAC_KIT,translate(30076),translate(30000))
-			import tarfile
 			if tarfile.is_tarfile(MAC_KIT):
 				path_libraries = os.path.join(pastaperfil)
 				download_tools().extract(MAC_KIT,pastaperfil)
@@ -440,7 +440,6 @@ def configure_sopcast(latest_version):
             				os.makedirs(android_binary_dir)
 				android_binary_path = os.path.join(android_binary_dir, "sopclient")
 		        	if not os.path.exists(android_binary_path) or os.path.getsize(android_binary_path) != os.path.getsize(sopclient_builtin_location):
-					import shutil
 					shutil.copy2(sopclient_builtin_location, android_binary_path)
 				binary_path = android_binary_path
 				st = os.stat(binary_path)
@@ -450,7 +449,6 @@ def configure_sopcast(latest_version):
 				opcao= xbmcgui.Dialog().yesno(translate(30000), translate(30101),translate(30103))
 				if not opcao:
 					settings.setSetting('external-sopcast',value='1')
-					settings.setSetting('force_android',value='true')
 					sopcast_installed = True
 					mensagemok(translate(30000),translate(30099))
 				else:
@@ -463,7 +461,6 @@ def configure_sopcast(latest_version):
 						pasta = dialog.browse(int(0), translate(30105), 'videos')
 						sopfile = os.path.join(pasta,sopcast_apk.split("/")[-1])
 					download_tools().Downloader(sopcast_apk,sopfile,translate(30106),translate(30000))
-					import tarfile
 					if tarfile.is_tarfile(sopfile):
 						download_tools().extract(sopfile,pasta)
 						download_tools().remove(sopfile)
@@ -481,7 +478,7 @@ def configure_sopcast(latest_version):
 
 def configure_acestream(latest_version):
 	#Configuration for LINUX 
-	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android') and not settings.getSetting('force_android') == "true":
+	if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android'):
 		print("Detected OS: Linux")
 		if "arm" in os.uname()[4]:
 			print("Linux Arm")
@@ -505,7 +502,6 @@ def configure_acestream(latest_version):
 				print("OpenELEC x86_64 Acestream configuration")
 				ACE_KIT = os.path.join(addonpath,openeelcx86_64_acestream.split("/")[-1])
 				download_tools().Downloader(openeelcx86_64_acestream ,ACE_KIT,translate(30110),translate(30000))
-				import tarfile
 				if tarfile.is_tarfile(ACE_KIT):
 					download_tools().extract(ACE_KIT,pastaperfil)
 					xbmc.sleep(500)
@@ -517,7 +513,6 @@ def configure_acestream(latest_version):
 				print("64 bit Linux Disto Acestream Configuration")
 				ACE_KIT = os.path.join(addonpath,acestream_linux_x64_generic.split("/")[-1])
 				download_tools().Downloader(acestream_linux_x64_generic,ACE_KIT,translate(30110),translate(30000))
-				import tarfile
 				if tarfile.is_tarfile(ACE_KIT):
 					download_tools().extract(ACE_KIT,pastaperfil)
 					xbmc.sleep(500)
@@ -530,7 +525,6 @@ def configure_acestream(latest_version):
 				print("32 bit Openelec Acestream Configuration")
 				ACE_KIT = os.path.join(addonpath,openeelcxi386_acestream.split("/")[-1])
 				download_tools().Downloader(openeelcxi386_acestream,ACE_KIT,translate(30110),translate(30000))
-				import tarfile
 				if tarfile.is_tarfile(ACE_KIT):
 					download_tools().extract(ACE_KIT,pastaperfil)
 					xbmc.sleep(500)
@@ -541,7 +535,6 @@ def configure_acestream(latest_version):
 				print("32 bit Linux general distro Acestream Configuration")
 				ACE_KIT = os.path.join(addonpath,acestream_linux_i386_generic.split("/")[-1])
 				download_tools().Downloader(acestream_linux_i386_generic,ACE_KIT,translate(30110),translate(30000))
-				import tarfile
 				if tarfile.is_tarfile(ACE_KIT):
 					download_tools().extract(ACE_KIT,pastaperfil)
 					xbmc.sleep(500)
@@ -555,12 +548,10 @@ def configure_acestream(latest_version):
           #Ace
 		SPSC_KIT = os.path.join(addonpath,acestream_windows.split("/")[-1])
 		download_tools().Downloader(acestream_windows,SPSC_KIT,translate(30110),translate(30000))
-		import shutil
 		if os.path.exists(os.path.join(pastaperfil,"acestream")):
 			shutil.rmtree(os.path.join(pastaperfil,"acestream"))
 		if os.path.exists(os.path.join(pastaperfil,"player")):
 			shutil.rmtree(os.path.join(pastaperfil,"player"))
-		import tarfile
 		if tarfile.is_tarfile(SPSC_KIT):
 			path_libraries = os.path.join(pastaperfil)
 			download_tools().extract(SPSC_KIT,path_libraries)
@@ -635,7 +626,6 @@ def configure_acestream(latest_version):
 			else:
 				acebundle = os.path.join(pastaperfil,android_aceengine_x86.split("/")[-1])
 				download_tools().Downloader(android_aceengine_x86,acebundle,translate(30111),translate(30000))
-			import tarfile
 			if tarfile.is_tarfile(acebundle):
 				download_tools().extract(acebundle,pastaperfil)
 				download_tools().remove(acebundle)
@@ -691,7 +681,6 @@ def configure_acestream(latest_version):
 					else: acefile = os.path.join(pasta,acestreamengine_apk_x86.split("/")[-1])
 				if "arm" in os.uname()[4]: download_tools().Downloader(acestreamengine_apk_arm,acefile,translate(30117),translate(30000))
 				else: download_tools().Downloader(acestreamengine_apk_x86,acefile,translate(30117),translate(30000))
-				import tarfile
 				if tarfile.is_tarfile(acefile):
 					download_tools().extract(acefile,pasta)
 					download_tools().remove(acefile)
@@ -712,7 +701,6 @@ def configure_acestream(latest_version):
 					else: acefile = os.path.join(pasta,acestreamengine_apk_x86.split("/")[-1])
 				if "arm" in os.uname()[4]: download_tools().Downloader(android_aceplayer_arm,acefile,translate(30124),translate(30000))
 				else: download_tools().Downloader(android_aceplayer_x86,acefile,translate(30124),translate(30000))
-				import tarfile
 				if tarfile.is_tarfile(acefile):
 					download_tools().extract(acefile,pasta)
 					download_tools().remove(acefile)
