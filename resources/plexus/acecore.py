@@ -290,9 +290,16 @@ class TSengine():
                 self.progress.update(0,"Acestreamengine.apk not installed","")
         else:
             print("Linux not android..")
-            if os.uname()[4] == "armv6l" or os.uname()[4] == "armv7l":
+            if "arm" in os.uname()[4]:
                 try:
-                    self.proc = subprocess.Popen([settings.getSetting('python_cmd'),os.path.join(pastaperfil,'acestream','ace','start.py')])
+                    command = ["sh",os.path.join(pastaperfil,"acestream","start_acestream.sh"),"--client-console"]
+                    if settings.getSetting('total_max_download_rate') != "0":
+                        command.append('--download-limit')
+                        command.append(settings.getSetting('total_max_download_rate'))
+                    if settings.getSetting('total_max_upload_rate') != "0":
+                        command.append('--upload-limit')
+                        command.append(settings.getSetting('total_max_upload_rate'))
+                    self.proc = subprocess.Popen(command)
                 except:
                     self.sm("Not installed")
                     self.log.out("Not installed")
@@ -793,6 +800,7 @@ def stop_aceengine():
             os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $1}')")
             os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $2}')")
             os.system("kill $(ps aux | grep '[s]tart.py' | awk '{print $2}')")
+            os.system("sh "+os.path.join(pastaperfil,"acestream","stop_acestream.sh"))
             if settings.getSetting('save') != "true":
                 try:
                     cache_file = xbmc.Player().getPlayingFile().split('/')[-2]

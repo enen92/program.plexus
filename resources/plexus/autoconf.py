@@ -33,7 +33,8 @@ trunkfolder = "https://plexus.svn.codeplex.com/svn/trunk"
 version_control = trunkfolder + "/Control/versions.info"
 
 #Linux Arm #TODO
-sopcast_raspberry = trunkfolder + "/Modules/Linux/RaspberryPi/sopcast-raspberry.tar.gz"
+sopcast_raspberry = trunkfolder + "/Modules/Linux/arm/rpi2/sopcast-raspberry.tar.gz"
+acestream_rpi2 = 'removed...'
 
 #Linux i386 and x86_64 (including openelec)
 sopcast_linux_generico =  trunkfolder + "/Modules/Linux/Sopcastx86_64i386/sopcast_linux.tar.gz"
@@ -70,7 +71,7 @@ def check_for_updates():
 		version_source = eval(version_source)
 		if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.Android'):
 			if "arm" in os.uname()[4]:
-				if settings.getSetting('platform_rpi2') == "true": platf = "rpi2"		
+				if settings.getSetting('rpi2') == "true": platf = "rpi2"		
 			elif os.uname()[4] == "i386" or os.uname()[4] == "i686":
 				if settings.getSetting('openeleci386') == "true": platf = "openeleci386"
 				else: platf = "linuxi386"
@@ -107,7 +108,8 @@ def first_conf():
 			choose=xbmcgui.Dialog().select(translate(30130),OS_list)
 			if choose > -1:
 				OS_Choose= OS_list[choose]
-                	if OS_Choose.lower() == "raspberry pi 2": settings.setSetting('rpi2',value='true')
+                	if OS_Choose.lower() == "raspberry pi 2":
+                		settings.setSetting('rpi2',value='true')
                 	check_for_updates()
 		else:
 			#32bit and 64bit
@@ -483,18 +485,19 @@ def configure_acestream(latest_version):
 		if "arm" in os.uname()[4]:
 			print("Linux Arm")
 			if settings.getSetting('rpi2') == "true":
-				#TODO
-				#acestream_rpi = acestream_openelec_raspberry
-				#else: acestream_rpi = acestream_generic_raspberry
-				#ACE_KIT = os.path.join(addonpath,acestream_rpi.split("/")[-1])
-				#download_tools().Downloader(acestream_rpi,ACE_KIT,translate(30110),translate(30000))
-				#import tarfile            
-				#if tarfile.is_tarfile(ACE_KIT):
-				#	path_libraries = os.path.join(pastaperfil,"acestream")
-				#	download_tools().extract(ACE_KIT,path_libraries)
-				#	xbmc.sleep(500)
-				#	download_tools().remove(ACE_KIT)
-				#if latest_version: settings.setSetting('acestream_version',value=latest_version)
+				ACE_KIT = os.path.join(addonpath,acestream_rpi2.split("/")[-1])
+				download_tools().Downloader(acestream_rpi2,ACE_KIT,translate(30110),translate(30000))
+				if tarfile.is_tarfile(ACE_KIT):
+					path_libraries = os.path.join(pastaperfil)
+					download_tools().extract(ACE_KIT,path_libraries)
+					xbmc.sleep(500)
+					download_tools().remove(ACE_KIT)
+				#set chroot to executable
+				binary_path = os.path.join(pastaperfil,"acestream","chroot")
+				st = os.stat(binary_path)
+				import stat
+				os.chmod(binary_path, st.st_mode | stat.S_IEXEC)
+				if latest_version: settings.setSetting('acestream_version',value=latest_version)
 				return
 
 		elif os.uname()[4] == "x86_64":
