@@ -561,13 +561,115 @@ msgctxt "#30137"
 msgid "Clear addon history"
 msgstr ""
 
+msgctxt "#30138"
+msgid "SopCast configuration"
+msgstr ""
 
+msgctxt "#30139"
+msgid "Player Type"
+msgstr ""
 
+msgctxt "#30140"
+msgid "Find ip address automatically"
+msgstr ""
 
+msgctxt "#30141"
+msgid "Ip address"
+msgstr ""
 
+msgctxt "#30142"
+msgid "Local port"
+msgstr ""
 
+msgctxt "#30143"
+msgid "Video port"
+msgstr ""
 
+msgctxt "#30144"
+msgid "Buffer size"
+msgstr ""
 
+msgctxt "#30145"
+msgid "Player start timeout"
+msgstr ""
 
+msgctxt "#30146"
+msgid "Player start delay"
+msgstr ""
 
+msgctxt "#30147"
+msgid "Service creation timeout"
+msgstr ""
+
+msgctxt "#30148"
+msgid "Stream creation timeout"
+msgstr ""
+
+msgctxt "#30149"
+msgid "Auto-detect android app id"
+msgstr ""
+
+msgctxt "#30150"
+msgid "Custom app id"
+msgstr ""
+
+msgctxt "#30151"
+msgid "AceStream configurations"
+msgstr ""
+
+msgctxt "#30152"
+msgid "AceStreams"
+msgstr ""
+
+msgctxt "#30153"
+msgid "AceStream player type"
+msgstr ""
+
+msgctxt "#30154"
+msgid "AceStream command"
+msgstr ""
+
+msgctxt "#30155"
+msgid "AceStream alternative cmd"
+msgstr ""
+
+msgctxt "#30156"
+msgid "AceStream engine ip address"
+msgstr ""
+
+msgctxt "#30157"
+msgid "AceStream engine port"
+msgstr ""
+
+msgctxt "#30158"
+msgid "AceStream engine player port"
+msgstr ""
+
+msgctxt "#30159"
+msgid "Show AceStream engine status on video OSD"
+msgstr ""
+
+msgctxt "#30160"
+msgid "Auto pause mode"
+msgstr ""
+
+msgctxt "#30161"
+msgid "Keep downloaded files in disk"
+msgstr ""
+
+msgctxt "#30162"
+msgid "Download path"
+msgstr ""
+
+msgctxt "#30163"
+msgid "Shutdown AceStream engine on playback stop"
+msgstr ""
+
+msgctxt "#30164"
+msgid "AceStream shutdown type"
+msgstr ""
+
+msgctxt "#30165"
+msgid "Custom Acestream engine shutdown command"
+msgstr ""
 

@@ -19,41 +19,41 @@
 
 	</category>
 	<category label="Sopcast">
-		<setting label="30017" type="lsep" />
-		<setting id="external-sopcast" type="enum" values="Kodi player|External player" label="40101" visible="System.Platform.Android" default="0"/>
-		<setting id="android_sopclient" type="text" label="40071" visible="False" default=""/>
-		<setting id="auto_ip" type="bool" label="30003" default="true"/>
-		<setting id="localhost" type="ipaddress" label="30004" enable="eq(-1,false)" visible="!System.Platform.Windows+eq(-1,false)" default="127.0.0.1"/>
-		<setting id="local_port" type="number" label="30006" visible="!System.Platform.Windows" default="9000"/>
-		<setting id="video_port" type="number" label="30007" visible="!System.Platform.Windows" default="9001"/>
-		<setting id="buffer_size" type="number" label="30008" visible="!System.Platform.Windows" default="8192"/>
-		<setting id="stream_time_osx" label="40199" type="number" visible="System.Platform.OSX" default="15"/>
-		<setting id="loading_time" type="number" label="Load time (seconds)" visible="!System.Platform.Windows" default="20"/>
-		<setting id="wait_time" type="number" label="30005" visible="!System.Platform.Windows+!System.Platform.OSX" default="1000"/>
-		<setting id="socket_time" label="40198" type="number" visible="System.Platform.Windows" default="15"/>
-		<setting id="stream_time" label="40199" type="number" visible="System.Platform.Windows" default="6"/>
-		<setting id="auto_appid" type="bool" label="Auto-detect AppID" visible="System.Platform.Android" default="true"/>
+		<setting label="30138" type="lsep" />
+		<setting id="external-sopcast" type="enum" values="Kodi player|External player" label="30139" visible="System.Platform.Android" default="0"/>
+		<setting id="android_sopclient" type="text" label="" visible="False" default=""/>
+		<setting id="auto_ip" type="bool" label="30140" default="true"/>
+		<setting id="localhost" type="ipaddress" label="30141" enable="eq(-1,false)" visible="!System.Platform.Windows+eq(-1,false)" default="127.0.0.1"/>
+		<setting id="local_port" type="number" label="30142" visible="!System.Platform.Windows" default="9000"/>
+		<setting id="video_port" type="number" label="30143" visible="!System.Platform.Windows" default="9001"/>
+		<setting id="buffer_size" type="number" label="30144" visible="!System.Platform.Windows" default="8192"/>
+		<setting id="stream_time_osx" label="30145" type="number" visible="System.Platform.OSX" default="15"/>
+		<setting id="loading_time" type="number" label="30145" visible="!System.Platform.Windows" default="20"/>
+		<setting id="wait_time" type="number" label="30146" visible="!System.Platform.Windows+!System.Platform.OSX" default="1000"/>
+		<setting id="socket_time" label="30147" type="number" visible="System.Platform.Windows" default="15"/>
+		<setting id="stream_time" label="30148" type="number" visible="System.Platform.Windows" default="6"/>
+		<setting id="auto_appid" type="bool" label="30149" visible="System.Platform.Android" default="true"/>
 	     <setting id="app_id" type="text" label="" default="" visible="false" />
-		<setting id="custom_appid" type="text" label="Custom AppID" default="" visible="eq(-1,false)"/>
+		<setting id="custom_appid" type="text" label="30150" default="" visible="eq(-1,false)"/>
 	</category>
-	<category label="Acestream">
-		<setting label="30018" type="lsep" />
-		<setting id="aceplay_type" type="enum" values="Local|Server remote engine|ValdikSS proxy" label="40152" default="0" enable="True"/>
-		<setting id="ace_cmd" type="enum" values="Default|acestreamengine --client-console|Use my own" label="Acestream CMD" default="0" visible="System.Platform.Linux+!System.Platform.Android" enable="eq(-1,0)"/>
-		<setting id="ace_cmd_alternative" type="text" label="70010" default="" visible="System.Platform.Linux+!System.Platform.Android" enable="eq(-1,2)"/>
-		<setting id="engine_app" type="enum" values="All Addon|External App+Kodi Player|Official Ace Player|Torrent Controler Proxy" label="50000" default="0" visible="System.Platform.Android"/>
-		<setting id="ip_addr" type="text" label="30004" default="127.0.0.1" />
-		<setting id="aceporta" type="text" label="40108" default="62062" />
-		<setting id="playerport" type="text" label="40153" default="6878" visible="eq(-6,1)" />
-		<setting id="engine-status" type="bool" label="49999" default="true"/>
+	<category label="30152">
+		<setting label="30151" type="lsep" />
+		<setting id="aceplay_type" type="enum" values="Local|Server remote engine|ValdikSS proxy" label="30153" default="0" enable="True"/>
+		<setting id="ace_cmd" type="enum" values="Default|acestreamengine --client-console|Use my own" label="30154" default="0" visible="System.Platform.Linux+!System.Platform.Android" enable="eq(-1,0)"/>
+		<setting id="ace_cmd_alternative" type="text" label="30155" default="" visible="System.Platform.Linux+!System.Platform.Android" enable="eq(-1,2)"/>
+		<setting id="engine_app" type="enum" values="All Addon|External App+Kodi Player|Official Ace Player|Torrent Controler Proxy" label="30153" default="0" visible="System.Platform.Android"/>
+		<setting id="ip_addr" type="text" label="30156" default="127.0.0.1" />
+		<setting id="aceporta" type="text" label="30157" default="62062" />
+		<setting id="playerport" type="text" label="30158" default="6878" visible="eq(-6,1)" />
+		<setting id="engine-status" type="bool" label="30159" default="true"/>
 		<setting label="" type="lsep" />
-		<setting id="pausable" type="bool" label="30010" default="false" />
-		<setting id="save" type="bool" label="30012" default="false" />
-		<setting id="folder" type="folder" label="30013"/>
+		<setting id="pausable" type="bool" label="30160" default="false" />
+		<setting id="save" type="bool" label="30161" default="false" />
+		<setting id="folder" type="folder" label="30162"/>
 		<setting label="" type="lsep" />
-		<setting id="shutdown-engine" type="bool" label="30015" default="true"/>
-		<setting id="kill_type" type="enum" values="Normal|Custom" label="70002" default="0" visible="!eq(-8,1)"/>
-		<setting id="custom_kill_ace" type="text" label="Custom kill engine cmd" default="" visible="eq(-2,true)+eq(-1,1)"/>
+		<setting id="shutdown-engine" type="bool" label="30163" default="true"/>
+		<setting id="kill_type" type="enum" values="Normal|Custom" label="30164" default="0" visible="!eq(-8,1)"/>
+		<setting id="custom_kill_ace" type="text" label="30165" default="" visible="eq(-2,true)+eq(-1,1)"/>
 		<!-- Android default port -->
 		<setting id="android_port" type="text" label="" visible="False" default="8621"/>
 		<!-- Linux settings to pass to the engine -->
