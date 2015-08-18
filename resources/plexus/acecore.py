@@ -278,7 +278,7 @@ class TSengine():
     def startLin(self):
         self.log.out('try to start Lin engine')
         import subprocess
-        if xbmc.getCondVisibility('System.Platform.Android') == "true":
+        if xbmc.getCondVisibility('System.Platform.Android'):
             try:
                 if settings.getSetting('engine_app') == "1": xbmc.executebuiltin('XBMC.StartAndroidActivity("org.acestream.engine")')
                 else:
