@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings>
 	<category label="30000">
-	    <setting label="30016" type="lsep" />
-	    	<setting id="autoconfig" type="bool" label="30001" default="true"/>
-	    	<setting id="force_dvplayer" type="bool" label="70009" visible="System.Platform.Windows" default="false"/>
-	    	<setting id="debug_mode" type="bool" label="49998" default="false"/>
-	    	<setting label="40114" type="lsep" />
-	    	<setting id="python_cmd" type="text" label="" default="python" visible="false" />
-	     <setting id="app_id" type="text" label="" default="" visible="false" />
-	     <setting label="70036" type="lsep" />
-	     <setting id="addon_history" type="bool" label="70037" default="true"/>
-	     <setting id="items_per_page" label="70038" type="slider" default="20" range="10,50" option="int" />
-		<setting type="action" label="70039" action="XBMC.RunPlugin(plugin://program.plexus/?mode=9&name=plexus&url=plexus)" />	
+	    <setting label="30131" type="lsep" />
+	    	<setting id="autoconfig" type="bool" label="30132" default="true"/>
+	    	<setting id="force_dvplayer" type="bool" label="30133" visible="System.Platform.Windows" default="false"/>
+	    	<setting id="debug_mode" type="bool" label="30134" default="false"/>
+	     <setting label="30002" type="lsep" />
+	     <setting id="addon_history" type="bool" label="30135" default="true"/>
+	     <setting id="items_per_page" label="30136" type="slider" default="20" range="10,50" option="int" />
+		<setting type="action" label="30137" action="XBMC.RunPlugin(plugin://program.plexus/?mode=9&name=plexus&url=plexus)" />	
 	    	<setting id="openelecx86_64" type="bool" visible="false" default="false"/>
 	    	<setting id="openeleci386" type="bool" visible="false" default="false"/>
 	     <setting id="rpi2" type="bool" visible="false" default="false"/>
@@ -36,6 +33,7 @@
 		<setting id="socket_time" label="40198" type="number" visible="System.Platform.Windows" default="15"/>
 		<setting id="stream_time" label="40199" type="number" visible="System.Platform.Windows" default="6"/>
 		<setting id="auto_appid" type="bool" label="Auto-detect AppID" visible="System.Platform.Android" default="true"/>
+	     <setting id="app_id" type="text" label="" default="" visible="false" />
 		<setting id="custom_appid" type="text" label="Custom AppID" default="" visible="eq(-1,false)"/>
 	</category>
 	<category label="Acestream">

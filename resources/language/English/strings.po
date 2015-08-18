@@ -533,6 +533,34 @@ msgctxt "#30130"
 msgid "Select your operating system"
 msgstr ""
 
+msgctxt "#30131"
+msgid "General"
+msgstr ""
+
+msgctxt "#30132"
+msgid "Repeat configuration on the next run"
+msgstr ""
+
+msgctxt "#30133"
+msgid "Force use of dvdplayer"
+msgstr ""
+
+msgctxt "#30134"
+msgid "Enable debug mode"
+msgstr ""
+
+msgctxt "#30135"
+msgid "Enable addon history"
+msgstr ""
+
+msgctxt "#30136"
+msgid "Number of items to save"
+msgstr ""
+
+msgctxt "#30137"
+msgid "Clear addon history"
+msgstr ""
+
 
 
 
