@@ -34,7 +34,7 @@ version_control = trunkfolder + "/Control/versions.info"
 
 #Linux Arm #TODO
 sopcast_raspberry = trunkfolder + "/Modules/Linux/arm/rpi2/sopcast-raspberry.tar.gz"
-acestream_rpi2 = 'removed...'
+acestream_rpi2 = 'removed'
 
 #Linux i386 and x86_64 (including openelec)
 sopcast_linux_generico =  trunkfolder + "/Modules/Linux/Sopcastx86_64i386/sopcast_linux.tar.gz"

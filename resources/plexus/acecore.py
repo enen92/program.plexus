@@ -797,10 +797,12 @@ def stop_aceengine():
             #    except: pass
  
         elif xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('System.Platform.Android'):
-            os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $1}')")
-            os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $2}')")
-            os.system("kill $(ps aux | grep '[s]tart.py' | awk '{print $2}')")
-            os.system("sh "+os.path.join(pastaperfil,"acestream","stop_acestream.sh"))
+            if "arm" in os.uname()[4]:
+                os.system("sh "+os.path.join(pastaperfil,"acestream","stop_acestream.sh"))
+            else:
+                os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $1}')")
+                os.system("kill $(ps aux | grep '[a]cestream' | awk '{print $2}')")
+            
             if settings.getSetting('save') != "true":
                 try:
                     cache_file = xbmc.Player().getPlayingFile().split('/')[-2]
