@@ -48,8 +48,8 @@ def addDir(name,url,mode,iconimage,total,pasta,fan_art="%s/fanart.jpg"%settings.
     if mode == 1 or mode == 2:
         fic = hashlib.md5(name + '|' + url).hexdigest() + '.txt'
         if os.path.exists(os.path.join(mystrm_folder,fic)):
-            contextmen.append((translate(30025), 'XBMC.RunPlugin(%s?mode=12&url=%s&name=%s&iconimage=%s)' % (sysargv, urllib.quote_plus(url),name,iconimage)))
+            contextmen.append((translate(30025), 'XBMC.RunPlugin(%s?mode=13&url=%s&name=%s&iconimage=%s)' % (sysargv, urllib.quote_plus(url),name,iconimage)))
         else:
-            contextmen.append((translate(30026), 'XBMC.RunPlugin(%s?mode=11&url=%s&name=%s&iconimage=%s)' % (sysargv,urllib.quote_plus(url),name,iconimage)))
+            contextmen.append((translate(30026), 'XBMC.RunPlugin(%s?mode=12&url=%s&name=%s&iconimage=%s)' % (sysargv,urllib.quote_plus(url),name,iconimage)))
     liz.addContextMenuItems(contextmen,replaceItems=False)
     return xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=pasta,totalItems=total)

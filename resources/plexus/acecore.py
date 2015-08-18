@@ -413,6 +413,10 @@ class TSengine():
         while not self.tsserv.got_url and not self.progress.iscanceled() and not self.tsserv.err:
             self.progress.update(int(self.tsserv.proc),self.tsserv.label,self.tsserv.line)
             xbmc.sleep(200)
+            
+            if self.progress.iscanceled():
+                self.canceled = True
+            
             if xbmc.abortRequested:
                 self.log.out("XBMC is shutting down")
                 self.canceled = True
@@ -420,6 +424,7 @@ class TSengine():
         if self.tsserv.err:
             self.sm('Failed to load file')
             self.canceled = True
+        
         self.progress.update(100,translate(30049),'')
         if settings.getSetting('save')=='true': save=True
         else: save=False

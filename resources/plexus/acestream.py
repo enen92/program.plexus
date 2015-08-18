@@ -29,7 +29,7 @@ def load_local_torrent():
 	else: pass
 
 def acestreams(name,iconimage,chid):
-	if not iconimage: iconimage=os.path.join(addonpath,'resources','art','acelogofull.jpg')
+	if not iconimage: iconimage=os.path.join(addonpath,'resources','art','acestream-menu-item.png')
 	else: iconimage = urllib.unquote(iconimage)
 	if settings.getSetting('addon_history') == "true":
 		try: add_to_history(name, str(chid),1, iconimage)
