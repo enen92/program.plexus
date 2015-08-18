@@ -140,6 +140,7 @@ class TSengine():
         self.url=None
         self.local=False
         self.saved=False
+        self.canceled = False
         self.pos=[25,50,75,100]
         l=False
         while xbmc.Player().isPlaying(): 
@@ -148,6 +149,7 @@ class TSengine():
                 self.log.out("XBMC asked to abort request")
                 return False
             if self.progress.iscanceled():
+                self.canceled = True
                 return False
             xbmc.sleep(300)
         
@@ -162,9 +164,11 @@ class TSengine():
         self.progress.update(0,translate(30044)," ")
         while not self.tsserv.version:
             if xbmc.abortRequested:
+                self.canceled = True
                 self.log.out("XBMC asked to abort request")
                 return False
             if self.progress.iscanceled():
+                self.canceled = True
                 return False
             time.sleep(1)
         ready='READY'
@@ -178,6 +182,7 @@ class TSengine():
             key="%s-%s"%(pk,key)
             ready='READY key=%s'% key
         if self.progress.iscanceled():
+            self.canceled = True
             self.err=1
             return False        
         self.TSpush(ready)
@@ -227,6 +232,7 @@ class TSengine():
             except:
                 self.log.out('Failed to connect to %s:%s'%(servip,aceport))
             if self.progress.iscanceled():
+                self.canceled = True
                 return False
                 break
             i=i-1
@@ -409,8 +415,11 @@ class TSengine():
             xbmc.sleep(200)
             if xbmc.abortRequested:
                 self.log.out("XBMC is shutting down")
+                self.canceled = True
                 break
-        if self.tsserv.err: self.sm('Failed to load file')
+        if self.tsserv.err:
+            self.sm('Failed to load file')
+            self.canceled = True
         self.progress.update(100,translate(30049),'')
         if settings.getSetting('save')=='true': save=True
         else: save=False
@@ -426,6 +435,7 @@ class TSengine():
                 if xbmc.abortRequested or self.progress.iscanceled():
                     self.log.out("XBMC asked to abort request")
                     succ=False
+                    self.canceled = True
                     break
                 xbmc.sleep(200)
             if not succ: return False
@@ -476,6 +486,7 @@ class TSengine():
                 self.loop()
                 xbmc.sleep(300)
                 if xbmc.abortRequested:
+                    self.canceled = True
                     self.log.out("XBMC asked to abort request")
                     break
             self.log.out('ended play')
@@ -543,15 +554,19 @@ class TSengine():
         while not self.tsserv.files and not self.progress.iscanceled():
             if xbmc.abortRequested:
                 self.log.out("XBMC is shutting down")
+                self.canceled = True
                 break
             if self.tsserv.err:
+                self.canceled = True
                 self.log.out("Failed to load files")
                 break
             xbmc.sleep(200)
-        if self.progress.iscanceled(): 
+        if self.progress.iscanceled():
+            self.canceled = True 
             return False
         if not self.tsserv.files: 
             self.sm('Failed to load list files')
+            self.canceled = True
             return False
         self.filelist=self.tsserv.files
         self.file_count = self.tsserv.count
@@ -586,7 +601,9 @@ class TSengine():
 
         if settings.getSetting('engine-status') == "true": 
             try:lat123._close()
-            except:pass           
+            except:pass 
+        
+        if self.canceled: stop_aceengine()         
 
         
     def __del__(self):
