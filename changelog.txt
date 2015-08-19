@@ -1,3 +1,6 @@
+19/8/2015 - Version 0.1.1 & 0.1.2
+-Raspberry PI 2 fixes
+
 19/8/2015 - Version 0.1.0 (first beta)
 -Removed parsers and lists
 -Added stream manager
