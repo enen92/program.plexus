@@ -32,9 +32,9 @@ from plexusutils.utilities import *
 trunkfolder = "https://plexus.svn.codeplex.com/svn/trunk"
 version_control = trunkfolder + "/Control/versions.info"
 
-#Linux Arm #TODO
+#Linux Arm
 sopcast_raspberry = trunkfolder + "/Modules/Linux/arm/rpi2/sopcast-raspberry.tar.gz"
-acestream_rpi2 = 'removed'
+acestream_rpi2 = '/Modules/Linux/arm/rpi2/acestream-rpi2.tar.gz'
 
 #Linux i386 and x86_64 (including openelec)
 sopcast_linux_generico =  trunkfolder + "/Modules/Linux/Sopcastx86_64i386/sopcast_linux.tar.gz"

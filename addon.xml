@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="program.plexus"
        name="Plexus"
-       version="0.0.6"
+       version="0.1.0"
        provider-name="enen92">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -10,6 +10,11 @@
   <extension point="xbmc.python.pluginsource"
             library="default.py">
         <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.addon.repository" name="Plexus Repository">
+        <info compressed="false">https://plexus.svn.codeplex.com/svn/trunk/Addon/addons.xml</info>
+        <checksum>https://plexus.svn.codeplex.com/svn/trunk/Addon/addons.xml.md5</checksum>
+        <datadir zip="true">https://plexus.svn.codeplex.com/svn/trunk/Addon/</datadir>
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary>SopCast and AceStream for Kodi</summary>

@@ -1,0 +1,8 @@
+19/8/2015 - Version 0.1.0 (first beta)
+-Removed parsers and lists
+-Added stream manager
+-Added support for the Raspberry PI 2
+-Fixed stop
+-New translation system
+-Repository moved to a new location
+-Plenty of other fixes
