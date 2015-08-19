@@ -24,14 +24,13 @@ def main_menu():
       if settings.getSetting('addon_history') == "true":
       	addDir('[B]'+translate(30002)+'[/B]',MainURL,8,os.path.join(addonpath,art,'history.png'),2,True)
       	if "confluence" in xbmc.getSkinDir(): addLink('','','plexus')
-      if xbmc.getCondVisibility('system.platform.windows') or xbmc.getCondVisibility('system.platform.linux') or xbmc.getCondVisibility('System.Platform.OSX') or xbmc.getCondVisibility('System.Platform.Android'):
-          addDir('[B][COLOR maroon]'+translate(30003)+'[/COLOR][/B]' + translate(30005),MainURL,4,os.path.join(addonpath,art,'acestream-menu-item.png'),1,False)
-          addDir('[B][COLOR maroon]'+translate(30003)+'[/COLOR][/B]' + translate(30006),MainURL,6,os.path.join(addonpath,art,'acestream-menu-item.png'),1,False)
-      if xbmc.getCondVisibility('system.platform.windows') or xbmc.getCondVisibility('system.platform.linux') or xbmc.getCondVisibility('System.Platform.OSX') or xbmc.getCondVisibility('System.Platform.Android'):
-          addDir('[B][COLOR maroon]'+translate(30004)+'[/COLOR][/B]' + translate(30007),MainURL,3,os.path.join(addonpath,art,'sopcast-menu-item.png'),1,False)
-          addDir('[B][COLOR maroon]'+translate(30004)+'[/COLOR][/B]' + translate(30008),MainURL,5,os.path.join(addonpath,art,'sopcast-menu-item.png'),1,False)
-      if xbmc.getCondVisibility('System.Platform.IOS') or xbmc.getCondVisibility('System.Platform.ATV2'):
-          addLink(translate(40056),'',os.path.join(addonpath,art,'processwarning.png'))
+
+      addDir('[B][COLOR maroon]'+translate(30003)+'[/COLOR][/B]' + translate(30005),MainURL,4,os.path.join(addonpath,art,'acestream-menu-item.png'),1,False)
+      addDir('[B][COLOR maroon]'+translate(30003)+'[/COLOR][/B]' + translate(30006),MainURL,6,os.path.join(addonpath,art,'acestream-menu-item.png'),1,False)
+
+      addDir('[B][COLOR maroon]'+translate(30004)+'[/COLOR][/B]' + translate(30007),MainURL,3,os.path.join(addonpath,art,'sopcast-menu-item.png'),1,False)
+      addDir('[B][COLOR maroon]'+translate(30004)+'[/COLOR][/B]' + translate(30008),MainURL,5,os.path.join(addonpath,art,'sopcast-menu-item.png'),1,False)
+
       #if "confluence" in xbmc.getSkinDir(): addLink('','','plexus')
       #addDir('[B][COLOR maroon]' + translate(40057) + '[/COLOR][/B]',MainURL,300,os.path.join(addonpath,art,'settings.png'),2,True)       
       #break_sopcast is a function used in windows to intentionally break the sopcast.exe setup by renaming one of its codec files. It's ran here to rename the file again in case it failed when played before

@@ -136,7 +136,9 @@ def first_conf():
 		check_for_updates()
 		
 	elif xbmc.getCondVisibility('System.Platform.OSX'):
-		check_for_updates()
+		mensagemok(translate(30000),"Not available for OSX for now")
+		sys.exit(0)
+		#check_for_updates()
 		
 	settings.setSetting('autoconfig',value="false")
 		
