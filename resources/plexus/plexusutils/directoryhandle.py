@@ -33,14 +33,10 @@ def addLink(name,url,iconimage,fan_art="%s/fanart.jpg"%settings.getAddonInfo("pa
     liz.setProperty('fanart_image', fan_art)
     return xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz)
 
-def addDir(name,url,mode,iconimage,total,pasta,fan_art="%s/fanart.jpg"%settings.getAddonInfo("path"),parser=None,parserfunction=None):
+def addDir(name,url,mode,iconimage,total,pasta,fan_art="%s/fanart.jpg"%settings.getAddonInfo("path")):
     if "plugin://" in sys.argv[0]: u = sys.argv[0]; sysargv = sys.argv[0]
-    else: u = 'plugin://plugin.video.p2p-streams/'; sysargv = 'plugin://plugin.video.p2p-streams/'
+    else: u = 'plugin://program.plexus/'; sysargv = 'plugin://program.plexus/'
     u += "?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)+"&iconimage="+urllib.quote_plus(iconimage)
-    try: u += "&parser="+urllib.quote_plus(parser)
-    except: pass
-    try: u += "&parserfunction="+urllib.quote_plus(parserfunction)
-    except: pass
     contextmen = []
     liz=xbmcgui.ListItem(name,iconImage="DefaultFolder.png", thumbnailImage=iconimage)
     liz.setInfo( type="Video", infoLabels={ "Title": name} )

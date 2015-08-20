@@ -31,6 +31,8 @@ def my_streams_menu():
 					addDir(content[0],content[1],2,content[2],1,False) 
 				else:
 					pass
+		xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_UNSORTED)
+		xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_LABEL)
 	addDir('[B][COLOR maroon]'+translate(30009)+'[/COLOR][/B]',MainURL,11,os.path.join(addonpath,art,'plus-menu.png'),1,False)
 
 def add_stream(name='',url='',iconimage=''):
